@@ -10,5 +10,5 @@
     <string name="invalid_username">Nom d\'usuari invàlid</string>
     <string name="invalid_password">La contrasenya ha de ser >5 caracters</string>
     <string name="login_failed">"Entrada fallida"</string>
-    <string name="texto_registro">No estàs registrat?</string>
+    <string name="texto_registro"><u>No estàs registrat?</u></string>
 </resources>

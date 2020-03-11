@@ -9,5 +9,6 @@
     <string name="invalid_username">Nombre de usuario inválido</string>
     <string name="invalid_password">La contraeña debe ser >5 caracteres</string>
     <string name="login_failed">"Entrada fallida"</string>
-    <string name="texto_registro">¿No estás registrado?</string>
+    <string name="texto_registro"><u>¿No estás registrado?</u></string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>
