@@ -24,9 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.katundu.R;
-import com.example.katundu.ui.login.RegisterActivity;
-import com.example.katundu.ui.login.LoginViewModel;
-import com.example.katundu.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
