@@ -19,4 +19,11 @@
     <string name="prompt_address">Dirección</string>
     <string name="action_register">Regístrate</string>
 
+    <!-- Strings related to Menu Principal-->
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search">Search</string>
+
 </resources>
