@@ -11,3 +11,12 @@
 /build
 /captures
 .externalNativeBuild
+/_windows/laf.xml
+/_windows/path.macros.xml
+/codestyles/Default.xml
+androidEditors.xml
+androidStudioFirstRun.xml
+colors.scheme.xml
+debugger.xml
+github.xml
+
