@@ -36,6 +36,7 @@
                 android:id="@+id/img_perfil"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:clickable="true"
                 android:src="@drawable/logo_ajustes" />
 
         </LinearLayout>
