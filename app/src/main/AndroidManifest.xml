@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.logged.LlistesUsuari" />
+        <activity android:name=".ui.logged.Perfil" />
 
     </application>
 
