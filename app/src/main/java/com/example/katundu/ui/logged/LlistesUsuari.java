@@ -19,9 +19,9 @@ public class LlistesUsuari extends AppCompatActivity {
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
-        final Button PerfilButton = findViewById(R.id.nomusuari);
+        final Button NomUsuari = findViewById(R.id.nomusuari);
 
-        PerfilButton.setOnClickListener(new View.OnClickListener() {
+        NomUsuari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LlistesUsuari.this, Perfil.class);
