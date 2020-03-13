@@ -26,7 +26,7 @@ public class LlistesUsuari extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LlistesUsuari.this, Perfil.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
     }
