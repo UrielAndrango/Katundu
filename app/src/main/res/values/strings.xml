@@ -28,4 +28,7 @@
     <string name="search">Buscar</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
 
+    <!-- Strings related to Llistes Usuaris-->
+    <string name="nom_usuari" translatable="false">Nom Usuari</string>
+
 </resources>
