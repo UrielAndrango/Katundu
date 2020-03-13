@@ -16,11 +16,13 @@
 /codestyles/Default.xml
 androidEditors.xml
 androidStudioFirstRun.xml
+
+/_windows
+/codestyles
 colors.scheme.xml
 debugger.xml
 github.xml
-/.idea/gradle.xml
-/.idea/misc.xml
-
+notifications.xml
+vcs.xml
 
 
