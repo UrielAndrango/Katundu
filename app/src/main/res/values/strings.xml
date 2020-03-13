@@ -17,13 +17,15 @@
     <string name="prompt_email">Correo</string>
     <string name="prompt_password_2">Repite la contraseña</string>
     <string name="prompt_address">Dirección</string>
+    <string name="prompt_birthday">\ Fecha de nacimiento:</string>
     <string name="action_register">Regístrate</string>
 
     <!-- Strings related to Menu Principal-->
-    <string name="title_activity_menu_principal">MenuPrincipal</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="search">Search</string>
+    <string name="title_dashboard">Sorpréndeme</string>
+    <string name="title_notifications">Añadir Producto</string>
+    <string name="title_chat">Chat</string>
+    <string name="search">Buscar</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
 
 </resources>

@@ -19,6 +19,13 @@
     <string name="prompt_password_2">Repeat password</string>
     <string name="prompt_address">Address</string>
     <string name="action_register">Join us</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Surprise me</string>
+    <string name="title_notifications">Add Product</string>
+    <string name="title_chat">Chat</string>
+    <string name="search">Search</string>
+    <string name="prompt_birthday">" Birth date"</string>
 
 
 </resources>

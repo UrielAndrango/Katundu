@@ -19,6 +19,13 @@
     <string name="prompt_password_2">Repeteix la contrasenya</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Sorprèn-me</string>
+    <string name="title_notifications">Afegir Producte</string>
+    <string name="title_chat">Xat</string>
+    <string name="search">Cercar</string>
+    <string name="prompt_birthday">" Data de naixement"</string>
 
 
 </resources>
