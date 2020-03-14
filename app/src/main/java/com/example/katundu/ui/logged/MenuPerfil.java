@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 
-class MenuPerfil extends AppCompatActivity {
+public class MenuPerfil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_perfil); //TODO:No se porque no me reconoce el activity_perfil y por eso lo pongo como comentario
+        setContentView(R.layout.activity_perfil);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 

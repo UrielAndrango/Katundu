@@ -19,34 +19,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageViewAtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/abc_vector_test"
-            tools:layout_editor_absoluteX="118dp"
-            tools:layout_editor_absoluteY="182dp"
-            tools:ignore="PrivateResource" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="16dp"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="3dp">
+
+            <ImageView
+                android:id="@+id/imageViewAtras"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/abc_vector_test"
+                tools:ignore="PrivateResource" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/textViewPerfil"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/perfil"
-                android:textAlignment="textStart"
                 android:textSize="18sp" />
 
             <ImageView
-                android:layout_width="50dp"
+                android:id="@+id/foto_perfil"
+                android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:src="@drawable/logo_ajustes" />
+                android:src="@drawable/icon_avatar_profile" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

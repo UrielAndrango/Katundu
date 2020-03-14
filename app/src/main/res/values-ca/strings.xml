@@ -19,6 +19,8 @@
     <string name="prompt_password_2">Repeteix la contrasenya</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
+
+    <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Sorprèn-me</string>
@@ -27,5 +29,8 @@
     <string name="search">Cercar</string>
     <string name="prompt_birthday">" Data de naixement"</string>
 
+    <!-- Strings related to Llistes Usuaris-->
+    <string name="nom_usuari" translatable="false">Nom Usuari</string>
+    <string name="perfil">Perfil</string>
 
 </resources>
