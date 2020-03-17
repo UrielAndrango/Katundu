@@ -48,9 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
-        Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
-        startActivity(intent);
-        finish();
+
     }
 
     @Override
