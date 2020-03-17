@@ -22,9 +22,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.katundu.R;
 import com.example.katundu.ui.logged.MenuPrincipal;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private LoginViewModel loginViewModel;
     private MenuPrincipal menuPrincipal;
 
@@ -35,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
         getSupportActionBar().hide();
+        //Firebase Anlytics de prueba
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -132,6 +136,12 @@ public class LoginActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+        Bundle bundle = new Bundle();
+        //bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
