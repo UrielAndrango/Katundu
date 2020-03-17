@@ -24,7 +24,7 @@ public class LlistesUsuari extends AppCompatActivity {
         NomUsuari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LlistesUsuari.this, MenuPerfil.class);
+                Intent intent = new Intent(LlistesUsuari.this, EditarPerfil.class);
                 startActivity(intent);
                 finish();
             }

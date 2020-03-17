@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 
-public class MenuPerfil extends AppCompatActivity {
+public class EditarPerfil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MenuPerfil extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPerfil.this, LlistesUsuari.class);
+                Intent intent = new Intent(EditarPerfil.this, LlistesUsuari.class);
                 startActivity(intent);
                 finish();
             }

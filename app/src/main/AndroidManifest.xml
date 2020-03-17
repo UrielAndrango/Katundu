@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.logged.LlistesUsuari" />
-        <activity android:name=".ui.logged.MenuPerfil" />
+        <activity android:name=".ui.logged.EditarPerfil" />
 
     </application>
 
