@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Katundu</string>
+    <string name="descripcio" translatable="false">descripcio</string>
+
     <!-- Strings related to login -->
     <string name="prompt_username">Nombre de usuario</string>
     <string name="prompt_password">Contraseña</string>
@@ -14,10 +16,11 @@
     <!-- Strings related to register -->
     <string name="title_activity_register">Crea tu cuenta</string>
     <string name="subtitle_activity_register">Introduce tus datos personales</string>
+    <string name="name">Nombre</string>
     <string name="prompt_email">Correo</string>
     <string name="prompt_password_2">Repite la contraseña</string>
+    <string name="coordinates">Coordenadas</string>
     <string name="prompt_address">Dirección</string>
-    <string name="prompt_birthday">\ Fecha de nacimiento:</string>
     <string name="action_register">Regístrate</string>
 
     <!-- Strings related to Menu Principal-->
@@ -31,5 +34,9 @@
     <!-- Strings related to Llistes Usuaris-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
     <string name="perfil">Perfil</string>
+
+    <!-- Strings related to EditarPerfil-->
+    <string name="prompt_birthday">\ Fecha de nacimiento</string>
+    <string name="Save">Guardar</string>
 
 </resources>

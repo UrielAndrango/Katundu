@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password1);
 
 
-        final Button registrat = findViewById(R.id.button);
+        final Button registrat = findViewById(R.id.SaveButton);
 
 
         registrat.setOnClickListener(new View.OnClickListener() {

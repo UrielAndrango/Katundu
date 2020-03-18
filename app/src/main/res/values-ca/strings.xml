@@ -15,8 +15,10 @@
     <!-- Strings related to register -->
     <string name="title_activity_register">Crea el teu compte</string>
     <string name="subtitle_activity_register">Introdueix les teves dades personals</string>
+    <string name="name">Nom</string>
     <string name="prompt_email">Correu</string>
     <string name="prompt_password_2">Repeteix la contrasenya</string>
+    <string name="coordinates">Coordenades</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
 
@@ -27,10 +29,13 @@
     <string name="title_notifications">Afegir Producte</string>
     <string name="title_chat">Xat</string>
     <string name="search">Cercar</string>
-    <string name="prompt_birthday">" Data de naixement"</string>
 
     <!-- Strings related to Llistes Usuaris-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
     <string name="perfil">Perfil</string>
+
+    <!-- Strings related to EditarPerfil-->
+    <string name="prompt_birthday">" Data de naixement"</string>
+    <string name="Save">Guardar</string>
 
 </resources>

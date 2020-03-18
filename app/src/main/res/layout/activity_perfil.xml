@@ -29,6 +29,7 @@
                 android:id="@+id/imageViewAtras"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/descripcio"
                 app:srcCompat="@drawable/abc_vector_test"
                 tools:ignore="PrivateResource" />
 
@@ -38,7 +39,7 @@
 
             <TextView
                 android:id="@+id/textViewPerfil"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/perfil"
@@ -48,145 +49,106 @@
                 android:id="@+id/foto_perfil"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:contentDescription="@string/descripcio"
                 android:src="@drawable/icon_avatar_profile" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/nomusuari"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="68dp"
-        android:text="Nom usuari:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextNomUsuari"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/correu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Correu:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextCorreu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomusuari" />
-
-    <TextView
-        android:id="@+id/contrasenya"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Contrasenya:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextContrasenya"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correu" />
-
-    <TextView
-        android:id="@+id/BirthDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Any naixement:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextBirthDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contrasenya" />
-
-    <TextView
-        android:id="@+id/Adress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Adreça:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextBirthDate2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BirthDate" />
-
     <EditText
         android:id="@+id/editTextNomUsuari"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="nomusuari"
-        android:textAlignment="viewEnd"
+        android:text="@string/prompt_username"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nomusuari"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextCorreu"
-        android:layout_width="253dp"
+        android:layout_width="300dp"
         android:layout_height="43dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="correu"
-        android:textAlignment="viewEnd"
+        android:text="@string/prompt_email"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toEndOf="@+id/correu"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomUsuari" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNomUsuari"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextContrasenya"
-        android:layout_width="209dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="contrasenya"
-        android:textAlignment="viewEnd"
+        android:text="@string/prompt_password"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/contrasenya"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreu" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreu"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextBirthDate"
-        android:layout_width="191dp"
+        android:layout_width="300dp"
         android:layout_height="43dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="date"
-        android:text="10/06/1999"
-        android:textAlignment="viewEnd"
+        android:text="@string/prompt_birthday"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/BirthDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextContrasenya" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContrasenya"
+        android:autofillHints="" />
 
     <EditText
-        android:id="@+id/editTextBirthDate2"
-        android:layout_width="249dp"
+        android:id="@+id/editTextDireccio"
+        android:layout_width="300dp"
         android:layout_height="39dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:text="Jordi Girona 45"
-        android:textAlignment="viewEnd"
+        android:text="@string/prompt_address"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Adress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBirthDate" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBirthDate"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/SaveButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/Save"
+        android:textColor="@color/colorLetraKatundu"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

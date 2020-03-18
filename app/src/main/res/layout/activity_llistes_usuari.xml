@@ -38,8 +38,8 @@
                 android:id="@+id/img_perfil2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/logo_ajustes_negro"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/descripcio"
+                android:src="@drawable/logo_ajustes_negro" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

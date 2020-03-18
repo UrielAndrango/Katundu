@@ -15,8 +15,10 @@
     <!-- Strings related to register -->
     <string name="title_activity_register">Create your account</string>
     <string name="subtitle_activity_register">Enter your personal data</string>
+    <string name="name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password_2">Repeat password</string>
+    <string name="coordinates">Coordinates</string>
     <string name="prompt_address">Address</string>
     <string name="action_register">Join us</string>
 
@@ -27,10 +29,13 @@
     <string name="title_notifications">Add Product</string>
     <string name="title_chat">Chat</string>
     <string name="search">Search</string>
-    <string name="prompt_birthday">" Birth date"</string>
 
     <!-- Strings related to Llistes Usuaris-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
     <string name="perfil">Profile</string>
+
+    <!-- Strings related to EditarPerfil-->
+    <string name="prompt_birthday">" Birth date"</string>
+    <string name="Save">Save</string>
 
 </resources>
