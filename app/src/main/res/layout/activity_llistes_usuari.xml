@@ -35,9 +35,11 @@
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/img_perfil2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/logo_ajustes" />
+                android:src="@drawable/logo_ajustes_negro"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
