@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
+    private MenuPrincipal menuPrincipal;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,19 +33,17 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+        final Button login = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final TextView no_registrado = findViewById(R.id.no_registrado);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadingProgressBar.setVisibility(View.VISIBLE);
-                    //loguearUsuario(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
-                    startActivity(intent);
-                    finish();
-                }
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
         no_registrado.setOnClickListener(new View.OnClickListener(){
@@ -57,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-                Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
         //bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
         //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
