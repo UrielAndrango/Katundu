@@ -37,9 +37,8 @@
 
     <!-- Strings related to Modificar Perfil-->
     <string name="title_profile">Perfil</string>
-
-    <!-- Strings related to EditarPerfil-->
     <string name="prompt_birthday">Data de naixement</string>
-    <string name="Save">Desa els canvis</string>
+    <string name="Save">Desar canvis</string>
+    <string name="action_logout">Tanca sessió</string>
 
 </resources>
