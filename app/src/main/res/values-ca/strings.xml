@@ -39,6 +39,6 @@
 
     <!-- Strings related to EditarPerfil-->
     <string name="prompt_birthday">Data de naixement</string>
-    <string name="Save">Guardar</string>
+    <string name="Save">Desa els canvis</string>
 
 </resources>

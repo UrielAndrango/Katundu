@@ -36,13 +36,30 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/textViewPerfil"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/title_profile"
-                android:textSize="18sp" />
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/textViewPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_profile"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/foto_perfil"
@@ -109,6 +126,10 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
         <EditText
             android:id="@+id/editTextNomUsuari"
             android:layout_width="wrap_content"
@@ -140,9 +161,14 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <EditText
             android:id="@+id/editTextContrasenya"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
@@ -171,6 +197,10 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
         <EditText
             android:id="@+id/editTextBirthDate"
             android:layout_width="wrap_content"
@@ -179,6 +209,73 @@
             android:inputType="date"
             android:text="10/06/1999"
             android:textAlignment="viewEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/Adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/coordinate_latitude"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/editTextBirthDate2"
+            android:layout_width="249dp"
+            android:layout_height="39dp"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:textAlignment="viewEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/coordinate_longitude"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
     </LinearLayout>
 
     <Button
@@ -195,54 +292,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-        <TextView
-            android:id="@+id/Adress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/prompt_address"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <EditText
-            android:id="@+id/editTextBirthDate2"
-            android:layout_width="249dp"
-            android:layout_height="39dp"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:text="Jordi Girona 45"
-            android:textAlignment="viewEnd" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="176dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="406dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/coordinate_longitude" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

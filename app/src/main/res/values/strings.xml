@@ -40,6 +40,6 @@
 
     <!-- Strings related to EditarPerfil-->
     <string name="prompt_birthday">Fecha de nacimiento</string>
-    <string name="Save">Guardar</string>
+    <string name="Save">Guarda los cambios</string>
 
 </resources>

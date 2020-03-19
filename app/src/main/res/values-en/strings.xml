@@ -39,6 +39,6 @@
 
     <!-- Strings related to EditarPerfil-->
     <string name="prompt_birthday">Birth date</string>
-    <string name="Save">Save</string>
+    <string name="Save">Save changes</string>
 
 </resources>
