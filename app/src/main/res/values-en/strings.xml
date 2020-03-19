@@ -19,7 +19,7 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password_2">Repeat password</string>
     <string name="coordinate_latitude">Latitude</string>
-    <string name="coordinate_logitude">Longitude</string>
+    <string name="coordinate_longitude">Longitude</string>
     <string name="prompt_address">Address</string>
     <string name="action_register">Join us</string>
 
@@ -38,7 +38,7 @@
     <string name="title_profile">Perfil</string>
 
     <!-- Strings related to EditarPerfil-->
-    <string name="prompt_birthday">" Birth date"</string>
+    <string name="prompt_birthday">Birth date</string>
     <string name="Save">Save</string>
 
 </resources>

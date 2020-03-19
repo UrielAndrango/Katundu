@@ -19,7 +19,7 @@
     <string name="prompt_email">Correu</string>
     <string name="prompt_password_2">Repeteix la contrasenya</string>
     <string name="coordinate_latitude">Latitud</string>
-    <string name="coordinate_logitude">Longitud</string>
+    <string name="coordinate_longitude">Longitud</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
 
@@ -38,7 +38,7 @@
     <string name="title_profile">Perfil</string>
 
     <!-- Strings related to EditarPerfil-->
-    <string name="prompt_birthday">" Data de naixement"</string>
+    <string name="prompt_birthday">Data de naixement</string>
     <string name="Save">Guardar</string>
 
 </resources>

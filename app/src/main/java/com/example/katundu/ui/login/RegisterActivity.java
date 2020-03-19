@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addMessage?text=notinccabell";
+                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/signup?un=test&pw=1234&n=testname&lat=12&lon=34";
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

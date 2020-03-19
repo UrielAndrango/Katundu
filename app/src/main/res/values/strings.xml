@@ -20,7 +20,7 @@
     <string name="prompt_email">Correo</string>
     <string name="prompt_password_2">Repite la contraseña</string>
     <string name="coordinate_latitude">Latitud</string>
-    <string name="coordinate_logitude">Longitud</string>
+    <string name="coordinate_longitude">Longitud</string>
     <string name="prompt_address">Dirección</string>
     <string name="action_register">Regístrate</string>
 
@@ -39,7 +39,7 @@
     <string name="title_profile">Perfil</string>
 
     <!-- Strings related to EditarPerfil-->
-    <string name="prompt_birthday">\ Fecha de nacimiento</string>
+    <string name="prompt_birthday">Fecha de nacimiento</string>
     <string name="Save">Guardar</string>
 
 </resources>

@@ -94,7 +94,7 @@
         android:layout_marginEnd="50dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/coordinate_logitude"
+        android:hint="@string/coordinate_longitude"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
