@@ -18,7 +18,8 @@
     <string name="name">Nom</string>
     <string name="prompt_email">Correu</string>
     <string name="prompt_password_2">Repeteix la contrasenya</string>
-    <string name="coordinates">Coordenades</string>
+    <string name="coordinate_latitude">Latitud</string>
+    <string name="coordinate_logitude">Longitud</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
 

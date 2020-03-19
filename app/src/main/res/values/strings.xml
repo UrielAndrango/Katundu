@@ -19,7 +19,8 @@
     <string name="name">Nombre</string>
     <string name="prompt_email">Correo</string>
     <string name="prompt_password_2">Repite la contraseña</string>
-    <string name="coordinates">Coordenadas</string>
+    <string name="coordinate_latitude">Latitud</string>
+    <string name="coordinate_logitude">Longitud</string>
     <string name="prompt_address">Dirección</string>
     <string name="action_register">Regístrate</string>
 
