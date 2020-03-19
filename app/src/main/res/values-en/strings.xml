@@ -22,6 +22,7 @@
     <string name="coordinate_longitude">Longitude</string>
     <string name="prompt_address">Address</string>
     <string name="action_register">Join us</string>
+    <string name="incorrect_data">Incorrect data</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>

@@ -22,6 +22,7 @@
     <string name="coordinate_longitude">Longitud</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
+    <string name="incorrect_data">Dades incorrectes</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
