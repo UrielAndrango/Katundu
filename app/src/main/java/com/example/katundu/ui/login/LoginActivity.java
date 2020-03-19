@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
+                Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
                 Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
                 startActivity(intent);
                 finish();
@@ -63,3 +67,14 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }
+
+/*
+private void updateUiWithUser(LoggedInUserView model) {
+        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    }
+
+    private void showLoginFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+ */
