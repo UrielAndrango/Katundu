@@ -33,7 +33,9 @@
 
     <!-- Strings related to Llistes Usuaris-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
-    <string name="perfil">Perfil</string>
+
+    <!-- Strings related to Modificar Perfil-->
+    <string name="title_profile">Perfil</string>
 
     <!-- Strings related to EditarPerfil-->
     <string name="prompt_birthday">" Data de naixement"</string>
