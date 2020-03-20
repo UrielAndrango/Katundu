@@ -24,6 +24,7 @@
     <string name="prompt_address">Dirección</string>
     <string name="action_register">Regístrate</string>
     <string name="incorrect_data">Datos incorrectos</string>
+    <string name="incorrect_password">No coinciden las contraseñas</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_home">Home</string>
