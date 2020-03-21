@@ -24,6 +24,7 @@
     <string name="action_register">Registrat</string>
     <string name="incorrect_data">Dades incorrectes</string>
     <string name="incorrect_password">No coincideixen les contrasenyes</string>
+    <string name="existing_user">El nom d\'usuario ja existeix</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>

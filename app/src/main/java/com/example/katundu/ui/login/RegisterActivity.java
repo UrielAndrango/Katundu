@@ -41,8 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         registrat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(passwordEditText.getText() == repeatpasswordEditText.getText()) {
+                if(passwordEditText.getText().toString().equals(repeatpasswordEditText.getText().toString())) {
                     // Instantiate the RequestQueue.
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
 
@@ -58,17 +57,29 @@ public class RegisterActivity extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
-                                    Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
-                                    toast.show();
+                                    if(response.equals("New user added")) {
+                                        String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
+                                        Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
+                                        toast.show();
 
-                                    Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
-                                    startActivity(intent);
-                                    //finish();
+                                        Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
+                                        startActivity(intent);
+                                        //finish();
+                                    }
+                                    else if(response.equals("The username already exists")){
+                                        String texterror = getString(R.string.existing_user);
+                                        Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                    else {
+                                        String texterror = getString(R.string.incorrect_data);
+                                        Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
-                        public void onErrorResponse(VolleyError error) {
+                        public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
                             String texterror = getString(R.string.incorrect_data);
                             Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                             toast.show();
