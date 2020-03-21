@@ -1,7 +1,6 @@
 package com.example.katundu.ui.login;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.logged.MenuPrincipal;
 
-import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
 
