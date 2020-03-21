@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         toast.show();
                                     }
                                     else { //response == "Something went wrong"
-                                        String texterror = getString(R.string.incorrect_data);
+                                        String texterror = getString(R.string.error);
                                         Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                            String texterror = getString(R.string.incorrect_data);
+                            String texterror = getString(R.string.error);
                             Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                             toast.show();
                         }
