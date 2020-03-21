@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
-                                    else {
+                                    else { //response == "Something went wrong"
                                         String texterror = getString(R.string.incorrect_data);
                                         Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                                         toast.show();
