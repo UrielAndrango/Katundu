@@ -11,6 +11,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="texto_registro"><u>Not registered?</u></string>
+    <string name="unregistered">You are not registered</string>
+    <string name="incorrect_password">Incorrect password</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Create your account</string>
@@ -22,8 +24,8 @@
     <string name="coordinate_longitude">Longitude</string>
     <string name="prompt_address">Address</string>
     <string name="action_register">Join us</string>
-    <string name="incorrect_data">Incorrect data</string>
-    <string name="incorrect_password">Passwords don\'t match</string>
+    <string name="error">An error has occurred</string>
+    <string name="mismatchedpasswords">Passwords don\'t match</string>
     <string name="existing_user">The username already exists</string>
 
     <!-- Strings related to Menu Principal-->

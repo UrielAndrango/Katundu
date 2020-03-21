@@ -12,6 +12,8 @@
     <string name="invalid_password">La contraeña debe ser >=8 caracteres</string> <!-- Login View Model-->
     <string name="login_failed">"Entrada fallida"</string>
     <string name="texto_registro"><u>¿No estás registrado?</u></string>
+    <string name="unregistered">No esta registrado</string>
+    <string name="incorrect_password">Contraseña incorrecta</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Crea tu cuenta</string>
@@ -23,8 +25,8 @@
     <string name="coordinate_longitude">Longitud</string>
     <string name="prompt_address">Dirección</string>
     <string name="action_register">Regístrate</string>
-    <string name="incorrect_data">Datos incorrectos</string>
-    <string name="incorrect_password">No coinciden las contraseñas</string>
+    <string name="error">Se ha producido un error</string>
+    <string name="mismatchedpasswords">No coinciden las contraseñas</string>
     <string name="existing_user">El nombre de usuario ya existe</string>
 
     <!-- Strings related to Menu Principal-->

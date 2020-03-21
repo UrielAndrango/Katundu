@@ -11,6 +11,8 @@
     <string name="invalid_password">La contrasenya ha de ser >5 caracters</string>
     <string name="login_failed">"Entrada fallida"</string>
     <string name="texto_registro"><u>No estàs registrat?</u></string>
+    <string name="unregistered">No esta registrat</string>
+    <string name="incorrect_password">Contrasenya incorrecte</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Crea el teu compte</string>
@@ -22,8 +24,8 @@
     <string name="coordinate_longitude">Longitud</string>
     <string name="prompt_address">Direcció</string>
     <string name="action_register">Registrat</string>
-    <string name="incorrect_data">Dades incorrectes</string>
-    <string name="incorrect_password">No coincideixen les contrasenyes</string>
+    <string name="error">S\'ha produit un error</string>
+    <string name="mismatchedpasswords">No coincideixen les contrasenyes</string>
     <string name="existing_user">El nom d\'usuario ja existeix</string>
 
     <!-- Strings related to Menu Principal-->
