@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                     queue.add(stringRequest);
                 }
                 else {
-                    String texterror = getString(R.string.incorrect_password);
+                    String texterror = getString(R.string.mismatchedpasswords);
                     Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 }
