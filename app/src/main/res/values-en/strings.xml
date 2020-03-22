@@ -44,5 +44,7 @@
     <string name="prompt_birthday">Birth date</string>
     <string name="Save">Save changes</string>
     <string name="action_logout">Logout</string>
+    <string name="action_delete_account">Delete account</string>
+    <string name="account_deleted_successfully">Account successfully deleted</string>
 
 </resources>

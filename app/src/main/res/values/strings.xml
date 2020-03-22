@@ -45,5 +45,7 @@
     <string name="prompt_birthday">Fecha de nacimiento</string>
     <string name="Save">Guardar cambios</string>
     <string name="action_logout">Cerrar sessión</string>
+    <string name="action_delete_account">Eliminar cuenta</string>
+    <string name="account_deleted_successfully">Cuenta eliminada con éxito</string>
 
 </resources>
