@@ -36,11 +36,14 @@
     <string name="title_chat">Chat</string>
     <string name="search">Search</string>
 
-    <!-- Strings related to Llistes Usuaris-->
+    <!-- Strings related to Users-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
 
+    <!-- Strings related to Settings-->
+    <string name="title_settings">Settings</string>
+
     <!-- Strings related to Modificar Perfil-->
-    <string name="title_profile">Perfil</string>
+    <string name="title_profile">Change Profile</string>
     <string name="prompt_birthday">Birth date</string>
     <string name="Save">Save changes</string>
     <string name="action_logout">Logout</string>

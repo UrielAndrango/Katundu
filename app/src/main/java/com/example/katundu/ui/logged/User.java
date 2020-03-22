@@ -11,31 +11,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.katundu.R;
 
 
-public class LlistesUsuari extends AppCompatActivity {
+public class User extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llistes_usuari);
+        setContentView(R.layout.activity_user);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
         final Button NomUsuari = findViewById(R.id.nomusuari);
-        final ImageView ImgPerfil = findViewById(R.id.img_perfil2);
+        final ImageView ImgSettings = findViewById(R.id.img_settings);
+        final ImageView Atras = findViewById(R.id.User_Atras);
 
-        NomUsuari.setOnClickListener(new View.OnClickListener() {
+        Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LlistesUsuari.this, EditarPerfil.class);
+                Intent intent = new Intent(User.this, MenuPrincipal.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        ImgPerfil.setOnClickListener(new View.OnClickListener() {
+        NomUsuari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LlistesUsuari.this, MenuPrincipal.class);
+                Intent intent = new Intent(User.this, EditarPerfil.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        ImgSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(User.this, Ajustes.class);
                 startActivity(intent);
                 finish();
             }

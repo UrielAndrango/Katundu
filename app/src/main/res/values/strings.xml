@@ -37,11 +37,14 @@
     <string name="search">Buscar</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
 
-    <!-- Strings related to Llistes Usuaris-->
+    <!-- Strings related to User-->
     <string name="nom_usuari" translatable="false">Nom Usuari</string>
 
+    <!-- Strings related to Settings-->
+    <string name="title_settings">Ajustes</string>
+
     <!-- Strings related to Modificar Perfil-->
-    <string name="title_profile">Perfil</string>
+    <string name="title_profile">Modificar Perfil</string>
     <string name="prompt_birthday">Fecha de nacimiento</string>
     <string name="Save">Guardar cambios</string>
     <string name="action_logout">Cerrar sessión</string>
