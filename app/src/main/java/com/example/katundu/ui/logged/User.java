@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 
 
 public class User extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class User extends AppCompatActivity {
             }
         });
 
+        //Esto se descomentara si sabemos volver a atras de forma "inteligente"
+        /*
         NomUsuari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +44,7 @@ public class User extends AppCompatActivity {
                 finish();
             }
         });
-
+*/
         ImgSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,9 @@ public class User extends AppCompatActivity {
                 finish();
             }
         });
+
+        //USERNAME DEL USUARIO
+        NomUsuari.setText(ControladoraPresentacio.getUsername());
     }
 }
 
