@@ -78,9 +78,16 @@ public class EditarPerfil extends AppCompatActivity {
                                     Toast toast = Toast.makeText(getApplicationContext(), account_modified_successfully, Toast.LENGTH_SHORT);
                                     toast.show();
 
+                                    //Actualizamos Controladora
+                                    ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                                    ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
+                                    ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
+                                    ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
+                                    ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
+                                    //Volvemos a Ajustes
                                     Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
                                     startActivity(intent);
-                                    //finish();
+                                    finish();
                                 }
                                 else { //response == "1" No such user in the database
                                     String texterror = getString(R.string.error);

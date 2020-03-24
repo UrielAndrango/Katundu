@@ -24,6 +24,8 @@ public class User extends AppCompatActivity {
         final TextView NomUsuari = findViewById(R.id.nomUsuari);
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
+        //USERNAME DEL USUARIO
+        NomUsuari.setText(ControladoraPresentacio.getUsername());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,12 +54,9 @@ public class User extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(User.this, Ajustes.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
-
-        //USERNAME DEL USUARIO
-        NomUsuari.setText(ControladoraPresentacio.getUsername());
     }
 }
 

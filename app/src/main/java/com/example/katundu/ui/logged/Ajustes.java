@@ -40,7 +40,7 @@ public class Ajustes extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Ajustes.this, EditarPerfil.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
@@ -61,7 +61,7 @@ public class Ajustes extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Ajustes.this, DeleteAccount.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }
