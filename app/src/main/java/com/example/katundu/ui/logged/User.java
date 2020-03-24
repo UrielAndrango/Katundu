@@ -3,8 +3,8 @@ package com.example.katundu.ui.logged;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +20,7 @@ public class User extends AppCompatActivity {
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
-        final Button NomUsuari = findViewById(R.id.nomusuari);
+        final TextView NomUsuari = findViewById(R.id.nomUsuari);
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
 

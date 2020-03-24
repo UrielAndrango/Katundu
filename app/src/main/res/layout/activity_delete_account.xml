@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.logged.Ajustes">
+    tools:context=".ui.logged.DeleteAccount">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -50,7 +50,7 @@
                     android:id="@+id/nomUsuari"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_settings"
+                    android:text="@string/title_delete_account"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -63,49 +63,33 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <Button
-        android:id="@+id/logout"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="150dp"
-        android:background="@drawable/logout_rounded"
-        android:text="@string/action_logout"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/text_anti_delete_account"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/save_button" />
-
-    <Button
-        android:id="@+id/modificar_perfil"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/button_rounded"
-        android:text="@string/title_profile"
-        android:textColor="@color/colorLetraKatundu"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/textViewDeleteAccount"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/deleteaccount"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/prompt_delete_account"
-        android:textColor="@color/colorLetraKatundu"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/logout_rounded"
+        android:text="@string/action_delete_account"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

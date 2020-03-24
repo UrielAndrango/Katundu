@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.Ajustes"/>
+        <activity android:name=".ui.logged.DeleteAccount"></activity>
+        <activity android:name=".ui.logged.Ajustes" />
         <activity
             android:name=".ui.logged.MenuPrincipal"
             android:label="@string/title_activity_menu_principal" />

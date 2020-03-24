@@ -18,7 +18,7 @@ public class EditarPerfil extends AppCompatActivity {
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
-        final ImageView Atras = findViewById(R.id.Ajustes_Atras);
+        final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override

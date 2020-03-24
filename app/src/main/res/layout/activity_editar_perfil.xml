@@ -26,7 +26,7 @@
             tools:layout_editor_absoluteY="3dp">
 
             <ImageView
-                android:id="@+id/Ajustes_Atras"
+                android:id="@+id/DeleteAccount_Atras"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/abc_vector_test"
@@ -48,7 +48,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/textViewAjustes"
+                    android:id="@+id/nomUsuari"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_profile"
@@ -285,14 +285,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="150dp"
         android:background="@drawable/button_rounded"
         android:text="@string/Save"
         android:textColor="@color/colorLetraKatundu"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

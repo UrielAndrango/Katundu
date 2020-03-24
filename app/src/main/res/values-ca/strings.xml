@@ -37,7 +37,7 @@
     <string name="search">Cercar</string>
 
     <!-- Strings related to Users-->
-    <string name="nom_usuari" translatable="false">Nom Usuari</string>
+    <string name="nom_Usuari" translatable="false">Nom Usuari</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Ajustos</string>
@@ -47,7 +47,14 @@
     <string name="prompt_birthday">Data de naixement</string>
     <string name="Save">Desar canvis</string>
     <string name="action_logout">Tanca sessió</string>
-    <string name="action_delete_account">Eliminar compte</string>
+    <string name="prompt_delete_account">Vols donar-te de baixa?</string>
+
+    <!-- Strings related to Delete Account-->
+    <string name="title_delete_account">Esborrar compte</string>
+    <string name="text_anti_delete_account">
+        Aquest pas es irreversible i eliminarà la teva compte per sempre.\n\nPensa-ho un altre cop abans de continuar.
+    </string>
+    <string name="action_delete_account">Esborrar compte</string>
     <string name="account_deleted_successfully">Compte eliminada amb èxit</string>
 
 </resources>

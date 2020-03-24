@@ -37,7 +37,7 @@
     <string name="search">Search</string>
 
     <!-- Strings related to Users-->
-    <string name="nom_usuari" translatable="false">Nom Usuari</string>
+    <string name="nom_Usuari" translatable="false">Nom Usuari</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Settings</string>
@@ -47,6 +47,14 @@
     <string name="prompt_birthday">Birth date</string>
     <string name="Save">Save changes</string>
     <string name="action_logout">Logout</string>
+    <string name="prompt_delete_account">Do you want to delete your account?</string>
+
+    <!-- Strings related to Delete Account-->
+    <string name="title_delete_account">Delete Account</string>
+    <string name="text_anti_delete_account">
+        TRADUCIR ESTO:
+        Este paso es irreversible y eliminará tu cuenta para siempre.\n\nPiénsatelo otra vez antes de continuar.
+    </string>
     <string name="action_delete_account">Delete account</string>
     <string name="account_deleted_successfully">Account successfully deleted</string>
 

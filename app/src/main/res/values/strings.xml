@@ -38,7 +38,7 @@
     <string name="title_activity_menu_principal">MenuPrincipal</string>
 
     <!-- Strings related to User-->
-    <string name="nom_usuari" translatable="false">Nom Usuari</string>
+    <string name="nom_Usuari" translatable="false">Nom Usuari</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Ajustes</string>
@@ -48,7 +48,15 @@
     <string name="prompt_birthday">Fecha de nacimiento</string>
     <string name="Save">Guardar cambios</string>
     <string name="action_logout">Cerrar sessión</string>
+    <string name="prompt_delete_account"><u>¿Quieres darte de baja?</u></string>
+
+    <!-- Strings related to Delete Account-->
+    <string name="title_delete_account">Eliminar cuenta</string>
+    <string name="text_anti_delete_account">
+        Este paso es irreversible y eliminará tu cuenta para siempre.\n\nPiénsatelo otra vez antes de continuar.
+    </string>
     <string name="action_delete_account">Eliminar cuenta</string>
     <string name="account_deleted_successfully">Cuenta eliminada con éxito</string>
+
 
 </resources>
