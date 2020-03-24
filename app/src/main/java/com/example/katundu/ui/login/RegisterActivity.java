@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    if(response.equals("New user added")) {
+                                    if(response.equals("0")) { //New user added
                                         String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
                                         Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
                                         toast.show();
@@ -64,12 +64,12 @@ public class RegisterActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         //finish();
                                     }
-                                    else if(response.equals("The username already exists")){
+                                    else if(response.equals("1")){ //The username already exists
                                         String texterror = getString(R.string.existing_user);
                                         Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
-                                    else { //response == "Something went wrong"
+                                    else { //response == "-1" Something went wrong
                                         String texterror = getString(R.string.error);
                                         Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                                         toast.show();
