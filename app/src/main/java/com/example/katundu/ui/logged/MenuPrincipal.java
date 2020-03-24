@@ -30,6 +30,9 @@ public class MenuPrincipal extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
+                    Intent intent = new Intent(MenuPrincipal.this, AddProduct.class);
+                    startActivity(intent);
+                    //finish();
                     return true;
                 case R.id.navigation_xat:
                     mTextMessage.setText(R.string.title_chat);

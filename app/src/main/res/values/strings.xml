@@ -57,5 +57,18 @@
     <string name="action_delete_account">Eliminar cuenta</string>
     <string name="account_deleted_successfully">Cuenta eliminada con éxito</string>
 
+    <!-- Strings related to Add Product-->
+    <string name="title_add_product">Añadir Producto</string>
+    <string name="add_product_name">Nombre</string>
+    <string name="add_product_category">Categoría</string>
+    <string name="add_product_value">Valor</string>
+    <string name="add_product_type">Tipo</string>
+    <string name="add_product_type_product">Producto</string>
+    <string name="add_product_type_service">Servicio</string>
+    <string name="add_product_key_words">Palabras Clave</string>
+    <string name="add_product_description">Descripción</string>
+    <string name="add_product_cancel">Cancelar</string>
+    <string name="add_product_save">Subir Producto</string>
+
 
 </resources>
