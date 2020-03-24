@@ -27,7 +27,7 @@ public class AddProduct extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.AddProduct_Atras);
         final Button SubirProducto = findViewById(R.id.ok_button_AddP);
-        final Button Logout = findViewById(R.id.logout);
+        final Button Camara = findViewById(R.id.imageButton_AddP);
         final TextView DeleteAccount = findViewById(R.id.textViewDeleteAccount);;
 
         Atras.setOnClickListener(new View.OnClickListener() {

@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Modo Vertical
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
         getSupportActionBar().hide();
 
@@ -48,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //desactivar login momentaneamente
+                login.setEnabled(false);
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -99,6 +104,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Add the request to the RequestQueue.
                 queue.add(stringRequest);
+
+                //Reactivar login
+                login.setEnabled(true);
             }
         });
 

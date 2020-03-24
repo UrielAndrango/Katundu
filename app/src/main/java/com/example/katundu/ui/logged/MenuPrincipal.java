@@ -29,7 +29,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
                     Intent intent = new Intent(MenuPrincipal.this, AddProduct.class);
                     startActivity(intent);
                     //finish();
