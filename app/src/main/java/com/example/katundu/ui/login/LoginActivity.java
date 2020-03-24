@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                if(response.equals("Successful login")) {
+                                if(response.equals("0")) { //Successful login
                                     String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
                                     Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
                                     toast.show();
@@ -70,17 +70,17 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     //finish();
                                 }
-                                else if(response.equals("Incorrect password")){
+                                else if(response.equals("2")){ //Incorrect password
                                     String texterror = getString(R.string.incorrect_password);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
-                                else if(response.equals("No such user!")) {
+                                else if(response.equals("1")) { //No such user!
                                     String texterror = getString(R.string.unregistered);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
-                                else { //response == "Error getting document + err"
+                                else { //response == "-1" Error getting document + err
                                     String texterror = getString(R.string.error);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
