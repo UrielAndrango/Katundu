@@ -30,12 +30,13 @@ public class EditarPerfil extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
         final Button SaveButton = findViewById(R.id.save_button);
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText nameEditText = findViewById(R.id.editTextNomUsuari);
+        final EditText usernameEditText = findViewById(R.id.editTextNomUsuari);
+        final EditText nameEditText = findViewById(R.id.editTextNom);
         final EditText passwordEditText = findViewById(R.id.editTextContrasenya);
         final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
         final EditText longitudeEditText = findViewById(R.id.editTextLongitud);
         //final EditText birthDateEditText = findViewById(R.id.editTextBirthDate);
+
         //DATOS DEL USUARIO
         usernameEditText.setText(ControladoraPresentacio.getUsername());
         nameEditText.setText(ControladoraPresentacio.getNom_real());
@@ -43,6 +44,7 @@ public class EditarPerfil extends AppCompatActivity {
         latitudeEditText.setText(ControladoraPresentacio.getLatitud());
         longitudeEditText.setText(ControladoraPresentacio.getLongitud());
         //birthDateEditText.setText(ControladoraPresentacio.getUsername());
+
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +84,7 @@ public class EditarPerfil extends AppCompatActivity {
                                 }
                                 else { //response == "1" No such user in the database
                                     String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(EditarPerfil.this, "texterror", Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
                             }

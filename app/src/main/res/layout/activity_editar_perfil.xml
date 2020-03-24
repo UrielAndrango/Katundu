@@ -275,7 +275,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number|numberDecimal" />
+            android:inputType="number|numberDecimal"
+            android:textAlignment="viewEnd" />
     </LinearLayout>
 
     <Button
