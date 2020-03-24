@@ -67,8 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                                     toast.show();
 
                                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
-                                    //finish();
+                                    finish();
                                 }
                                 else if(response.equals("2")){ //Incorrect password
                                     String texterror = getString(R.string.incorrect_password);

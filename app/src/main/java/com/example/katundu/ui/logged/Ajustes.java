@@ -49,8 +49,10 @@ public class Ajustes extends AppCompatActivity {
             public void onClick(View v) {
                 //FALTA HACER LOGOUT DE VERDAD
                 Intent intent = new Intent(Ajustes.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
