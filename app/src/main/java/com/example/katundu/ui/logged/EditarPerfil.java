@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.login.LoginActivity;
+import com.example.katundu.ui.ControladoraPresentacio;
 
 public class EditarPerfil extends AppCompatActivity {
 
@@ -34,8 +34,15 @@ public class EditarPerfil extends AppCompatActivity {
         final EditText nameEditText = findViewById(R.id.editTextNomUsuari);
         final EditText passwordEditText = findViewById(R.id.editTextContrasenya);
         final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
-        final EditText birthDateEditText = findViewById(R.id.editTextBirthDate);
         final EditText longitudeEditText = findViewById(R.id.editTextLongitud);
+        //final EditText birthDateEditText = findViewById(R.id.editTextBirthDate);
+        //DATOS DEL USUARIO
+        usernameEditText.setText(ControladoraPresentacio.getUsername());
+        nameEditText.setText(ControladoraPresentacio.getNom_real());
+        passwordEditText.setText(ControladoraPresentacio.getPassword());
+        latitudeEditText.setText(ControladoraPresentacio.getLatitud());
+        longitudeEditText.setText(ControladoraPresentacio.getLongitud());
+        //birthDateEditText.setText(ControladoraPresentacio.getUsername());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override

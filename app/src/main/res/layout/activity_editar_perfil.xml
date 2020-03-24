@@ -101,7 +101,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="nom"
             android:textAlignment="viewEnd" />
     </LinearLayout>
 
@@ -137,7 +136,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="nomusuari"
             android:textAlignment="viewEnd" />
     </LinearLayout>
 
@@ -173,7 +171,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="contrasenya"
             android:textAlignment="viewEnd" />
     </LinearLayout>
 
@@ -185,10 +182,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:orientation="horizontal"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <TextView
             android:id="@+id/BirthDate"
@@ -223,7 +221,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/Adress"
