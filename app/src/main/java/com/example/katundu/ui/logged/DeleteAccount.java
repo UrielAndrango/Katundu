@@ -56,7 +56,7 @@ public class DeleteAccount extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                if(response.equals("Account deleted successfully")) {
+                                if(response.equals("0")) { //Account deleted successfully
                                     String account_deleted_successfully = getString(R.string.account_deleted_successfully);
                                     Toast toast = Toast.makeText(getApplicationContext(), account_deleted_successfully, Toast.LENGTH_SHORT);
                                     toast.show();
@@ -65,7 +65,7 @@ public class DeleteAccount extends AppCompatActivity {
                                     startActivity(intent);
                                     //finish();
                                 }
-                                else { //response == "Something went wrong"
+                                else { //response == "1" Something went wrong
                                     String texterror = getString(R.string.error);
                                     Toast toast = Toast.makeText(DeleteAccount.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
