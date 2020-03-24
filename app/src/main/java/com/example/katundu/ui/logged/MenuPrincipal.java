@@ -31,6 +31,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
+                case R.id.navigation_xat:
+                    mTextMessage.setText(R.string.title_chat);
+                    return true;
             }
             return false;
         }

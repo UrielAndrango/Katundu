@@ -52,7 +52,7 @@
 
     <!-- Strings related to Delete Account-->
     <string name="title_delete_account">Delete Account</string>
-    <string name="text_anti_delete_account">This step is irreversible and will delete your account forever.\n\n Think again before continuing.</string>
+    <string name="text_anti_delete_account">This step is irreversible and will delete your account forever.\n\nThink again before continuing.</string>
     <string name="action_delete_account">Delete account</string>
     <string name="account_deleted_successfully">Account successfully deleted</string>
 

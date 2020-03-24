@@ -52,7 +52,7 @@
 
     <!-- Strings related to Delete Account-->
     <string name="title_delete_account">Esborrar compte</string>
-    <string name="text_anti_delete_account">Aquest pas és irreversible i eliminarà el teu compte per sempre.\n\n Pensa-t\'ho una altra vegada abans de continuar.</string>
+    <string name="text_anti_delete_account">Aquest pas és irreversible i eliminarà el teu compte per sempre.\n\nPensa-t\'ho una altra vegada abans de continuar.</string>
     <string name="action_delete_account">Esborrar compte</string>
     <string name="account_deleted_successfully">Compte eliminada amb èxit</string>
 
