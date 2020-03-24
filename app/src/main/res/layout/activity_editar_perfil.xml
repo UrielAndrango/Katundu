@@ -96,7 +96,7 @@
             android:layout_weight="1" />
 
         <EditText
-            android:id="@+id/editTextCorreu"
+            android:id="@+id/editTextNom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -239,7 +239,7 @@
             android:layout_weight="1" />
 
         <EditText
-            android:id="@+id/editTextBirthDate2"
+            android:id="@+id/editTextLatitud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -273,7 +273,7 @@
             android:layout_weight="1" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/editTextLongitud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
