@@ -63,9 +63,9 @@
             <ImageView
                 android:id="@+id/img_settings"
                 android:layout_width="70dp"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:contentDescription="@string/descripcio"
-                app:srcCompat="@drawable/icon_settings" />
+                app:srcCompat="@drawable/icon_settings_white" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
