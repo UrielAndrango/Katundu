@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class EditarPerfil extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
         final Button SaveButton = findViewById(R.id.save_button);
-        final EditText usernameEditText = findViewById(R.id.editTextNomUsuari);
+        final TextView usernameEditText = findViewById(R.id.TextNomUsuari);
         final EditText nameEditText = findViewById(R.id.editTextNom);
         final EditText passwordEditText = findViewById(R.id.editTextContrasenya);
         final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
