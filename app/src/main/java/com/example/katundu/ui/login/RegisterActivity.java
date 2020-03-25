@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
 
 
@@ -59,6 +60,13 @@ public class RegisterActivity extends AppCompatActivity {
                                         String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
                                         Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
                                         toast.show();
+
+                                        //Actualizamos Controladora
+                                        ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                                        ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
+                                        ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
+                                        ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
+                                        ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
 
                                         Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
                                         startActivity(intent);
