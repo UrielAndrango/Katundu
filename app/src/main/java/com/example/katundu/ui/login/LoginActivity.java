@@ -53,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //desactivar login momentaneamente
-                login_button.setEnabled(true);
+                login_button.setEnabled(false);
+                no_registrado.setEnabled(false);
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -85,16 +86,25 @@ public class LoginActivity extends AppCompatActivity {
                                     String texterror = getString(R.string.incorrect_password);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
+                                    //Reactivar login
+                                    login_button.setEnabled(true);
+                                    no_registrado.setEnabled(true);
                                 }
                                 else if(response.equals("1")) { //No such user!
                                     String texterror = getString(R.string.unregistered);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
+                                    //Reactivar login
+                                    login_button.setEnabled(true);
+                                    no_registrado.setEnabled(true);
                                 }
                                 else { //response == "-1" Error getting document + err
                                     String texterror = getString(R.string.error);
                                     Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
+                                    //Reactivar login
+                                    login_button.setEnabled(true);
+                                    no_registrado.setEnabled(true);
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -103,6 +113,9 @@ public class LoginActivity extends AppCompatActivity {
                         String texterror = getString(R.string.error);
                         Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
+                        //Reactivar login
+                        login_button.setEnabled(true);
+                        no_registrado.setEnabled(true);
                     }
                 });
 
@@ -110,7 +123,8 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(stringRequest);
 
                 //Reactivar login
-                login_button.setEnabled(false);
+                //login_button.setEnabled(true);
+                //no_registrado.setEnabled(true);
             }
         });
 
