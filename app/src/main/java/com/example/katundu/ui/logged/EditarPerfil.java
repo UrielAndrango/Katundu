@@ -73,6 +73,7 @@ public class EditarPerfil extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+                                System.out.println(response);
                                 if(response.equals("0")) { //Account modified successfully
                                     String account_modified_successfully = getString(R.string.account_modified_successfully);
                                     Toast toast = Toast.makeText(getApplicationContext(), account_modified_successfully, Toast.LENGTH_SHORT);
@@ -91,7 +92,7 @@ public class EditarPerfil extends AppCompatActivity {
                                 }
                                 else { //response == "1" No such user in the database
                                     String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(EditarPerfil.this, "texterror", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
                             }

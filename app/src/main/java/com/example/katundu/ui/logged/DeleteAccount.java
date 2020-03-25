@@ -59,6 +59,7 @@ public class DeleteAccount extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+                                System.out.println(response);
                                 if(response.equals("0")) { //Account deleted successfully
                                     String account_deleted_successfully = getString(R.string.account_deleted_successfully);
                                     Toast toast = Toast.makeText(getApplicationContext(), account_deleted_successfully, Toast.LENGTH_SHORT);
