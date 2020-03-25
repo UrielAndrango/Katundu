@@ -1,9 +1,9 @@
 package com.example.katundu.ui;
 
 public class ControladoraPresentacio {
-    private static String username = "Bobby";
-    private static String nom_real = "Bob";
-    private static String password = "12345678";
+    private static String username = "testusername";
+    private static String nom_real = "testname";
+    private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
 
