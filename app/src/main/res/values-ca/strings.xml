@@ -46,7 +46,7 @@
     <string name="title_profile">Modificar Perfil</string>
     <string name="prompt_birthday">Data de naixement</string>
     <string name="Save">Desar canvis</string>
-    <string name="action_logout">Tanca sessió</string>
+    <string name="action_logout">Tancar sessió</string>
     <string name="prompt_delete_account">Vols donar-te de baixa?</string>
     <string name="account_modified_successfully">Compte modificat amb èxit</string>
 
