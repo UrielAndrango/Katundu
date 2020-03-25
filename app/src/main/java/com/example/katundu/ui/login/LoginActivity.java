@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,16 +44,16 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
-        final Button login = findViewById(R.id.login);
+        final Button login_button = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading); //TODO:Esto se puede quitar??
         final TextView no_registrado = findViewById(R.id.no_registrado);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //desactivar login momentaneamente
-                login.setEnabled(false);
+                login_button.setEnabled(false);
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -70,6 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                                     String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
                                     Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
                                     toast.show();
+
+                                    //FALTA PETICION A BACKEND DE LOS DATOS REALES DEL USUARIO
+                                    ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
 
                                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -106,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(stringRequest);
 
                 //Reactivar login
-                login.setEnabled(true);
+                login_button.setEnabled(true);
             }
         });
 
