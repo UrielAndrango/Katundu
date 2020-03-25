@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //desactivar login momentaneamente
-                login_button.setEnabled(false);
+                login_button.setEnabled(true);
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(stringRequest);
 
                 //Reactivar login
-                login_button.setEnabled(true);
+                login_button.setEnabled(false);
             }
         });
 
