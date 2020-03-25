@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.login.LoginActivity;
 
 public class DeleteAccount extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class DeleteAccount extends AppCompatActivity {
         getSupportActionBar().hide();
         final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
         //modificar estos botones, esto es solo provisional
-        final EditText usernameEditText = findViewById(R.id.editTextNomUsuari);
+        final String username = ControladoraPresentacio.getUsername();
         final Button deleteAccount = findViewById(R.id.deleteaccount);
 
         Atras.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +49,10 @@ public class DeleteAccount extends AppCompatActivity {
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(DeleteAccount.this);
 
+                System.out.println(username);
+
                 String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteaccount?" +
-                        "un=" + usernameEditText.getText();
+                        "un=" + username;
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
