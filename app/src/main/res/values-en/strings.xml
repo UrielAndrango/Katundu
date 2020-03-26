@@ -38,6 +38,9 @@
 
     <!-- Strings related to Users-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>
+    <string name="user_valoracio_text">"Assessment: "</string>
+    <string name="user_valoracio_numero">0</string>
+    <string name="user_perfil_valoracio_max">"/5"</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Settings</string>

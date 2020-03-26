@@ -6,6 +6,7 @@ public class ControladoraPresentacio {
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+    private static double valoracion = 4;
 
     public static String getUsername() {
         return username;
@@ -45,5 +46,13 @@ public class ControladoraPresentacio {
 
     public static void setLongitud(String longitud) {
         ControladoraPresentacio.longitud = longitud;
+    }
+
+    public static double getValoracion() {
+        return valoracion;
+    }
+
+    public static void setValoracion(double valoracion) {
+        ControladoraPresentacio.valoracion = valoracion;
     }
 }
