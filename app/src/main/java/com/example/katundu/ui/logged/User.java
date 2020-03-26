@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class User extends AppCompatActivity {
@@ -42,6 +43,15 @@ public class User extends AppCompatActivity {
             }
         });
 
+        ImgSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(User.this, Ajustes.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
         //Valoracion Usuario
         final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_User);
         valoracion_usuario.setText(Double.toString(ControladoraPresentacio.getValoracion()));
@@ -56,6 +66,10 @@ public class User extends AppCompatActivity {
             stars[i].setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         }
 
+        //Barra Navegacio Llistes
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_own_list);
+
         //Esto se descomentara si sabemos volver a atras de forma "inteligente"
         /*
         NomUsuari.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +81,6 @@ public class User extends AppCompatActivity {
             }
         });
 */
-        ImgSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(User.this, Ajustes.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
     }
 }
 
