@@ -96,35 +96,36 @@
                     android:id="@+id/imageViewStar1_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@android:color/black"
+                    android:tint="@color/colorLetraKatundu"
                     app:srcCompat="@android:drawable/btn_star" />
 
                 <ImageView
                     android:id="@+id/imageViewStar2_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@android:color/black"
+                    android:tint="@color/colorLetraKatundu"
                     app:srcCompat="@android:drawable/btn_star" />
 
                 <ImageView
                     android:id="@+id/imageViewStar3_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@android:color/black"
+                    android:tint="@color/colorLetraKatundu"
                     app:srcCompat="@android:drawable/btn_star" />
 
                 <ImageView
                     android:id="@+id/imageViewStar4_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    android:tint="@color/colorLetraKatundu"
+                    app:srcCompat="@android:drawable/btn_star"
+                    tools:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/imageViewStar5_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@android:color/black"
+                    android:tint="@color/colorLetraKatundu"
                     app:srcCompat="@android:drawable/btn_star" />
             </LinearLayout>
 
@@ -170,8 +171,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/colorLetraKatundu"
+        app:elevation="0dp"
         app:itemIconSize="36dp"
+        app:itemIconTint="@color/nav_item_colors"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"

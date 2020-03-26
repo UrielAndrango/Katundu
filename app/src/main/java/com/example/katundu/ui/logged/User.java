@@ -69,6 +69,7 @@ public class User extends AppCompatActivity {
         //Barra Navegacio Llistes
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_own_list);
+        //navView.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
 
         //Esto se descomentara si sabemos volver a atras de forma "inteligente"
         /*
