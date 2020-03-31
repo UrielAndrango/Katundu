@@ -29,6 +29,7 @@ public class Ajustes extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: Cuidado porque vuelve a User no a la ventana que me invoca
                 Intent intent = new Intent(Ajustes.this, User.class);
                 onNewIntent(intent);
                 //startActivity(intent);

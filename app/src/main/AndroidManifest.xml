@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.AddWish"></activity>
+        <activity android:name=".ui.logged.ListWish"></activity>
+        <activity android:name=".ui.logged.AddWish" />
         <activity android:name=".ui.logged.Add" />
         <activity android:name=".ui.logged.PreviewFoto" />
         <activity

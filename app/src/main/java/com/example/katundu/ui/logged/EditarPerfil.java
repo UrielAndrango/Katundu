@@ -50,8 +50,11 @@ public class EditarPerfil extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Comentar las dos lineas siguientes es equivalente aunque no se porque esto funciona
+                //Quizas busca el Intent de ajustes y al no encontrarlo hace un finish() y ya :D
                 Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
                 onNewIntent(intent);
+
                 //startActivity(intent);
                 finish();
             }
