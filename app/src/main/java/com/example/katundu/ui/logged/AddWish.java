@@ -30,7 +30,8 @@ public class AddWish extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddWish.this, Add.class);
-                startActivity(intent);
+                onNewIntent(intent);
+                //startActivity(intent);
                 finish();
             }
         });

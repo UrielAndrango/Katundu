@@ -36,8 +36,9 @@ public class PreviewFoto extends AppCompatActivity {
                 ControladoraPresentacio.reordenar_fotos();
                 //Vuelvo a la ventan de Add Product
                 Intent intent = new Intent(PreviewFoto.this, AddProduct.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }

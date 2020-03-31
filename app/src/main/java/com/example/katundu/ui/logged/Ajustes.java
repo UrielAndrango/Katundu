@@ -30,7 +30,8 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Ajustes.this, User.class);
-                startActivity(intent);
+                onNewIntent(intent);
+                //startActivity(intent);
                 finish();
             }
         });

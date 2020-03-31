@@ -87,7 +87,8 @@ public class AddProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddProduct.this, Add.class);
-                startActivity(intent);
+                onNewIntent(intent);
+                //startActivity(intent);
                 finish();
             }
         });

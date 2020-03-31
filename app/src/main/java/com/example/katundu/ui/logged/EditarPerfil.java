@@ -51,7 +51,8 @@ public class EditarPerfil extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
-                startActivity(intent);
+                onNewIntent(intent);
+                //startActivity(intent);
                 finish();
             }
         });

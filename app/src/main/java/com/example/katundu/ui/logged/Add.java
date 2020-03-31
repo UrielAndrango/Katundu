@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Add extends AppCompatActivity {
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -26,8 +27,10 @@ public class Add extends AppCompatActivity {
                     Intent intent = new Intent(Add.this, MenuPrincipal.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    onNewIntent(intent);
+                    finish();
+                    //startActivity(intent);
                     return true;
                 case R.id.navigation_surprise:
                     return true;

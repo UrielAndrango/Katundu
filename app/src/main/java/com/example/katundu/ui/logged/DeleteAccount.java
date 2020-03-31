@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -38,7 +37,8 @@ public class DeleteAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DeleteAccount.this, Ajustes.class);
-                startActivity(intent);
+                onNewIntent(intent);
+                //startActivity(intent);
                 finish();
             }
         });

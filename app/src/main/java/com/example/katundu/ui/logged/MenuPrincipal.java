@@ -34,7 +34,8 @@ public class MenuPrincipal extends AppCompatActivity {
                     Intent intent = new Intent(MenuPrincipal.this, Add.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //onNewIntent(intent);
                     startActivity(intent);
                     //finish();
 
