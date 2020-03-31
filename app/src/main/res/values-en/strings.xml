@@ -100,4 +100,8 @@
     <string name="preview_foto_delete">Delete foto</string>
     <string name="preview_foto_cancelar">Cancel</string>
 
+    <!-- Strings related to EditWish-->
+    <string name="edit_wish_title">Modify wish data</string>
+    <string name="edit_wish_ok">Modify wish</string>
+
 </resources>

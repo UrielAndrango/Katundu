@@ -36,7 +36,9 @@ public class MenuPrincipal extends AppCompatActivity {
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //onNewIntent(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(0,0);
                     //finish();
 
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES

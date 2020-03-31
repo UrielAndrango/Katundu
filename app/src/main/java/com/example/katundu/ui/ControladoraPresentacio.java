@@ -3,16 +3,23 @@ package com.example.katundu.ui;
 import android.net.Uri;
 
 public class ControladoraPresentacio {
+    //datos usuario
     private static String username = "testusername";
     private static String nom_real = "testname";
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+    //add product
     private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
+    //modificar wish
+    private static String wish_name = "Audi";
+    private static int wish_categoria = 5;
+    private static boolean wish_service = false;
+    private static String wish_PC = "Coche";
 
     public static String getUsername() {
         return username;
@@ -125,5 +132,37 @@ public class ControladoraPresentacio {
             }
         }
         fotos = actualizada;
+    }
+
+    public static String getWish_name() {
+        return wish_name;
+    }
+
+    public static void setWish_name(String wish_name) {
+        ControladoraPresentacio.wish_name = wish_name;
+    }
+
+    public static int getWish_Categoria() {
+        return wish_categoria;
+    }
+
+    public static void setWish_Categoria(int categoria) {
+        ControladoraPresentacio.wish_categoria = categoria;
+    }
+
+    public static boolean isWish_Service() {
+        return wish_service;
+    }
+
+    public static void setWish_Service(boolean service) {
+        ControladoraPresentacio.wish_service = service;
+    }
+
+    public static String getWish_PC() {
+        return wish_PC;
+    }
+
+    public static void setWish_PC(String wish_PC) {
+        ControladoraPresentacio.wish_PC = wish_PC;
     }
 }

@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +33,10 @@ public class ListWish extends AppCompatActivity {
                     Intent intent = new Intent(ListWish.this, User.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //onNewIntent(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    //startActivityForResult(intent, 0);
+                    overridePendingTransition(0,0);
                     finish();
 
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
@@ -96,7 +102,6 @@ public class ListWish extends AppCompatActivity {
         //navView.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         //Esto se descomentara si sabemos volver a atras de forma "inteligente"
         //Si no gusta se comenta y listo
         NomUsuari.setOnClickListener(new View.OnClickListener() {
@@ -107,5 +112,62 @@ public class ListWish extends AppCompatActivity {
                 //finish();
             }
         });
+
+        /* Creación de la LISTA DE WISHES */
+        //Esto es temporal, hay que hacer tanto botones como wishes tenga el usuario --> Controladora_numeroWishes() ??
+        int numBotones = 20;
+        //Obtenemos el linear layout donde colocar los botones
+        LinearLayout llBotonera = (LinearLayout) findViewById(R.id.listaWishes_LW);
+
+        //Creamos las propiedades de layout que tendrán los botones.
+        //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT );
+
+        //Creamos los botones en bucle
+        for (int i=0; i<numBotones; i++){
+            Button button = new Button(this);
+            //Asignamos propiedades de layout al boton
+            button.setLayoutParams(lp);
+            //Asignamos Texto al botón
+            button.setText("Boton "+String.format("%02d", i ));
+
+            //Le damos el estilo que queremos
+            button.setBackgroundResource(R.drawable.button_rounded);
+            button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
+            //Margenes del button
+            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+            //params.setMargins(left, top, right, bottom);
+            params.setMargins(0, 0, 0, 20);
+            button.setLayoutParams(params);
+
+            //Asignamose el Listener
+            button.setOnClickListener(new ButtonsOnClickListener(this));
+            //Añadimos el botón a la botonera
+            llBotonera.addView(button);
+        }
+    }
+
+    private class ButtonsOnClickListener implements View.OnClickListener {
+        public ButtonsOnClickListener(ListWish listWish) {
+        }
+
+        @Override
+        public void onClick(View view) {
+            Button b = (Button) view;
+            //Provando que funciona el boton
+            //Toast.makeText(getApplicationContext(),b.getText(),Toast.LENGTH_SHORT).show();
+
+            //Pasamos los datos del deseo a la controladora
+            ControladoraPresentacio.setWish_name("Clases Matematicas");
+            //TODO: Solo deberia hacer falta el nombre, lo demas se deberia pedir al Servidor cuando se quiera modificar
+            ControladoraPresentacio.setWish_Categoria(5);
+            ControladoraPresentacio.setWish_Service(true);
+            ControladoraPresentacio.setWish_PC("Profesor");
+            //Nos vamos a la ventana de User
+            Intent intent = new Intent(ListWish.this, EditWish.class);
+            startActivity(intent);
+            //finish();
+        }
     }
 }

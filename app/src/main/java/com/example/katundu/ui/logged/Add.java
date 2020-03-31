@@ -28,7 +28,9 @@ public class Add extends AppCompatActivity {
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     onNewIntent(intent);
+                    overridePendingTransition(0,0);
                     finish();
                     //startActivity(intent);
                     return true;
