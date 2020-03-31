@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -43,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
+        final TextInputLayout password_layout = findViewById(R.id.password);
+        final EditText passwordEditText = findViewById(R.id.passwordEdit);
         final Button login_button = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading); //TODO:Esto se puede quitar??
         final TextView no_registrado = findViewById(R.id.no_registrado);

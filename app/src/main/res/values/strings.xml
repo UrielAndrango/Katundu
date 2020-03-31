@@ -60,10 +60,21 @@
     <string name="action_delete_account">Eliminar cuenta</string>
     <string name="account_deleted_successfully">Cuenta eliminada con éxito</string>
 
+    <!-- Strings related to Add-->
+    <string name="add_product">Subir Oferta</string>
+    <string name="add_wish">Añadir Deseo</string>
+
     <!-- Strings related to Add Product-->
-    <string name="title_add_product">Añadir Producto</string>
+    <string name="title_add_product">Añadir Nueva Oferta</string>
+    <string name="add_product_add_foto">Añadir foto</string>
     <string name="add_product_name">Nombre</string>
-    <string name="add_product_category">Categoría</string>
+    <string name="add_product_categories">Categoría</string>
+    <string name="add_product_category_technology">Tecnología</string>
+    <string name="add_product_category_home">Hogar</string>
+    <string name="add_product_category_beauty">Belleza</string>
+    <string name="add_product_category_sports">Deportes</string>
+    <string name="add_product_category_fashion">Moda</string>
+    <string name="add_product_category_leisure">Ocio</string>
     <string name="add_product_value">Valor</string>
     <string name="add_product_type">Tipo</string>
     <string name="add_product_type_product">Producto</string>
@@ -71,7 +82,24 @@
     <string name="add_product_key_words">Palabras Clave</string>
     <string name="add_product_description">Descripción</string>
     <string name="add_product_cancel">Cancelar</string>
-    <string name="add_product_save">Subir Producto</string>
+    <string name="add_product_save">Subir Oferta</string>
+    <string name="add_product_muchas_fotos">Límite de fotos alcanzado</string>
+    <string name="add_product_no_hay_fotos">Debes añadir una foto</string>
+    <string name="add_product_no_hay_nombre">Debes añadir un nombre</string>
+    <string name="add_product_no_hay_valor">Debes añadir un valor</string>
+    <string name="add_product_no_hay_palabras_clave">Debes añadir una palabra clave</string>
+    <string name="add_product_no_hay_descripcion">Debes añadir una descripción</string>
+
+    <!-- Strings related to Add Wish-->
+    <string name="title_add_wish">Añadir Nuevo Deseo</string>
+    <string name="add_new_wish_explication">
+        Un deseo es aquello que quieres conseguir en un intercambio con otro usuario, independientemente de su valor.
+    </string>
+    <string name="add_new_wish">Añadir Deseo</string>
+
+    <!-- Strings related to PreviewFoto-->
+    <string name="preview_foto_delete">Borrar foto</string>
+    <string name="preview_foto_cancelar">Cancelar</string>
 
 
 </resources>

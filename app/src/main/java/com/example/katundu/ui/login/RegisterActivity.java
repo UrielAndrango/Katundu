@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         //getSupportActionBar().hide();
 
-        final EditText usernameEditText = findViewById(R.id.username);
+        final EditText usernameEditText = findViewById(R.id.username_R);
         final EditText nameEditText = findViewById(R.id.nom);
         final EditText passwordEditText = findViewById(R.id.password1);
         final EditText repeatpasswordEditText = findViewById(R.id.password2);

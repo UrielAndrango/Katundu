@@ -4,17 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MenuPrincipal extends AppCompatActivity {
-    private TextView mTextMessage;
+public class Add extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -23,25 +22,19 @@ public class MenuPrincipal extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_surprise:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_add:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    //ControladoraPresentacio.reset_fotos();
-                    Intent intent = new Intent(MenuPrincipal.this, Add.class);
+                    ControladoraPresentacio.reset_fotos();
+                    Intent intent = new Intent(Add.this, MenuPrincipal.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                    //finish();
-
-                    //Si lo hacemos con ventanas independientes, quitamos los TRUES
+                    return true;
+                case R.id.navigation_surprise:
+                    return true;
+                case R.id.navigation_add:
+                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_xat:
-                    mTextMessage.setText(R.string.title_chat);
                     return true;
             }
             return false;
@@ -51,20 +44,32 @@ public class MenuPrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
-        //Escondemos la Action Bar porque usamos la ToolBar
+        setContentView(R.layout.activity_add);
+        //Escondemos la Action Bar
         getSupportActionBar().hide();
 
-        final ImageView Perfil_img = findViewById(R.id.img_perfil);
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
+        //Barra Navegacio en ADD
+        BottomNavigationView navView = findViewById(R.id.nav_view_add);
+        navView.setSelectedItemId(R.id.navigation_add);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Perfil_img.setOnClickListener(new View.OnClickListener() {
+        final Button add_product = findViewById(R.id.addProduct_add);
+        final Button add_wish = findViewById(R.id.addWish_add);
+
+        add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPrincipal.this, User.class);
+                ControladoraPresentacio.reset_fotos();
+                Intent intent = new Intent(Add.this, AddProduct.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        add_wish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Add.this, AddWish.class);
                 startActivity(intent);
                 //finish();
             }

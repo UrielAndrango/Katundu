@@ -59,10 +59,21 @@
     <string name="action_delete_account">Esborrar compte</string>
     <string name="account_deleted_successfully">Compte eliminada amb èxit</string>
 
+    <!-- Strings related to Add-->
+    <string name="add_product">Pujar Oferta</string>
+    <string name="add_wish">Afegir Desig</string>
+
     <!-- Strings related to Add Product-->
-    <string name="title_add_product">Afegir Producto</string>
+    <string name="title_add_product">Afegir Nova Oferta</string>
+    <string name="add_product_add_foto">Afegir foto</string>
     <string name="add_product_name">Nom</string>
-    <string name="add_product_category">Categoria</string>
+    <string name="add_product_categories">Categoria</string>
+    <string name="add_product_category_technology">Tecnologia</string>
+    <string name="add_product_category_home">Llar</string>
+    <string name="add_product_category_beauty">Bellesa</string>
+    <string name="add_product_category_sports">Esports</string>
+    <string name="add_product_category_fashion">Moda</string>
+    <string name="add_product_category_leisure">Oci</string>
     <string name="add_product_value">Valor</string>
     <string name="add_product_type">Tipus</string>
     <string name="add_product_type_product">Producte</string>
@@ -70,6 +81,23 @@
     <string name="add_product_key_words">Paraules Clau</string>
     <string name="add_product_description">Descripció</string>
     <string name="add_product_cancel">Cancel·lar</string>
-    <string name="add_product_save">Pujar Producte</string>
+    <string name="add_product_save">Pujar Oferta</string>
+    <string name="add_product_muchas_fotos">Límit de fotos assolit</string>
+    <string name="add_product_no_hay_fotos">Has d\'afegir una foto</string>
+    <string name="add_product_no_hay_nombre">Has d\'afegir un nom</string>
+    <string name="add_product_no_hay_valor">Has d\'afegir un valor</string>
+    <string name="add_product_no_hay_palabras_clave">Has d\'afegir una paraula clau</string>
+    <string name="add_product_no_hay_descripcion">Has d\'afegir una descripció</string>
+
+    <!-- Strings related to Add Wish-->
+    <string name="title_add_wish">Afegir Nou Desig</string>
+    <string name="add_new_wish_explication">
+        Un desig és allò què vols aconseguir en un intercanvi amb un altre usuari, independenment del seu valor.
+    </string>
+    <string name="add_new_wish">Afegir Desig</string>
+
+    <!-- Strings related to PreviewFoto-->
+    <string name="preview_foto_delete">Borrar foto</string>
+    <string name="preview_foto_cancelar">Cancel·lar</string>
 
 </resources>

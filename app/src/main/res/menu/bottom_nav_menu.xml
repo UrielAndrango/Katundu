@@ -6,11 +6,11 @@
         android:icon="@drawable/ic_home_black_24dp" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_surprise"
         android:icon="@drawable/icon_target" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_add"
         android:icon="@drawable/icon_plus_rounded" />
     <item
         android:id="@+id/navigation_xat"

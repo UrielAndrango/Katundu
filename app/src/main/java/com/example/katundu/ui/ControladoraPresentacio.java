@@ -1,5 +1,7 @@
 package com.example.katundu.ui;
 
+import android.net.Uri;
+
 public class ControladoraPresentacio {
     private static String username = "testusername";
     private static String nom_real = "testname";
@@ -7,6 +9,10 @@ public class ControladoraPresentacio {
     private static String latitud = "0.0";
     private static String longitud = "0.0";
     private static double valoracion = 4;
+    private static int numero_imagen = -1;
+    private static int cantidad_fotos = 0;
+    private static int numero_maximo_fotos = 5;
+    private static Uri[] fotos = new Uri[numero_maximo_fotos];
 
     public static String getUsername() {
         return username;
@@ -54,5 +60,70 @@ public class ControladoraPresentacio {
 
     public static void setValoracion(double valoracion) {
         ControladoraPresentacio.valoracion = valoracion;
+    }
+
+    public static int getNumero_imagen() {
+        return numero_imagen;
+    }
+
+    public static void setNumero_imagen(int numero_imagen) {
+        ControladoraPresentacio.numero_imagen = numero_imagen;
+    }
+
+    public static int getCantidad_fotos() {
+        return cantidad_fotos;
+    }
+
+    public static void setCantidad_fotos(int cantidad_fotos) {
+        ControladoraPresentacio.cantidad_fotos = cantidad_fotos;
+    }
+
+    public static int getNumero_maximo_fotos() {
+        return numero_maximo_fotos;
+    }
+
+    public static Uri[] getFotos() {
+        return fotos;
+    }
+
+    public static void setFotos(Uri[] foto) {
+        ControladoraPresentacio.fotos = foto;
+    }
+
+    public static Uri obtener_foto(int i) {
+        //"i" empieza en 0
+        Uri foto = fotos[i];
+        return foto;
+    }
+
+    public static void add_foto(Uri photo, int pos) {
+        //"i" empieza en 0
+        fotos[pos] = photo;
+        ++cantidad_fotos;
+    }
+
+    public static void borrar_foto(int i) {
+        //"i" empieza en 0
+        fotos[i] = null;
+        if (cantidad_fotos > 0) --cantidad_fotos;
+    }
+
+    public static void reset_fotos() {
+        //"i" empieza en 0
+        numero_imagen = 1;
+        cantidad_fotos = 0;
+        fotos = new Uri[numero_maximo_fotos];
+    }
+
+    public static void reordenar_fotos() {
+        Uri[] actualizada = new Uri[numero_maximo_fotos];
+        int new_pos = 0;
+        for (int i=0; i<numero_maximo_fotos; ++i) {
+            if (fotos[i] != null) {
+                actualizada[new_pos] = fotos[i];
+                ++new_pos;
+            }
+        }
+        fotos = actualizada;
     }
 }
