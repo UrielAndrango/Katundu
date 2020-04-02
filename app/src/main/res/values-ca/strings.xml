@@ -53,6 +53,12 @@
     <string name="prompt_delete_account">Vols donar-te de baixa?</string>
     <string name="account_modified_successfully">Compte modificat amb èxit</string>
 
+    <!-- Strings related to Editar Idioma-->
+    <string name="title_idioma">Canviar Idioma</string>
+    <string name="editar_idioma_español">Español</string>
+    <string name="editar_idioma_catalan">Català</string>
+    <string name="editar_idioma_ingles">English</string>
+
     <!-- Strings related to Delete Account-->
     <string name="title_delete_account">Esborrar compte</string>
     <string name="text_anti_delete_account">Aquest pas és irreversible i eliminarà el teu compte per sempre.\n\nPensa-t\'ho una altra vegada abans de continuar.</string>

@@ -78,6 +78,31 @@ public class LoginActivity extends AppCompatActivity {
                                     //FALTA PETICION A BACKEND DE LOS DATOS REALES DEL USUARIO
                                     ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
 
+                                    /*
+                                    //Idioma
+                                    //temporal lo de la controladora, porque debe ser con el idioma del usuario desde el servidor
+                                    String idioma_usuario = ControladoraPresentacio.getIdioma();
+                                    Locale localizacion;
+                                    switch (idioma_usuario) {
+                                        case "es":
+                                            localizacion = new Locale("es");
+                                            break;
+                                        case "ca":
+                                            localizacion = new Locale("ca");
+                                            break;
+                                        case "en":
+                                            localizacion = new Locale("en");
+                                            break;
+                                        default:
+                                            idioma_usuario = "es";
+                                            localizacion = new Locale("es");
+                                    }
+                                    ControladoraPresentacio.setIdioma(idioma_usuario);
+                                    Locale.setDefault(localizacion);
+                                    Configuration config = new Configuration();
+                                    config.locale = localizacion;
+                                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+*/
                                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

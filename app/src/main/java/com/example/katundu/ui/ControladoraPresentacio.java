@@ -9,6 +9,8 @@ public class ControladoraPresentacio {
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+    //idioma usuario (temporal)
+    private static String idioma = "";
     //add product
     private static double valoracion = 4;
     private static int numero_imagen = -1;
@@ -164,5 +166,13 @@ public class ControladoraPresentacio {
 
     public static void setWish_PC(String wish_PC) {
         ControladoraPresentacio.wish_PC = wish_PC;
+    }
+
+    public static String getIdioma() {
+        return idioma;
+    }
+
+    public static void setIdioma(String idioma) {
+        ControladoraPresentacio.idioma = idioma;
     }
 }

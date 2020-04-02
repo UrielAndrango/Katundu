@@ -18,20 +18,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.logged.EditarIdioma"></activity>
         <activity
             android:name=".ui.logged.EditWish"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.logged.ListWish"
+        <activity
+            android:name=".ui.logged.ListWish"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.logged.AddWish"
+        <activity
+            android:name=".ui.logged.AddWish"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.logged.Add"
+        <activity
+            android:name=".ui.logged.Add"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.logged.PreviewFoto"
+        <activity
+            android:name=".ui.logged.PreviewFoto"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

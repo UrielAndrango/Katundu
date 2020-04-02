@@ -53,6 +53,12 @@
     <string name="prompt_delete_account">Do you want to delete your account?</string>
     <string name="account_modified_successfully">Account successfully modified</string>
 
+    <!-- Strings related to Editar Idioma-->
+    <string name="title_idioma">Change Language</string>
+    <string name="editar_idioma_español">Español</string>
+    <string name="editar_idioma_catalan">Català</string>
+    <string name="editar_idioma_ingles">English</string>
+
     <!-- Strings related to Delete Account-->
     <string name="title_delete_account">Delete Account</string>
     <string name="text_anti_delete_account">This step is irreversible and will delete your account forever.\n\nThink again before continuing.</string>

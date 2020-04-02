@@ -23,8 +23,9 @@ public class Ajustes extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
         final Button ModificarPerfil = findViewById(R.id.modificar_perfil);
+        final Button CambiarIdioma = findViewById(R.id.modificar_idioma);
         final Button Logout = findViewById(R.id.logout);
-        final TextView DeleteAccount = findViewById(R.id.textViewDeleteAccount);;
+        final TextView DeleteAccount = findViewById(R.id.textViewDeleteAccount);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,15 @@ public class Ajustes extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Ajustes.this, EditarPerfil.class);
                 startActivity(intent);
+                //finish();
+            }
+        });
+
+        CambiarIdioma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent refresh = new Intent(Ajustes.this, EditarIdioma.class);
+                startActivity(refresh);
                 //finish();
             }
         });
