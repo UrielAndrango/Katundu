@@ -26,7 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class AddProduct extends AppCompatActivity {
 
-    String[] categorias = new String[6];
+    String[] categorias = new String[7];
 
     Button Camara;
     ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
@@ -62,6 +62,7 @@ public class AddProduct extends AppCompatActivity {
         categorias[3] = getString(R.string.add_product_category_sports);
         categorias[4] = getString(R.string.add_product_category_fashion);
         categorias[5] = getString(R.string.add_product_category_leisure);
+        categorias[6] = getString(R.string.add_product_category_transport);
 
         //Inicializamos las fotos
         Camara = findViewById(R.id.camaraButton_AddP);
@@ -138,7 +139,6 @@ public class AddProduct extends AppCompatActivity {
             }
         });
 
-        //TODO: Añadir 8h de trabajo al PRT
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

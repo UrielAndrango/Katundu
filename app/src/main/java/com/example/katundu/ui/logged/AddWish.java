@@ -15,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.katundu.R;
 
 public class AddWish extends AppCompatActivity {
-//TODO:Añadir 2h por AddWish y Add + Refactor
 
-    String[] categorias = new String[6];
+    String[] categorias = new String[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class AddWish extends AppCompatActivity {
         categorias[3] = getString(R.string.add_product_category_sports);
         categorias[4] = getString(R.string.add_product_category_fashion);
         categorias[5] = getString(R.string.add_product_category_leisure);
+        categorias[6] = getString(R.string.add_product_category_transport);
         /* SPINNER CATEGORIAS */
         Spinner spinner = (Spinner) findViewById(R.id.spinner_AddWish);
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));

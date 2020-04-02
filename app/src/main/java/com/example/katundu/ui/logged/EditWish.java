@@ -18,7 +18,7 @@ import com.example.katundu.ui.ControladoraPresentacio;
 
 public class EditWish extends AppCompatActivity {
 
-    String[] categorias = new String[6];
+    String[] categorias = new String[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class EditWish extends AppCompatActivity {
         categorias[3] = getString(R.string.add_product_category_sports);
         categorias[4] = getString(R.string.add_product_category_fashion);
         categorias[5] = getString(R.string.add_product_category_leisure);
+        categorias[6] = getString(R.string.add_product_category_transport);
         /* SPINNER CATEGORIAS */
         Spinner spinner = (Spinner) findViewById(R.id.spinner_EditWish);
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));

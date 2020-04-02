@@ -80,6 +80,7 @@
     <string name="add_product_category_sports">Sports</string>
     <string name="add_product_category_fashion">Fashion</string>
     <string name="add_product_category_leisure">Leisure</string>
+    <string name="add_product_category_transport">Transport</string>
     <string name="add_product_value">Value</string>
     <string name="add_product_type">Type</string>
     <string name="add_product_type_product">Product</string>
