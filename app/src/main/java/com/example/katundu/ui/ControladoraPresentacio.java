@@ -2,6 +2,8 @@ package com.example.katundu.ui;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 public class ControladoraPresentacio {
     //datos usuario
     private static String username = "testusername";
@@ -12,12 +14,14 @@ public class ControladoraPresentacio {
     //idioma usuario (temporal)
     private static String idioma = "";
     //add product
+    private static ArrayList<String> offer_list_ids;
     private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
     //modificar wish
+    private static ArrayList<String> wish_list_ids;
     private static String wish_id = "wish_id";
     private static String wish_name = "Audi";
     private static int wish_categoria = 5;
@@ -137,6 +141,14 @@ public class ControladoraPresentacio {
         fotos = actualizada;
     }
 
+    public static void afegir_offer_id(String offer_id) {
+        offer_list_ids.add(offer_id);
+    }
+
+    public static ArrayList<String> get_offer_ids() {
+        return offer_list_ids;
+    }
+
     public static String getWish_name() {
         return wish_name;
     }
@@ -183,5 +195,13 @@ public class ControladoraPresentacio {
 
     public static void setWish_id(String wish_id) {
         ControladoraPresentacio.wish_id = wish_id;
+    }
+
+    public static void afegir_wish_id(String wish_id) {
+        wish_list_ids.add(wish_id);
+    }
+
+    public static ArrayList<String> get_wish_ids() {
+        return wish_list_ids;
     }
 }

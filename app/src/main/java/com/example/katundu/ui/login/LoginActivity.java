@@ -2,6 +2,7 @@ package com.example.katundu.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
@@ -23,6 +25,12 @@ import com.example.katundu.ui.logged.MenuPrincipal;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
                 no_registrado.setEnabled(false);
 
                 // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
-                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/login?" +
+                final String url = "https://us-central1-test-8ea8f.cloudfunctions.net/login?" +
                         "un=" + usernameEditText.getText() + "&" +
                         "pw=" + passwordEditText.getText();
 
@@ -75,8 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
                                     toast.show();
 
-                                    //FALTA PETICION A BACKEND DE LOS DATOS REALES DEL USUARIO
-                                    ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                                    //Inicialitzem amb les dades de l'usuari
+                                    InicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
 
                                     /*
                                     //Idioma
@@ -170,5 +178,41 @@ public class LoginActivity extends AppCompatActivity {
         //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    private void InicialitzaDadesUsuari(final String username, RequestQueue queue) {
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/infouser?" + "username=" + username;
+
+        // Request a JSONObject response from the provided URL.
+        JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    ControladoraPresentacio.setUsername(username);
+                    ControladoraPresentacio.setNom_real(response.getString("name"));
+                    ControladoraPresentacio.setPassword(response.getString("password"));
+                    ControladoraPresentacio.setLatitud(response.getString("latitud"));
+                    ControladoraPresentacio.setLongitud(response.getString("longitud"));
+
+                    JSONArray wish_list = response.getJSONArray("wish");
+                    for(int i = 0; i < wish_list.length(); ++i)
+                        ControladoraPresentacio.afegir_wish_id(wish_list.getString(i));
+
+                    JSONArray offer_list = response.getJSONArray("offer");
+                    for(int i = 0; i < offer_list.length(); ++i)
+                        ControladoraPresentacio.afegir_offer_id(wish_list.getString(i));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        queue.add(jsObjectRequest);
     }
 }
