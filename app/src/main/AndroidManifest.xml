@@ -81,6 +81,10 @@
             android:name=".ui.logged.EditarPerfil"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.ChooseActionWish"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>
