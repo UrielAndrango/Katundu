@@ -36,8 +36,7 @@ public class EditWish extends AppCompatActivity {
         final ImageView Atras = findViewById(R.id.EditWish_Atras);
         final Button Modify_Wish = findViewById(R.id.ok_button_EditWish);
 
-        final String id = "v";
-                //ControladoraPresentacio.getWish_id();
+        final String id = ControladoraPresentacio.getWish_id();
         final EditText nameEditText = findViewById(R.id.editTextNom_EditWish);
         final Spinner categoriaSpace = findViewById(R.id.spinner_EditWish);
         final String[] categoria = {getString(R.string.add_product_category_technology)};
@@ -126,7 +125,7 @@ public class EditWish extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     if(response.equals("0")) { //Account modified successfully
-                                        String wish_modified_successfully = getString(R.string.wish_modified_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
+                                        String wish_modified_successfully = getString(R.string.wish_modified_successfully);
                                         Toast toast = Toast.makeText(getApplicationContext(), wish_modified_successfully, Toast.LENGTH_SHORT);
                                         toast.show();
 

@@ -165,7 +165,7 @@ public class ListWish extends AppCompatActivity {
             ControladoraPresentacio.setWish_Service(true);
             ControladoraPresentacio.setWish_PC("Profesor");
             //Nos vamos a la ventana de User
-            Intent intent = new Intent(ListWish.this, EditWish.class);
+            Intent intent = new Intent(ListWish.this, ChooseActionWish.class);
             startActivity(intent);
             //finish();
         }
