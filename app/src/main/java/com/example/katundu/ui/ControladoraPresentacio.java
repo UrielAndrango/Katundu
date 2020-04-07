@@ -18,6 +18,7 @@ public class ControladoraPresentacio {
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
     //modificar wish
+    private static String wish_id = "wish_id";
     private static String wish_name = "Audi";
     private static int wish_categoria = 5;
     private static boolean wish_service = false;
@@ -174,5 +175,13 @@ public class ControladoraPresentacio {
 
     public static void setIdioma(String idioma) {
         ControladoraPresentacio.idioma = idioma;
+    }
+
+    public static String getWish_id() {
+        return wish_id;
+    }
+
+    public static void setWish_id(String wish_id) {
+        ControladoraPresentacio.wish_id = wish_id;
     }
 }
