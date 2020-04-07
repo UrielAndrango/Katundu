@@ -115,10 +115,10 @@ public class AddWish extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    System.out.println(response);
-                                    if(response.equals("0")) { //Account modified successfully
-                                        String wish_added_successfully = getString(R.string.account_modified_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
-                                        wish_added_successfully = "WISH ADDED SUCCESSFULLY";
+                                    if(!response.equals("-1")) { //wish added successfully
+                                        ControladoraPresentacio.setWish_id(response);
+
+                                        String wish_added_successfully = getString(R.string.wish_added_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
                                         Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
                                         toast.show();
 
@@ -126,11 +126,6 @@ public class AddWish extends AppCompatActivity {
                                         Intent intent = new Intent(AddWish.this, User.class);
                                         startActivity(intent);
                                         finish();
-                                    }
-                                    else { //response == "1" No such user in the database
-                                        String texterror = getString(R.string.error);
-                                        Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
-                                        toast.show();
                                     }
                                 }
                             }, new Response.ErrorListener() {
