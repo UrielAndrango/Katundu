@@ -8,11 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 
 public class AddWish extends AppCompatActivity {
 
@@ -27,8 +35,14 @@ public class AddWish extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.AddWish_Atras);
         final Button Add_Wish = findViewById(R.id.ok_button_AddWish);
-        final EditText nombre = findViewById(R.id.editTextNom_AddWish);
-        final EditText palabras_clave = findViewById(R.id.editTextParaulesClau_AddWish);
+        final String username = ControladoraPresentacio.getUsername();
+        final EditText nameEditText = findViewById(R.id.editTextNom_AddWish);
+        final Spinner categoriaSpace = findViewById(R.id.spinner_AddWish);
+        final String[] categoria = {getString(R.string.add_product_category_technology)};
+        final Switch tipusSwitch = findViewById(R.id.switch_wish);
+        final String[] tipus = {"Producte"};
+        final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_AddWish);
+        final EditText valueEditText = findViewById(R.id.editTextValor_AddW);
 
         //Inicilizamos las categorias
         categorias[0] = getString(R.string.add_product_category_technology);
@@ -60,12 +74,12 @@ public class AddWish extends AppCompatActivity {
             public void onClick(View v) {
                 boolean okay = false;
                 //Comprovaciones de que ha puesto cosas
-                if (nombre.length() == 0) {
+                if (nameEditText.length() == 0) {
                     String texterror = getString(R.string.add_product_no_hay_nombre);
                     Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    if (palabras_clave.length() == 0) {
+                    if (paraulesClauEditText.length() == 0) {
                         String texterror = getString(R.string.add_product_no_hay_palabras_clave);
                         Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
@@ -74,10 +88,62 @@ public class AddWish extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-                    //Nos vamos a la ventana de User
-                    Intent intent = new Intent(AddWish.this, User.class);
-                    startActivity(intent);
-                    finish();
+                    // Instantiate the RequestQueue.
+                    RequestQueue queue = Volley.newRequestQueue(AddWish.this);
+
+                    if(categoriaSpace.getSelectedItemPosition() == 0) categoria[0] = getString(R.string.add_product_category_technology);
+                    else if(categoriaSpace.getSelectedItemPosition() == 1) categoria[0] = getString(R.string.add_product_category_home);
+                    else if(categoriaSpace.getSelectedItemPosition() == 2) categoria[0] = getString(R.string.add_product_category_beauty);
+                    else if(categoriaSpace.getSelectedItemPosition() == 3) categoria[0] = getString(R.string.add_product_category_sports);
+                    else if(categoriaSpace.getSelectedItemPosition() == 4) categoria[0] = getString(R.string.add_product_category_fashion);
+                    else if(categoriaSpace.getSelectedItemPosition() == 5) categoria[0] = getString(R.string.add_product_category_leisure);
+                    else if(categoriaSpace.getSelectedItemPosition() == 6) categoria[0] = getString(R.string.add_product_category_transport);
+
+                    if(tipusSwitch.isChecked()) tipus[0] = "Servei";
+                    else tipus[0] = "Producte";
+
+                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
+                            "user=" + username + "&" +
+                            "name=" + nameEditText.getText() + "&" +
+                            "category=" + categoria[0] + "&" +
+                            "type=" + tipus[0] + "&" +
+                            "keywords=" + paraulesClauEditText.getText()+ "&" +
+                            "value=" + valueEditText.getText();
+
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    System.out.println(response);
+                                    if(response.equals("0")) { //Account modified successfully
+                                        String wish_added_successfully = getString(R.string.account_modified_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
+                                        wish_added_successfully = "WISH ADDED SUCCESSFULLY";
+                                        Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
+                                        toast.show();
+
+                                        //Volvemos a User
+                                        Intent intent = new Intent(AddWish.this, User.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else { //response == "1" No such user in the database
+                                        String texterror = getString(R.string.error);
+                                        Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    });
+
+                    // Add the request to the RequestQueue.
+                    queue.add(stringRequest);
                 }
             }
         });
