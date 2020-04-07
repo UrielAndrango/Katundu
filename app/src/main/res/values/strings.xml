@@ -116,4 +116,10 @@
     <string name="wish_modified_successfully">Deseo modificado con éxito</string>
     <string name="wish_added_successfully">Deseo añadido con éxito</string>
 
+    <!-- Strings related to ChooseActionWish-->
+    <string name="title_wish">Deseo</string>
+    <string name="modify_wish">MODIFICAR DESEO</string>
+    <string name="delete_wish">ELIMINAR DESEO</string>
+    <string name="wish_deleted_successfully">Deseo eliminado con éxito</string>
+
 </resources>

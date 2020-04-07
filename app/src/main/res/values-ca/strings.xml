@@ -115,4 +115,10 @@
     <string name="wish_modified_successfully">Desig modificat amb èxit</string>
     <string name="wish_added_successfully">Desig afegit amb èxit</string>
 
+    <!-- Strings related to ChooseActionWish-->
+    <string name="title_wish">Desig</string>
+    <string name="modify_wish">MODIFICAR DESEO</string>
+    <string name="delete_wish">ELIMINAR DESEO</string>
+    <string name="wish_deleted_successfully">Desig eliminat amb èxit</string>
+
 </resources>

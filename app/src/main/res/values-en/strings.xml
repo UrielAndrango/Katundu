@@ -115,4 +115,10 @@
     <string name="wish_modified_successfully">Wish successfully modified</string>
     <string name="wish_added_successfully">Wish successfully added</string>
 
+    <!-- Strings related to ChooseActionWish-->
+    <string name="title_wish">Wish</string>
+    <string name="modify_wish">MODIFICAR DESEO</string>
+    <string name="delete_wish">ELIMINAR DESEO</string>
+    <string name="wish_deleted_successfully">Wish successfully deleted</string>
+
 </resources>
