@@ -95,6 +95,7 @@
     <string name="add_product_no_hay_valor">Must add value</string>
     <string name="add_product_no_hay_palabras_clave">Must add a key words</string>
     <string name="add_product_no_hay_descripcion">Must add description</string>
+    <string name="add_product_general_error">Something failed, try again.</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Add New Wish</string>

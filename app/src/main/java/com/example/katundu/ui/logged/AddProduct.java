@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,19 +16,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.login.LoginActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AddProduct extends AppCompatActivity {
 
     String[] categorias = new String[7];
-
+    //StorageReference storageRef = storage.getReference();
     Button Camara;
     ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
     ImageView[] PreviewFotos;
@@ -54,6 +63,14 @@ public class AddProduct extends AppCompatActivity {
         final EditText valor = findViewById(R.id.editTextValor_AddP);
         final EditText palabras_clave = findViewById(R.id.editTextParaulesClau_AddP);
         final TextInputEditText descripcion = findViewById(R.id.editDescripcio_AddP);
+        final Switch switch_type = findViewById(R.id.switch2);
+
+        //SPINNER CATEGORIAS
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner_AddP);
+        //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
+        //Spinner spinner = (Spinner)findViewById(R.id.spinner_AddP);
+        spinner.setAdapter(adapter);
 
         //Inicilizamos las categorias
         categorias[0] = getString(R.string.add_product_category_technology);
@@ -97,6 +114,7 @@ public class AddProduct extends AppCompatActivity {
         SubirProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RequestQueue queue = Volley.newRequestQueue(AddProduct.this);
                 boolean okay = false;
                 //Comprovaciones de que ha puesto cosas
                 if (cantidad_fotos == 0) {
@@ -118,7 +136,14 @@ public class AddProduct extends AppCompatActivity {
                                 String texterror = getString(R.string.add_product_no_hay_palabras_clave);
                                 Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
                                 toast.show();
-                            } else {
+                            }
+                            else if (!palabras_clave.getText().toString().contains("#"))
+                            {
+                                String texterror = "Las palabras clave deben empezar con # e ir sin espacios.";
+                                Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                            else {
                                 if (descripcion.length() == 0) {
                                     String texterror = getString(R.string.add_product_no_hay_descripcion);
                                     Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
@@ -131,10 +156,58 @@ public class AddProduct extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-                    //Nos vamos a la ventana de User
-                    Intent intent = new Intent(AddProduct.this, User.class);
-                    startActivity(intent);
-                    finish();
+                    String type;
+                    if ( switch_type.isChecked()) type = "Service";
+                    else type = "Product";
+
+                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addoffer?" +
+                            "user=" + ControladoraPresentacio.getUsername() + "&" +
+                            "name=" + nombre.getText()+ "&" +
+                            "category=" + spinner.getSelectedItemPosition() + "&" + "type=" + type+"&";
+                    String palabras = palabras_clave.getText().toString();
+                    //url+="keywords="+palabras+"&";
+                    int i = 0;
+                    while( i < palabras.length()) {
+                        if (palabras.charAt(i) == '#') {
+                            ++i;
+                            String nueva_palabra = "";
+                            while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                                nueva_palabra += palabras.charAt(i);
+                                ++i;
+                            }
+                            url += "keywords=" + nueva_palabra + "&";
+                        }
+                    }
+                    url+="value="+valor.getText()+"&"
+                            +"description="+ descripcion.getText();
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    if (response.equals("-1")) { //Error
+                                        String texterror = getString(R.string.add_product_general_error);
+                                        Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                    else
+                                    {
+                                        Intent intent = new Intent(AddProduct.this, User.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            },  new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            String texterror = getString(R.string.add_product_general_error);
+                            Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    });
+                    // Add the request to the RequestQueue.
+
+                    queue.add(stringRequest);
+
                 }
             }
         });
@@ -226,12 +299,7 @@ public class AddProduct extends AppCompatActivity {
             }
         });
 
-        /* SPINNER CATEGORIAS */
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_AddP);
-        //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
-        //Spinner spinner = (Spinner)findViewById(R.id.spinner_AddP);
-        spinner.setAdapter(adapter);
+
     }
 
     private void openCamera() {
