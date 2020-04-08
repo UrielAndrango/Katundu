@@ -63,57 +63,61 @@ public class EditarPerfil extends AppCompatActivity {
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(EditarPerfil.this);
-
-                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modify_personal_credentials?" +
-                        "un=" + usernameEditText.getText() + "&" +
-                        "pw=" + passwordEditText.getText() + "&" +
-                        "n=" + nameEditText.getText() + "&" +
-                        "lat=" + latitudeEditText.getText() + "&" +
-                        "lon=" + longitudeEditText.getText();
-
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                System.out.println(response);
-                                if(response.equals("0")) { //Account modified successfully
-                                    String account_modified_successfully = getString(R.string.account_modified_successfully);
-                                    Toast toast = Toast.makeText(getApplicationContext(), account_modified_successfully, Toast.LENGTH_SHORT);
-                                    toast.show();
-
-                                    //Actualizamos Controladora
-                                    ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
-                                    ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
-                                    ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
-                                    ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
-                                    ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
-                                    //Volvemos a Ajustes
-                                    Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                else { //response == "1" No such user in the database
-                                    String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                        String texterror = getString(R.string.error);
-                        Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                });
-
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
             }
         });
+    }
+
+    private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText, final EditText latitudeEditText, final EditText longitudeEditText) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(EditarPerfil.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modify_personal_credentials?" +
+                "un=" + usernameEditText.getText() + "&" +
+                "pw=" + passwordEditText.getText() + "&" +
+                "n=" + nameEditText.getText() + "&" +
+                "lat=" + latitudeEditText.getText() + "&" +
+                "lon=" + longitudeEditText.getText();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        if(response.equals("0")) { //Account modified successfully
+                            String account_modified_successfully = getString(R.string.account_modified_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), account_modified_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Actualizamos Controladora
+                            ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                            ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
+                            ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
+                            ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
+                            ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
+                            //Volvemos a Ajustes
+                            Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else { //response == "1" No such user in the database
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }
 

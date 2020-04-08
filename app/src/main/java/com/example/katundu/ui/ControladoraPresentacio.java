@@ -14,14 +14,14 @@ public class ControladoraPresentacio {
     //idioma usuario (temporal)
     private static String idioma = "";
     //add product
-    private static ArrayList<String> offer_list_ids;
+    private static ArrayList<String> offer_list_ids = new ArrayList<>();
     private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
     //modificar wish
-    private static ArrayList<String> wish_list_ids;
+    private static ArrayList<String> wish_list_ids = new ArrayList<>();
     private static String wish_id = "wish_id";
     private static String wish_name = "Audi";
     private static int wish_categoria = 5;

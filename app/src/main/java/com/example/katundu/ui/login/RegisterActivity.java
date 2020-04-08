@@ -34,66 +34,14 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText repeatpasswordEditText = findViewById(R.id.password2);
         final EditText latitudeEditText = findViewById(R.id.latitud);
         final EditText longitudeEditText = findViewById(R.id.longitud);
-        final Button registrat = findViewById(R.id.SaveButton);
+        final Button registratButton = findViewById(R.id.SaveButton);
 
 
-        registrat.setOnClickListener(new View.OnClickListener() {
+        registratButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(passwordEditText.getText().toString().equals(repeatpasswordEditText.getText().toString())) {
-                    // Instantiate the RequestQueue.
-                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-
-                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/signup?" +
-                            "un=" + usernameEditText.getText() + "&" +
-                            "pw=" + passwordEditText.getText() + "&" +
-                            "n=" + nameEditText.getText() + "&" +
-                            "lat=" + latitudeEditText.getText() + "&" +
-                            "lon=" + longitudeEditText.getText();
-
-                    // Request a string response from the provided URL.
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    if(response.equals("0")) { //New user added
-                                        String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
-                                        Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
-                                        toast.show();
-
-                                        //Actualizamos Controladora
-                                        ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
-                                        ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
-                                        ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
-                                        ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
-                                        ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
-
-                                        Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
-                                        startActivity(intent);
-                                        //finish();
-                                    }
-                                    else if(response.equals("1")){ //The username already exists
-                                        String texterror = getString(R.string.existing_user);
-                                        Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-                                    else { //response == "-1" Something went wrong
-                                        String texterror = getString(R.string.error);
-                                        Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                            String texterror = getString(R.string.error);
-                            Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                    });
-
-                    // Add the request to the RequestQueue.
-                    queue.add(stringRequest);
+                    RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
                 }
                 else {
                     String texterror = getString(R.string.mismatchedpasswords);
@@ -102,5 +50,61 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void RequestRegister(final EditText usernameEditText, final EditText passwordEditText, final EditText nameEditText, final EditText latitudeEditText, final EditText longitudeEditText) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/signup?" +
+                "un=" + usernameEditText.getText() + "&" +
+                "pw=" + passwordEditText.getText() + "&" +
+                "n=" + nameEditText.getText() + "&" +
+                "lat=" + latitudeEditText.getText() + "&" +
+                "lon=" + longitudeEditText.getText();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //New user added
+                            String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
+                            Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Actualizamos Controladora
+                            ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                            ControladoraPresentacio.setPassword(passwordEditText.getText().toString());
+                            ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
+                            ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
+                            ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
+
+                            Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
+                            startActivity(intent);
+                            //finish();
+                        }
+                        else if(response.equals("1")){ //The username already exists
+                            String texterror = getString(R.string.existing_user);
+                            Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else { //response == "-1" Something went wrong
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }

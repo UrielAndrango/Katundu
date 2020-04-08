@@ -55,45 +55,48 @@ public class ChooseActionWish extends AppCompatActivity {
         DeleteWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(ChooseActionWish.this);
-
-                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" + "id=" + id;
-
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if(response.equals("0")) { //Account modified successfully
-                                    String wish_deleted_successfully = getString(R.string.wish_deleted_successfully);
-                                    Toast toast = Toast.makeText(getApplicationContext(), wish_deleted_successfully, Toast.LENGTH_SHORT);
-                                    toast.show();
-
-                                    //Volvemos a User
-                                    Intent intent = new Intent(ChooseActionWish.this, ListWish.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                else { //response == "1" No s'ha esborrat el desig
-                                    String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(ChooseActionWish.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                        String texterror = getString(R.string.error);
-                        Toast toast = Toast.makeText(ChooseActionWish.this, texterror, Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                });
-
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                RequestDeleteWish(id);
             }
         });
     }
 
+    private void RequestDeleteWish(String id) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(ChooseActionWish.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" + "id=" + id;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Account modified successfully
+                            String wish_deleted_successfully = getString(R.string.wish_deleted_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), wish_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Volvemos a User
+                            Intent intent = new Intent(ChooseActionWish.this, ListWish.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else { //response == "1" No s'ha esborrat el desig
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(ChooseActionWish.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(ChooseActionWish.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 }

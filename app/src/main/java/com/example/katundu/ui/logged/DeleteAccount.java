@@ -46,49 +46,53 @@ public class DeleteAccount extends AppCompatActivity {
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(DeleteAccount.this);
-
-                System.out.println(username);
-
-                String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteaccount?" +
-                        "un=" + username;
-
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                System.out.println(response);
-                                if(response.equals("0")) { //Account deleted successfully
-                                    String account_deleted_successfully = getString(R.string.account_deleted_successfully);
-                                    Toast toast = Toast.makeText(getApplicationContext(), account_deleted_successfully, Toast.LENGTH_SHORT);
-                                    toast.show();
-
-                                    Intent intent = new Intent(DeleteAccount.this, LoginActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    //finish();
-                                }
-                                else { //response == "1" Something went wrong
-                                    String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(DeleteAccount.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                        String texterror = getString(R.string.error);
-                        Toast toast = Toast.makeText(DeleteAccount.this, texterror, Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                });
-
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                RequestDeleteAccount(username);
             }
         });
+    }
+
+    private void RequestDeleteAccount(String username) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(DeleteAccount.this);
+
+        System.out.println(username);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteaccount?" +
+                "un=" + username;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        if(response.equals("0")) { //Account deleted successfully
+                            String account_deleted_successfully = getString(R.string.account_deleted_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), account_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            Intent intent = new Intent(DeleteAccount.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            //finish();
+                        }
+                        else { //response == "1" Something went wrong
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(DeleteAccount.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(DeleteAccount.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }

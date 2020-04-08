@@ -52,10 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         final EditText usernameEditText = findViewById(R.id.username);
-        final TextInputLayout password_layout = findViewById(R.id.password);
         final EditText passwordEditText = findViewById(R.id.passwordEdit);
         final Button login_button = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading); //TODO:Esto se puede quitar??
         final TextView no_registrado = findViewById(R.id.no_registrado);
 
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -66,96 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 login_button.setEnabled(false);
                 no_registrado.setEnabled(false);
 
-                // Instantiate the RequestQueue.
-                final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-
-                final String url = "https://us-central1-test-8ea8f.cloudfunctions.net/login?" +
-                        "un=" + usernameEditText.getText() + "&" +
-                        "pw=" + passwordEditText.getText();
-
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if(response.equals("0")) { //Successful login
-                                    String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
-                                    Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
-                                    toast.show();
-
-                                    //Inicialitzem amb les dades de l'usuari
-                                    InicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
-
-                                    /*
-                                    //Idioma
-                                    //temporal lo de la controladora, porque debe ser con el idioma del usuario desde el servidor
-                                    String idioma_usuario = ControladoraPresentacio.getIdioma();
-                                    Locale localizacion;
-                                    switch (idioma_usuario) {
-                                        case "es":
-                                            localizacion = new Locale("es");
-                                            break;
-                                        case "ca":
-                                            localizacion = new Locale("ca");
-                                            break;
-                                        case "en":
-                                            localizacion = new Locale("en");
-                                            break;
-                                        default:
-                                            idioma_usuario = "es";
-                                            localizacion = new Locale("es");
-                                    }
-                                    ControladoraPresentacio.setIdioma(idioma_usuario);
-                                    Locale.setDefault(localizacion);
-                                    Configuration config = new Configuration();
-                                    config.locale = localizacion;
-                                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-*/
-                                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                else if(response.equals("2")){ //Incorrect password
-                                    String texterror = getString(R.string.incorrect_password);
-                                    Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                    //Reactivar login
-                                    login_button.setEnabled(true);
-                                    no_registrado.setEnabled(true);
-                                }
-                                else if(response.equals("1")) { //No such user!
-                                    String texterror = getString(R.string.unregistered);
-                                    Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                    //Reactivar login
-                                    login_button.setEnabled(true);
-                                    no_registrado.setEnabled(true);
-                                }
-                                else { //response == "-1" Error getting document + err
-                                    String texterror = getString(R.string.error);
-                                    Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
-                                    toast.show();
-                                    //Reactivar login
-                                    login_button.setEnabled(true);
-                                    no_registrado.setEnabled(true);
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
-                        String texterror = getString(R.string.error);
-                        Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
-                        toast.show();
-                        //Reactivar login
-                        login_button.setEnabled(true);
-                        no_registrado.setEnabled(true);
-                    }
-                });
-
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
 
                 //Reactivar login
                 //login_button.setEnabled(true);
@@ -178,6 +87,99 @@ public class LoginActivity extends AppCompatActivity {
         //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    private void RequestLogin(final EditText usernameEditText, EditText passwordEditText, final Button login_button, final TextView no_registrado) {
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+
+        final String url = "https://us-central1-test-8ea8f.cloudfunctions.net/login?" +
+                "un=" + usernameEditText.getText() + "&" +
+                "pw=" + passwordEditText.getText();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Successful login
+                            String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
+                            Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Inicialitzem amb les dades de l'usuari
+                            InicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
+
+                            /*
+                            //Idioma
+                            //temporal lo de la controladora, porque debe ser con el idioma del usuario desde el servidor
+                            String idioma_usuario = ControladoraPresentacio.getIdioma();
+                            Locale localizacion;
+                            switch (idioma_usuario) {
+                                case "es":
+                                    localizacion = new Locale("es");
+                                    break;
+                                case "ca":
+                                    localizacion = new Locale("ca");
+                                    break;
+                                case "en":
+                                    localizacion = new Locale("en");
+                                    break;
+                                default:
+                                    idioma_usuario = "es";
+                                    localizacion = new Locale("es");
+                            }
+                            ControladoraPresentacio.setIdioma(idioma_usuario);
+                            Locale.setDefault(localizacion);
+                            Configuration config = new Configuration();
+                            config.locale = localizacion;
+                            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+*/
+                            Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else if(response.equals("2")){ //Incorrect password
+                            String texterror = getString(R.string.incorrect_password);
+                            Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                            //Reactivar login
+                            login_button.setEnabled(true);
+                            no_registrado.setEnabled(true);
+                        }
+                        else if(response.equals("1")) { //No such user!
+                            String texterror = getString(R.string.unregistered);
+                            Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                            //Reactivar login
+                            login_button.setEnabled(true);
+                            no_registrado.setEnabled(true);
+                        }
+                        else { //response == "-1" Error getting document + err
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                            //Reactivar login
+                            login_button.setEnabled(true);
+                            no_registrado.setEnabled(true);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+                //Reactivar login
+                login_button.setEnabled(true);
+                no_registrado.setEnabled(true);
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     private void InicialitzaDadesUsuari(final String username, RequestQueue queue) {
