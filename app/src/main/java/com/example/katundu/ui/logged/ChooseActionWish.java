@@ -64,7 +64,7 @@ public class ChooseActionWish extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(ChooseActionWish.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" + "id=" + id;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deletewish?" + "id=" + id;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
