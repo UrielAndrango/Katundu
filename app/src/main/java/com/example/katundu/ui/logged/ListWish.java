@@ -32,7 +32,7 @@ public class ListWish extends AppCompatActivity {
                 case R.id.navigation_wish_list:
                     return true;
                 case R.id.navigation_own_list:
-                    Intent intent = new Intent(ListWish.this, User.class);
+                    Intent intent = new Intent(ListWish.this, ListOffer.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //onNewIntent(intent);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
