@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                             toast.show();
 
                             //Inicialitzem amb les dades de l'usuari
-                            InicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
+                            RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
 
                             /*
                             //Idioma
@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void InicialitzaDadesUsuari(final String username, RequestQueue queue) {
+    private void RequestInicialitzaDadesUsuari(final String username, RequestQueue queue) {
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/infouser?" + "username=" + username;
 
         // Request a JSONObject response from the provided URL.
