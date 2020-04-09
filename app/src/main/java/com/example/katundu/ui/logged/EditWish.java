@@ -123,8 +123,7 @@ public class EditWish extends AppCompatActivity {
                 "category=" + categoria[0] + "&" +
                 "type=" + tipus[0] + "&" +
                 "keywords=" + paraulesClauEditText.getText()+ "&" +
-                "value=" + valueEditText.getText() + "&" +
-                "description=hola";
+                "value=" + valueEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

@@ -19,6 +19,8 @@ import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class ListWish extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -82,26 +84,6 @@ public class ListWish extends AppCompatActivity {
             }
         });
 
-        //Valoracion Usuario
-        final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_User);
-        valoracion_usuario.setText(Double.toString(ControladoraPresentacio.getValoracion()));
-        final ImageView star1 = findViewById(R.id.imageViewStar1_User);
-        final ImageView star2 = findViewById(R.id.imageViewStar2_User);
-        final ImageView star3 = findViewById(R.id.imageViewStar3_User);
-        final ImageView star4 = findViewById(R.id.imageViewStar4_User);
-        final ImageView star5 = findViewById(R.id.imageViewStar5_User);
-        ImageView[] stars = {star1, star2, star3, star4, star5};
-        int valoracion = (int)ControladoraPresentacio.getValoracion();
-        for (int i=0; i<valoracion; ++i) {
-            stars[i].setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
-        }
-
-        //Barra Navegacio Llistes
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        //navView.setSelectedItemId(R.id.navigation_own_list);
-        //navView.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         //Esto se descomentara si sabemos volver a atras de forma "inteligente"
         //Si no gusta se comenta y listo
         NomUsuari.setOnClickListener(new View.OnClickListener() {
@@ -113,16 +95,29 @@ public class ListWish extends AppCompatActivity {
             }
         });
 
+        InicialitzarValoracioUsuari();
+
+        //Barra Navegacio Llistes
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        //navView.setSelectedItemId(R.id.navigation_own_list);
+        //navView.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
         /* Creación de la LISTA DE WISHES */
-        //Esto es temporal, hay que hacer tanto botones como wishes tenga el usuario --> Controladora_numeroWishes() ??
-        int numBotones = 20;
+        InicialitzaBotonsWishes();
+    }
+
+    private void InicialitzaBotonsWishes() {
+        ArrayList<String> wish_ids_list = ControladoraPresentacio.get_wish_ids();
+        int numBotones = wish_ids_list.size();
+
         //Obtenemos el linear layout donde colocar los botones
-        LinearLayout llBotonera = (LinearLayout) findViewById(R.id.listaWishes_LW);
+        LinearLayout llBotonera = findViewById(R.id.listaWishes_LW);
 
         //Creamos las propiedades de layout que tendrán los botones.
         //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT );
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
 
         //Creamos los botones en bucle
         for (int i=0; i<numBotones; i++){
@@ -145,6 +140,22 @@ public class ListWish extends AppCompatActivity {
             button.setOnClickListener(new ButtonsOnClickListener(this));
             //Añadimos el botón a la botonera
             llBotonera.addView(button);
+        }
+    }
+
+    private void InicialitzarValoracioUsuari() {
+        //Valoracion Usuario
+        final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_User);
+        valoracion_usuario.setText(Double.toString(ControladoraPresentacio.getValoracion()));
+        final ImageView star1 = findViewById(R.id.imageViewStar1_User);
+        final ImageView star2 = findViewById(R.id.imageViewStar2_User);
+        final ImageView star3 = findViewById(R.id.imageViewStar3_User);
+        final ImageView star4 = findViewById(R.id.imageViewStar4_User);
+        final ImageView star5 = findViewById(R.id.imageViewStar5_User);
+        ImageView[] stars = {star1, star2, star3, star4, star5};
+        int valoracion = (int)ControladoraPresentacio.getValoracion();
+        for (int i=0; i<valoracion; ++i) {
+            stars[i].setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         }
     }
 

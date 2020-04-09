@@ -124,6 +124,7 @@ public class AddWish extends AppCompatActivity {
                     public void onResponse(String response) {
                         if(!response.equals("-1")) { //wish added successfully
                             ControladoraPresentacio.setWish_id(response);
+                            ControladoraPresentacio.afegir_wish_id(response);
 
                             String wish_added_successfully = getString(R.string.wish_added_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
                             Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);

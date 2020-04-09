@@ -60,7 +60,7 @@ public class ChooseActionWish extends AppCompatActivity {
         });
     }
 
-    private void RequestDeleteWish(String id) {
+    private void RequestDeleteWish(final String id) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(ChooseActionWish.this);
 
@@ -72,6 +72,8 @@ public class ChooseActionWish extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("0")) { //Account modified successfully
+                            ControladoraPresentacio.treure_wish_id(id);
+
                             String wish_deleted_successfully = getString(R.string.wish_deleted_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), wish_deleted_successfully, Toast.LENGTH_SHORT);
                             toast.show();
