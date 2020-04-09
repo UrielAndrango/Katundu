@@ -193,7 +193,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     ControladoraPresentacio.setUsername(username);
                     ControladoraPresentacio.setNom_real(response.getString("name"));
-                    ControladoraPresentacio.setPassword(response.getString("password"));
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
 
