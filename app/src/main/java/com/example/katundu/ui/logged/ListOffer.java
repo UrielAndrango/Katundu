@@ -50,7 +50,7 @@ public class ListOffer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_list_offer);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
