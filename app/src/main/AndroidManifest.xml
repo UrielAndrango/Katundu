@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.logged.User"
+            android:name=".ui.logged.ListOffer"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

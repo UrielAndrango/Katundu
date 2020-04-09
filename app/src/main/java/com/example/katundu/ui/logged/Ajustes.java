@@ -31,7 +31,7 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Cuidado porque vuelve a User no a la ventana que me invoca
-                Intent intent = new Intent(Ajustes.this, User.class);
+                Intent intent = new Intent(Ajustes.this, ListOffer.class);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();

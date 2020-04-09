@@ -18,7 +18,7 @@ import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class User extends AppCompatActivity {
+public class ListOffer extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,7 +27,7 @@ public class User extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_wish_list:
-                    Intent intent = new Intent(User.this, ListWish.class);
+                    Intent intent = new Intent(ListOffer.this, ListWish.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //onNewIntent(intent);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -63,7 +63,7 @@ public class User extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(User.this, MenuPrincipal.class);
+                Intent intent = new Intent(ListOffer.this, MenuPrincipal.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 onNewIntent(intent);
@@ -75,7 +75,7 @@ public class User extends AppCompatActivity {
         ImgSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(User.this, Ajustes.class);
+                Intent intent = new Intent(ListOffer.this, Ajustes.class);
                 startActivity(intent);
                 //finish();
             }
@@ -107,7 +107,7 @@ public class User extends AppCompatActivity {
         NomUsuari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(User.this, EditarPerfil.class);
+                Intent intent = new Intent(ListOffer.this, EditarPerfil.class);
                 startActivity(intent);
                 //finish();
             }

@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -244,7 +242,7 @@ public class AddProduct extends AppCompatActivity {
                                                 });
                                             }
                                         }
-                                        Intent intent = new Intent(AddProduct.this, User.class);
+                                        Intent intent = new Intent(AddProduct.this, ListOffer.class);
                                         startActivity(intent);
                                         finish();
                                     }
