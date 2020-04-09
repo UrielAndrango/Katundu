@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.ControladoraAddProduct;
 
 public class PreviewFoto extends AppCompatActivity {
 
     ImageView preview_foto;
-    int pos = ControladoraPresentacio.getNumero_imagen();
-    Uri foto = ControladoraPresentacio.obtener_foto(pos);
+    int pos = ControladoraAddProduct.getNumero_imagen();
+    Uri foto = ControladoraAddProduct.obtener_foto(pos);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,8 @@ public class PreviewFoto extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Borro la foto en la posicion i de la controladora
-                ControladoraPresentacio.borrar_foto(pos);
-                ControladoraPresentacio.reordenar_fotos();
+                ControladoraAddProduct.borrar_foto(pos);
+                ControladoraAddProduct.reordenar_fotos();
                 //Vuelvo a la ventan de Add Product
                 Intent intent = new Intent(PreviewFoto.this, AddProduct.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

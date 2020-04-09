@@ -31,10 +31,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,9 +58,9 @@ public class AddProduct extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     Uri image_uri;
-    int cantidad_fotos = ControladoraPresentacio.getCantidad_fotos();
-    int numero_maximo_fotos = ControladoraPresentacio.getNumero_maximo_fotos();
-    Uri[] fotos = ControladoraPresentacio.getFotos();
+    int cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
+    int numero_maximo_fotos = ControladoraAddProduct.getNumero_maximo_fotos();
+    Uri[] fotos = ControladoraAddProduct.getFotos();
 
 
     @Override
@@ -82,7 +82,7 @@ public class AddProduct extends AppCompatActivity {
         final EditText nombre = findViewById(R.id.editTextNom_AddP);
         final EditText valor = findViewById(R.id.editTextValor_AddP);
         final EditText palabras_clave = findViewById(R.id.editTextParaulesClau_AddP);
-        final TextInputEditText descripcion = findViewById(R.id.editDescripcio_AddP);
+        final EditText descripcion = findViewById(R.id.editDescripcio_AddP);
         final Switch switch_type = findViewById(R.id.switch2);
 
         //SPINNER CATEGORIAS
@@ -121,6 +121,16 @@ public class AddProduct extends AppCompatActivity {
             }
         }
 
+        //Inicilizamos todos los atributos que tenia el usuario (si es que tenia)
+        nombre.setText(ControladoraAddProduct.getNombre_producto());
+        spinner.setSelection(ControladoraAddProduct.getNumero_Categoria());
+        valor.setText(ControladoraAddProduct.getValor());
+        switch_type.setChecked(ControladoraAddProduct.isEs_servicio());
+        palabras_clave.setText(ControladoraAddProduct.getPalabras_clave());
+        descripcion.setText(ControladoraAddProduct.getDescripcion());
+
+
+        //Funcion de los botones
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +169,9 @@ public class AddProduct extends AppCompatActivity {
                             }
                             else if (!palabras_clave.getText().toString().contains("#"))
                             {
+                                //TODO: Hay que cambiar esto, 2 opciones (aunque se pueden hacer ambas al mismo tiempo)
+                                //Opcion1: Podemos traducir la frase
+                                //Opcion2: Poner un text encima de las palabras clave que siempre este ahí
                                 String texterror = "Las palabras clave deben empezar con # e ir sin espacios.";
                                 Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
                                 toast.show();
@@ -264,19 +277,15 @@ public class AddProduct extends AppCompatActivity {
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Guardar datos
+                ControladoraAddProduct.setNombre_producto(nombre.getText().toString());
+                ControladoraAddProduct.setNumero_Categoria(spinner.getSelectedItemPosition());
+                ControladoraAddProduct.setValor(valor.getText().toString());
+                ControladoraAddProduct.setEs_servicio(switch_type.isChecked());
+                ControladoraAddProduct.setPalabras_clave(palabras_clave.getText().toString());
+                ControladoraAddProduct.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(0);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
-        PreviewFoto0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(0);
+                ControladoraAddProduct.setNumero_imagen(0);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
                 startActivity(intent);
@@ -286,8 +295,15 @@ public class AddProduct extends AppCompatActivity {
         PreviewFoto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Guardar datos
+                ControladoraAddProduct.setNombre_producto(nombre.getText().toString());
+                ControladoraAddProduct.setNumero_Categoria(spinner.getSelectedItemPosition());
+                ControladoraAddProduct.setValor(valor.getText().toString());
+                ControladoraAddProduct.setEs_servicio(switch_type.isChecked());
+                ControladoraAddProduct.setPalabras_clave(palabras_clave.getText().toString());
+                ControladoraAddProduct.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(1);
+                ControladoraAddProduct.setNumero_imagen(1);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
                 startActivity(intent);
@@ -297,8 +313,15 @@ public class AddProduct extends AppCompatActivity {
         PreviewFoto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Guardar datos
+                ControladoraAddProduct.setNombre_producto(nombre.getText().toString());
+                ControladoraAddProduct.setNumero_Categoria(spinner.getSelectedItemPosition());
+                ControladoraAddProduct.setValor(valor.getText().toString());
+                ControladoraAddProduct.setEs_servicio(switch_type.isChecked());
+                ControladoraAddProduct.setPalabras_clave(palabras_clave.getText().toString());
+                ControladoraAddProduct.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(2);
+                ControladoraAddProduct.setNumero_imagen(2);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
                 startActivity(intent);
@@ -308,8 +331,15 @@ public class AddProduct extends AppCompatActivity {
         PreviewFoto3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Guardar datos
+                ControladoraAddProduct.setNombre_producto(nombre.getText().toString());
+                ControladoraAddProduct.setNumero_Categoria(spinner.getSelectedItemPosition());
+                ControladoraAddProduct.setValor(valor.getText().toString());
+                ControladoraAddProduct.setEs_servicio(switch_type.isChecked());
+                ControladoraAddProduct.setPalabras_clave(palabras_clave.getText().toString());
+                ControladoraAddProduct.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(3);
+                ControladoraAddProduct.setNumero_imagen(3);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
                 startActivity(intent);
@@ -319,8 +349,15 @@ public class AddProduct extends AppCompatActivity {
         PreviewFoto4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Guardar datos
+                ControladoraAddProduct.setNombre_producto(nombre.getText().toString());
+                ControladoraAddProduct.setNumero_Categoria(spinner.getSelectedItemPosition());
+                ControladoraAddProduct.setValor(valor.getText().toString());
+                ControladoraAddProduct.setEs_servicio(switch_type.isChecked());
+                ControladoraAddProduct.setPalabras_clave(palabras_clave.getText().toString());
+                ControladoraAddProduct.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
-                ControladoraPresentacio.setNumero_imagen(4);
+                ControladoraAddProduct.setNumero_imagen(4);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
                 startActivity(intent);
@@ -418,7 +455,7 @@ public class AddProduct extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             //set the image captured to our ImageView
             //int longitud = fotos.length;
-            int longitud = ControladoraPresentacio.getFotos().length;
+            int longitud = ControladoraAddProduct.getFotos().length;
             int i = 0;
             boolean foto_subida_con_exito = false;
             while ((i < longitud) && (foto_subida_con_exito == false)) {
@@ -426,9 +463,9 @@ public class AddProduct extends AppCompatActivity {
                     PreviewFotos[i].setImageURI(image_uri);
                     PreviewFotos[i].setVisibility(View.VISIBLE);
                     //Actualizamos la controladora
-                    ControladoraPresentacio.add_foto(image_uri, i);
-                    fotos = ControladoraPresentacio.getFotos();
-                    cantidad_fotos = ControladoraPresentacio.getCantidad_fotos();
+                    ControladoraAddProduct.add_foto(image_uri, i);
+                    fotos = ControladoraAddProduct.getFotos();
+                    cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
                     //Salimos del bucle
                     foto_subida_con_exito = true;
                 }

@@ -18,7 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.EditarIdioma"></activity>
+        <activity android:name=".ui.logged.SearchUser"></activity>
+        <activity android:name=".ui.logged.SearchProduct" />
+        <activity android:name=".ui.logged.VisualizeListWUser" />
+        <activity android:name=".ui.logged.VisualizeListOUser" />
+        <activity android:name=".ui.logged.EditarIdioma" />
         <activity
             android:name=".ui.logged.EditWish"
             android:screenOrientation="portrait"

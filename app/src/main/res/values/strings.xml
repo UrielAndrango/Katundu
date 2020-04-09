@@ -37,6 +37,12 @@
     <string name="search">Buscar</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
 
+    <!-- Strings related to SearchProduct-->
+    <string name="search_product">Buscar Producto o Servicio</string>
+
+    <!-- Strings related to SearchProduct-->
+    <string name="search_user">Buscar Usuario</string>
+
     <!-- Strings related to User-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>
     <string name="user_valoracio_text">"Valoración: "</string>

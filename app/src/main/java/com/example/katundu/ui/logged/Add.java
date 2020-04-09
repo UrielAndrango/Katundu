@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.ControladoraAddProduct;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Add extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class Add extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    ControladoraPresentacio.reset_fotos();
+                    ControladoraAddProduct.reset();
                     Intent intent = new Intent(Add.this, MenuPrincipal.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -64,7 +64,7 @@ public class Add extends AppCompatActivity {
         add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ControladoraPresentacio.reset_fotos();
+                ControladoraAddProduct.reset();
                 Intent intent = new Intent(Add.this, AddProduct.class);
                 startActivity(intent);
                 //finish();

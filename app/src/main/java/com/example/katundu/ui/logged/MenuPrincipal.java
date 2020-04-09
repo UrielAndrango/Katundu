@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,11 +30,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_add:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    //ControladoraPresentacio.reset_fotos();
                     Intent intent = new Intent(MenuPrincipal.this, Add.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //onNewIntent(intent);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -59,6 +56,7 @@ public class MenuPrincipal extends AppCompatActivity {
         getSupportActionBar().hide();
 
         final ImageView Perfil_img = findViewById(R.id.img_perfil);
+        final LinearLayout search = findViewById(R.id.search_MP);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
@@ -68,6 +66,15 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, ListOffer.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPrincipal.this, SearchProduct.class);
                 startActivity(intent);
                 //finish();
             }

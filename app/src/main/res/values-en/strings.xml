@@ -36,6 +36,12 @@
     <string name="title_chat">Chat</string>
     <string name="search">Search</string>
 
+    <!-- Strings related to SearchProduct-->
+    <string name="search_product">Search Product or Service</string>
+
+    <!-- Strings related to SearchProduct-->
+    <string name="search_user">Search User</string>
+
     <!-- Strings related to Users-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>
     <string name="user_valoracio_text">"Assessment: "</string>

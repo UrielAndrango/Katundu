@@ -36,6 +36,12 @@
     <string name="title_chat">Xat</string>
     <string name="search">Cercar</string>
 
+    <!-- Strings related to SearchProduct-->
+    <string name="search_product">Cercar Producte o Servei</string>
+
+    <!-- Strings related to SearchProduct-->
+    <string name="search_user">Cercar Usuari</string>
+
     <!-- Strings related to Users-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>
     <string name="user_valoracio_text">"Valoració: "</string>
