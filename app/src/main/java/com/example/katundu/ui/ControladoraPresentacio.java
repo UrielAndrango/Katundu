@@ -145,6 +145,8 @@ public class ControladoraPresentacio {
         offer_list_ids.add(offer_id);
     }
 
+    public static void treure_offer_id(String offer_id) { offer_list_ids.remove(offer_id); }
+
     public static ArrayList<String> get_offer_ids() {
         return offer_list_ids;
     }
@@ -200,6 +202,8 @@ public class ControladoraPresentacio {
     public static void afegir_wish_id(String wish_id) {
         wish_list_ids.add(wish_id);
     }
+
+    public static void treure_wish_id(String wish_id) { wish_list_ids.remove(wish_id); }
 
     public static ArrayList<String> get_wish_ids() {
         return wish_list_ids;
