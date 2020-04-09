@@ -5,11 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,9 +34,22 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.login.LoginActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class AddProduct extends AppCompatActivity {
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     String[] categorias = new String[7];
     //StorageReference storageRef = storage.getReference();
@@ -52,6 +68,12 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // do your stuff
+        } else {
+            signInAnonymously();
+        }
         setContentView(R.layout.activity_add_product);
 
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
@@ -156,6 +178,7 @@ public class AddProduct extends AppCompatActivity {
                     }
                 }
                 if (okay) {
+                    final String[] productid = {""};
                     String type;
                     if ( switch_type.isChecked()) type = "Service";
                     else type = "Product";
@@ -191,6 +214,36 @@ public class AddProduct extends AppCompatActivity {
                                     }
                                     else
                                     {
+                                        productid[0] =response;
+                                        String folder_product = "/products/" + productid[0];
+                                        StorageReference imagesRef = storageRef.child("/products").child(folder_product);
+                                        for (int k = 0; k < PreviewFotos.length;++k)
+                                        {
+                                            if( fotos[k] != null) {
+                                                System.out.println(folder_product);
+                                                imagesRef = storageRef.child(folder_product).child("product_"+k);
+                                                ImageView imageView = PreviewFotos[k];
+                                                imageView.setDrawingCacheEnabled(true);
+                                                imageView.buildDrawingCache();
+                                                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                                byte[] data = baos.toByteArray();
+                                                UploadTask uploadTask = imagesRef.putBytes(data);
+                                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception exception) {
+                                                        // Handle unsuccessful uploads
+                                                    }
+                                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                                        // ...
+                                                    }
+                                                });
+                                            }
+                                        }
                                         Intent intent = new Intent(AddProduct.this, User.class);
                                         startActivity(intent);
                                         finish();
@@ -205,13 +258,22 @@ public class AddProduct extends AppCompatActivity {
                         }
                     });
                     // Add the request to the RequestQueue.
-
                     queue.add(stringRequest);
-
                 }
             }
         });
 
+        PreviewFoto0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraPresentacio.setNumero_imagen(0);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(AddProduct.this, PreviewFoto.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,7 +363,22 @@ public class AddProduct extends AppCompatActivity {
 
 
     }
+    private void signInAnonymously() {
+        mAuth.signInAnonymously().addOnSuccessListener(this, new  OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                // do your stuff
+            }
+        })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    private static final String TAG = "SignInStorage" ;
 
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e(TAG, "signInAnonymously:FAILURE", exception);
+                    }
+                });
+    }
     private void openCamera() {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
