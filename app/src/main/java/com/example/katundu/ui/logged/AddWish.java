@@ -37,8 +37,7 @@ public class AddWish extends AppCompatActivity {
         final Button Add_Wish = findViewById(R.id.ok_button_AddWish);
         final String username = ControladoraPresentacio.getUsername();
         final EditText nameEditText = findViewById(R.id.editTextNom_AddWish);
-        final Spinner categoriaSpace = findViewById(R.id.spinner_AddWish);
-        final String[] categoria = {getString(R.string.add_product_category_technology)};
+        final Spinner categoriaSpinner = findViewById(R.id.spinner_AddWish);
         final Switch tipusSwitch = findViewById(R.id.switch_wish);
         final String[] tipus = {"Producte"};
         final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_AddWish);
@@ -53,11 +52,10 @@ public class AddWish extends AppCompatActivity {
         categorias[5] = getString(R.string.add_product_category_leisure);
         categorias[6] = getString(R.string.add_product_category_transport);
         /* SPINNER CATEGORIAS */
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_AddWish);
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
         //Spinner spinner = (Spinner)findViewById(R.id.spinner_AddP);
-        spinner.setAdapter(adapter);
+        categoriaSpinner.setAdapter(adapter);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,23 +86,15 @@ public class AddWish extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-                    RequestAddWish(categoriaSpace, categoria, tipusSwitch, tipus, username, nameEditText, paraulesClauEditText, valueEditText);
+                    RequestAddWish(categoriaSpinner, tipusSwitch, tipus, username, nameEditText, paraulesClauEditText, valueEditText);
                 }
             }
         });
     }
 
-    private void RequestAddWish(Spinner categoriaSpace, String[] categoria, Switch tipusSwitch, String[] tipus, String username, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
+    private void RequestAddWish(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String username, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(AddWish.this);
-
-        if(categoriaSpace.getSelectedItemPosition() == 0) categoria[0] = getString(R.string.add_product_category_technology);
-        else if(categoriaSpace.getSelectedItemPosition() == 1) categoria[0] = getString(R.string.add_product_category_home);
-        else if(categoriaSpace.getSelectedItemPosition() == 2) categoria[0] = getString(R.string.add_product_category_beauty);
-        else if(categoriaSpace.getSelectedItemPosition() == 3) categoria[0] = getString(R.string.add_product_category_sports);
-        else if(categoriaSpace.getSelectedItemPosition() == 4) categoria[0] = getString(R.string.add_product_category_fashion);
-        else if(categoriaSpace.getSelectedItemPosition() == 5) categoria[0] = getString(R.string.add_product_category_leisure);
-        else if(categoriaSpace.getSelectedItemPosition() == 6) categoria[0] = getString(R.string.add_product_category_transport);
 
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
         else tipus[0] = "Producte";
@@ -112,7 +102,7 @@ public class AddWish extends AppCompatActivity {
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
                 "user=" + username + "&" +
                 "name=" + nameEditText.getText() + "&" +
-                "category=" + categoria[0] + "&" +
+                "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
                 "keywords=" + paraulesClauEditText.getText()+ "&" +
                 "value=" + valueEditText.getText();
@@ -123,10 +113,7 @@ public class AddWish extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(!response.equals("-1")) { //wish added successfully
-                            ControladoraPresentacio.setWish_id(response);
-                            ControladoraPresentacio.afegir_wish_id(response);
-
-                            String wish_added_successfully = getString(R.string.wish_added_successfully);//TODO: actualitzar string, ara no ho puc fer perque falta fer pull
+                            String wish_added_successfully = getString(R.string.wish_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
 
@@ -138,7 +125,7 @@ public class AddWish extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+            public void onErrorResponse(VolleyError error) {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();

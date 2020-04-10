@@ -72,8 +72,6 @@ public class ChooseActionWish extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("0")) { //Account modified successfully
-                            ControladoraPresentacio.treure_wish_id(id);
-
                             String wish_deleted_successfully = getString(R.string.wish_deleted_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), wish_deleted_successfully, Toast.LENGTH_SHORT);
                             toast.show();
@@ -91,7 +89,7 @@ public class ChooseActionWish extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+            public void onErrorResponse(VolleyError error) {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(ChooseActionWish.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();

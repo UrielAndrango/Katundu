@@ -38,8 +38,7 @@ public class EditWish extends AppCompatActivity {
 
         final String id = ControladoraPresentacio.getWish_id();
         final EditText nameEditText = findViewById(R.id.editTextNom_EditWish);
-        final Spinner categoriaSpace = findViewById(R.id.spinner_EditWish);
-        final String[] categoria = {getString(R.string.add_product_category_technology)};
+        final Spinner categoriaSpinner = findViewById(R.id.spinner_EditWish);
         final Switch tipusSwitch = findViewById(R.id.switch_wish_EW);
         final String[] tipus = {"Producte"};
         final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_EditWish);
@@ -54,18 +53,17 @@ public class EditWish extends AppCompatActivity {
         categorias[5] = getString(R.string.add_product_category_leisure);
         categorias[6] = getString(R.string.add_product_category_transport);
         /* SPINNER CATEGORIAS */
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_EditWish);
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
         //Spinner spinner = (Spinner)findViewById(R.id.spinner_AddP);
-        spinner.setAdapter(adapter);
+        categoriaSpinner.setAdapter(adapter);
 
         //Inicializamos los editText con nuestros datos
-        //TODO: Ahora hay datos random para probar, pero hay que hacerlo bien
         nameEditText.setText(ControladoraPresentacio.getWish_name());
-        spinner.setSelection(ControladoraPresentacio.getWish_Categoria()); //esto es para cambiar el elemento seleccionado por defecto del spinner
+        categoriaSpinner.setSelection(ControladoraPresentacio.getWish_Categoria()); //esto es para cambiar el elemento seleccionado por defecto del spinner
         tipusSwitch.setChecked(ControladoraPresentacio.isWish_Service()); //esto es para cambiar el switch
         paraulesClauEditText.setText(ControladoraPresentacio.getWish_PC());
+        valueEditText.setText(ControladoraPresentacio.getWish_Value().toString());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,23 +94,15 @@ public class EditWish extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-                    RequestEditWish(categoriaSpace, categoria, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
+                    RequestEditWish(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
                 }
             }
         });
     }
 
-    private void RequestEditWish(Spinner categoriaSpace, String[] categoria, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
+    private void RequestEditWish(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditWish.this);
-
-        if(categoriaSpace.getSelectedItemPosition() == 0) categoria[0] = getString(R.string.add_product_category_technology);
-        else if(categoriaSpace.getSelectedItemPosition() == 1) categoria[0] = getString(R.string.add_product_category_home);
-        else if(categoriaSpace.getSelectedItemPosition() == 2) categoria[0] = getString(R.string.add_product_category_beauty);
-        else if(categoriaSpace.getSelectedItemPosition() == 3) categoria[0] = getString(R.string.add_product_category_sports);
-        else if(categoriaSpace.getSelectedItemPosition() == 4) categoria[0] = getString(R.string.add_product_category_fashion);
-        else if(categoriaSpace.getSelectedItemPosition() == 5) categoria[0] = getString(R.string.add_product_category_leisure);
-        else if(categoriaSpace.getSelectedItemPosition() == 6) categoria[0] = getString(R.string.add_product_category_transport);
 
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
         else tipus[0] = "Producte";
@@ -120,7 +110,7 @@ public class EditWish extends AppCompatActivity {
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" +
                 "id=" + id + "&" +
                 "name=" + nameEditText.getText().toString() + "&" +
-                "category=" + categoria[0] + "&" +
+                "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
                 "keywords=" + paraulesClauEditText.getText()+ "&" +
                 "value=" + valueEditText.getText();
@@ -153,7 +143,7 @@ public class EditWish extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+            public void onErrorResponse(VolleyError error) {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
