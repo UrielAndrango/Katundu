@@ -5,29 +5,37 @@ import android.net.Uri;
 import java.util.ArrayList;
 
 public class ControladoraPresentacio {
-    //datos usuario
+    //ATRIBUTS USER
     private static String username = "testusername";
     private static String nom_real = "testname";
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+
     //idioma usuario (temporal)
     private static String idioma = "";
-    //add product
-    private static ArrayList<String> offer_list_ids = new ArrayList<>();
+
+    //ATRIBUTS add product
     private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
-    //modificar wish
-    private static ArrayList<String> wish_list_ids = new ArrayList<>();
+
+    //ATRIBUTS OFFER
+
+
+    //ATRIBUTS WISH
+    private static ArrayList<Wish> wish_list = new ArrayList<>();
     private static String wish_id = "wish_id";
     private static String wish_name = "Audi";
     private static int wish_categoria = 5;
     private static boolean wish_service = false;
     private static String wish_PC = "Coche";
+    private static Integer value = 0;
 
+
+    //GET & SET DE USER
     public static String getUsername() {
         return username;
     }
@@ -76,6 +84,8 @@ public class ControladoraPresentacio {
         ControladoraPresentacio.valoracion = valoracion;
     }
 
+
+    //GET & SET add product
     public static int getNumero_imagen() {
         return numero_imagen;
     }
@@ -141,15 +151,32 @@ public class ControladoraPresentacio {
         fotos = actualizada;
     }
 
-    public static void afegir_offer_id(String offer_id) {
-        offer_list_ids.add(offer_id);
+
+    //GET & SET DE OFFER
+
+
+    //GET & SET DE WISH
+    public static ArrayList<Wish> getWish_List() {
+        return wish_list;
     }
 
-    public static void treure_offer_id(String offer_id) { offer_list_ids.remove(offer_id); }
+    public static Wish getWish_perName(String wish_name) {
+        Wish info_wish = new Wish();
+        boolean trobat = false;
 
-    public static ArrayList<String> get_offer_ids() {
-        return offer_list_ids;
+        for(int i = 0; i < wish_list.size() & !trobat; ++i){
+            if(wish_list.get(i).getName().equals(wish_name)){
+                trobat = true;
+                info_wish = wish_list.get(i);
+            }
+        }
+        return info_wish;
     }
+
+    public static void setWish_List(ArrayList<Wish> wish_list) {
+        ControladoraPresentacio.wish_list = wish_list;
+    }
+
 
     public static String getWish_name() {
         return wish_name;
@@ -199,13 +226,11 @@ public class ControladoraPresentacio {
         ControladoraPresentacio.wish_id = wish_id;
     }
 
-    public static void afegir_wish_id(String wish_id) {
-        wish_list_ids.add(wish_id);
+    public static Integer getWish_Value() {
+        return value;
     }
 
-    public static void treure_wish_id(String wish_id) { wish_list_ids.remove(wish_id); }
-
-    public static ArrayList<String> get_wish_ids() {
-        return wish_list_ids;
+    public static void setWish_Value(Integer value) {
+        ControladoraPresentacio.value = value;
     }
 }
