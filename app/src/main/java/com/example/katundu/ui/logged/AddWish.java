@@ -97,7 +97,7 @@ public class AddWish extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(AddWish.this);
 
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
-        else tipus[0] = "Producte";
+        else tipus[0] = "Producte"; 
 
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
                 "user=" + username + "&" +
