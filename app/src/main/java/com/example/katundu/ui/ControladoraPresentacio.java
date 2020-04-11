@@ -233,4 +233,7 @@ public class ControladoraPresentacio {
     public static void setWish_Value(Integer value) {
         ControladoraPresentacio.value = value;
     }
+
+    public static void afegir_offer_id(String toString) {
+    }
 }
