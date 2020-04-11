@@ -22,9 +22,6 @@ public class ControladoraPresentacio {
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
 
-    //ATRIBUTS OFFER
-
-
     //ATRIBUTS WISH
     private static ArrayList<Wish> wish_list = new ArrayList<>();
     private static String wish_id = "wish_id";
@@ -33,6 +30,15 @@ public class ControladoraPresentacio {
     private static boolean wish_service = false;
     private static String wish_PC = "Coche";
     private static Integer value = 0;
+
+    //ATRIBUTS OFFER
+    private static ArrayList<Offer> offer_list = new ArrayList<>();
+    private static String offer_id = "wish_id";
+    private static String offer_name = "Audi";
+    private static int offer_categoria = 5;
+    private static boolean offer_service = false;
+    private static String offer_PC = "Coche";
+    private static Integer offer_value = 0;
 
 
     //GET & SET DE USER
@@ -176,7 +182,9 @@ public class ControladoraPresentacio {
     public static void setWish_List(ArrayList<Wish> wish_list) {
         ControladoraPresentacio.wish_list = wish_list;
     }
-
+    public static void setOffer_List(ArrayList<Offer> offer_list) {
+        ControladoraPresentacio.offer_list = offer_list;
+    }
 
     public static String getWish_name() {
         return wish_name;

@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.Offer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -128,19 +129,16 @@ public class ListOffer extends AppCompatActivity {
                 //finish();
             }
         });
-        InicialitzaBotonsOffers();
+       RequestGetOffers();
     }
-    private void InicialitzaBotonsOffers() {
-        ArrayList<ArrayList<String>> offers = RequestGetOffers();
-        for ( int j = 0; j < offers.size(); ++j)
-        {
-            ControladoraPresentacio.afegir_offer_id(offers.get(j).toString());
-        }
-        //ArrayList<String> offers_ids_list = ControladoraPresentacio.get_offer_ids();
-        int numBotones = 7; //offers_ids_list.size();
+    private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
+        ControladoraPresentacio.setOffer_List(offer_list);
+
+        int numBotones = offer_list.size();
 
         //Obtenemos el linear layout donde colocar los botones
-       // LinearLayout llBotonera = findViewById(R.id.listaOffers_LO);
+        LinearLayout llBotonera = findViewById(R.id.listaOffers_LO);
+
         //Creamos las propiedades de layout que tendrán los botones.
         //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
@@ -151,28 +149,29 @@ public class ListOffer extends AppCompatActivity {
             //Asignamos propiedades de layout al boton
             button.setLayoutParams(lp);
             //Asignamos Texto al botón
-            button.setText(offers.indexOf(i));
+            button.setText(offer_list.get(i).getName());
             //Le damos el estilo que queremos
             button.setBackgroundResource(R.drawable.button_rounded);
             button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
             //Margenes del button
             TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //params.setMargins(left, top, right, bottom);
-            params.setMargins(0, 0, 0, 20);
+            if(i == 0) params.setMargins(0, 20, 0, 20);
+            else params.setMargins(0, 0, 0, 20);
             button.setLayoutParams(params);
             //Asignamose el Listener
             button.setOnClickListener(new ButtonsOnClickListener(this));
             //Añadimos el botón a la botonera
-            //llBotonera.addView(button);
+            llBotonera.addView(button);
         }
     }
-    private ArrayList<ArrayList<String>> RequestGetOffers() {
+    private void RequestGetOffers() {
         final String username = ControladoraPresentacio.getUsername();
-        final ArrayList<ArrayList<String>> offer_list = new ArrayList<>();
+        final ArrayList<Offer> offer_list = new ArrayList<>();
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(ListOffer.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/getOffers?un=username";
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/getOffers?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -188,18 +187,10 @@ public class ListOffer extends AppCompatActivity {
                         String type = info_offer.getString("type");
                         String keywords = info_offer.getString("keywords");
                         String value = info_offer.getString("value");
-                        ArrayList<String> oferta = new ArrayList<>();
-                        oferta.add(name);
-                        oferta.add(category);
-                        oferta.add(type);
-                        oferta.add(keywords);
-                        oferta.add(value);
-
-                        //Wish wish = new Offer(id,name,category,type,keywords,value);
-
-                        offer_list.add(oferta);
-                        System.out.println(response);
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value));
+                        offer_list.add(offer);
                     }
+                    InicialitzaBotonsOffers(offer_list);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -211,8 +202,6 @@ public class ListOffer extends AppCompatActivity {
             }
         });
         queue.add(jsonArrayRequest);
-
-        return offer_list;
     }
     private class ButtonsOnClickListener implements View.OnClickListener {
         public ButtonsOnClickListener(ListOffer listOffer) {
