@@ -111,6 +111,14 @@
     </string>
     <string name="add_new_wish">Añadir Deseo</string>
 
+    <!-- Strings related to Add Offer-->
+    <string name="title_add_offer">Añadir Nueva Oferta</string>
+    <string name="add_new_offer_explication">
+        Una oferta es aquello que ofreces en un intercambio con otro usuario.
+    </string>
+    <string name="add_new_offer">Añadir Oferta</string>
+
+
     <!-- Strings related to PreviewFoto-->
     <string name="preview_foto_delete">Borrar foto</string>
     <string name="preview_foto_cancelar">Cancelar</string>
@@ -122,10 +130,22 @@
     <string name="wish_modified_successfully">Deseo modificado con éxito</string>
     <string name="wish_added_successfully">Deseo añadido con éxito</string>
 
+    <!-- Strings related to EditOffer-->
+    <string name="edit_offer_title">Modificar datos de la oferta</string>
+    <string name="edit_offer_ok">Modificar oferta</string>
+    <string name="offer_modified_successfully">Oferta modificada con éxito</string>
+    <string name="offer_added_successfully">Oferta añadida con éxito</string>
+
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Deseo</string>
     <string name="modify_wish">MODIFICAR DESEO</string>
     <string name="delete_wish">ELIMINAR DESEO</string>
     <string name="wish_deleted_successfully">Deseo eliminado con éxito</string>
+
+    <!-- Strings related to ChooseActionOffer-->
+    <string name="title_offer">Oferta</string>
+    <string name="modify_offer">MODIFICAR OFERTA</string>
+    <string name="delete_offer">ELIMINAR OFERTA</string>
+    <string name="offer_deleted_successfully">Oferta eliminada con éxito</string>
 
 </resources>

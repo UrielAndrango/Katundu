@@ -110,6 +110,13 @@
     </string>
     <string name="add_new_wish">Add Wish</string>
 
+    <!-- Strings related to Add Offer-->
+    <string name="title_add_offer">Add new offer</string>
+    <string name="add_new_offer_explication">
+        An offer is what you want to give in an exchange with another user.
+    </string>
+    <string name="add_new_offer">Add offer</string>
+
     <!-- Strings related to PreviewFoto-->
     <string name="preview_foto_delete">Delete foto</string>
     <string name="preview_foto_cancelar">Cancel</string>
@@ -121,10 +128,22 @@
     <string name="wish_modified_successfully">Wish successfully modified</string>
     <string name="wish_added_successfully">Wish successfully added</string>
 
+    <!-- Strings related to EditOffer-->
+    <string name="edit_offer_title">Modify offer values</string>
+    <string name="edit_offer_ok">Modify offer</string>
+    <string name="offer_modified_successfully">Offer successfully modified</string>
+    <string name="offer_added_successfully">Offer successfully added</string>
+
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Wish</string>
     <string name="modify_wish">MODIFICAR DESEO</string>
     <string name="delete_wish">ELIMINAR DESEO</string>
     <string name="wish_deleted_successfully">Wish successfully deleted</string>
+
+    <!-- Strings related to ChooseActionOffer-->
+    <string name="title_offer">Offer</string>
+    <string name="modify_offer">MODIFY OFFER</string>
+    <string name="delete_offer">DELETE OFFER</string>
+    <string name="offer_deleted_successfully">Offer successfully deleted</string>
 
 </resources>

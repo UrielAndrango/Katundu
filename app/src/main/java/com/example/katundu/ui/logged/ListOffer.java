@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -149,10 +150,11 @@ public class ListOffer extends AppCompatActivity {
             //Asignamos propiedades de layout al boton
             button.setLayoutParams(lp);
             //Asignamos Texto al botón
-            button.setText(offer_list.get(i).getName());
+            button.setText(offer_list.get(i).getName() + " - " +offer_list.get(i).getValue() + '€' );
             //Le damos el estilo que queremos
             button.setBackgroundResource(R.drawable.button_rounded);
             button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
+            button.setContentDescription(offer_list.get(i).getId());
             //Margenes del button
             TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //params.setMargins(left, top, right, bottom);
@@ -188,6 +190,8 @@ public class ListOffer extends AppCompatActivity {
                         String keywords = info_offer.getString("keywords");
                         String value = info_offer.getString("value");
                         Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value));
+                        String tipus = offer.getType();
+                        System.out.println("El tipus es : "+ tipus);
                         offer_list.add(offer);
                     }
                     InicialitzaBotonsOffers(offer_list);
@@ -210,19 +214,24 @@ public class ListOffer extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Button b = (Button) view;
-            /*
             //Provando que funciona el boton
-            //Toast.makeText(getApplicationContext(),b.getText(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),b.getText(),Toast.LENGTH_SHORT).show();
 
+            Offer info_offer = ControladoraPresentacio.getOffer_perName(b.getText().toString());
             //Pasamos los datos del deseo a la controladora
-            ControladoraPresentacio.setOffer_name("Clases Matematicas");
-            //TODO: Solo deberia hacer falta el nombre, lo demas se deberia pedir al Servidor cuando se quiera modificar
-            ControladoraPresentacio.setOffer_Categoria(5);
-            ControladoraPresentacio.setOffer_Service(true);
-            ControladoraPresentacio.setOffer_PC("Profesor");
-            */
+            ControladoraPresentacio.setOffer_id(info_offer.getId());
+            ControladoraPresentacio.setOffer_name(info_offer.getName());
+            ControladoraPresentacio.setOffer_Categoria(info_offer.getCategory());
+
+            boolean type = true;
+            String tipus = info_offer.getType();
+            System.out.println("El tipus es : "+ tipus);
+            if(tipus.equals("Producte")) type = false;
+            ControladoraPresentacio.setOffer_Service(type);
+            ControladoraPresentacio.setOffer_PC(info_offer.getKeywords());
+            ControladoraPresentacio.setOffer_Value(info_offer.getValue());
             //Nos vamos a la ventana de User
-            Intent intent = new Intent(ListOffer.this, ChooseActionWish.class);
+            Intent intent = new Intent(ListOffer.this, ChooseActionOffer.class);
             startActivity(intent);
             //finish();
         }

@@ -9,7 +9,6 @@ public class Offer {
     private Integer value;
 
     public Offer(){
-
     }
 
     public Offer(String id, String name, Integer category, String type, String keywords, Integer value) {
