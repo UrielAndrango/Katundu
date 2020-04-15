@@ -53,7 +53,7 @@
 
     <!-- Strings related to Modificar Perfil-->
     <string name="title_profile">Change Profile</string>
-    <string name="prompt_birthday">Birth date</string>
+    <string name="prompt_distancia_max">Maximum distance</string>
     <string name="Save">Save changes</string>
     <string name="action_logout">Log out</string>
     <string name="prompt_delete_account">Do you want to delete your account?</string>
