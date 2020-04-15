@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,15 +21,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -187,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
                     ControladoraPresentacio.setPassword(response.getString("password"));
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
-                    ControladoraPresentacio.setDistancia_maxima(Integer.parseInt(response.getString("distancia")));
+                    ControladoraPresentacio.setDistanciaMaxima(response.getString("distancia"));
 
                     String welcome = getString(R.string.welcome) + username;
                     Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
