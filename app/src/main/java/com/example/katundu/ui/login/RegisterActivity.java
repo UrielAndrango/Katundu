@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
                             startActivity(intent);
-                            //finish();
+                            finish();
                         }
                         else if(response.equals("1")){ //The username already exists
                             String texterror = getString(R.string.existing_user);
