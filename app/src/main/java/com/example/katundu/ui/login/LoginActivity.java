@@ -134,12 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                             Configuration config = new Configuration();
                             config.locale = localizacion;
                             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-*/
-                            Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+                            */
                         }
                         else if(response.equals("2")){ //Incorrect password
                             String texterror = getString(R.string.incorrect_password);
@@ -168,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {  //TODO: aixo ho podem treure?
+            public void onErrorResponse(VolleyError error) {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
@@ -196,13 +191,12 @@ public class LoginActivity extends AppCompatActivity {
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
 
-                    JSONArray wish_list = response.getJSONArray("wish");
-                    for(int i = 0; i < wish_list.length(); ++i)
-                        ControladoraPresentacio.afegir_wish_id(wish_list.getString(i));
-
-                    JSONArray offer_list = response.getJSONArray("offer");
-                    for(int i = 0; i < offer_list.length(); ++i)
-                        ControladoraPresentacio.afegir_offer_id(wish_list.getString(i));
+                    //Canviem de pantalla i anem al Menu Principal
+                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -110,6 +110,13 @@
     </string>
     <string name="add_new_wish">Afegir Desig</string>
 
+    <!-- Strings related to Add Offer-->
+    <string name="title_add_offer">Afegir Nova Oferta</string>
+    <string name="add_new_offer_explication">
+        Una oferta es allò que ofereixes en un intercanvi amb un altre usuari.
+    </string>
+    <string name="add_new_offer">Afegir oferta</string>
+
     <!-- Strings related to PreviewFoto-->
     <string name="preview_foto_delete">Borrar foto</string>
     <string name="preview_foto_cancelar">Cancel·lar</string>
@@ -121,10 +128,22 @@
     <string name="wish_modified_successfully">Desig modificat amb èxit</string>
     <string name="wish_added_successfully">Desig afegit amb èxit</string>
 
+    <!-- Strings related to EditOffer-->
+    <string name="edit_offer_title">Modificar dades oferta</string>
+    <string name="edit_offer_ok">Modificar oferta</string>
+    <string name="offer_modified_successfully">Oferta modificada amb èxit</string>
+    <string name="offer_added_successfully">Oferta afegida amb èxit</string>
+
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Desig</string>
     <string name="modify_wish">MODIFICAR DESEO</string>
     <string name="delete_wish">ELIMINAR DESEO</string>
     <string name="wish_deleted_successfully">Desig eliminat amb èxit</string>
+
+    <!-- Strings related to ChooseActionOffer-->
+    <string name="title_offer">Oferta</string>
+    <string name="modify_offer">MODIFICAR OFERTA</string>
+    <string name="delete_offer">ELIMINAR OFERTA</string>
+    <string name="offer_deleted_successfully">Oferta eliminada amb èxit</string>
 
 </resources>

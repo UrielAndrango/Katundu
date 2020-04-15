@@ -5,29 +5,43 @@ import android.net.Uri;
 import java.util.ArrayList;
 
 public class ControladoraPresentacio {
-    //datos usuario
+    //ATRIBUTS USER
     private static String username = "testusername";
     private static String nom_real = "testname";
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+
     //idioma usuario (temporal)
     private static String idioma = "";
-    //add product
-    private static ArrayList<String> offer_list_ids = new ArrayList<>();
+
+    //ATRIBUTS add product
     private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
     private static Uri[] fotos = new Uri[numero_maximo_fotos];
-    //modificar wish
-    private static ArrayList<String> wish_list_ids = new ArrayList<>();
+
+    //ATRIBUTS WISH
+    private static ArrayList<Wish> wish_list = new ArrayList<>();
     private static String wish_id = "wish_id";
     private static String wish_name = "Audi";
     private static int wish_categoria = 5;
     private static boolean wish_service = false;
     private static String wish_PC = "Coche";
+    private static Integer value = 0;
 
+    //ATRIBUTS OFFER
+    private static ArrayList<Offer> offer_list = new ArrayList<>();
+    private static String offer_id = "wish_id";
+    private static String offer_name = "Audi";
+    private static Integer offer_categoria = 5;
+    private static boolean offer_service = false;
+    private static String offer_PC = "Coche";
+    private static Integer offer_value = 0;
+
+
+    //GET & SET DE USER
     public static String getUsername() {
         return username;
     }
@@ -76,6 +90,8 @@ public class ControladoraPresentacio {
         ControladoraPresentacio.valoracion = valoracion;
     }
 
+
+    //GET & SET add product
     public static int getNumero_imagen() {
         return numero_imagen;
     }
@@ -141,14 +157,98 @@ public class ControladoraPresentacio {
         fotos = actualizada;
     }
 
-    public static void afegir_offer_id(String offer_id) {
-        offer_list_ids.add(offer_id);
+
+    //GET & SET DE OFFER
+    public static Offer getOffer_perName(String offer_name) {
+        boolean trobat = false;
+        Offer info_offer = new Offer();
+        for(int i = 0; i < offer_list.size() & !trobat; ++i){
+            if(offer_list.get(i).getName().equals(offer_name)){
+                trobat = true;
+                info_offer = offer_list.get(i);
+            }
+        }
+        System.out.println("(Controladora)El tipus es:"+ info_offer.getType());
+        return info_offer;
     }
 
-    public static void treure_offer_id(String offer_id) { offer_list_ids.remove(offer_id); }
+    public static void setOffer_List(ArrayList<Offer> offer_list) {
+        ControladoraPresentacio.offer_list = offer_list;
+    }
 
-    public static ArrayList<String> get_offer_ids() {
-        return offer_list_ids;
+    public static String getOffer_name() {
+        return offer_name;
+    }
+
+    public static void setOffer_name(String offer_name) {
+        ControladoraPresentacio.offer_name = offer_name;
+    }
+
+    public static int getOffer_Categoria() {
+        return offer_categoria;
+    }
+
+    public static void setOffer_Categoria(Integer categoria) {
+        ControladoraPresentacio.offer_categoria = categoria;
+    }
+
+    public static boolean isOffer_Service() {
+        return offer_service;
+    }
+
+    public static void setOffer_Service(boolean service) {
+        ControladoraPresentacio.offer_service = service;
+    }
+
+    public static String getOffer_PC() {
+        return offer_PC;
+    }
+
+    public static void setOffer_PC(String offer_PC) {
+        ControladoraPresentacio.offer_PC = offer_PC;
+    }
+
+    public static String getOffer_id() {
+        return offer_id;
+    }
+
+    public static void setOffer_id(String offer_id) {
+        ControladoraPresentacio.offer_id = offer_id;
+    }
+
+
+    public static Integer getOffer_Value() {
+        return offer_value;
+    }
+
+    public static void setOffer_Value(Integer value) {
+        ControladoraPresentacio.offer_value = value;
+    }
+
+
+
+    //GET & SET DE WISH
+    public static ArrayList<Wish> getWish_List() {
+        return wish_list;
+    }
+
+    public static Wish getWish_perName(String wish_name) {
+        Wish info_wish = new Wish();
+        boolean trobat = false;
+
+        for(int i = 0; i < wish_list.size() & !trobat; ++i){
+            if(wish_list.get(i).getName().equals(wish_name)){
+                trobat = true;
+                info_wish = wish_list.get(i);
+            }
+        }
+        return info_wish;
+    }
+
+
+
+    public static void setWish_List(ArrayList<Wish> wish_list) {
+        ControladoraPresentacio.wish_list = wish_list;
     }
 
     public static String getWish_name() {
@@ -195,17 +295,19 @@ public class ControladoraPresentacio {
         return wish_id;
     }
 
+
     public static void setWish_id(String wish_id) {
         ControladoraPresentacio.wish_id = wish_id;
     }
 
-    public static void afegir_wish_id(String wish_id) {
-        wish_list_ids.add(wish_id);
+    public static Integer getWish_Value() {
+        return value;
     }
 
-    public static void treure_wish_id(String wish_id) { wish_list_ids.remove(wish_id); }
+    public static void setWish_Value(Integer value) {
+        ControladoraPresentacio.value = value;
+    }
 
-    public static ArrayList<String> get_wish_ids() {
-        return wish_list_ids;
+    public static void afegir_offer_id(String toString) {
     }
 }

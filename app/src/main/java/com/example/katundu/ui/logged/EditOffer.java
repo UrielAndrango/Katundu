@@ -22,26 +22,29 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 
-public class AddWish extends AppCompatActivity {
+public class EditOffer extends AppCompatActivity {
 
     String[] categorias = new String[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_wish);
+
+        setContentView(R.layout.activity_edit_offer);
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
         getSupportActionBar().hide();
 
-        final ImageView Atras = findViewById(R.id.AddWish_Atras);
-        final Button Add_Wish = findViewById(R.id.ok_button_AddWish);
-        final String username = ControladoraPresentacio.getUsername();
-        final EditText nameEditText = findViewById(R.id.editTextNom_AddWish);
-        final Spinner categoriaSpinner = findViewById(R.id.spinner_AddWish);
-        final Switch tipusSwitch = findViewById(R.id.switch_wish);
+        final ImageView Atras = findViewById(R.id.EditOffer_Atras);
+        final Button Modify_Offer = findViewById(R.id.ok_button_EditOffer);
+
+        final String id = ControladoraPresentacio.getOffer_id();
+        final EditText nameEditText = findViewById(R.id.editTextNom_EditOffer);
+        final Spinner categoriaSpinner = findViewById(R.id.spinner_EditOffer);
+        final Switch tipusSwitch = findViewById(R.id.switch_Offer_EW);
         final String[] tipus = {"Producte"};
-        final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_AddWish);
-        final EditText valueEditText = findViewById(R.id.editTextValor_AddW);
+        final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_EditOffer);
+        final EditText valueEditText = findViewById(R.id.editTextValor_ModifyO);
 
         //Inicilizamos las categorias
         categorias[0] = getString(R.string.add_product_category_technology);
@@ -57,51 +60,58 @@ public class AddWish extends AppCompatActivity {
         //Spinner spinner = (Spinner)findViewById(R.id.spinner_AddP);
         categoriaSpinner.setAdapter(adapter);
 
+        //Inicializamos los editText con nuestros datos
+        nameEditText.setText(ControladoraPresentacio.getOffer_name());
+        categoriaSpinner.setSelection(ControladoraPresentacio.getOffer_Categoria()); //esto es para cambiar el elemento seleccionado por defecto del spinner
+        tipusSwitch.setChecked(ControladoraPresentacio.isOffer_Service()); //esto es para cambiar el switch
+        paraulesClauEditText.setText(ControladoraPresentacio.getOffer_PC());
+        valueEditText.setText(ControladoraPresentacio.getOffer_Value().toString());
+
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddWish.this, Add.class);
+                Intent intent = new Intent(EditOffer.this, ListOffer.class);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
             }
         });
 
-        Add_Wish.setOnClickListener(new View.OnClickListener() {
+        Modify_Offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean okay = false;
                 //Comprovaciones de que ha puesto cosas
                 if (nameEditText.length() == 0) {
                     String texterror = getString(R.string.add_product_no_hay_nombre);
-                    Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     if (paraulesClauEditText.length() == 0) {
                         String texterror = getString(R.string.add_product_no_hay_palabras_clave);
-                        Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
                         okay = true;
                     }
                 }
                 if (okay) {
-                    RequestAddWish(categoriaSpinner, tipusSwitch, tipus, username, nameEditText, paraulesClauEditText, valueEditText);
+                    RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
                 }
             }
         });
     }
 
-    private void RequestAddWish(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String username, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
+    private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(AddWish.this);
+        RequestQueue queue = Volley.newRequestQueue(EditOffer.this);
 
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
-        else tipus[0] = "Producte"; 
+        else tipus[0] = "Producte";
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
-                "user=" + username + "&" +
-                "name=" + nameEditText.getText() + "&" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifyoffer?" +
+                "id=" + id + "&" +
+                "name=" + nameEditText.getText().toString() + "&" +
                 "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
                 "keywords=" + paraulesClauEditText.getText()+ "&" +
@@ -112,22 +122,32 @@ public class AddWish extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(!response.equals("-1")) { //wish added successfully
-                            String wish_added_successfully = getString(R.string.wish_added_successfully);
-                            Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
+                        if(response.equals("0")) { //Account modified successfully
+                            String offer_modified_successfully = getString(R.string.offer_modified_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), offer_modified_successfully, Toast.LENGTH_SHORT);
                             toast.show();
 
                             //Volvemos a User
-                            Intent intent = new Intent(AddWish.this, ListOffer.class);
+                            Intent intent = new Intent(EditOffer.this, ListOffer.class);
                             startActivity(intent);
                             finish();
+                        }
+                        else if(response.equals("3")) { //Account modified successfully
+                            String offer_empty_values = getString(R.string.empty_values);
+                            Toast toast = Toast.makeText(getApplicationContext(), offer_empty_values, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else { //response == "1" No such user in the database
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 String texterror = getString(R.string.error);
-                Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -135,4 +155,6 @@ public class AddWish extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+
 }

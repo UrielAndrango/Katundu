@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.Wish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ListWish extends AppCompatActivity {
 
@@ -105,12 +118,57 @@ public class ListWish extends AppCompatActivity {
 
 
         /* Creación de la LISTA DE WISHES */
-        InicialitzaBotonsWishes();
+        RequestGetWishes();
     }
 
-    private void InicialitzaBotonsWishes() {
-        ArrayList<String> wish_ids_list = ControladoraPresentacio.get_wish_ids();
-        int numBotones = wish_ids_list.size();
+    private void RequestGetWishes() {
+        final ArrayList<Wish> wish_list = new ArrayList<>();
+        final String username = ControladoraPresentacio.getUsername();
+
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = Volley.newRequestQueue(ListWish.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/getWishes?" + "un=" + username;
+
+        // Request a JSONObject response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i = 0; i < response.length(); ++i) {
+                        JSONObject info_wish = response.getJSONObject(i);
+
+                        String id = info_wish.getString("name"); //TODO: ACTUALITZA AMB CAMP ID
+                        String name = info_wish.getString("name");
+                        String category = info_wish.getString("category");
+                        String type = info_wish.getString("type");
+                        String keywords = info_wish.getString("keywords");
+                        String value = info_wish.getString("value");
+
+                        Wish wish = new Wish(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value));
+
+                        wish_list.add(wish);
+                    }
+
+                    InicialitzaBotonsWishes(wish_list);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void InicialitzaBotonsWishes(ArrayList<Wish> wish_list) {
+        ControladoraPresentacio.setWish_List(wish_list);
+
+        int numBotones = wish_list.size();
 
         //Obtenemos el linear layout donde colocar los botones
         LinearLayout llBotonera = findViewById(R.id.listaWishes_LW);
@@ -122,22 +180,27 @@ public class ListWish extends AppCompatActivity {
         //Creamos los botones en bucle
         for (int i=0; i<numBotones; i++){
             Button button = new Button(this);
+
             //Asignamos propiedades de layout al boton
             button.setLayoutParams(lp);
+
             //Asignamos Texto al botón
-            button.setText("Boton "+String.format("%02d", i ));
+            button.setText(wish_list.get(i).getName());
 
             //Le damos el estilo que queremos
             button.setBackgroundResource(R.drawable.button_rounded);
             button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
+
             //Margenes del button
             TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //params.setMargins(left, top, right, bottom);
-            params.setMargins(0, 0, 0, 20);
+            if(i == 0) params.setMargins(0, 20, 0, 20);
+            else params.setMargins(0, 0, 0, 20);
             button.setLayoutParams(params);
 
             //Asignamose el Listener
-            button.setOnClickListener(new ButtonsOnClickListener(this));
+            button.setOnClickListener(new ButtonsOnClickListener());
+
             //Añadimos el botón a la botonera
             llBotonera.addView(button);
         }
@@ -160,7 +223,7 @@ public class ListWish extends AppCompatActivity {
     }
 
     private class ButtonsOnClickListener implements View.OnClickListener {
-        public ButtonsOnClickListener(ListWish listWish) {
+        public ButtonsOnClickListener() {
         }
 
         @Override
@@ -169,16 +232,27 @@ public class ListWish extends AppCompatActivity {
             //Provando que funciona el boton
             //Toast.makeText(getApplicationContext(),b.getText(),Toast.LENGTH_SHORT).show();
 
+            Wish info_wish = ControladoraPresentacio.getWish_perName(b.getText().toString());
+
             //Pasamos los datos del deseo a la controladora
-            ControladoraPresentacio.setWish_name("Clases Matematicas");
-            //TODO: Solo deberia hacer falta el nombre, lo demas se deberia pedir al Servidor cuando se quiera modificar
-            ControladoraPresentacio.setWish_Categoria(5);
-            ControladoraPresentacio.setWish_Service(true);
-            ControladoraPresentacio.setWish_PC("Profesor");
+            //TODO:Saber quin boto s'ha picat, per tal de saber la info del desig que es
+            ControladoraPresentacio.setWish_id(info_wish.getId());
+            ControladoraPresentacio.setWish_name(info_wish.getName());
+            ControladoraPresentacio.setWish_Categoria(info_wish.getCategory());
+
+            boolean type = true;
+            if(info_wish.getType().equals("Producte")) type = false;
+
+            ControladoraPresentacio.setWish_Service(type);
+            ControladoraPresentacio.setWish_PC(info_wish.getKeywords());
+            ControladoraPresentacio.setWish_Value(info_wish.getValue());
+
+
             //Nos vamos a la ventana de User
             Intent intent = new Intent(ListWish.this, ChooseActionWish.class);
             startActivity(intent);
             //finish();
+
         }
     }
 }
