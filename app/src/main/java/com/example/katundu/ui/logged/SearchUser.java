@@ -73,6 +73,7 @@ public class SearchUser extends AppCompatActivity {
         getSupportActionBar().hide();
         //Barra Navegacio Tipus de Cerca
         BottomNavigationView typeSearch = findViewById(R.id.type_search);
+        typeSearch.setSelectedItemId(R.id.navigation_search_users);
         typeSearch.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //Barra Navegacio Principal
         BottomNavigationView navView = findViewById(R.id.nav_view);
