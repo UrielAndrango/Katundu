@@ -108,6 +108,10 @@
             android:name=".ui.logged.ChooseActionOffer"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.PreviewFotoEdit"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

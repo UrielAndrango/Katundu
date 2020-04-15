@@ -149,7 +149,7 @@ public class ListOffer extends AppCompatActivity {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
 
-                        String id = info_offer.getString("name"); //TODO: ACTUALITZA AMB CAMP ID
+                        String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
                         String name = info_offer.getString("name");
                         String category = info_offer.getString("category");
                         String type = info_offer.getString("type");

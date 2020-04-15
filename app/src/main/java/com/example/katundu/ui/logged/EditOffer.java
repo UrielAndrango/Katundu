@@ -1,6 +1,9 @@
 package com.example.katundu.ui.logged;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -20,10 +24,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraEditOffer;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.bumptech.glide.Glide;
 public class EditOffer extends AppCompatActivity {
 
     String[] categorias = new String[7];
@@ -37,16 +44,6 @@ public class EditOffer extends AppCompatActivity {
         String folder_product = "/products/Q9KGzX0vB7rC5aakqBEp/";
         StorageReference imagesRef = storageRef.child(folder_product);
         setContentView(R.layout.activity_edit_offer);
-        // Load the image using Glide
-        ImageView PreviewFoto0;
-        PreviewFoto0 = findViewById(R.id.previewFoto_AddP);
-        Glide.with(getApplicationContext())
-                .load(imagesRef)
-                .into(PreviewFoto0);
-        PreviewFoto0.setVisibility(View.VISIBLE);
-        //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
-        getSupportActionBar().hide();
-
         final ImageView Atras = findViewById(R.id.EditOffer_Atras);
         final Button Modify_Offer = findViewById(R.id.ok_button_EditOffer);
 
@@ -57,6 +54,130 @@ public class EditOffer extends AppCompatActivity {
         final String[] tipus = {"Producte"};
         final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_EditOffer);
         final EditText valueEditText = findViewById(R.id.editTextValor_EditOffer);
+
+        // FOTOS
+        Button Camara;
+        ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
+        final ImageView[] PreviewFotos;
+        Camara = findViewById(R.id.camaraButton_AddP);
+        PreviewFoto0 = findViewById(R.id.previewFoto_EditOffer);
+        PreviewFoto1 = findViewById(R.id.previewFoto2_EditOffer);
+        PreviewFoto2 = findViewById(R.id.previewFoto3_EditOffer);
+        PreviewFoto3 = findViewById(R.id.previewFoto4_EditOffer);
+        PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
+        PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
+
+        for ( int i = 0; i < 5; ++i) {
+            StorageReference Reference = storageRef.child("/products/"+ControladoraPresentacio.getOffer_id()).child("product_" + i);
+            final int finalI = i;
+            Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    PreviewFotos[finalI].setImageBitmap(bmp);
+                    PreviewFotos[finalI].setVisibility(View.VISIBLE);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    System.out.println(exception.getCause());
+                }
+            });
+        }
+        PreviewFoto0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar datos
+                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
+                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraEditOffer.setValor(valueEditText.getText().toString());
+                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
+                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraEditOffer.setNumero_imagen(0);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+        PreviewFoto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar datos
+                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
+                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraEditOffer.setValor(valueEditText.getText().toString());
+                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
+                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraEditOffer.setNumero_imagen(1);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+        PreviewFoto2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar datos
+                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
+                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraEditOffer.setValor(valueEditText.getText().toString());
+                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
+                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraEditOffer.setNumero_imagen(2);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+        PreviewFoto3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar datos
+                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
+                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraEditOffer.setValor(valueEditText.getText().toString());
+                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
+                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraEditOffer.setNumero_imagen(3);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+        PreviewFoto4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar datos
+                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
+                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraEditOffer.setValor(valueEditText.getText().toString());
+                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
+                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
+                //Indicamos la foto a la controladora que querremos ver
+                ControladoraEditOffer.setNumero_imagen(4);
+                //Nos vamos a la ventana de Preview
+                Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
+        getSupportActionBar().hide();
+
 
         //Inicilizamos las categorias
         categorias[0] = getString(R.string.add_product_category_technology);
@@ -127,7 +248,8 @@ public class EditOffer extends AppCompatActivity {
                 "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
                 "keywords=" + paraulesClauEditText.getText()+ "&" +
-                "value=" + valueEditText.getText();
+                "value=" + valueEditText.getText()+"&"+
+                "description= " + "hola";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
