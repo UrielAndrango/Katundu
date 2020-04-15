@@ -21,7 +21,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.bumptech.glide.Glide;
 public class EditOffer extends AppCompatActivity {
 
     String[] categorias = new String[7];
@@ -30,8 +32,18 @@ public class EditOffer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        String folder_product = "/products/Q9KGzX0vB7rC5aakqBEp/";
+        StorageReference imagesRef = storageRef.child(folder_product);
         setContentView(R.layout.activity_edit_offer);
+        // Load the image using Glide
+        ImageView PreviewFoto0;
+        PreviewFoto0 = findViewById(R.id.previewFoto_AddP);
+        Glide.with(getApplicationContext())
+                .load(imagesRef)
+                .into(PreviewFoto0);
+        PreviewFoto0.setVisibility(View.VISIBLE);
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
         getSupportActionBar().hide();
 
@@ -41,10 +53,10 @@ public class EditOffer extends AppCompatActivity {
         final String id = ControladoraPresentacio.getOffer_id();
         final EditText nameEditText = findViewById(R.id.editTextNom_EditOffer);
         final Spinner categoriaSpinner = findViewById(R.id.spinner_EditOffer);
-        final Switch tipusSwitch = findViewById(R.id.switch_Offer_EW);
+        final Switch tipusSwitch = findViewById(R.id.switch3);
         final String[] tipus = {"Producte"};
         final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_EditOffer);
-        final EditText valueEditText = findViewById(R.id.editTextValor_ModifyO);
+        final EditText valueEditText = findViewById(R.id.editTextValor_EditOffer);
 
         //Inicilizamos las categorias
         categorias[0] = getString(R.string.add_product_category_technology);

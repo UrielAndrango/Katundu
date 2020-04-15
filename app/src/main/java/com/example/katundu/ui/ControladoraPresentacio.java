@@ -172,12 +172,14 @@ public class ControladoraPresentacio {
         boolean trobat = false;
         Offer info_offer = new Offer();
         for(int i = 0; i < offer_list.size() & !trobat; ++i){
+            System.out.println(offer_list.get(i).getName());
+            System.out.println(offer_name);
             if(offer_list.get(i).getName().equals(offer_name)){
                 trobat = true;
                 info_offer = offer_list.get(i);
+                System.out.println(trobat);
             }
         }
-        System.out.println("(Controladora)El tipus es:"+ info_offer.getType());
         return info_offer;
     }
 
