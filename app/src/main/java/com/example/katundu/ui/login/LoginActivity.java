@@ -103,10 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("0")) { //Successful login
-                            String welcome = getString(R.string.welcome) + usernameEditText.getText().toString();
-                            Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
-                            toast.show();
-
                             //Inicialitzem amb les dades de l'usuari
                             RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
 
@@ -188,8 +184,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     ControladoraPresentacio.setUsername(username);
                     ControladoraPresentacio.setNom_real(response.getString("name"));
+                    ControladoraPresentacio.setPassword(response.getString("password"));
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
+                    ControladoraPresentacio.setDistancia_maxima(Integer.parseInt(response.getString("distancia")));
+
+                    String welcome = getString(R.string.welcome) + username;
+                    Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
+                    toast.show();
 
                     //Canviem de pantalla i anem al Menu Principal
                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
