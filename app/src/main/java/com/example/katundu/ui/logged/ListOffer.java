@@ -132,41 +132,7 @@ public class ListOffer extends AppCompatActivity {
         });
        RequestGetOffers();
     }
-    private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
-        ControladoraPresentacio.setOffer_List(offer_list);
 
-        int numBotones = offer_list.size();
-
-        //Obtenemos el linear layout donde colocar los botones
-        LinearLayout llBotonera = findViewById(R.id.listaOffers_LO);
-
-        //Creamos las propiedades de layout que tendrán los botones.
-        //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-
-        //Creamos los botones en bucle
-        for (int i=0; i<numBotones; i++){
-            Button button = new Button(this);
-            //Asignamos propiedades de layout al boton
-            button.setLayoutParams(lp);
-            //Asignamos Texto al botón
-            button.setText(offer_list.get(i).getName() + " - " +offer_list.get(i).getValue() + '€' );
-            //Le damos el estilo que queremos
-            button.setBackgroundResource(R.drawable.button_rounded);
-            button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
-            button.setContentDescription(offer_list.get(i).getId());
-            //Margenes del button
-            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-            //params.setMargins(left, top, right, bottom);
-            if(i == 0) params.setMargins(0, 20, 0, 20);
-            else params.setMargins(0, 0, 0, 20);
-            button.setLayoutParams(params);
-            //Asignamose el Listener
-            button.setOnClickListener(new ButtonsOnClickListener(this));
-            //Añadimos el botón a la botonera
-            llBotonera.addView(button);
-        }
-    }
     private void RequestGetOffers() {
         final String username = ControladoraPresentacio.getUsername();
         final ArrayList<Offer> offer_list = new ArrayList<>();
@@ -207,6 +173,41 @@ public class ListOffer extends AppCompatActivity {
         });
         queue.add(jsonArrayRequest);
     }
+    private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
+        ControladoraPresentacio.setOffer_List(offer_list);
+        int numBotones = offer_list.size();
+
+        //Obtenemos el linear layout donde colocar los botones
+        LinearLayout llBotonera = findViewById(R.id.listaOffers_LO);
+
+        //Creamos las propiedades de layout que tendrán los botones.
+        //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+
+        //Creamos los botones en bucle
+        for (int i=0; i<numBotones; i++){
+            Button button = new Button(this);
+            //Asignamos propiedades de layout al boton
+            button.setLayoutParams(lp);
+            //Asignamos Texto al botón
+            button.setText(offer_list.get(i).getName() + " - " +offer_list.get(i).getValue() + '€' );
+            //Le damos el estilo que queremos
+            button.setBackgroundResource(R.drawable.button_rounded);
+            button.setHint(offer_list.get(i).getName());
+            button.setTextColor(this.getResources().getColor(R.color.colorLetraKatundu));
+            button.setContentDescription(offer_list.get(i).getId());
+            //Margenes del button
+            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+            //params.setMargins(left, top, right, bottom);
+            if(i == 0) params.setMargins(0, 20, 0, 20);
+            else params.setMargins(0, 0, 0, 20);
+            button.setLayoutParams(params);
+            //Asignamose el Listener
+            button.setOnClickListener(new ButtonsOnClickListener(this));
+            //Añadimos el botón a la botonera
+            llBotonera.addView(button);
+        }
+    }
     private class ButtonsOnClickListener implements View.OnClickListener {
         public ButtonsOnClickListener(ListOffer listOffer) {
         }
@@ -217,12 +218,11 @@ public class ListOffer extends AppCompatActivity {
             //Provando que funciona el boton
             Toast.makeText(getApplicationContext(),b.getText(),Toast.LENGTH_SHORT).show();
 
-            Offer info_offer = ControladoraPresentacio.getOffer_perName(b.getText().toString());
+            Offer info_offer = ControladoraPresentacio.getOffer_perName(b.getHint().toString());
             //Pasamos los datos del deseo a la controladora
             ControladoraPresentacio.setOffer_id(info_offer.getId());
             ControladoraPresentacio.setOffer_name(info_offer.getName());
             ControladoraPresentacio.setOffer_Categoria(info_offer.getCategory());
-
             boolean type = true;
             String tipus = info_offer.getType();
             System.out.println("El tipus es : "+ tipus);
