@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.ControladoraSearchUsers;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class VisualizeListWUser extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class VisualizeListWUser extends AppCompatActivity {
         final ImageView Atras = findViewById(R.id.VLO_User_Atras);
 
         //USERNAME DEL USUARIO
-        //NomUsuari.setText(ControladoraPresentacio.getUsername());
+        NomUsuari.setText(ControladoraSearchUsers.getUsername());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +70,7 @@ public class VisualizeListWUser extends AppCompatActivity {
 
         //Valoracion Usuario
         final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_VLO_User);
-        valoracion_usuario.setText(Double.toString(ControladoraPresentacio.getValoracion()));
+        valoracion_usuario.setText(Double.toString(ControladoraSearchUsers.getValoracion()));
         final ImageView star1 = findViewById(R.id.imageViewStar1_VLO_User);
         final ImageView star2 = findViewById(R.id.imageViewStar2_VLO_User);
         final ImageView star3 = findViewById(R.id.imageViewStar3_VLO_User);

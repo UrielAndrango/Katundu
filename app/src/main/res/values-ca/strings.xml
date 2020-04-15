@@ -39,8 +39,13 @@
     <!-- Strings related to SearchProduct-->
     <string name="search_product">Cercar Producte o Servei</string>
 
-    <!-- Strings related to SearchProduct-->
+    <!-- Strings related to SearchUser-->
     <string name="search_user">Cercar Usuari</string>
+    <string name="search_user_username">Nom d\'usuari</string>
+    <string name="search_user_real_name">Nom</string>
+    <string name="search_user_valoracio">Valoració</string>
+    <string name="search_user_good_search">S\'han trobat usuaris</string>
+    <string name="search_user_bad_search">No s\'ha trobat cap usuari</string>
 
     <!-- Strings related to Users-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>

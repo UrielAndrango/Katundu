@@ -40,8 +40,13 @@
     <!-- Strings related to SearchProduct-->
     <string name="search_product">Buscar Producto o Servicio</string>
 
-    <!-- Strings related to SearchProduct-->
+    <!-- Strings related to SearchUser-->
     <string name="search_user">Buscar Usuario</string>
+    <string name="search_user_username">Nombre de usuario</string>
+    <string name="search_user_real_name">Nombre</string>
+    <string name="search_user_valoracio">Valoración</string>
+    <string name="search_user_good_search">Se han encontrado usuarios</string>
+    <string name="search_user_bad_search">No se ha encontrado ningún usuario</string>
 
     <!-- Strings related to User-->
     <string name="nom_Usuari" translatable="false">Nom Usuari</string>

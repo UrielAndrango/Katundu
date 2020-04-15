@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,7 +77,7 @@ public class SearchProduct extends AppCompatActivity {
 
 
         final ImageView Atras = findViewById(R.id.Search_Atras);
-        final EditText search = findViewById(R.id.search_SP);
+        final SearchView search = findViewById(R.id.search_SP);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
