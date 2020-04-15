@@ -11,7 +11,7 @@ public class ControladoraPresentacio {
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
-    private static Integer distancia_maxima = 10;
+    private static String distanciaMaxima = "10.0";
 
     //idioma usuario (temporal)
     private static String idioma = "";
@@ -83,12 +83,12 @@ public class ControladoraPresentacio {
         ControladoraPresentacio.longitud = longitud;
     }
 
-    public static Integer getDistancia_maxima() {
-        return distancia_maxima;
+    public static String getDistanciaMaxima() {
+        return distanciaMaxima;
     }
 
-    public static void setDistancia_maxima(Integer distancia_maxima) {
-        ControladoraPresentacio.distancia_maxima = distancia_maxima;
+    public static void setDistanciaMaxima(String distanciaMaxima) {
+        ControladoraPresentacio.distanciaMaxima = distanciaMaxima;
     }
 
     public static double getValoracion() {

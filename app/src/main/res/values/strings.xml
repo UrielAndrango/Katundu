@@ -54,7 +54,7 @@
 
     <!-- Strings related to Modificar Perfil-->
     <string name="title_profile">Modificar Perfil</string>
-    <string name="prompt_birthday">Fecha de nacimiento</string>
+    <string name="prompt_distancia_max">Distancia máxima</string>
     <string name="Save">Guardar cambios</string>
     <string name="action_logout">Cerrar sessión</string>
     <string name="prompt_delete_account"><u>¿Quieres darte de baja?</u></string>

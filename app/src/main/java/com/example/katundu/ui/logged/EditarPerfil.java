@@ -36,7 +36,7 @@ public class EditarPerfil extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.editTextContrasenya);
         final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
         final EditText longitudeEditText = findViewById(R.id.editTextLongitud);
-        //final EditText birthDateEditText = findViewById(R.id.editTextBirthDate);
+        final EditText maximumDistanceEditText = findViewById(R.id.editTextMaximumDistance);
 
         //DATOS DEL USUARIO
         usernameEditText.setText(ControladoraPresentacio.getUsername());
@@ -44,7 +44,7 @@ public class EditarPerfil extends AppCompatActivity {
         passwordEditText.setText(ControladoraPresentacio.getPassword());
         latitudeEditText.setText(ControladoraPresentacio.getLatitud());
         longitudeEditText.setText(ControladoraPresentacio.getLongitud());
-        //birthDateEditText.setText(ControladoraPresentacio.getUsername());
+        maximumDistanceEditText.setText(ControladoraPresentacio.getDistanciaMaxima());
 
 
         Atras.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +63,12 @@ public class EditarPerfil extends AppCompatActivity {
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
+                RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText, maximumDistanceEditText);
             }
         });
     }
 
-    private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText, final EditText latitudeEditText, final EditText longitudeEditText) {
+    private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText, final EditText latitudeEditText, final EditText longitudeEditText, final EditText maximumDistanceEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditarPerfil.this);
 
@@ -77,7 +77,8 @@ public class EditarPerfil extends AppCompatActivity {
                 "pw=" + passwordEditText.getText() + "&" +
                 "n=" + nameEditText.getText() + "&" +
                 "lat=" + latitudeEditText.getText() + "&" +
-                "lon=" + longitudeEditText.getText();
+                "lon=" + longitudeEditText.getText() + "&" +
+                "dis=" + maximumDistanceEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -96,9 +97,11 @@ public class EditarPerfil extends AppCompatActivity {
                             ControladoraPresentacio.setNom_real(nameEditText.getText().toString());
                             ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
                             ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
+                            ControladoraPresentacio.setDistanciaMaxima(maximumDistanceEditText.getText().toString());
                             //Volvemos a Ajustes
                             Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
-                            startActivity(intent);
+                            onNewIntent(intent);
+                            //startActivity(intent);
                             finish();
                         }
                         else { //response == "1" No such user in the database
