@@ -35,6 +35,7 @@ public class EditWish extends AppCompatActivity {
 
         final ImageView Atras = findViewById(R.id.EditWish_Atras);
         final Button Modify_Wish = findViewById(R.id.ok_button_EditWish);
+        final ImageView DeleteWish = findViewById(R.id.basura_delete_wish);
 
         final String id = ControladoraPresentacio.getWish_id();
         final EditText nameEditText = findViewById(R.id.editTextNom_EditWish);
@@ -75,13 +76,25 @@ public class EditWish extends AppCompatActivity {
             }
         });
 
+        DeleteWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestDeleteWish(id);
+            }
+        });
+
         Modify_Wish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             boolean okay = false;
-                //Comprovaciones de que ha puesto cosas
-                if (nameEditText.length() == 0) {
-                    String texterror = getString(R.string.add_product_no_hay_nombre);
+            //Comprovaciones de que ha puesto cosas
+            if (nameEditText.length() == 0) {
+                String texterror = getString(R.string.add_product_no_hay_nombre);
+                Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                if (valueEditText.length() == 0) {
+                    String texterror = getString(R.string.add_product_no_hay_valor);
                     Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
@@ -89,15 +102,66 @@ public class EditWish extends AppCompatActivity {
                         String texterror = getString(R.string.add_product_no_hay_palabras_clave);
                         Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
-                    } else {
+                    }
+                    else if (!paraulesClauEditText.getText().toString().contains("#"))
+                    {
+                        //TODO: Hay que cambiar esto, 2 opciones (aunque se pueden hacer ambas al mismo tiempo)
+                        //Opcion1: Podemos traducir la frase
+                        //Opcion2: Poner un text encima de las palabras clave que siempre este ahí
+                        String texterror = getString(R.string.add_product_no_hay_hashtag);
+                        Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
                         okay = true;
                     }
                 }
-                if (okay) {
-                    RequestEditWish(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
-                }
+            }
+            if (okay) {
+                RequestEditWish(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
+            }
             }
         });
+    }
+
+    private void RequestDeleteWish(final String id) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(EditWish.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deletewish?" + "id=" + id;
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Account modified successfully
+                            String wish_deleted_successfully = getString(R.string.wish_deleted_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), wish_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Volvemos a User
+                            Intent intent = new Intent(EditWish.this, ListWish.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else { //response == "1" No s'ha esborrat el desig
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(EditWish.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     private void RequestEditWish(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
@@ -108,12 +172,25 @@ public class EditWish extends AppCompatActivity {
         else tipus[0] = "Producte";
 
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" +
-                "id=" + id + "&" +
-                "name=" + nameEditText.getText().toString() + "&" +
-                "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
-                "type=" + tipus[0] + "&" +
-                "keywords=" + paraulesClauEditText.getText()+ "&" +
-                "value=" + valueEditText.getText();
+            "id=" + id + "&" +
+            "name=" + nameEditText.getText().toString() + "&" +
+            "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
+            "type=" + tipus[0] + "&";
+
+            String palabras = paraulesClauEditText.getText().toString();
+            int i = 0;
+            while( i < palabras.length()) {
+                if (palabras.charAt(i) == '#') {
+                    ++i;
+                    String nueva_palabra = "";
+                    while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                        nueva_palabra += palabras.charAt(i);
+                        ++i;
+                    }
+                    url += "keywords=" + nueva_palabra + "&";
+                }
+            }
+        url+="value="+valueEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

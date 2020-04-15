@@ -77,12 +77,28 @@ public class AddWish extends AppCompatActivity {
                     Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    if (paraulesClauEditText.length() == 0) {
-                        String texterror = getString(R.string.add_product_no_hay_palabras_clave);
+                    if (valueEditText.length() == 0) {
+                        String texterror = getString(R.string.add_product_no_hay_valor);
                         Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
-                        okay = true;
+                        if (paraulesClauEditText.length() == 0) {
+                            String texterror = getString(R.string.add_product_no_hay_palabras_clave);
+                            Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else if (!paraulesClauEditText.getText().toString().contains("#"))
+                        {
+                            //TODO: Hay que cambiar esto, 2 opciones (aunque se pueden hacer ambas al mismo tiempo)
+                            //Opcion1: Podemos traducir la frase
+                            //Opcion2: Poner un text encima de las palabras clave que siempre este ahí
+                            String texterror = getString(R.string.add_product_no_hay_hashtag);
+                            Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else {
+                            okay = true;
+                        }
                     }
                 }
                 if (okay) {
@@ -100,12 +116,25 @@ public class AddWish extends AppCompatActivity {
         else tipus[0] = "Producte"; 
 
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
-                "user=" + username + "&" +
-                "name=" + nameEditText.getText() + "&" +
-                "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
-                "type=" + tipus[0] + "&" +
-                "keywords=" + paraulesClauEditText.getText()+ "&" +
-                "value=" + valueEditText.getText();
+            "user=" + username + "&" +
+            "name=" + nameEditText.getText() + "&" +
+            "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
+            "type=" + tipus[0] + "&";
+
+            String palabras = paraulesClauEditText.getText().toString();
+            int i = 0;
+            while( i < palabras.length()) {
+                if (palabras.charAt(i) == '#') {
+                    ++i;
+                    String nueva_palabra = "";
+                    while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                        nueva_palabra += palabras.charAt(i);
+                        ++i;
+                    }
+                    url += "keywords=" + nueva_palabra + "&";
+                }
+            }
+        url+="value="+valueEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

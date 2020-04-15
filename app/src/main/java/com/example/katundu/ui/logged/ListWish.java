@@ -138,11 +138,17 @@ public class ListWish extends AppCompatActivity {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_wish = response.getJSONObject(i);
 
-                        String id = info_wish.getString("name"); //TODO: ACTUALITZA AMB CAMP ID
+                        String id = info_wish.getString("id");
                         String name = info_wish.getString("name");
                         String category = info_wish.getString("category");
                         String type = info_wish.getString("type");
-                        String keywords = info_wish.getString("keywords");
+                        JSONArray keywords_array = info_wish.getJSONArray("keywords");
+                        String keywords = "";
+                            for(int j = 0; j < keywords_array.length(); ++j) {
+                                String keyword = keywords_array.getString(j);
+                                keywords += "#";
+                                keywords += keyword;
+                            }
                         String value = info_wish.getString("value");
 
                         Wish wish = new Wish(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value));
@@ -235,7 +241,6 @@ public class ListWish extends AppCompatActivity {
             Wish info_wish = ControladoraPresentacio.getWish_perName(b.getText().toString());
 
             //Pasamos los datos del deseo a la controladora
-            //TODO:Saber quin boto s'ha picat, per tal de saber la info del desig que es
             ControladoraPresentacio.setWish_id(info_wish.getId());
             ControladoraPresentacio.setWish_name(info_wish.getName());
             ControladoraPresentacio.setWish_Categoria(info_wish.getCategory());
@@ -249,7 +254,7 @@ public class ListWish extends AppCompatActivity {
 
 
             //Nos vamos a la ventana de User
-            Intent intent = new Intent(ListWish.this, ChooseActionWish.class);
+            Intent intent = new Intent(ListWish.this, EditWish.class);
             startActivity(intent);
             //finish();
 
