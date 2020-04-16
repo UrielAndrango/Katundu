@@ -30,17 +30,20 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 public class EditOffer extends AppCompatActivity {
 
     String[] categorias = new String[7];
-
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    final int[] numImages = {0};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+
         String folder_product = "/products/Q9KGzX0vB7rC5aakqBEp/";
         StorageReference imagesRef = storageRef.child(folder_product);
         setContentView(R.layout.activity_edit_offer);
@@ -67,23 +70,25 @@ public class EditOffer extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
-        for ( int i = 0; i < 5; ++i) {
-            StorageReference Reference = storageRef.child("/products/"+ControladoraPresentacio.getOffer_id()).child("product_" + i);
-            final int finalI = i;
-            Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    PreviewFotos[finalI].setImageBitmap(bmp);
-                    PreviewFotos[finalI].setVisibility(View.VISIBLE);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    System.out.println(exception.getCause());
-                }
-            });
+        //nombre_fotos();
+
+        System.out.println("Entrem al bucle per carregar imatges");
+        for (int i = 0; i < 5; ++i) {
+                final int finalI = i;
+                StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+                System.out.println(Reference2.toString());
+                Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        PreviewFotos[finalI].setImageBitmap(bmp);
+                        PreviewFotos[finalI].setVisibility(View.VISIBLE);
+                    }
+                });
         }
+
+
+
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,7 +239,21 @@ public class EditOffer extends AppCompatActivity {
             }
         });
     }
-
+    private void nombre_fotos()
+    {
+        StorageReference Reference = storageRef.child("/products/"+ControladoraPresentacio.getOffer_id());
+        Reference.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult) {
+                System.out.println("The list is : " + listResult.getItems().size());
+                numImages[0] = listResult.getItems().size();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println( "error");
+            }});
+    }
     private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditOffer.this);

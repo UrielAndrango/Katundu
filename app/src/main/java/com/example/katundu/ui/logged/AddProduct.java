@@ -244,13 +244,13 @@ public class AddProduct extends AppCompatActivity {
                                                 uploadTask.addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception exception) {
-                                                        // Handle unsuccessful uploads
+                                                        System.out.println("TOT MAL");
+                                                        System.out.println(exception.getCause());
                                                     }
                                                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                     @Override
                                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                                                        // ...
+                                                        System.out.println("TOT CORRECTE");
                                                     }
                                                 });
                                             }

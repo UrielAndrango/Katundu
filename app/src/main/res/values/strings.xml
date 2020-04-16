@@ -155,4 +155,9 @@
     <string name="delete_offer">ELIMINAR OFERTA</string>
     <string name="offer_deleted_successfully">Oferta eliminada con éxito</string>
 
+    <!-- Strings related to PreviewFotoeDIT-->
+    <string name="preview_fotoE_delete">Borrar foto</string>
+    <string name="preview_fotoE_cancelar">Cancelar</string>
+    <string name="preview_fotoE_error">Error al borrar la foto</string>
+
 </resources>

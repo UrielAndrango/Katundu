@@ -1,17 +1,26 @@
 package com.example.katundu.ui.logged;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraEditOffer;
+import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class PreviewFotoEdit extends AppCompatActivity {
 
@@ -35,6 +44,25 @@ public class PreviewFotoEdit extends AppCompatActivity {
                 //Borro la foto en la posicion i de la controladora
                 ControladoraEditOffer.borrar_foto(pos);
                 ControladoraEditOffer.reordenar_fotos();
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference Reference = storageRef.child("/products/"+ ControladoraPresentacio.getOffer_id()).child("product_" + ControladoraEditOffer.getNumero_imagen());
+                Reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(PreviewFotoEdit.this, EditOffer.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        String texterror = getString(R.string.preview_fotoE_error);
+                        Toast toast = Toast.makeText(PreviewFotoEdit.this, texterror, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
                 //Vuelvo a la ventan de Add Product
                 Intent intent = new Intent(PreviewFotoEdit.this, AddProduct.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -53,9 +81,8 @@ public class PreviewFotoEdit extends AppCompatActivity {
                 finish();
             }
         });
-
         //Imagen que me pasan
-        preview_foto = (ImageView)findViewById(R.id.imageView);
-        preview_foto.setImageURI(foto);
+        //preview_foto = (ImageView)findViewById(R.id.imageView);
+       // preview_foto.setImageURI(foto);
     }
 }

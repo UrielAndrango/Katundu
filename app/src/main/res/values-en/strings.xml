@@ -153,4 +153,8 @@
     <string name="delete_offer">DELETE OFFER</string>
     <string name="offer_deleted_successfully">Offer successfully deleted</string>
 
+    <!-- Strings related to PreviewFotoeDIT-->
+    <string name="preview_fotoE_delete">Delete foto</string>
+    <string name="preview_fotoE_cancelar">Cancel</string>
+    <string name="preview_fotoE_error">Could not delete the photo</string>
 </resources>
