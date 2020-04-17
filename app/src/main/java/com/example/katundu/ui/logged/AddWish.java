@@ -76,29 +76,42 @@ public class AddWish extends AppCompatActivity {
                     String texterror = getString(R.string.add_product_no_hay_nombre);
                     Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
-                } else {
-                    if (valueEditText.length() == 0) {
-                        String texterror = getString(R.string.add_product_no_hay_valor);
+                }
+                else if (valueEditText.length() == 0) {
+                    String texterror = getString(R.string.add_product_no_hay_valor);
+                    Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (paraulesClauEditText.length() == 0) {
+                    String texterror = getString(R.string.add_product_no_hay_palabras_clave);
+                    Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (!paraulesClauEditText.getText().toString().contains("#")) {
+                    String texterror = getString(R.string.add_product_no_hay_hashtag);
+                    Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if(paraulesClauEditText.getText().toString().contains("#")) {
+                    String palabras = paraulesClauEditText.getText().toString();
+                    int i = 0;
+                    int count = 0;
+                    while( i < palabras.length()) {
+                        if (palabras.charAt(i) == '#') {
+                            ++i;
+                            StringBuilder nueva_palabra = new StringBuilder();
+                            while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                                nueva_palabra.append(palabras.charAt(i));
+                                ++i;
+                            }
+                            if(!nueva_palabra.toString().equals("")) ++count;
+                        }
+                    }
+                    if(count == 2) okay = true;
+                    else {
+                        String texterror = getString(R.string.add_product_minimo_dos_keywords);
                         Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
-                    } else {
-                        if (paraulesClauEditText.length() == 0) {
-                            String texterror = getString(R.string.add_product_no_hay_palabras_clave);
-                            Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                        else if (!paraulesClauEditText.getText().toString().contains("#"))
-                        {
-                            //TODO: Hay que cambiar esto, 2 opciones (aunque se pueden hacer ambas al mismo tiempo)
-                            //Opcion1: Podemos traducir la frase
-                            //Opcion2: Poner un text encima de las palabras clave que siempre este ahí
-                            String texterror = getString(R.string.add_product_no_hay_hashtag);
-                            Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                        else {
-                            okay = true;
-                        }
                     }
                 }
                 if (okay) {

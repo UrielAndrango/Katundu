@@ -108,6 +108,7 @@
     <string name="add_product_no_hay_descripcion">Has d\'afegir una descripció</string>
     <string name="add_product_general_error">Hi ha hagut un error, torna-ho a intentar</string>
     <string name="add_product_no_hay_hashtag">Les paraules clau han de començar amb # i sense espais</string>
+    <string name="add_product_minimo_dos_keywords">Escriu minim dos paraules clau</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Afegir Nou Desig</string>
