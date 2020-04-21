@@ -66,8 +66,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </LinearLayout>
+                <ImageView
+                    android:id="@+id/basura_delete_offer"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icono_basura" />
 
             </LinearLayout>
+
+
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView

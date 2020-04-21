@@ -244,13 +244,10 @@ public class AddProduct extends AppCompatActivity {
                                                 uploadTask.addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception exception) {
-                                                        System.out.println("TOT MAL");
-                                                        System.out.println(exception.getCause());
                                                     }
                                                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                     @Override
                                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                        System.out.println("TOT CORRECTE");
                                                     }
                                                 });
                                             }

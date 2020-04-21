@@ -155,7 +155,8 @@ public class ListOffer extends AppCompatActivity {
                         String type = info_offer.getString("type");
                         String keywords = info_offer.getString("keywords");
                         String value = info_offer.getString("value");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value));
+                        String description = info_offer.getString("description");
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
                         String tipus = offer.getType();
                         System.out.println("El tipus es : "+ tipus);
                         offer_list.add(offer);
@@ -230,8 +231,9 @@ public class ListOffer extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Service(type);
             ControladoraPresentacio.setOffer_PC(info_offer.getKeywords());
             ControladoraPresentacio.setOffer_Value(info_offer.getValue());
+            ControladoraPresentacio.setOffer_Description(info_offer.getDescription());
             //Nos vamos a la ventana de User
-            Intent intent = new Intent(ListOffer.this, ChooseActionOffer.class);
+            Intent intent = new Intent(ListOffer.this, EditOffer.class);
             startActivity(intent);
             //finish();
         }

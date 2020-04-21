@@ -40,6 +40,7 @@ public class ControladoraPresentacio {
     private static boolean offer_service = false;
     private static String offer_PC = "Coche";
     private static Integer offer_value = 0;
+    private static String offer_description= "Es una descripcio";
 
 
     //GET & SET DE USER
@@ -234,6 +235,13 @@ public class ControladoraPresentacio {
 
     public static void setOffer_Value(Integer value) {
         ControladoraPresentacio.offer_value = value;
+    }
+    public static String getOffer_Description() {
+        return offer_description;
+    }
+
+    public static void setOffer_Description(String description) {
+        ControladoraPresentacio.offer_description= description;
     }
 
 

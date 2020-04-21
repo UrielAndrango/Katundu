@@ -7,17 +7,18 @@ public class Offer {
     private String type;
     private String keywords;
     private Integer value;
-
+    private String description;
     public Offer(){
     }
 
-    public Offer(String id, String name, Integer category, String type, String keywords, Integer value) {
+    public Offer(String id, String name, Integer category, String type, String keywords, Integer value, String description) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.type = type;
         this.keywords = keywords;
         this.value = value;
+        this.description = description;
     }
 
     public String getName() {
@@ -58,6 +59,14 @@ public class Offer {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setValue(String description) {
+        this.description = description;
     }
 
     public String getId() {

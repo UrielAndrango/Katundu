@@ -1,10 +1,17 @@
 package com.example.katundu.ui.logged;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,28 +31,42 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraEditOffer;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+
 public class EditOffer extends AppCompatActivity {
 
     String[] categorias = new String[7];
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     final int[] numImages = {0};
+    private static final int PERMISSION_CODE = 1000;
+    private static final int IMAGE_CAPTURE_CODE = 1001;
+    Uri image_uri;
+    Button Camara;
+    ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
+    ImageView[] PreviewFotos;
+    final Integer[] cantidad_fotos = {0};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
         String folder_product = "/products/Q9KGzX0vB7rC5aakqBEp/";
-        StorageReference imagesRef = storageRef.child(folder_product);
+        final StorageReference imagesRef = storageRef.child(folder_product);
         setContentView(R.layout.activity_edit_offer);
         final ImageView Atras = findViewById(R.id.EditOffer_Atras);
         final Button Modify_Offer = findViewById(R.id.ok_button_EditOffer);
@@ -57,12 +78,11 @@ public class EditOffer extends AppCompatActivity {
         final String[] tipus = {"Producte"};
         final EditText paraulesClauEditText = findViewById(R.id.editTextParaulesClau_EditOffer);
         final EditText valueEditText = findViewById(R.id.editTextValor_EditOffer);
-
+        final EditText descriptionEditText = (TextInputEditText)findViewById(R.id.editDescripcio_EditOffer);
+        final ImageView DeleteWish = findViewById(R.id.basura_delete_offer);
         // FOTOS
-        Button Camara;
-        ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
-        final ImageView[] PreviewFotos;
-        Camara = findViewById(R.id.camaraButton_AddP);
+
+        Camara = findViewById(R.id.camaraButton_EditOffer);
         PreviewFoto0 = findViewById(R.id.previewFoto_EditOffer);
         PreviewFoto1 = findViewById(R.id.previewFoto2_EditOffer);
         PreviewFoto2 = findViewById(R.id.previewFoto3_EditOffer);
@@ -74,18 +94,20 @@ public class EditOffer extends AppCompatActivity {
 
         System.out.println("Entrem al bucle per carregar imatges");
         for (int i = 0; i < 5; ++i) {
-                final int finalI = i;
-                StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
-                System.out.println(Reference2.toString());
-                Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        PreviewFotos[finalI].setImageBitmap(bmp);
-                        PreviewFotos[finalI].setVisibility(View.VISIBLE);
-                    }
-                });
+            final int finalI = i;
+            StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+            System.out.println(Reference2.toString());
+            Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    cantidad_fotos[0] +=1;
+                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    PreviewFotos[finalI].setImageBitmap(bmp);
+                    PreviewFotos[finalI].setVisibility(View.VISIBLE);
+                }
+            });
         }
+        System.out.println("Cantidad de fotoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos" + cantidad_fotos[0]);
 
 
 
@@ -179,7 +201,42 @@ public class EditOffer extends AppCompatActivity {
                 //finish();
             }
         });
-
+        Camara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cantidad_fotos[0] < 5) {
+                    //If system os is >= Marshmallow
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (checkSelfPermission(Manifest.permission.CAMERA) ==
+                                PackageManager.PERMISSION_DENIED ||
+                                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                                        PackageManager.PERMISSION_DENIED) {
+                            //permission not enable, request it
+                            String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                            //Show popup to request permissions
+                            requestPermissions(permission, PERMISSION_CODE);
+                        } else {
+                            //permission already granmted
+                            openCamera();
+                        }
+                    } else {
+                        //System os < Marshmallow
+                        openCamera();
+                    }
+                }
+                else {
+                    String texterror = getString(R.string.add_product_muchas_fotos);
+                    Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+        DeleteWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestDeleteOffer(id);
+            }
+        });
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
         getSupportActionBar().hide();
 
@@ -204,6 +261,7 @@ public class EditOffer extends AppCompatActivity {
         tipusSwitch.setChecked(ControladoraPresentacio.isOffer_Service()); //esto es para cambiar el switch
         paraulesClauEditText.setText(ControladoraPresentacio.getOffer_PC());
         valueEditText.setText(ControladoraPresentacio.getOffer_Value().toString());
+        descriptionEditText.setText(ControladoraPresentacio.getOffer_Description());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,23 +297,96 @@ public class EditOffer extends AppCompatActivity {
             }
         });
     }
-    private void nombre_fotos()
-    {
-        StorageReference Reference = storageRef.child("/products/"+ControladoraPresentacio.getOffer_id());
-        Reference.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+    private void RequestDeleteOffer(final String id) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(EditOffer.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteoffer?" + "id=" + id;
+        for (int i = 0; i < 5; ++i) {
+            final int finalI = i;
+            StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+            System.out.println(Reference2.toString());
+            Reference2.delete();
+        }
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Account modified successfully
+                            String offer_deleted_successfully = getString(R.string.offer_deleted_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), offer_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            //Volvemos a User
+                            Intent intent = new Intent(EditOffer.this, ListOffer.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else { //response == "1" No s'ha esborrat el desig
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onSuccess(ListResult listResult) {
-                System.out.println("The list is : " + listResult.getItems().size());
-                numImages[0] = listResult.getItems().size();
+            public void onErrorResponse(VolleyError error) {
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println( "error");
-            }});
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+    private void openCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        //Camera intent
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
     private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
         // Instantiate the RequestQueue.
+        for (int i = 0; i < 5; ++i) {
+            final int finalI = i;
+            StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+            System.out.println(Reference2.toString());
+            Reference2.delete();
+        }
+        String folder_product = "/products/" + id;
+        StorageReference imagesRef = storageRef.child("/products").child(folder_product);
+        int nombre_fotos = 0;
+        for (int k = 0; k < 5;++k)
+        {
+            ImageView imageView = PreviewFotos[k];
+            if(imageView.getDrawable() != null) {
+                System.out.println(folder_product);
+                imagesRef = storageRef.child(folder_product).child("product_"+nombre_fotos);
+                ++nombre_fotos;
+                imageView.setDrawingCacheEnabled(true);
+                imageView.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                UploadTask uploadTask = imagesRef.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    }
+                });
+            }
+        }
         RequestQueue queue = Volley.newRequestQueue(EditOffer.this);
 
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
@@ -308,6 +439,40 @@ public class EditOffer extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //called when image was captured from camera
+        if (resultCode == RESULT_OK) {
+            //set the image captured to our ImageView
+            //int longitud = fotos.length;
+            PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
+            PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
+            cantidad_fotos[0]++;
+            /*
+            int longitud = ControladoraAddProduct.getFotos().length;
+            int i = 0;
+            boolean foto_subida_con_exito = false;
+            while ((i < longitud) && (foto_subida_con_exito == false)) {
+                if (fotos[i] == null) {
+                    PreviewFotos[i].setImageURI(image_uri);
+                    PreviewFotos[i].setVisibility(View.VISIBLE);
 
+                    //Actualizamos la controladora
+                    ControladoraAddProduct.add_foto(image_uri, i);
+                    fotos = ControladoraAddProduct.getFotos();
+                    cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
+                    //Salimos del bucle
+                    foto_subida_con_exito = true;
+
+                }
+                else {
+                    //Siguiente hueco de foto
+                    ++i;
+                }
+            }
+            */
+        }
+    }
 
 }

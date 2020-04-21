@@ -245,7 +245,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:textAlignment="viewEnd" />
+                android:textAlignment="viewEnd"
+                />
         </LinearLayout>
 
         <LinearLayout

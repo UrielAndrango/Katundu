@@ -64,7 +64,7 @@ public class PreviewFotoEdit extends AppCompatActivity {
                     }
                 });
                 //Vuelvo a la ventan de Add Product
-                Intent intent = new Intent(PreviewFotoEdit.this, AddProduct.class);
+                Intent intent = new Intent(PreviewFotoEdit.this, EditOffer.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
