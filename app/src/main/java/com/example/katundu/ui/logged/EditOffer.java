@@ -31,16 +31,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraEditOffer;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -326,6 +322,9 @@ public class EditOffer extends AppCompatActivity {
 
                             //Volvemos a User
                             Intent intent = new Intent(EditOffer.this, ListOffer.class);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
                         }
@@ -419,6 +418,7 @@ public class EditOffer extends AppCompatActivity {
 
                             //Volvemos a User
                             Intent intent = new Intent(EditOffer.this, ListOffer.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
                         }
