@@ -3,6 +3,7 @@ package com.example.katundu.ui.logged;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -26,12 +27,15 @@ public class PreviewFotoEdit extends AppCompatActivity {
 
     ImageView preview_foto;
     int pos = ControladoraEditOffer.getNumero_imagen();
-    Uri foto = ControladoraEditOffer.obtener_foto(pos);
+    ImageView foto = ControladoraEditOffer.obtener_foto(pos);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("El numero de foto es "+ pos );
+        System.out.println("La foto es "+ foto.getImageMatrix());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_foto);
+        foto.setVisibility(View.VISIBLE);
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
         getSupportActionBar().hide();
 
@@ -82,7 +86,10 @@ public class PreviewFotoEdit extends AppCompatActivity {
             }
         });
         //Imagen que me pasan
-        //preview_foto = (ImageView)findViewById(R.id.imageView);
-       // preview_foto.setImageURI(foto);
+        preview_foto= (ImageView)findViewById(R.id.imageView);
+        BitmapDrawable drawable = (BitmapDrawable) foto.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        preview_foto.setImageBitmap(bitmap);
+        preview_foto.setVisibility(View.VISIBLE);
     }
 }

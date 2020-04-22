@@ -107,7 +107,8 @@ public class EditOffer extends AppCompatActivity {
                 }
             });
         }
-        System.out.println("Cantidad de fotoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos" + cantidad_fotos[0]);
+        ControladoraEditOffer.setFotos(PreviewFotos);
+        //System.out.println("Cantidad de fotoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos" + cantidad_fotos[0]);
 
 
 
@@ -120,6 +121,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setValor(valueEditText.getText().toString());
                 ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
                 ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraEditOffer.add_foto(PreviewFotos[0],0);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(0);
@@ -138,6 +140,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setValor(valueEditText.getText().toString());
                 ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
                 ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraEditOffer.add_foto(PreviewFotos[1],1);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(1);
@@ -156,6 +159,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setValor(valueEditText.getText().toString());
                 ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
                 ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraEditOffer.add_foto(PreviewFotos[2],2);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(2);
@@ -174,6 +178,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setValor(valueEditText.getText().toString());
                 ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
                 ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraEditOffer.add_foto(PreviewFotos[3],3);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(3);
@@ -192,6 +197,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setValor(valueEditText.getText().toString());
                 ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
                 ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraEditOffer.add_foto(PreviewFotos[4],4);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(4);
