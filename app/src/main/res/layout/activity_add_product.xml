@@ -201,7 +201,8 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textEmailAddress"
-                        android:textAlignment="viewEnd" />
+                        android:textAlignment="viewEnd"
+                        android:maxLength="20"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -268,7 +269,8 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="number"
-                        android:textAlignment="viewEnd" />
+                        android:textAlignment="viewEnd"
+                        android:maxLength="10"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -359,7 +361,8 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textEmailAddress"
-                        android:textAlignment="viewEnd" />
+                        android:textAlignment="viewEnd"
+                        android:maxLength="30"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -395,7 +398,8 @@
                             android:id="@+id/editDescripcio_AddP"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:maxLength="260"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
