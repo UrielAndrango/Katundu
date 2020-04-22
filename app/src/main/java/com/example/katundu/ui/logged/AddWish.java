@@ -25,6 +25,8 @@ import com.example.katundu.ui.ControladoraPresentacio;
 public class AddWish extends AppCompatActivity {
 
     String[] categorias = new String[7];
+    ImageView Atras;
+    Button Add_Wish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,8 @@ public class AddWish extends AppCompatActivity {
         //Escondemos la Action Bar porque usamos la ToolBar, aunque podriamos usar la ActionBar
         getSupportActionBar().hide();
 
-        final ImageView Atras = findViewById(R.id.AddWish_Atras);
-        final Button Add_Wish = findViewById(R.id.ok_button_AddWish);
+        Atras = findViewById(R.id.AddWish_Atras);
+        Add_Wish = findViewById(R.id.ok_button_AddWish);
         final String username = ControladoraPresentacio.getUsername();
         final EditText nameEditText = findViewById(R.id.editTextNom_AddWish);
         final Spinner categoriaSpinner = findViewById(R.id.spinner_AddWish);
@@ -72,6 +74,9 @@ public class AddWish extends AppCompatActivity {
             public void onClick(View v) {
                 boolean okay = ComprovarCamps(nameEditText, valueEditText, paraulesClauEditText);
                 if (okay) {
+                    //desactivar atras y subir wish momentaneamente
+                    Atras.setEnabled(false);
+                    Add_Wish.setEnabled(false);
                     RequestAddWish(categoriaSpinner, tipusSwitch, tipus, username, nameEditText, paraulesClauEditText, valueEditText);
                 }
             }
@@ -176,6 +181,9 @@ public class AddWish extends AppCompatActivity {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
+                //reactivar atras y subir wish
+                Atras.setEnabled(true);
+                Add_Wish.setEnabled(true);
             }
         });
 

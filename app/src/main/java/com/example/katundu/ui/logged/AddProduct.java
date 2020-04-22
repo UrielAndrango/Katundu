@@ -189,6 +189,10 @@ public class AddProduct extends AppCompatActivity {
                     }
                 }
                 if (okay) {
+                    //desactivar atras y subir producto momentaneamente
+                    Atras.setEnabled(false);
+                    SubirProducto.setEnabled(false);
+
                     final String[] productid = {""};
                     String type;
                     if ( switch_type.isChecked()) type = "Service";
@@ -263,6 +267,9 @@ public class AddProduct extends AppCompatActivity {
                             String texterror = getString(R.string.add_product_general_error);
                             Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
                             toast.show();
+                            //desactivar atras y subir producto momentaneamente
+                            Atras.setEnabled(true);
+                            SubirProducto.setEnabled(true);
                         }
                     });
                     // Add the request to the RequestQueue.
