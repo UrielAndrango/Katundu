@@ -190,93 +190,96 @@ public class AddProduct extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-                    //desactivar atras y subir producto momentaneamente
                     Atras.setEnabled(false);
                     SubirProducto.setEnabled(false);
-
                     final String[] productid = {""};
                     String type;
-                    if ( switch_type.isChecked()) type = "Service";
+                    if (switch_type.isChecked()) type = "Service";
                     else type = "Product";
 
                     String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addoffer?" +
                             "user=" + ControladoraPresentacio.getUsername() + "&" +
-                            "name=" + nombre.getText()+ "&" +
-                            "category=" + spinner.getSelectedItemPosition() + "&" + "type=" + type+"&";
+                            "name=" + nombre.getText() + "&" +
+                            "category=" + spinner.getSelectedItemPosition() + "&" + "type=" + type + "&";
                     String palabras = palabras_clave.getText().toString();
                     //url+="keywords="+palabras+"&";
                     int i = 0;
-                    while( i < palabras.length()) {
+                    int count = 0;
+                    while (i < palabras.length()) {
                         if (palabras.charAt(i) == '#') {
                             ++i;
                             String nueva_palabra = "";
-                            while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                            while (i < palabras.length() && palabras.charAt(i) != '#') {
                                 nueva_palabra += palabras.charAt(i);
                                 ++i;
                             }
                             url += "keywords=" + nueva_palabra + "&";
+                            if (!nueva_palabra.toString().equals("")) ++count;
                         }
                     }
-                    url+="value="+valor.getText()+"&"
-                            +"description="+ descripcion.getText();
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    if (response.equals("-1")) { //Error
-                                        String texterror = getString(R.string.add_product_general_error);
-                                        Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-                                    else
-                                    {
-                                        productid[0] =response;
-                                        String folder_product = "/products/" + productid[0];
-                                        StorageReference imagesRef = storageRef.child("/products").child(folder_product);
-                                        for (int k = 0; k < PreviewFotos.length;++k)
-                                        {
-                                            if( fotos[k] != null) {
-                                                System.out.println(folder_product);
-                                                imagesRef = storageRef.child(folder_product).child("product_"+k);
-                                                ImageView imageView = PreviewFotos[k];
-                                                imageView.setDrawingCacheEnabled(true);
-                                                imageView.buildDrawingCache();
-                                                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                                                byte[] data = baos.toByteArray();
-                                                UploadTask uploadTask = imagesRef.putBytes(data);
-                                                uploadTask.addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception exception) {
-                                                    }
-                                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                    }
-                                                });
+                    if (count >= 2) {
+                        url += "value=" + valor.getText() + "&"
+                                + "description=" + descripcion.getText();
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        if (response.equals("-1")) { //Error
+                                            String texterror = getString(R.string.add_product_general_error);
+                                            Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                                            toast.show();
+                                        } else {
+                                            productid[0] = response;
+                                            String folder_product = "/products/" + productid[0];
+                                            StorageReference imagesRef = storageRef.child("/products").child(folder_product);
+                                            for (int k = 0; k < PreviewFotos.length; ++k) {
+                                                if (fotos[k] != null) {
+                                                    imagesRef = storageRef.child(folder_product).child("product_" + k);
+                                                    ImageView imageView = PreviewFotos[k];
+                                                    imageView.setDrawingCacheEnabled(true);
+                                                    imageView.buildDrawingCache();
+                                                    Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                                    byte[] data = baos.toByteArray();
+                                                    UploadTask uploadTask = imagesRef.putBytes(data);
+                                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception exception) {
+                                                        }
+                                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                        @Override
+                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                        }
+                                                    });
+                                                }
                                             }
+                                            Intent intent = new Intent(AddProduct.this, ListOffer.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
-                                        Intent intent = new Intent(AddProduct.this, ListOffer.class);
-                                        startActivity(intent);
-                                        finish();
                                     }
-                                }
-                            },  new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            String texterror = getString(R.string.add_product_general_error);
-                            Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
-                            toast.show();
-                            //desactivar atras y subir producto momentaneamente
-                            Atras.setEnabled(true);
-                            SubirProducto.setEnabled(true);
-                        }
-                    });
-                    stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                    // Add the request to the RequestQueue.
-                    queue.add(stringRequest);
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                String texterror = getString(R.string.add_product_general_error);
+                                Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        });
+                        // Add the request to the RequestQueue.
+                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                        queue.add(stringRequest);
+                    }
+                    else
+                    {
+                        String texterror = getString(R.string.add_product_minimo_dos_keywords);
+                        Toast toast = Toast.makeText(AddProduct.this, texterror, Toast.LENGTH_SHORT);
+                        toast.show();
+                        Atras.setEnabled(true);
+                        SubirProducto.setEnabled(true);
+                    }
                 }
             }
         });

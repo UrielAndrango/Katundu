@@ -57,6 +57,7 @@ public class EditOffer extends AppCompatActivity {
     ImageView[] PreviewFotos;
     final Integer[] cantidad_fotos = {0};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -304,8 +305,9 @@ public class EditOffer extends AppCompatActivity {
                     }
                 }
                 if (okay) {
-
-                    RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText,descriptionEditText);
+                    Atras.setEnabled(false);
+                    Modify_Offer.setEnabled(false);
+                    RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText,descriptionEditText,Atras,Modify_Offer);
                 }
             }
         });
@@ -367,7 +369,7 @@ public class EditOffer extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
-    private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText, EditText descriptionEditText) {
+    private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText, EditText descriptionEditText, final ImageView Atras, final Button Modify_Offer ) {
         // Instantiate the RequestQueue.
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
@@ -464,6 +466,8 @@ public class EditOffer extends AppCompatActivity {
                     String texterror = getString(R.string.error);
                     Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
+                    Atras.setEnabled(true);
+                    Modify_Offer.setEnabled(true);
                 }
             });
             stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
