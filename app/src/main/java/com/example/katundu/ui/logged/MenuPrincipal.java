@@ -24,11 +24,9 @@ public class MenuPrincipal extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_surprise:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
+                    //return true;
                 case R.id.navigation_add:
                     Intent intent = new Intent(MenuPrincipal.this, Add.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -39,10 +37,9 @@ public class MenuPrincipal extends AppCompatActivity {
                     //finish();
 
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
-                    return true;
+                    //return true;
                 case R.id.navigation_xat:
-                    mTextMessage.setText(R.string.title_chat);
-                    return true;
+                    //return true;
             }
             return false;
         }
@@ -59,7 +56,6 @@ public class MenuPrincipal extends AppCompatActivity {
         final LinearLayout search = findViewById(R.id.search_MP);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Perfil_img.setOnClickListener(new View.OnClickListener() {
