@@ -153,12 +153,17 @@ public class ListOffer extends AppCompatActivity {
                         String name = info_offer.getString("name");
                         String category = info_offer.getString("category");
                         String type = info_offer.getString("type");
-                        String keywords = info_offer.getString("keywords");
+                        JSONArray keywords_array = info_offer.getJSONArray("keywords");
+                        String keywords = "";
+                        for(int j = 0; j < keywords_array.length(); ++j) {
+                            String keyword = keywords_array.getString(j);
+                            keywords += "#";
+                            keywords += keyword;
+                        }
                         String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
                         Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
                         String tipus = offer.getType();
-                        System.out.println("El tipus es : "+ tipus);
                         offer_list.add(offer);
                     }
                     InicialitzaBotonsOffers(offer_list);
@@ -226,8 +231,7 @@ public class ListOffer extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Categoria(info_offer.getCategory());
             boolean type = true;
             String tipus = info_offer.getType();
-            System.out.println("El tipus es : "+ tipus);
-            if(tipus.equals("Producte")) type = false;
+            if(tipus.equals("Product")) type = false;
             ControladoraPresentacio.setOffer_Service(type);
             ControladoraPresentacio.setOffer_PC(info_offer.getKeywords());
             ControladoraPresentacio.setOffer_Value(info_offer.getValue());

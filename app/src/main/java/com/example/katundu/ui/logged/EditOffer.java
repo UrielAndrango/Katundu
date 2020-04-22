@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -86,13 +87,9 @@ public class EditOffer extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
-        //nombre_fotos();
-
-        System.out.println("Entrem al bucle per carregar imatges");
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
-            System.out.println(Reference2.toString());
             Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
@@ -104,19 +101,16 @@ public class EditOffer extends AppCompatActivity {
             });
         }
         ControladoraEditOffer.setFotos(PreviewFotos);
-        //System.out.println("Cantidad de fotoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos" + cantidad_fotos[0]);
-
-
 
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
-                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueEditText.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraPresentacio.setOffer_name(nameEditText.getText().toString());
+                ControladoraPresentacio.setOffer_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraPresentacio.setOffer_Value((Integer.valueOf(valueEditText.getText().toString())));
+                ControladoraPresentacio.setOffer_Service(tipusSwitch.isChecked());
+                ControladoraPresentacio.setOffer_PC(paraulesClauEditText.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[0],0);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
@@ -131,11 +125,11 @@ public class EditOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
-                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueEditText.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraPresentacio.setOffer_name(nameEditText.getText().toString());
+                ControladoraPresentacio.setOffer_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraPresentacio.setOffer_Value((Integer.valueOf(valueEditText.getText().toString())));
+                ControladoraPresentacio.setOffer_Service(tipusSwitch.isChecked());
+                ControladoraPresentacio.setOffer_PC(paraulesClauEditText.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[1],1);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
@@ -150,11 +144,11 @@ public class EditOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
-                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueEditText.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraPresentacio.setOffer_name(nameEditText.getText().toString());
+                ControladoraPresentacio.setOffer_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraPresentacio.setOffer_Value((Integer.valueOf(valueEditText.getText().toString())));
+                ControladoraPresentacio.setOffer_Service(tipusSwitch.isChecked());
+                ControladoraPresentacio.setOffer_PC(paraulesClauEditText.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[2],2);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
@@ -169,11 +163,11 @@ public class EditOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
-                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueEditText.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraPresentacio.setOffer_name(nameEditText.getText().toString());
+                ControladoraPresentacio.setOffer_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraPresentacio.setOffer_Value((Integer.valueOf(valueEditText.getText().toString())));
+                ControladoraPresentacio.setOffer_Service(tipusSwitch.isChecked());
+                ControladoraPresentacio.setOffer_PC(paraulesClauEditText.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[3],3);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
@@ -188,11 +182,11 @@ public class EditOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameEditText.getText().toString());
-                ControladoraEditOffer.setNumero_Categoria(categoriaSpinner.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueEditText.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusSwitch.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauEditText.getText().toString());
+                ControladoraPresentacio.setOffer_name(nameEditText.getText().toString());
+                ControladoraPresentacio.setOffer_Categoria(categoriaSpinner.getSelectedItemPosition());
+                ControladoraPresentacio.setOffer_Value((Integer.valueOf(valueEditText.getText().toString())));
+                ControladoraPresentacio.setOffer_Service(tipusSwitch.isChecked());
+                ControladoraPresentacio.setOffer_PC(paraulesClauEditText.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[4],4);
                 //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
                 //Indicamos la foto a la controladora que querremos ver
@@ -289,12 +283,29 @@ public class EditOffer extends AppCompatActivity {
                         String texterror = getString(R.string.add_product_no_hay_palabras_clave);
                         Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                         toast.show();
-                    } else {
-                        okay = true;
+                    }
+                    else if (!paraulesClauEditText.getText().toString().contains("#"))
+                    {
+                        //TODO: Hay que cambiar esto, 2 opciones (aunque se pueden hacer ambas al mismo tiempo)
+                        //Opcion1: Podemos traducir la frase
+                        //Opcion2: Poner un text encima de las palabras clave que siempre este ahí
+                        String texterror = "Las palabras clave deben empezar con # e ir sin espacios.";
+                        Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        if (descriptionEditText.length() == 0) {
+                            String texterror = getString(R.string.add_product_no_hay_descripcion);
+                            Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            okay = true;
+                        }
                     }
                 }
                 if (okay) {
-                    RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText);
+
+                    RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText,descriptionEditText);
                 }
             }
         });
@@ -307,7 +318,6 @@ public class EditOffer extends AppCompatActivity {
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
-            System.out.println(Reference2.toString());
             Reference2.delete();
         }
         // Request a string response from the provided URL.
@@ -342,7 +352,8 @@ public class EditOffer extends AppCompatActivity {
                 toast.show();
             }
         });
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
@@ -356,12 +367,11 @@ public class EditOffer extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
-    private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText) {
+    private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText, EditText descriptionEditText) {
         // Instantiate the RequestQueue.
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
-            System.out.println(Reference2.toString());
             Reference2.delete();
         }
         String folder_product = "/products/" + id;
@@ -371,7 +381,6 @@ public class EditOffer extends AppCompatActivity {
         {
             ImageView imageView = PreviewFotos[k];
             if(imageView.getDrawable() != null) {
-                System.out.println(folder_product);
                 imagesRef = storageRef.child(folder_product).child("product_"+nombre_fotos);
                 ++nombre_fotos;
                 imageView.setDrawingCacheEnabled(true);
@@ -402,48 +411,73 @@ public class EditOffer extends AppCompatActivity {
                 "name=" + nameEditText.getText().toString() + "&" +
                 "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
-                "keywords=" + paraulesClauEditText.getText()+ "&" +
                 "value=" + valueEditText.getText()+"&"+
-                "description= " + "hola";
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.equals("0")) { //Account modified successfully
-                            String offer_modified_successfully = getString(R.string.offer_modified_successfully);
-                            Toast toast = Toast.makeText(getApplicationContext(), offer_modified_successfully, Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            //Volvemos a User
-                            Intent intent = new Intent(EditOffer.this, ListOffer.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else if(response.equals("3")) { //Account modified successfully
-                            String offer_empty_values = getString(R.string.empty_values);
-                            Toast toast = Toast.makeText(getApplicationContext(), offer_empty_values, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                        else { //response == "1" No such user in the database
-                            String texterror = getString(R.string.error);
-                            Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String texterror = getString(R.string.error);
-                Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
-                toast.show();
+                "description= " +  descriptionEditText.getText();
+        String palabras = paraulesClauEditText.getText().toString();
+        //url+="keywords="+palabras+"&";
+        int i = 0;
+        int count = 0;
+        while( i < palabras.length()) {
+            if (palabras.charAt(i) == '#') {
+                ++i;
+                String nueva_palabra = "";
+                while (i < palabras.length() && palabras.charAt(i) != '#' ) {
+                    nueva_palabra += palabras.charAt(i);
+                    ++i;
+                }
+                url += "keywords=" + nueva_palabra + "&";
+                if(!nueva_palabra.toString().equals("")) ++count;
             }
-        });
+        }
+        if(count == 2)
+        {
+            // Request a string response from the provided URL.
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.equals("0")) { //Account modified successfully
+                                String offer_modified_successfully = getString(R.string.offer_modified_successfully);
+                                Toast toast = Toast.makeText(getApplicationContext(), offer_modified_successfully, Toast.LENGTH_SHORT);
+                                toast.show();
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+                                //Volvemos a User
+                                Intent intent = new Intent(EditOffer.this, ListOffer.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else if(response.equals("3")) { //Account modified successfully
+                                String offer_empty_values = getString(R.string.empty_values);
+                                Toast toast = Toast.makeText(getApplicationContext(), offer_empty_values, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                            else { //response == "1" No such user in the database
+                                String texterror = getString(R.string.error);
+                                Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String texterror = getString(R.string.error);
+                    Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            });
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
+        }
+        else {
+            String texterror = getString(R.string.add_product_minimo_dos_keywords);
+            Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
     @SuppressLint("MissingSuperCall")
     @Override
@@ -455,29 +489,6 @@ public class EditOffer extends AppCompatActivity {
             PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
             PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
             cantidad_fotos[0]++;
-            /*
-            int longitud = ControladoraAddProduct.getFotos().length;
-            int i = 0;
-            boolean foto_subida_con_exito = false;
-            while ((i < longitud) && (foto_subida_con_exito == false)) {
-                if (fotos[i] == null) {
-                    PreviewFotos[i].setImageURI(image_uri);
-                    PreviewFotos[i].setVisibility(View.VISIBLE);
-
-                    //Actualizamos la controladora
-                    ControladoraAddProduct.add_foto(image_uri, i);
-                    fotos = ControladoraAddProduct.getFotos();
-                    cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
-                    //Salimos del bucle
-                    foto_subida_con_exito = true;
-
-                }
-                else {
-                    //Siguiente hueco de foto
-                    ++i;
-                }
-            }
-            */
         }
     }
 
