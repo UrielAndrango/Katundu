@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -136,7 +137,13 @@ public class VisualizeListOUser extends AppCompatActivity {
                         String name = info_offer.getString("name");
                         String category = info_offer.getString("category");
                         String type = info_offer.getString("type");
-                        String keywords = info_offer.getString("keywords");
+                        JSONArray keywords_array = info_offer.getJSONArray("keywords");
+                        String keywords = "";
+                        for(int j = 0; j < keywords_array.length(); ++j) {
+                            String keyword = keywords_array.getString(j);
+                            keywords += "#";
+                            keywords += keyword;
+                        }
                         String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
                         Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
@@ -155,6 +162,9 @@ public class VisualizeListOUser extends AppCompatActivity {
                 Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
             }
         });
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         queue.add(jsonArrayRequest);
     }
 

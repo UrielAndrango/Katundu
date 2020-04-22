@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.VisualizeOffer"></activity>
+        <activity android:name=".ui.logged.PreviewFotoShow"></activity>
+        <activity android:name=".ui.logged.VisualizeOffer" />
         <activity android:name=".ui.logged.VisualizeWish" />
         <activity
             android:name=".ui.logged.SearchUser"

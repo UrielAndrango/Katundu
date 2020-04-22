@@ -90,18 +90,10 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameOffer.getText().toString());
-                //ControladoraEditOffer.setNumero_Categoria(categoriaOffer.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueOffer.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusOffer.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauOffer.getText().toString());
+
                 ControladoraEditOffer.add_foto(PreviewFotos[0],0);
-                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
-                //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(0);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoEdit.class);
+                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
             }
@@ -109,18 +101,9 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameOffer.getText().toString());
-                //ControladoraEditOffer.setNumero_Categoria(categoriaOffer.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueOffer.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusOffer.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauOffer.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[1],1);
-                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
-                //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(1);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoEdit.class);
+                Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
             }
@@ -128,18 +111,9 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameOffer.getText().toString());
-                //ControladoraEditOffer.setNumero_Categoria(categoriaOffer.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueOffer.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusOffer.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauOffer.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[2],2);
-                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
-                //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(2);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoEdit.class);
+                Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
             }
@@ -147,18 +121,9 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameOffer.getText().toString());
-                //ControladoraEditOffer.setNumero_Categoria(categoriaOffer.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueOffer.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusOffer.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauOffer.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[3],3);
-                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
-                //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(3);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoEdit.class);
+                Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
             }
@@ -166,18 +131,9 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Guardar datos
-                ControladoraEditOffer.setNombre_producto(nameOffer.getText().toString());
-               //ControladoraEditOffer.setNumero_Categoria(categoriaOffer.getSelectedItemPosition());
-                ControladoraEditOffer.setValor(valueOffer.getText().toString());
-                ControladoraEditOffer.setEs_servicio(tipusOffer.isChecked());
-                ControladoraEditOffer.setPalabras_clave(paraulesClauOffer.getText().toString());
                 ControladoraEditOffer.add_foto(PreviewFotos[4],4);
-                //ControladoraEditOffer.setDescripcion(descripcion.getText().toString());
-                //Indicamos la foto a la controladora que querremos ver
                 ControladoraEditOffer.setNumero_imagen(4);
-                //Nos vamos a la ventana de Preview
-                Intent intent = new Intent(VisualizeOffer.this, PreviewFotoEdit.class);
+                Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
             }

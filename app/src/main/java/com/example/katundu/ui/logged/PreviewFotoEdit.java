@@ -31,8 +31,6 @@ public class PreviewFotoEdit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("El numero de foto es "+ pos );
-        System.out.println("La foto es "+ foto.getImageMatrix());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_foto);
         foto.setVisibility(View.VISIBLE);
