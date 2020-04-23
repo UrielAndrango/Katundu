@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                 RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
 
                 //Reactivar login
-                //login_button.setEnabled(true);
-                //no_registrado.setEnabled(true);
+                login_button.setEnabled(true);
+                no_registrado.setEnabled(true);
             }
         });
 
