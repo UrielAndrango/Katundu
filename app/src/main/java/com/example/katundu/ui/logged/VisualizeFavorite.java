@@ -66,9 +66,6 @@ public class VisualizeFavorite extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_VisualizeFavorite);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
-        //nombre_fotos();
-
-        System.out.println("Entrem al bucle per carregar imatges");
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getfavorite_id()).child("product_" + i);
@@ -86,7 +83,6 @@ public class VisualizeFavorite extends AppCompatActivity {
             });
         }
         ControladoraEditOffer.setFotos(PreviewFotos);
-        //System.out.println("Cantidad de fotoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos" + cantidad_fotos[0]);
 
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
