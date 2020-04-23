@@ -414,7 +414,7 @@ public class EditOffer extends AppCompatActivity {
                 "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
                 "type=" + tipus[0] + "&" +
                 "value=" + valueEditText.getText()+"&"+
-                "description= " +  descriptionEditText.getText();
+                "description= " +  descriptionEditText.getText() + "&";
         String palabras = paraulesClauEditText.getText().toString();
         //url+="keywords="+palabras+"&";
         int i = 0;
