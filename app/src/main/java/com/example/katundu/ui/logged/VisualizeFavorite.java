@@ -1,40 +1,32 @@
 package com.example.katundu.ui.logged;
 
-        import androidx.appcompat.app.AppCompatActivity;
-
-        import android.Manifest;
         import android.annotation.SuppressLint;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.net.Uri;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ImageView;
-        import android.widget.Spinner;
-        import android.widget.Switch;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.android.volley.DefaultRetryPolicy;
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.example.katundu.R;
-        import com.example.katundu.ui.ControladoraEditOffer;
-        import com.example.katundu.ui.ControladoraPresentacio;
-        import com.google.android.gms.tasks.OnSuccessListener;
-        import com.google.android.material.textfield.TextInputEditText;
-        import com.google.firebase.storage.FirebaseStorage;
-        import com.google.firebase.storage.StorageReference;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraEditOffer;
+import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class VisualizeFavorite extends AppCompatActivity {
 
@@ -86,6 +78,8 @@ public class VisualizeFavorite extends AppCompatActivity {
                 public void onSuccess(byte[] bytes) {
                     cantidad_fotos[0] +=1;
                     Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    //Redondeamos las esquinas de las fotos
+                    bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
                     PreviewFotos[finalI].setImageBitmap(bmp);
                     PreviewFotos[finalI].setVisibility(View.VISIBLE);
                 }
