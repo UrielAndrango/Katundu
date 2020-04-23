@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.ControladoraSearchUsers;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -176,27 +175,6 @@ public class SearchUser extends AppCompatActivity {
 
         //Creamos los botones en bucle
         for (int i=0; i<numBotones; i++){
-            /*
-            //Modo boton
-            Button button = new Button(SearchUser.this);
-            //Asignamos propiedades de layout al boton
-            button.setLayoutParams(lp);
-            //Asignamos Texto al botón
-            button.setText(getString(R.string.search_user_username) + ": " + username + ", " + getString(R.string.search_user_real_name) + ": " + ControladoraSearchUsers.getNombre_real());
-            //Le damos el estilo que queremos
-            button.setBackgroundResource(R.drawable.button_rounded);
-            button.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
-            //Margenes del button
-            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-            //params.setMargins(left, top, right, bottom);
-            if (i==0) params.setMargins(0, 20, 0, 20);
-            else params.setMargins(0, 0, 0, 20);
-            button.setLayoutParams(params);
-            //Asignamose el Listener
-            button.setOnClickListener(new ButtonsOnClickListener(SearchUser.this));
-            //Añadimos el botón a la botonera
-            llBotonera.addView(button);*/
-
             //Modo Layout con 2 TextViews
             LinearLayout ll = new LinearLayout(SearchUser.this);
             ll.setOrientation(LinearLayout.VERTICAL);
@@ -246,26 +224,7 @@ public class SearchUser extends AppCompatActivity {
             llBotonera.addView(ll);
         }
     }
-/*
-    private class ButtonsOnClickListener implements View.OnClickListener {
-        public ButtonsOnClickListener(SearchUser searchUser) {
-        }
-        @Override
-        public void onClick(View view) {
-            Button b = (Button) view;
-            //b.getText().toString();
 
-            //Pasamos los datos del deseo a la controladora
-            //TODO: Se debe pedir las listas del usuario que se ha clicado
-            //ControladoraSearchUsers.setUsername("?");
-
-            //Nos vamos a la ventana de VisualizeListOUser
-            Intent intent = new Intent(SearchUser.this, VisualizeListOUser.class);
-            startActivity(intent);
-            //finish();
-        }
-    }
-*/
     private class LayoutOnClickListener implements View.OnClickListener {
         public LayoutOnClickListener(SearchUser searchUser) {
         }

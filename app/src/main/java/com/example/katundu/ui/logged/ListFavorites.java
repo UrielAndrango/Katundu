@@ -31,7 +31,6 @@ import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.Favorite;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -291,68 +290,6 @@ public class ListFavorites extends AppCompatActivity {
                 mostrar_producto = false;
                 modo_impar = false;
             }
-            /*
-            //TODO: Se puede borrar pero hasta que no me asegure de que el modo_impar va 100% bien lo dejo por aqui
-            if (modo_impar == true && i==numBotones-1) {
-                //Definimos el layout y lo que contiene (foto+precio+nombre)
-                LinearLayout ll_aux = new LinearLayout(ListOffer.this);
-                ll_aux.setOrientation(LinearLayout.VERTICAL);
-                final ImageView foto_aux = new ImageView(ListOffer.this);
-                TextView preu_producte_aux = new TextView(ListOffer.this);
-                TextView nom_producte_aux = new TextView(ListOffer.this);
-                //Asignamos Texto a los textViews
-                preu_producte_aux.setText(offer_list.get(i).getValue() + "€");
-                nom_producte_aux.setText(offer_list.get(i).getName() + "");
-                //Le damos el estilo que queremos
-                //pareja.setBackgroundResource(R.drawable.button_rounded);
-                ll_aux.setBackgroundResource(R.drawable.button_rounded);
-                //foto.setImageURI();
-                StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
-                Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        foto_aux.setImageBitmap(bmp);
-                        foto_aux.setVisibility(View.VISIBLE);
-                    }
-                });
-                preu_producte_aux.setTextColor(ListOffer.this.getResources().getColor(R.color.colorLetraKatundu));
-                nom_producte_aux.setTextColor(ListOffer.this.getResources().getColor(R.color.colorLetraKatundu));
-                Typeface boldTypeface_aux = Typeface.defaultFromStyle(Typeface.BOLD);
-                preu_producte_aux.setTypeface(boldTypeface_aux);
-                nom_producte_aux.setTypeface(boldTypeface_aux);
-                preu_producte_aux.setTextSize(18);
-                nom_producte_aux.setTextSize(18);
-                //Margenes del layout
-                TableRow.LayoutParams paramsll_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsll_aux.weight = 1;
-                paramsll_aux.height = 800;
-                //paramsll.setMargins(left, top, right, bottom);
-                if (i%2==0) paramsll_aux.setMargins(0, 0, 10, 0);
-                else paramsll_aux.setMargins(10, 0, 0, 0);
-                ll_aux.setLayoutParams(paramsll_aux);
-                //Margenes de los textViews
-                TableRow.LayoutParams paramsFoto_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsFoto_aux.weight = 1;
-                paramsFoto_aux.setMargins(25, 25, 25, 10);
-                foto_aux.setLayoutParams(paramsFoto_aux);
-                TableRow.LayoutParams paramsPrecio_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsPrecio_aux.setMargins(25, 10, 25, 10);
-                preu_producte_aux.setLayoutParams(paramsPrecio_aux);
-                TableRow.LayoutParams paramsN_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                //paramsN.weight = 1;
-                paramsN_aux.setMargins(25, 10, 25, 20);
-                nom_producte_aux.setLayoutParams(paramsN_aux);
-                //Asignamose el Listener al Layout dinamico
-                ll_aux.setOnClickListener(new LayoutOnClickListener(ListOffer.this));
-                //Añadimos el layout dinamico al layout
-                ll_aux.addView(foto_aux);
-                ll_aux.addView(preu_producte_aux);
-                ll_aux.addView(nom_producte_aux);
-                ll_aux.setVisibility(View.INVISIBLE);
-                pareja.addView(ll_aux);
-                //if (i%2 == 0) llBotonera.addView(pareja);
-            }*/
         }
     }
 

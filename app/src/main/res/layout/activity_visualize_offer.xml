@@ -75,6 +75,10 @@
                     android:tint="@color/colorLetraKatundu"
                     app:srcCompat="@android:drawable/btn_star" />
 
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
             </LinearLayout>
 
 
