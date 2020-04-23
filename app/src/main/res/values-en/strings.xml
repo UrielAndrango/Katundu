@@ -80,6 +80,7 @@
     <string name="add_product">Upload Offer</string>
     <string name="add_wish">Add Wish</string>
     <string name="favorite_added_successfully">Favorite successfully added</string>
+    <string name="favorite_removed_successfully">Favorite successfully deleted</string>
 
     <!-- Strings related to Add Product-->
     <string name="title_add_product">Add New Offer</string>

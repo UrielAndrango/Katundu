@@ -81,6 +81,7 @@
     <string name="add_product">Subir Oferta</string>
     <string name="add_wish">Añadir Deseo</string>
     <string name="favorite_added_successfully">Favorito añadido con éxito</string>
+    <string name="favorite_removed_successfully">Favorito eliminado con éxito</string>
 
     <!-- Strings related to Add Product-->
     <string name="title_add_product">Añadir Nueva Oferta</string>

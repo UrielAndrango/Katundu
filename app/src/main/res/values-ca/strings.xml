@@ -80,6 +80,7 @@
     <string name="add_product">Pujar Oferta</string>
     <string name="add_wish">Afegir Desig</string>
     <string name="favorite_added_successfully">Preferit afegit amb èxit</string>
+    <string name="favorite_removed_successfully">Preferit eliminat amb èxit</string>
 
     <!-- Strings related to Add Product-->
     <string name="title_add_product">Afegir Nova Oferta</string>
