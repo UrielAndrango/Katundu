@@ -1,7 +1,8 @@
 package com.example.katundu.ui.logged;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraAddProduct;
+import com.example.katundu.ui.ControladoraPresentacio;
 
 public class PreviewFoto extends AppCompatActivity {
 
     ImageView preview_foto;
     int pos = ControladoraAddProduct.getNumero_imagen();
-    Uri foto = ControladoraAddProduct.obtener_foto(pos);
+    ImageView foto = ControladoraAddProduct.obtener_foto(pos);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,11 @@ public class PreviewFoto extends AppCompatActivity {
 
         //Imagen que me pasan
         preview_foto = (ImageView)findViewById(R.id.imageView);
-        preview_foto.setImageURI(foto);
+        ImageView imageView = foto;
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
+        preview_foto.setImageBitmap(bmp);
     }
 }

@@ -61,7 +61,7 @@ public class AddProduct extends AppCompatActivity {
     Uri image_uri;
     int cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
     int numero_maximo_fotos = ControladoraAddProduct.getNumero_maximo_fotos();
-    Uri[] fotos = ControladoraAddProduct.getFotos();
+    ImageView[] fotos = ControladoraAddProduct.getFotos();
 
 
     @Override
@@ -116,8 +116,16 @@ public class AddProduct extends AppCompatActivity {
         if (cantidad_fotos > 0) {
             for (int i = 0; i < fotos.length; ++i) {
                 if (fotos[i] != null) {
+                    ImageView imageView = fotos[i];
+                    imageView.setDrawingCacheEnabled(true);
+                    imageView.buildDrawingCache();
+                    Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                    bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
+                    PreviewFotos[i].setImageBitmap(bmp);
                     PreviewFotos[i].setVisibility(View.VISIBLE);
-                    PreviewFotos[i].setImageURI(fotos[i]);
+
+                    //PreviewFotos[i].setVisibility(View.VISIBLE);
+                    //PreviewFotos[i].setImageURI(fotos[i]);
                 }
             }
         }
@@ -472,9 +480,16 @@ public class AddProduct extends AppCompatActivity {
             while ((i < longitud) && (foto_subida_con_exito == false)) {
                 if (fotos[i] == null) {
                     PreviewFotos[i].setImageURI(image_uri);
+                    ImageView imageView = PreviewFotos[i];
+                    imageView.setImageURI(image_uri);
+                    imageView.setDrawingCacheEnabled(true);
+                    imageView.buildDrawingCache();
+                    Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                    bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
+                    PreviewFotos[i].setImageBitmap(bmp);
                     PreviewFotos[i].setVisibility(View.VISIBLE);
                     //Actualizamos la controladora
-                    ControladoraAddProduct.add_foto(image_uri, i);
+                    ControladoraAddProduct.add_foto(imageView, i);
                     fotos = ControladoraAddProduct.getFotos();
                     cantidad_fotos = ControladoraAddProduct.getCantidad_fotos();
                     //Salimos del bucle

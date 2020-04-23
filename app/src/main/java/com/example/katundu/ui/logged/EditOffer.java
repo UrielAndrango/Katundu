@@ -101,6 +101,8 @@ public class EditOffer extends AppCompatActivity {
                             cantidad[0] += 1;
                             System.out.println("quantitattt" + cantidad[0]);
                             Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            //Redondeamos las esquinas de las fotos
+                            bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
                             PreviewFotos[finalI].setImageBitmap(bmp);
                             PreviewFotos[finalI].setVisibility(View.VISIBLE);
                             ControladoraEditOffer.setCantidad_fotos(cantidad[0]);

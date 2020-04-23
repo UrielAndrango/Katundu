@@ -1,9 +1,6 @@
 package com.example.katundu.ui.logged;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.app.AutomaticZenRule;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -16,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -84,6 +83,8 @@ public class VisualizeOffer extends AppCompatActivity {
                 public void onSuccess(byte[] bytes) {
                     cantidad_fotos[0] +=1;
                     Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    //Redondeamos las esquinas de las fotos
+                    bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
                     PreviewFotos[finalI].setImageBitmap(bmp);
                     PreviewFotos[finalI].setVisibility(View.VISIBLE);
                 }

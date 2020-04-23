@@ -1,13 +1,13 @@
 package com.example.katundu.ui;
 
-import android.net.Uri;
+import android.widget.ImageView;
 
 public class ControladoraAddProduct {
     //Vector de fotos
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
-    private static Uri[] fotos = new Uri[numero_maximo_fotos];
+    private static ImageView[] fotos = new ImageView[numero_maximo_fotos];
     //Parametros del usuario
     private static String nombre_producto = "Audi A4";
     private static int numero_Categoria = 6;
@@ -36,21 +36,21 @@ public class ControladoraAddProduct {
         return numero_maximo_fotos;
     }
 
-    public static Uri[] getFotos() {
+    public static ImageView[] getFotos() {
         return fotos;
     }
 
-    public static void setFotos(Uri[] foto) {
+    public static void setFotos(ImageView[] foto) {
         ControladoraAddProduct.fotos = foto;
     }
 
-    public static Uri obtener_foto(int i) {
+    public static ImageView obtener_foto(int i) {
         //"i" empieza en 0
-        Uri foto = fotos[i];
+        ImageView foto = fotos[i];
         return foto;
     }
 
-    public static void add_foto(Uri photo, int pos) {
+    public static void add_foto(ImageView photo, int pos) {
         //"i" empieza en 0
         fotos[pos] = photo;
         ++cantidad_fotos;
@@ -66,7 +66,7 @@ public class ControladoraAddProduct {
         //reset fotos
         ControladoraAddProduct.numero_imagen = 1;
         ControladoraAddProduct.cantidad_fotos = 0;
-        ControladoraAddProduct.fotos = new Uri[numero_maximo_fotos];
+        ControladoraAddProduct.fotos = new ImageView[numero_maximo_fotos];
         //reset datos
         ControladoraAddProduct.nombre_producto = "";
         ControladoraAddProduct.numero_Categoria = 0;
@@ -77,7 +77,7 @@ public class ControladoraAddProduct {
     }
 
     public static void reordenar_fotos() {
-        Uri[] actualizada = new Uri[numero_maximo_fotos];
+        ImageView[] actualizada = new ImageView[numero_maximo_fotos];
         int new_pos = 0;
         for (int i=0; i<numero_maximo_fotos; ++i) {
             if (fotos[i] != null) {
