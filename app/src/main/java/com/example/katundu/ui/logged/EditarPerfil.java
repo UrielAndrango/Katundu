@@ -79,7 +79,7 @@ public class EditarPerfil extends AppCompatActivity {
                 "n=" + nameEditText.getText() + "&" +
                 "lat=" + latitudeEditText.getText() + "&" +
                 "lon=" + longitudeEditText.getText() + "&" +
-                "dis=" + maximumDistanceEditText.getText();
+                "distanciamaxima=" + maximumDistanceEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
