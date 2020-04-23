@@ -23,6 +23,8 @@ import com.example.katundu.ui.logged.MenuPrincipal;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    Button registratButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText repeatpasswordEditText = findViewById(R.id.password2);
         final EditText latitudeEditText = findViewById(R.id.latitud);
         final EditText longitudeEditText = findViewById(R.id.longitud);
-        final Button registratButton = findViewById(R.id.SaveButton);
+        registratButton = findViewById(R.id.SaveButton);
 
 
         registratButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(passwordEditText.getText().toString().equals(repeatpasswordEditText.getText().toString())) {
+                    //desactivar resgistrarse momentaneamente
+                    registratButton.setEnabled(false);
                     RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
                 }
                 else {
@@ -82,13 +86,17 @@ public class RegisterActivity extends AppCompatActivity {
                             ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
 
                             Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                            finish();
+                            //finish();
                         }
                         else if(response.equals("1")){ //The username already exists
                             String texterror = getString(R.string.existing_user);
                             Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                             toast.show();
+                            //reactivar resgistrarse
+                            registratButton.setEnabled(true);
                         }
                         else { //response == "-1" Something went wrong
                             String texterror = getString(R.string.error);
@@ -102,6 +110,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
+                //reactivar resgistrarse
+                registratButton.setEnabled(true);
             }
         });
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

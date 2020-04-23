@@ -18,11 +18,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.VisualizeFavorite"></activity>
-        <activity android:name=".ui.logged.ListFavorites" />
-        <activity android:name=".ui.logged.PreviewFotoShow" />
-        <activity android:name=".ui.logged.VisualizeOffer" />
-        <activity android:name=".ui.logged.VisualizeWish" />
+        <activity
+            android:name=".ui.logged.VisualizeFavorite"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.ListFavorites"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.PreviewFotoShow"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.VisualizeOffer"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.logged.VisualizeWish"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.logged.SearchUser"
             android:screenOrientation="portrait"
