@@ -2,30 +2,32 @@ package com.example.katundu.ui.logged;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AutomaticZenRule;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraEditOffer;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -58,6 +60,7 @@ public class VisualizeOffer extends AppCompatActivity {
         final TextView paraulesClauOffer = findViewById(R.id.editTextParaulesClau_EditOffer);
         final TextView valueOffer = findViewById(R.id.editTextValor_VisualizeOffer);
         final TextView descriptionOffer = findViewById(R.id.textDescripcion_EditOffer);
+        final ImageView afegirFavorite = findViewById(R.id.imageView_Favorite);
 
         // FOTOS
         PreviewFoto0 = findViewById(R.id.previewFoto_EditOffer);
@@ -66,6 +69,8 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto3 = findViewById(R.id.previewFoto4_EditOffer);
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
+
+        afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
 
         //nombre_fotos();
 
@@ -171,6 +176,51 @@ public class VisualizeOffer extends AppCompatActivity {
                 finish();
             }
         });
+
+        afegirFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestAddFavorite(Atras, afegirFavorite);
+            }
+        });
+    }
+
+    private void RequestAddFavorite(final ImageView Atras, final ImageView afegirFavorite) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addfavorite?" +
+                "user=" + ControladoraPresentacio.getUsername() + "&" +
+                "objectId=" + ControladoraPresentacio.getOffer_id();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //favorite added successfully
+                            String favorite_added_successfully = getString(R.string.favorite_added_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(VisualizeOffer.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+                //reactivar atras y subir wish
+                Atras.setEnabled(true);
+                afegirFavorite.setEnabled(true);
+            }
+        });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
     }
 
     @SuppressLint("MissingSuperCall")
