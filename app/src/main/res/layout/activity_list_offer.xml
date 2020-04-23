@@ -182,6 +182,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -197,8 +198,22 @@
             android:layout_marginRight="25dp"
             android:orientation="vertical"
             android:soundEffectsEnabled="false"
-            android:splitMotionEvents="false"/>
+            android:splitMotionEvents="false">
+
+        </LinearLayout>
 
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FAB_addProduct_LO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/icon_plus_rounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
