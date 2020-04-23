@@ -213,17 +213,16 @@
             android:id="@+id/editTextMaximumDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="8"
+            android:ems="7"
             android:inputType="numberDecimal"
-            android:textAlignment="viewEnd"
             android:maxLength="5"
+            android:textAlignment="viewEnd"
             app:counterEnabled="true"
-            app:counterMaxLength="5"/>
+            app:counterMaxLength="5" />
 
         <Space
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/textView7"

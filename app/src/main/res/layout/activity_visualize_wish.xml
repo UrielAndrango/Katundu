@@ -89,6 +89,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:orientation="horizontal"
+            android:textAlignment="textEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -102,15 +103,14 @@
                 android:textStyle="bold" />
 
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/editTextNom_ViewWish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
                 android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:textAlignment="viewEnd"
@@ -259,6 +259,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:orientation="horizontal"
+            android:textAlignment="textEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -272,15 +273,14 @@
                 android:textStyle="bold" />
 
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/editTextParaulesClau_ViewWish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_weight="1"
                 android:inputType="textEmailAddress"
                 android:textAlignment="viewEnd"
                 android:textSize="18sp" />
