@@ -80,6 +80,7 @@
     <!-- Strings related to Add-->
     <string name="add_product">Subir Oferta</string>
     <string name="add_wish">Añadir Deseo</string>
+    <string name="favorite_added_successfully">Favorito añadido con éxito</string>
 
     <!-- Strings related to Add Product-->
     <string name="title_add_product">Añadir Nueva Oferta</string>
@@ -161,5 +162,4 @@
     <string name="preview_fotoE_delete">Borrar foto</string>
     <string name="preview_fotoE_cancelar">Cancelar</string>
     <string name="preview_fotoE_error">Error al borrar la foto</string>
-
 </resources>
