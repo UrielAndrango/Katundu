@@ -141,7 +141,7 @@
     <string name="offer_modified_successfully">Oferta modificada amb èxit</string>
     <string name="offer_added_successfully">Oferta afegida amb èxit</string>
     <string name="EditOfferAddPhoto">Afegir foto</string>
-
+    <string name="title_modify_offer">Modificar oferta</string>
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Desig</string>
     <string name="modify_wish">MODIFICAR DESEO</string>

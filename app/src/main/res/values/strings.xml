@@ -143,6 +143,7 @@
     <string name="offer_modified_successfully">Oferta modificada con éxito</string>
     <string name="offer_added_successfully">Oferta añadida con éxito</string>
     <string name="EditOfferAddPhoto">Añadir foto</string>
+    <string name="title_modify_offer">Modificar oferta</string>
 
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Deseo</string>
