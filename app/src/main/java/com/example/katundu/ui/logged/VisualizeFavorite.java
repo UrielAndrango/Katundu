@@ -21,6 +21,13 @@ package com.example.katundu.ui.logged;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import com.android.volley.DefaultRetryPolicy;
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.VolleyError;
+        import com.android.volley.toolbox.StringRequest;
+        import com.android.volley.toolbox.Volley;
         import com.example.katundu.R;
         import com.example.katundu.ui.ControladoraEditOffer;
         import com.example.katundu.ui.ControladoraPresentacio;
@@ -48,7 +55,7 @@ public class VisualizeFavorite extends AppCompatActivity {
         String folder_product = "/products/Q9KGzX0vB7rC5aakqBEp/";
         final StorageReference imagesRef = storageRef.child(folder_product);
         setContentView(R.layout.activity_visualize_favorite);
-
+        final ImageView DeleteFavorite = findViewById(R.id.basura_delete_offer);
         final ImageView Atras = findViewById(R.id.VisualizeFavorite_Atras);
 
         final String id = ControladoraPresentacio.getfavorite_id();
@@ -171,8 +178,54 @@ public class VisualizeFavorite extends AppCompatActivity {
                 finish();
             }
         });
+        DeleteFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestDeleteFavorite(id);
+            }
+        });
     }
+    private void RequestDeleteFavorite(final String id) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(VisualizeFavorite.this);
 
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deletefavorite?" + "id=" + id + "&un=" + ControladoraPresentacio.getUsername();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Account modified successfully
+                            String offer_deleted_successfully = getString(R.string.favorite_removed_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), offer_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            Intent intent = new Intent(VisualizeFavorite.this, ListFavorites.class);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else { //response == "1" No s'ha esborrat el desig
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(VisualizeFavorite.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(VisualizeFavorite.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
