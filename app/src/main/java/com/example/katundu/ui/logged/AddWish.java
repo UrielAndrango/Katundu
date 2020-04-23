@@ -171,7 +171,7 @@ public class AddWish extends AppCompatActivity {
                             toast.show();
 
                             //Volvemos a User
-                            Intent intent = new Intent(AddWish.this, ListOffer.class);
+                            Intent intent = new Intent(AddWish.this, ListWish.class);
                             startActivity(intent);
                             finish();
                         }

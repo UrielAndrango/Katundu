@@ -23,9 +23,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.Wish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,6 +75,8 @@ public class ListWish extends AppCompatActivity {
         final TextView NomUsuari = findViewById(R.id.nomUsuari);
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
+        final FloatingActionButton addWish = findViewById(R.id.FAB_addWish_LW);
+
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
 
@@ -103,6 +107,16 @@ public class ListWish extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListWish.this, EditarPerfil.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        addWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ControladoraAddProduct.reset(); TODO: ESTO PARA QUE ES?
+                Intent intent = new Intent(ListWish.this, AddWish.class);
                 startActivity(intent);
                 //finish();
             }
