@@ -42,6 +42,16 @@ public class ControladoraPresentacio {
     private static Integer offer_value = 0;
     private static String offer_description= "Es una descripcio";
 
+    //ATRIBUTS OFFER
+    private static ArrayList<Favorite> favorite_list = new ArrayList<>();
+    private static String favorite_id = "wish_id";
+    private static String favorite_name = "Audi";
+    private static Integer favorite_categoria = 5;
+    private static boolean favorite_service = false;
+    private static String favorite_PC = "Coche";
+    private static Integer favorite_value = 0;
+    private static String favorite_description= "Es una descripcio";
+
 
     //GET & SET DE USER
     public static String getUsername() {
@@ -328,5 +338,79 @@ public class ControladoraPresentacio {
     }
 
     public static void afegir_offer_id(String toString) {
+    }
+
+
+    //GET & SET DE FAVORITES
+    public static Favorite getfavorite_perName(String favorite_name) {
+        boolean trobat = false;
+        Favorite info_favorite = new Favorite();
+        for(int i = 0; i < favorite_list.size() & !trobat; ++i){
+            if(favorite_list.get(i).getName().equals(favorite_name)){
+                trobat = true;
+                info_favorite = favorite_list.get(i);
+            }
+        }
+        return info_favorite;
+    }
+
+    public static void setFavorite_List(ArrayList<Favorite> favorite_list) {
+        ControladoraPresentacio.favorite_list =favorite_list;
+    }
+
+    public static String getFavorite_name() {
+        return favorite_name;
+    }
+
+    public static void setFavorite_name(String favorite_name) {
+        ControladoraPresentacio.favorite_name = favorite_name;
+    }
+
+    public static int getFavorite_Categoria() {
+        return favorite_categoria;
+    }
+
+    public static void setFavorite_Categoria(Integer categoria) {
+        ControladoraPresentacio.favorite_categoria = categoria;
+    }
+
+    public static boolean isfavorite_Service() {
+        return favorite_service;
+    }
+
+    public static void setFavorite_Service(boolean service) {
+        ControladoraPresentacio.favorite_service = service;
+    }
+
+    public static String getfavorite_PC() {
+        return favorite_PC;
+    }
+
+    public static void setfavorite_PC(String favorite_PC) {
+        ControladoraPresentacio.favorite_PC =favorite_PC;
+    }
+
+    public static String getfavorite_id() {
+        return favorite_id;
+    }
+
+    public static void setfavorite_id(String favorite_id) {
+        ControladoraPresentacio.favorite_id = favorite_id;
+    }
+
+
+    public static Integer getfavorite_Value() {
+        return favorite_value;
+    }
+
+    public static void setfavorite_Value(Integer value) {
+        ControladoraPresentacio.favorite_value = value;
+    }
+    public static String getfavorite_Description() {
+        return favorite_description;
+    }
+
+    public static void setfavorite_Description(String description) {
+        ControladoraPresentacio.favorite_description= description;
     }
 }
