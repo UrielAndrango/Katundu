@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.Wish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,7 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ListWish extends AppCompatActivity {
 
@@ -59,6 +57,11 @@ public class ListWish extends AppCompatActivity {
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     return true;
                 case R.id.navigation_fav_list:
+                    Intent intent_fav = new Intent(ListWish.this, ListFavorites.class);
+                    intent_fav.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent_fav);
+                    overridePendingTransition(0,0);
+                    finish();
                     return true;
             }
             return false;
