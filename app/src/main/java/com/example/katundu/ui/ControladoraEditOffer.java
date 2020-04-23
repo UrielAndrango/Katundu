@@ -16,6 +16,7 @@ public class ControladoraEditOffer {
     private static boolean es_servicio = true;
     private static String palabras_clave = "A4";
     private static String descripcion = "Audi A4 2006 3.0";
+    private static boolean canvis_imatges = false;
 
     public static int getNumero_imagen() {
         return numero_imagen;
@@ -135,5 +136,12 @@ public class ControladoraEditOffer {
 
     public static void setDescripcion(String descripcion) {
         ControladoraEditOffer.descripcion = descripcion;
+    }
+    public static boolean getEstatImatges() {
+        return canvis_imatges;
+    }
+
+    public static void setEstatImatges(boolean bool) {
+        ControladoraEditOffer.canvis_imatges = bool;
     }
 }

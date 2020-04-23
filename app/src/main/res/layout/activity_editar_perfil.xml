@@ -139,7 +139,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </LinearLayout>
 
     <LinearLayout
@@ -174,7 +177,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </LinearLayout>
 
     <LinearLayout
@@ -209,7 +215,10 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="numberDecimal"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"
+            android:maxLength="5"
+            app:counterEnabled="true"
+            app:counterMaxLength="5"/>
 
         <Space
             android:layout_width="wrap_content"
@@ -256,7 +265,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number|numberDecimal"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </LinearLayout>
 
     <LinearLayout
@@ -290,7 +302,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number|numberDecimal"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </LinearLayout>
 
     <Button

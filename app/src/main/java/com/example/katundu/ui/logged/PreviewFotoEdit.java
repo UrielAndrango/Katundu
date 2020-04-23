@@ -46,7 +46,6 @@ public class PreviewFotoEdit extends AppCompatActivity {
                 //Borro la foto en la posicion i de la controladora
                 ControladoraEditOffer.borrar_foto(pos);
                 ControladoraEditOffer.reordenar_fotos();
-                /*
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageRef = storage.getReference();
                 StorageReference Reference = storageRef.child("/products/"+ ControladoraPresentacio.getOffer_id()).child("product_" + ControladoraEditOffer.getNumero_imagen());
@@ -66,8 +65,8 @@ public class PreviewFotoEdit extends AppCompatActivity {
                         toast.show();
                     }
                 });
-                */
                 //Vuelvo a la ventan de Add Product
+                ControladoraEditOffer.setEstatImatges(true);
                 Intent intent = new Intent(PreviewFotoEdit.this, EditOffer.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

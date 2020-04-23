@@ -40,7 +40,10 @@
             android:hint="@string/prompt_username"
             android:lines="1"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +64,10 @@
             android:hint="@string/name"
             android:maxLines="1"
             android:lines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +90,10 @@
             android:inputType="textPassword"
             android:lines="1"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -107,7 +116,10 @@
             android:inputType="textPassword"
             android:lines="1"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -129,7 +141,10 @@
             android:inputType="numberDecimal"
             android:lines="1"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -151,7 +166,10 @@
             android:inputType="numberDecimal"
             android:lines="1"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:maxLength="20"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

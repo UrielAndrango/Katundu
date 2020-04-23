@@ -202,7 +202,9 @@
                         android:ems="10"
                         android:inputType="textEmailAddress"
                         android:textAlignment="viewEnd"
-                        android:maxLength="20"/>
+                        android:maxLength="20"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="20" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -362,7 +364,9 @@
                         android:ems="10"
                         android:inputType="textEmailAddress"
                         android:textAlignment="viewEnd"
-                        android:maxLength="30"/>
+                        android:maxLength="30"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="30"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -399,7 +403,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
-                            android:maxLength="260"/>
+                            android:maxLength="260"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="260"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>

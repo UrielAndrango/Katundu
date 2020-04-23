@@ -90,22 +90,26 @@ public class EditOffer extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
         PreviewFotos_final = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
-
+        final int[] cantidad = {0};
+        ControladoraEditOffer.setCantidad_fotos(0);
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
-            StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+            final StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
             Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    cantidad_fotos[0] +=1;
-                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    PreviewFotos[finalI].setImageBitmap(bmp);
-                    PreviewFotos[finalI].setVisibility(View.VISIBLE);
-
-                }
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            cantidad[0] += 1;
+                            System.out.println("quantitattt" + cantidad[0]);
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            PreviewFotos[finalI].setImageBitmap(bmp);
+                            PreviewFotos[finalI].setVisibility(View.VISIBLE);
+                            ControladoraEditOffer.setCantidad_fotos(cantidad[0]);
+                            ControladoraEditOffer.setFotos(PreviewFotos);
+                        }
             });
         }
-        ControladoraEditOffer.setFotos(PreviewFotos);
+
+
 
         PreviewFoto0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +209,7 @@ public class EditOffer extends AppCompatActivity {
         Camara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cantidad_fotos[0] < 5) {
+                if (ControladoraEditOffer.getCantidad_fotos() < 5) {
                     //If system os is >= Marshmallow
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (checkSelfPermission(Manifest.permission.CAMERA) ==
@@ -267,10 +271,18 @@ public class EditOffer extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditOffer.this, ListOffer.class);
-                onNewIntent(intent);
-                //startActivity(intent);
-                finish();
+                if ( ControladoraEditOffer.getEstatImatges())
+                {
+                    String texterror = getString(R.string.modified_images);
+                    Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    Intent intent = new Intent(EditOffer.this, ListOffer.class);
+                    onNewIntent(intent);
+                    //startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -278,8 +290,15 @@ public class EditOffer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean okay = false;
+                final int[] cantitat = {0};
                 //Comprovaciones de que ha puesto cosas
-                if (nameEditText.length() == 0) {
+                if ( cantitat[0] == 0 && ControladoraEditOffer.getCantidad_fotos() == 0)
+                {
+                    String texterror = getString(R.string.add_product_no_hay_fotos);
+                    Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (nameEditText.length() == 0) {
                     String texterror = getString(R.string.add_product_no_hay_nombre);
                     Toast toast = Toast.makeText(EditOffer.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
@@ -309,6 +328,7 @@ public class EditOffer extends AppCompatActivity {
                     }
                 }
                 if (okay) {
+                    ControladoraEditOffer.setEstatImatges(false);
                     Atras.setEnabled(false);
                     Modify_Offer.setEnabled(false);
                     RequestEditOffer(categoriaSpinner, tipusSwitch, tipus, id, nameEditText, paraulesClauEditText, valueEditText,descriptionEditText,Atras,Modify_Offer);
@@ -372,6 +392,7 @@ public class EditOffer extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
+        ControladoraEditOffer.setCantidad_fotos(ControladoraEditOffer.getCantidad_fotos()+1);
     }
     private void RequestEditOffer(Spinner categoriaSpinner, Switch tipusSwitch, String[] tipus, String id, EditText nameEditText, EditText paraulesClauEditText, EditText valueEditText, EditText descriptionEditText, final ImageView Atras, final Button Modify_Offer ) {
         // Instantiate the RequestQueue.
@@ -435,7 +456,7 @@ public class EditOffer extends AppCompatActivity {
                 if(!nueva_palabra.toString().equals("")) ++count;
             }
         }
-        if(count == 2)
+        if(count >= 2)
         {
             // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

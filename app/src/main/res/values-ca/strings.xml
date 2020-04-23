@@ -144,6 +144,8 @@
     <string name="offer_added_successfully">Oferta afegida amb èxit</string>
     <string name="EditOfferAddPhoto">Afegir foto</string>
     <string name="title_modify_offer">Modificar oferta</string>
+    <string name="modified_images">Clica modificar oferta per actualizar els valors</string>
+
 
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Desig</string>

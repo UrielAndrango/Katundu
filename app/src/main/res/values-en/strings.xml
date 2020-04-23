@@ -144,6 +144,7 @@
     <string name="offer_added_successfully">Offer successfully added</string>
     <string name="EditOfferAddPhoto">Add photo</string>
     <string name="title_modify_offer">Modify Offer</string>
+    <string name="modified_images">Please, press modify offer to update values</string>
 
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Wish</string>
