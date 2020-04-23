@@ -54,7 +54,9 @@ public class EditOffer extends AppCompatActivity {
     Uri image_uri;
     Button Camara;
     ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
+    ImageView PreviewFoto0_final, PreviewFoto1_final, PreviewFoto2_final, PreviewFoto3_final, PreviewFoto4_final;
     ImageView[] PreviewFotos;
+    ImageView[] PreviewFotos_final;
     final Integer[] cantidad_fotos = {0};
 
 
@@ -87,6 +89,7 @@ public class EditOffer extends AppCompatActivity {
         PreviewFoto3 = findViewById(R.id.previewFoto4_EditOffer);
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
+        PreviewFotos_final = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
@@ -98,6 +101,7 @@ public class EditOffer extends AppCompatActivity {
                     Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     PreviewFotos[finalI].setImageBitmap(bmp);
                     PreviewFotos[finalI].setVisibility(View.VISIBLE);
+
                 }
             });
         }
