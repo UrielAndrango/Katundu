@@ -26,7 +26,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_surprise:
-                    //return true;
+                    return true;
                 case R.id.navigation_add:
                     Intent intent = new Intent(MenuPrincipal.this, Add.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -39,7 +39,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     //return true;
                 case R.id.navigation_xat:
-                    //return true;
+                    return true;
             }
             return false;
         }
