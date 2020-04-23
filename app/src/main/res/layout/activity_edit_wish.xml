@@ -119,9 +119,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:textAlignment="viewEnd"
-                android:maxLength="20"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"/>
+                android:maxLength="30"/>
         </LinearLayout>
 
         <LinearLayout

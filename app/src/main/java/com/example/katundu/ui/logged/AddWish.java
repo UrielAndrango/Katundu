@@ -170,8 +170,9 @@ public class AddWish extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
 
-                            //Volvemos a User
+                            //Volvemos a ListWish
                             Intent intent = new Intent(AddWish.this, ListWish.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
                         }
