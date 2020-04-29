@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/signup?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-add?" +
                 "un=" + usernameEditText.getText() + "&" +
                 "pw=" + passwordEditText.getText() + "&" +
                 "n=" + nameEditText.getText() + "&" +

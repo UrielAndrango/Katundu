@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
-        final String url = "https://us-central1-test-8ea8f.cloudfunctions.net/login?" +
+        final String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-login?" +
                 "un=" + usernameEditText.getText() + "&" +
                 "pw=" + passwordEditText.getText();
 
@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void RequestInicialitzaDadesUsuari(final String username, RequestQueue queue) {
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/infouser?" + "username=" + username;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-infoUser?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
         JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     ControladoraPresentacio.setPassword(response.getString("password"));
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
-                    ControladoraPresentacio.setDistanciaMaxima(response.getString("distancia"));
+                    ControladoraPresentacio.setDistanciaMaxima(response.getString("distanciamaxima"));
 
                     String welcome = getString(R.string.welcome) + username;
                     Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
