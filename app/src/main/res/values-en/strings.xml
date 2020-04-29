@@ -115,7 +115,7 @@
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Add New Wish</string>
     <string name="add_new_wish_explication">
-        A wish is what you want to achieve in an exchange with another user, regardless of their value.
+        A wish is what you want to achieve in an exchange with another user.
     </string>
     <string name="add_new_wish">Add Wish</string>
 

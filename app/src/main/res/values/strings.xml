@@ -116,7 +116,7 @@
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Añadir Nuevo Deseo</string>
     <string name="add_new_wish_explication">
-        Un deseo es aquello que quieres conseguir en un intercambio con otro usuario, independientemente de su valor.
+        Un deseo es aquello que quieres conseguir en un intercambio con otro usuario.
     </string>
     <string name="add_new_wish">Añadir Deseo</string>
 
