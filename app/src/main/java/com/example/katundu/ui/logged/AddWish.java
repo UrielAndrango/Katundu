@@ -139,7 +139,7 @@ public class AddWish extends AppCompatActivity {
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
         else tipus[0] = "Producte"; 
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addwish?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/add-wish?" +
             "user=" + username + "&" +
             "name=" + nameEditText.getText() + "&" +
             "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +

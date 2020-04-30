@@ -179,7 +179,7 @@ public class VisualizeFavorite extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeFavorite.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deletefavorite?" + "id=" + id + "&un=" + ControladoraPresentacio.getUsername();
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/delete-favorite?" + "un=" + ControladoraPresentacio.getUsername() + "&id=" + id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

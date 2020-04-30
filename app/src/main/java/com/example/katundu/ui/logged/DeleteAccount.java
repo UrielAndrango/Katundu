@@ -58,7 +58,7 @@ public class DeleteAccount extends AppCompatActivity {
 
         System.out.println(username);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteaccount?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-delete?" +
                 "un=" + username;
 
         // Request a string response from the provided URL.

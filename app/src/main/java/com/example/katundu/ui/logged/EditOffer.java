@@ -342,7 +342,7 @@ public class EditOffer extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditOffer.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deleteoffer?" + "id=" + id;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/delete-offer?" + "id=" + id;
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
@@ -435,7 +435,7 @@ public class EditOffer extends AppCompatActivity {
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
         else tipus[0] = "Producte";
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifyoffer?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modify-offer?" +
                 "id=" + id + "&" +
                 "name=" + nameEditText.getText().toString() + "&" +
                 "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
