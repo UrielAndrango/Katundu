@@ -1,6 +1,8 @@
 package com.example.katundu.ui.logged;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,6 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraPresentacio;
 
 import java.util.Locale;
 
@@ -33,8 +34,8 @@ public class EditarIdioma extends AppCompatActivity {
         final RadioButton ingles = findViewById(R.id.idioma_eng);
 
         //Inicializamos con el idioma del usuario en este momento
-        //TODO: Añadir 2h al PRT
-        switch (ControladoraPresentacio.getIdioma()) {
+
+        switch (loadLocale()) {
         //switch (Locale.getDefault().getLanguage()) {
             case "es":
                 espanol.setChecked(true);
@@ -61,28 +62,18 @@ public class EditarIdioma extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Ahora si hacemos el cambio
-                //TODO: No funciona el catalan
-                Locale localizacion = new Locale("es");
-                System.out.println(idiomasDisponibles.getCheckedRadioButtonId());
-                switch (idiomasDisponibles.getCheckedRadioButtonId()) {
-                    case 2131230914:
-                        ControladoraPresentacio.setIdioma("es");
-                        localizacion = new Locale("es");
-                        break;
-                    case 2131230912:
-                        ControladoraPresentacio.setIdioma("ca");
-                        localizacion = new Locale("ca");
-                        break;
-                    case 2131230913:
-                        ControladoraPresentacio.setIdioma("en");
-                        localizacion = new Locale("en");
-                        break;
+                if (idiomasDisponibles.getCheckedRadioButtonId() == espanol.getId()) {
+                    setLocale("es");
+                    recreate();
                 }
-                Locale.setDefault(localizacion);
-                Configuration config = new Configuration();
-                config.locale = localizacion;
-                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
+                else if (idiomasDisponibles.getCheckedRadioButtonId() == catalan.getId()) {
+                    setLocale("ca");
+                    recreate();
+                }
+               else if (idiomasDisponibles.getCheckedRadioButtonId() == ingles.getId()) {
+                    setLocale("en");
+                    recreate();
+                }
                 //"Reiniciamos" y vamos a menuPrincipal
                 Intent intent = new Intent(EditarIdioma.this, MenuPrincipal.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -91,5 +82,24 @@ public class EditarIdioma extends AppCompatActivity {
                 //finish();
             }
         });
+    }
+
+    private void setLocale(String idioma) {
+        Locale locale = new Locale(idioma);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", idioma);
+        editor.apply();
+    }
+
+    public String loadLocale() {
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String idioma = prefs.getString("My_Lang", "");
+        setLocale(idioma);
+
+        return idioma;
     }
 }
