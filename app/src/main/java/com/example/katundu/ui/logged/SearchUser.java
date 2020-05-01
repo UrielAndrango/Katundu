@@ -126,7 +126,7 @@ public class SearchUser extends AppCompatActivity {
 
     private void RequestSearchUser(final String username) {
         final RequestQueue queue = Volley.newRequestQueue(SearchUser.this);
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/searchuser?" + "username=" + username;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-search?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
         JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
