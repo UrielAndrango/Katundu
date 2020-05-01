@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Katundu</string>
+
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Log in</string>
     <string name="welcome">"Welcome, "</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="invalid_username">Username not valid</string>
+    <string name="invalid_password">Password must be at least 8 characters long</string>
+    <string name="login_failed">"Log in failed"</string>
     <string name="texto_registro"><u>Not registered?</u></string>
     <string name="unregistered">You are not registered</string>
     <string name="incorrect_password">Incorrect password</string>
@@ -48,7 +49,7 @@
     <string name="search_user_bad_search">No users found</string>
 
     <!-- Strings related to Users-->
-    <string name="nom_Usuari" translatable="false">Nom Usuari</string>
+    <string name="nom_Usuari">Username</string>
     <string name="user_valoracio_text">"Assessment: "</string>
     <string name="user_valoracio_numero">0</string>
     <string name="user_perfil_valoracio_max">"/5"</string>
@@ -94,35 +95,36 @@
     <string name="add_product_category_fashion">Fashion</string>
     <string name="add_product_category_leisure">Leisure</string>
     <string name="add_product_category_transport">Transport</string>
+    <string name="add_product_category_education">Education</string>
     <string name="add_product_value">Value</string>
     <string name="add_product_type">Type</string>
     <string name="add_product_type_product">Product</string>
     <string name="add_product_type_service">Service</string>
-    <string name="add_product_key_words">Key Words</string>
+    <string name="add_product_key_words">Keywords</string>
     <string name="add_product_description">Description</string>
     <string name="add_product_cancel">Cancel</string>
     <string name="add_product_save">Upload Offer</string>
     <string name="add_product_muchas_fotos">Photo limit reached</string>
     <string name="add_product_no_hay_fotos">Must add one picture</string>
-    <string name="add_product_no_hay_nombre">Must add name</string>
-    <string name="add_product_no_hay_valor">Must add value</string>
-    <string name="add_product_no_hay_palabras_clave">Must add a key words</string>
-    <string name="add_product_no_hay_descripcion">Must add description</string>
-    <string name="add_product_general_error">Something failed, try again.</string>
+    <string name="add_product_no_hay_nombre">Must add a name</string>
+    <string name="add_product_no_hay_valor">Must add a value</string>
+    <string name="add_product_no_hay_palabras_clave">Must add at least 2 keywords</string>
+    <string name="add_product_no_hay_descripcion">Must add a description</string>
+    <string name="add_product_general_error">Something failed, try again</string>
     <string name="add_product_no_hay_hashtag">Keywords must start with # and write them without spaces</string>
     <string name="add_product_minimo_dos_keywords">Enter at least two keywords</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Add New Wish</string>
     <string name="add_new_wish_explication">
-        A wish is what you want to achieve in an exchange with another user.
+        A wish is what you want to get in an exchange with another user
     </string>
     <string name="add_new_wish">Add Wish</string>
 
     <!-- Strings related to Add Offer-->
     <string name="title_add_offer">Add new offer</string>
     <string name="add_new_offer_explication">
-        An offer is what you want to give in an exchange with another user.
+        An offer is what you want to give in an exchange with another user
     </string>
     <string name="add_new_offer">Add offer</string>
 
@@ -138,13 +140,13 @@
     <string name="wish_added_successfully">Wish successfully added</string>
 
     <!-- Strings related to EditOffer-->
-    <string name="edit_offer_title">Modify offer values</string>
-    <string name="edit_offer_ok">Modify offer</string>
+    <string name="edit_offer_title">Modify offer data</string>
+    <string name="edit_offer_ok">Modify Offer</string>
     <string name="offer_modified_successfully">Offer successfully modified</string>
     <string name="offer_added_successfully">Offer successfully added</string>
     <string name="EditOfferAddPhoto">Add photo</string>
     <string name="title_modify_offer">Modify Offer</string>
-    <string name="modified_images">Please, press modify offer to update values</string>
+    <string name="modified_images">Please, click Modify Offer to update the data</string>
 
     <!-- Strings related to ChooseActionWish-->
     <string name="title_wish">Wish</string>

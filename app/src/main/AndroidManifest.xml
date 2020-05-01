@@ -21,6 +21,9 @@
         <activity android:name=".ui.logged.ListChat"></activity>
         <activity android:name=".ui.logged.Chat" />
         <activity android:name=".ui.logged.SearchUserChat" />
+=======
+        <activity android:name=".ui.logged.VisualizeChat"></activity>
+>>>>>>> c402680c0d99af10a7e1b0860e5d49713c341dd2
         <activity
             android:name=".ui.logged.VisualizeFavorite"
             android:screenOrientation="portrait"
