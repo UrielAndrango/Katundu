@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.logged.ListChat"></activity>
-        <activity android:name=".ui.logged.Chat" />
         <activity android:name=".ui.logged.SearchUserChat" />
 =======
         <activity android:name=".ui.logged.VisualizeChat"></activity>
