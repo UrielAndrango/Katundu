@@ -43,15 +43,19 @@ public class RegisterActivity extends AppCompatActivity {
         registratButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(passwordEditText.getText().toString().equals(repeatpasswordEditText.getText().toString())) {
-                    //desactivar resgistrarse momentaneamente
-                    registratButton.setEnabled(false);
-                    RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
+                if(passwordEditText.getText().length() < 8) {
+                    String texterror = getString(R.string.invalid_password);
+                    Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-                else {
+                else if(!passwordEditText.getText().toString().equals(repeatpasswordEditText.getText().toString())) {
                     String texterror = getString(R.string.mismatchedpasswords);
                     Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
+                }
+                else {
+                    registratButton.setEnabled(false);
+                    RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText);
                 }
             }
         });
