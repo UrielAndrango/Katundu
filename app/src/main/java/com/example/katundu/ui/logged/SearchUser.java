@@ -65,13 +65,18 @@ public class SearchUser extends AppCompatActivity {
                     intentAdd.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intentAdd.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentAdd);
-                    //onNewIntent(intentAdd);
                     overridePendingTransition(0,0);
                     finish();
 
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     return true;
                 case R.id.navigation_xat:
+                    Intent intentChat = new Intent(SearchUser.this, ListChat.class);
+                    intentChat.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    intentChat.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intentChat);
+                    overridePendingTransition(0,0);
+                    finish();
                     return true;
             }
             return false;

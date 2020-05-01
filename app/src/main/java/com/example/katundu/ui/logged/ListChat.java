@@ -2,24 +2,19 @@
 package com.example.katundu.ui.logged;
 
         import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
-        import androidx.annotation.NonNull;
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.example.katundu.R;
-        import com.google.android.material.bottomnavigation.BottomNavigationView;
-        import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.katundu.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListChat extends AppCompatActivity {
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+        private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -27,25 +22,23 @@ public class ListChat extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     Intent intent = new Intent(ListChat.this, MenuPrincipal.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //onNewIntent(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    //onNewIntent(intent);
                     startActivity(intent);
                     overridePendingTransition(0,0);
-
+                    //finish();
+                    break;
                 case R.id.navigation_surprise:
                     return true;
                 case R.id.navigation_add:
                     Intent intent_2 = new Intent(ListChat.this, Add.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //onNewIntent(intent);
+                    intent_2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent_2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent_2);
                     overridePendingTransition(0,0);
                     //finish();
-
-                    //Si lo hacemos con ventanas independientes, quitamos los TRUES
-                    //return true;
+                    break;
                 case R.id.navigation_xat:
                     return true;
             }
@@ -62,7 +55,7 @@ public class ListChat extends AppCompatActivity {
 
         final FloatingActionButton search = findViewById(R.id.new_chat);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.nav_view_chat);
         navView.setSelectedItemId(R.id.navigation_xat);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

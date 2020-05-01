@@ -90,7 +90,7 @@ public class SearchUserChat extends AppCompatActivity {
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchUserChat.this, MenuPrincipal.class);
+                Intent intent = new Intent(SearchUserChat.this, ListChat.class);
                 onNewIntent(intent);
                 finish();
             }
