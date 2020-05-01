@@ -164,5 +164,5 @@
     <!-- Strings related to PreviewFotoeDIT-->
     <string name="preview_fotoE_delete">Esborrar foto</string>
     <string name="preview_fotoE_cancelar">Cancel·lar</string>
-    <string name="preview_fotoE_error">Error a l'\esbborrar la foto</string>
+    <string name="preview_fotoE_error">Error a l\'esborrar la foto</string>
 </resources>
