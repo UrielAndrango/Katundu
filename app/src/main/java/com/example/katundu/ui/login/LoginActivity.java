@@ -1,6 +1,9 @@
 package com.example.katundu.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;//TODO:Esto se puede quitar?? No se para que sirve...
@@ -39,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //Modo Vertical
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //Detectar idioma
+        loadLocale();
         //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
         getSupportActionBar().hide();
 
@@ -204,5 +211,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         queue.add(jsObjectRequest);
+    }
+
+    private void setLocale(String idioma) {
+        Locale locale = new Locale(idioma);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", idioma);
+        editor.apply();
+    }
+
+    public void loadLocale() {
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String idioma = prefs.getString("My_Lang", "");
+        setLocale(idioma);
     }
 }
