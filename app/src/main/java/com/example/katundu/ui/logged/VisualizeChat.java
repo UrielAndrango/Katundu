@@ -22,8 +22,7 @@ public class VisualizeChat extends AppCompatActivity {
         final String username1 = ControladoraPresentacio.getUsername();
         final TextView username2 = findViewById(R.id.nomUsuari);
         final ImageView Atras = findViewById(R.id.ViewChat_Atras);
-        final
-
+        
         username2.setText("nomUsuari"); //TODO: posar nom usuari amb qui parles (agafar de la CONTROLADORA CHAT)
 
         Atras.setOnClickListener(new View.OnClickListener() {
@@ -32,19 +31,6 @@ public class VisualizeChat extends AppCompatActivity {
                 Intent intent = new Intent(VisualizeChat.this, MenuPrincipal.class); //TODO: canviar pantalla MenuPrincipal per pantalla ListChats
                 onNewIntent(intent);
                 finish();
-            }
-        });
-
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                RequestGetMessages(search.getQuery().toString());
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
             }
         });
 
