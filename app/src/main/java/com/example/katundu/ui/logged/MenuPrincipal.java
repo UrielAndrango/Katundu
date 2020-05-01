@@ -35,11 +35,17 @@ public class MenuPrincipal extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(0,0);
                     //finish();
-
+                    break;
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     //return true;
                 case R.id.navigation_xat:
-                    return true;
+                    Intent intent2 = new Intent(MenuPrincipal.this, ListChat.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //onNewIntent(intent);
+                    intent2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent2);
+                    overridePendingTransition(0,0);
+                    break;
             }
             return false;
         }

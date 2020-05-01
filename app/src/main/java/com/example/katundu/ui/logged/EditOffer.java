@@ -517,9 +517,10 @@ public class EditOffer extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             //set the image captured to our ImageView
             //int longitud = fotos.length;
-            PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
-            PreviewFotos[cantidad_fotos[0]].setImageURI(image_uri);
-            cantidad_fotos[0]++;
+            if (ControladoraEditOffer.getCantidad_fotos() <=4) {
+                PreviewFotos[ControladoraEditOffer.getCantidad_fotos()].setImageURI(image_uri);
+                ControladoraEditOffer.setCantidad_fotos(ControladoraEditOffer.getCantidad_fotos() + 1);
+            }
         }
     }
 
