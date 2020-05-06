@@ -45,7 +45,7 @@ import java.io.ByteArrayOutputStream;
 
 public class EditOffer extends AppCompatActivity {
 
-    String[] categorias = new String[7];
+    String[] categorias = new String[8];
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     final int[] numImages = {0};
@@ -256,6 +256,7 @@ public class EditOffer extends AppCompatActivity {
         categorias[4] = getString(R.string.add_product_category_fashion);
         categorias[5] = getString(R.string.add_product_category_leisure);
         categorias[6] = getString(R.string.add_product_category_transport);
+        categorias[7] = getString(R.string.add_product_category_education);
         /* SPINNER CATEGORIAS */
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);

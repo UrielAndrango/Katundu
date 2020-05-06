@@ -50,7 +50,7 @@ public class AddProduct extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
 
-    String[] categorias = new String[7];
+    String[] categorias = new String[8];
     //StorageReference storageRef = storage.getReference();
     Button Camara;
     ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
@@ -63,7 +63,8 @@ public class AddProduct extends AppCompatActivity {
     int numero_maximo_fotos = ControladoraAddProduct.getNumero_maximo_fotos();
     ImageView[] fotos = ControladoraAddProduct.getFotos();
 
-
+    Button foto_gallery;
+    private static final int PICK_IMAGE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,14 @@ public class AddProduct extends AppCompatActivity {
         final EditText descripcion = findViewById(R.id.editDescripcio_AddP);
         final Switch switch_type = findViewById(R.id.switch2);
 
+        foto_gallery = findViewById(R.id.galleryButton_AddP);
+        foto_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+
         //SPINNER CATEGORIAS
         final Spinner spinner = (Spinner) findViewById(R.id.spinner_AddP);
         //spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias));
@@ -101,6 +110,7 @@ public class AddProduct extends AppCompatActivity {
         categorias[4] = getString(R.string.add_product_category_fashion);
         categorias[5] = getString(R.string.add_product_category_leisure);
         categorias[6] = getString(R.string.add_product_category_transport);
+        categorias[7] = getString(R.string.add_product_category_education);
 
         //Inicializamos las fotos
         Camara = findViewById(R.id.camaraButton_AddP);
@@ -473,7 +483,8 @@ public class AddProduct extends AppCompatActivity {
         //called when image was captured from camera
         if (resultCode == RESULT_OK) {
             //set the image captured to our ImageView
-            //int longitud = fotos.length;
+            //caso de si quiero seleccionar una foto que ya tengo en la galeria
+            if (requestCode == PICK_IMAGE) image_uri = data.getData();
             int longitud = ControladoraAddProduct.getFotos().length;
             int i = 0;
             boolean foto_subida_con_exito = false;
@@ -501,5 +512,10 @@ public class AddProduct extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
     }
 }

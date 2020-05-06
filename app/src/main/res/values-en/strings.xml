@@ -86,6 +86,8 @@
     <!-- Strings related to Add Product-->
     <string name="title_add_product">Add New Offer</string>
     <string name="add_product_add_foto">Add picture</string>
+    <string name="add_product_open_camera">Open camera</string>
+    <string name="add_product_open_gallery">Open gallery</string>
     <string name="add_product_name">Name</string>
     <string name="add_product_categories">Category</string>
     <string name="add_product_category_technology">Technology</string>
