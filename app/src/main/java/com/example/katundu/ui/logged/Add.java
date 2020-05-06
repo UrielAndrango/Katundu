@@ -25,22 +25,25 @@ public class Add extends AppCompatActivity {
                 case R.id.navigation_home:
                     ControladoraAddProduct.reset();
                     Intent intent = new Intent(Add.this, MenuPrincipal.class);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    onNewIntent(intent);
+                    //onNewIntent(intent);
+                    startActivity(intent);
                     overridePendingTransition(0,0);
-                    finish();
-                    //startActivity(intent);
-                    return true;
+                    //finish();
+                    break;
                 case R.id.navigation_surprise:
                     return true;
                 case R.id.navigation_add:
-                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_xat:
-                    return true;
+                    Intent intent2 = new Intent(Add.this, ListChat.class);
+                    intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent2.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent2);
+                    overridePendingTransition(0,0);
+                    //finish();
+                    break;
             }
             return false;
         }

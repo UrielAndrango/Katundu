@@ -147,7 +147,7 @@ public class EditWish extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditWish.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/deletewish?" + "id=" + id;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/delete-wish?" + "id=" + id;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -191,9 +191,9 @@ public class EditWish extends AppCompatActivity {
         if(tipusSwitch.isChecked()) tipus[0] = "Servei";
         else tipus[0] = "Producte";
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modifywish?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modify-wish?" +
             "id=" + id + "&" +
-            "name=" + nameEditText.getText().toString() + "&" +
+            "name=" + nameEditText.getText() + "&" +
             "category=" + categoriaSpinner.getSelectedItemPosition() + "&" +
             "type=" + tipus[0] + "&";
 

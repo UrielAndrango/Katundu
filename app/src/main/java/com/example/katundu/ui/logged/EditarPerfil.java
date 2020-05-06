@@ -73,7 +73,7 @@ public class EditarPerfil extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditarPerfil.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/modify_personal_credentials?" +
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-modify?" +
                 "un=" + usernameEditText.getText() + "&" +
                 "pw=" + passwordEditText.getText() + "&" +
                 "n=" + nameEditText.getText() + "&" +

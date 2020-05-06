@@ -1,35 +1,36 @@
+
 package com.example.katundu.ui.logged;
 
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.Intent;
+        import android.graphics.Typeface;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.SearchView;
+        import android.widget.TableRow;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraSearchUsers;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.VolleyError;
+        import com.android.volley.toolbox.JsonObjectRequest;
+        import com.android.volley.toolbox.Volley;
+        import com.example.katundu.R;
+        import com.example.katundu.ui.ControladoraSearchUsers;
+        import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
-public class SearchUser extends AppCompatActivity {
+public class SearchUserChat extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,19 +38,8 @@ public class SearchUser extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_search_products:
-                    Intent intent = new Intent(SearchUser.this, SearchProduct.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
-                    overridePendingTransition(0,0);
-                    finish();
-
-                    //Si lo hacemos con ventanas independientes, quitamos los TRUES
-                    return true;
-                case R.id.navigation_search_users:
-                    return true;
                 case R.id.navigation_home:
-                    Intent intentHome = new Intent(SearchUser.this, MenuPrincipal.class);
+                    Intent intentHome = new Intent(SearchUserChat.this, MenuPrincipal.class);
                     intentHome.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentHome);
@@ -61,20 +51,22 @@ public class SearchUser extends AppCompatActivity {
                 case R.id.navigation_surprise:
                     return true;
                 case R.id.navigation_add:
-                    Intent intentAdd = new Intent(SearchUser.this, Add.class);
+                    Intent intentAdd = new Intent(SearchUserChat.this, Add.class);
                     intentAdd.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intentAdd.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentAdd);
+                    //onNewIntent(intentAdd);
                     overridePendingTransition(0,0);
                     finish();
 
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     return true;
                 case R.id.navigation_xat:
-                    Intent intentChat = new Intent(SearchUser.this, ListChat.class);
+                    Intent intentChat = new Intent(SearchUserChat.this, ListChat.class);
                     intentChat.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intentChat.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentChat);
+                    //onNewIntent(intentChat);
                     overridePendingTransition(0,0);
                     finish();
                     return true;
@@ -89,26 +81,23 @@ public class SearchUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_user);
+        setContentView(R.layout.activity_search_user_chat);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
-        //Barra Navegacio Tipus de Cerca
-        BottomNavigationView typeSearch = findViewById(R.id.type_search);
-        typeSearch.setSelectedItemId(R.id.navigation_search_users);
-        typeSearch.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //Barra Navegacio Principal
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_xat);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        final ImageView Atras = findViewById(R.id.Search_Atras);
-        final SearchView search = findViewById(R.id.search_SU);
+        final ImageView Atras = findViewById(R.id.Search_Chat_Atras);
+        final SearchView search = findViewById(R.id.search_users);
         //Obtenemos el linear layout donde colocar los botones
         llBotonera = (LinearLayout) findViewById(R.id.listaUsers_SU);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchUser.this, MenuPrincipal.class);
+                Intent intent = new Intent(SearchUserChat.this, ListChat.class);
                 onNewIntent(intent);
                 finish();
             }
@@ -130,7 +119,7 @@ public class SearchUser extends AppCompatActivity {
     }
 
     private void RequestSearchUser(final String username) {
-        final RequestQueue queue = Volley.newRequestQueue(SearchUser.this);
+        final RequestQueue queue = Volley.newRequestQueue(SearchUserChat.this);
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-search?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
@@ -181,11 +170,11 @@ public class SearchUser extends AppCompatActivity {
         //Creamos los botones en bucle
         for (int i=0; i<numBotones; i++){
             //Modo Layout con 2 TextViews
-            LinearLayout ll = new LinearLayout(SearchUser.this);
+            LinearLayout ll = new LinearLayout(SearchUserChat.this);
             ll.setOrientation(LinearLayout.VERTICAL);
-            TextView text_username = new TextView(SearchUser.this);
-            TextView text_realName = new TextView(SearchUser.this);
-            TextView text_valoracio = new TextView(SearchUser.this);
+            TextView text_username = new TextView(SearchUserChat.this);
+            TextView text_realName = new TextView(SearchUserChat.this);
+            TextView text_valoracio = new TextView(SearchUserChat.this);
             //Asignamos propiedades de layout al layout
             ll.setLayoutParams(lp);
             //Asignamos Texto a los textViews
@@ -194,9 +183,9 @@ public class SearchUser extends AppCompatActivity {
             text_valoracio.setText(getString(R.string.search_user_valoracio) + ": " + ControladoraSearchUsers.getValoracion() + "/5");
             //Le damos el estilo que queremos
             ll.setBackgroundResource(R.drawable.button_rounded);
-            text_username.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
-            text_realName.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
-            text_valoracio.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
+            text_username.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
+            text_realName.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
+            text_valoracio.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
             Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
             text_username.setTypeface(boldTypeface);
             text_realName.setTypeface(boldTypeface);
@@ -221,7 +210,7 @@ public class SearchUser extends AppCompatActivity {
             paramsV.setMargins(25, 10, 25, 20);
             text_valoracio.setLayoutParams(paramsV);
             //Asignamose el Listener al Layout dinamico
-            ll.setOnClickListener(new LayoutOnClickListener(SearchUser.this));
+            ll.setOnClickListener(new LayoutOnClickListener(SearchUserChat.this));
             //Añadimos el layout dinamico al layout
             ll.addView(text_username);
             ll.addView(text_realName);
@@ -231,7 +220,7 @@ public class SearchUser extends AppCompatActivity {
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {
-        public LayoutOnClickListener(SearchUser searchUser) {
+        public LayoutOnClickListener(SearchUserChat searchUser) {
         }
         @Override
         public void onClick(View view) {
@@ -240,7 +229,7 @@ public class SearchUser extends AppCompatActivity {
             //ControladoraSearchUsers.setUsername("?");
 
             //Nos vamos a la ventana de VisualizeListOUser
-            Intent intent = new Intent(SearchUser.this, VisualizeListOUser.class);
+            Intent intent = new Intent(SearchUserChat.this, VisualizeListOUser.class);
             startActivity(intent);
             //finish();
         }

@@ -145,7 +145,7 @@ public class ListWish extends AppCompatActivity {
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(ListWish.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/getWishes?" + "un=" + username;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-wishes?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {

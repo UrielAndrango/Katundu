@@ -205,7 +205,7 @@ public class AddProduct extends AppCompatActivity {
                     if (switch_type.isChecked()) type = "Service";
                     else type = "Product";
 
-                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addoffer?" +
+                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/add-offer?" +
                             "user=" + ControladoraPresentacio.getUsername() + "&" +
                             "name=" + nombre.getText() + "&" +
                             "category=" + spinner.getSelectedItemPosition() + "&" + "type=" + type + "&";

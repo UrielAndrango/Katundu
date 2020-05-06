@@ -190,9 +190,9 @@ public class VisualizeOffer extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/addfavorite?" +
-                "user=" + ControladoraPresentacio.getUsername() + "&" +
-                "objectId=" + ControladoraPresentacio.getOffer_id();
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/add-favorite?" +
+                "un=" + ControladoraPresentacio.getUsername() + "&" +
+                "id=" + ControladoraPresentacio.getOffer_id();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
