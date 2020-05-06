@@ -96,7 +96,7 @@
     <string name="add_product_category_leisure">Ocio</string>
     <string name="add_product_category_transport">Transporte</string>
     <string name="add_product_category_education">Educación</string>
-    <string name="add_product_value">Valor</string>
+    <string name="add_product_value">Valor estimado</string>
     <string name="add_product_type">Tipo</string>
     <string name="add_product_type_product">Producto</string>
     <string name="add_product_type_service">Servicio</string>
