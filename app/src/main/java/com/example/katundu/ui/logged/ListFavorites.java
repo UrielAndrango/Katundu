@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -78,6 +79,7 @@ public class ListFavorites extends AppCompatActivity {
         }
     };
 
+    SwipeRefreshLayout refreshLayout;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class ListFavorites extends AppCompatActivity {
         final TextView NomUsuari = findViewById(R.id.nomUsuari);
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
+        refreshLayout = findViewById(R.id.refreshLayout_LF);
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
 
@@ -110,6 +113,18 @@ public class ListFavorites extends AppCompatActivity {
                 Intent intent = new Intent(ListFavorites.this, Ajustes.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
             }
         });
 
@@ -145,7 +160,6 @@ public class ListFavorites extends AppCompatActivity {
             }
         });
 
-        System.out.println("Agafo favorites");
         RequestGetFavorites();
     }
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -68,6 +69,7 @@ public class ListWish extends AppCompatActivity {
         }
     };
 
+    SwipeRefreshLayout refreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class ListWish extends AppCompatActivity {
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
         final FloatingActionButton addWish = findViewById(R.id.FAB_addWish_LW);
+        refreshLayout = findViewById(R.id.refreshLayout_LW);
 
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
@@ -101,6 +104,18 @@ public class ListWish extends AppCompatActivity {
                 Intent intent = new Intent(ListWish.this, Ajustes.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
             }
         });
 

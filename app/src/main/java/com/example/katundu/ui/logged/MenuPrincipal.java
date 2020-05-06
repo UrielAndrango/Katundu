@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.katundu.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,6 +48,7 @@ public class MenuPrincipal extends AppCompatActivity {
         }
     };
 
+    SwipeRefreshLayout refreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         final ImageView Perfil_img = findViewById(R.id.img_perfil);
         final LinearLayout search = findViewById(R.id.search_MP);
+        refreshLayout = findViewById(R.id.refreshLayout_MP);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -75,6 +78,18 @@ public class MenuPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(MenuPrincipal.this, SearchProduct.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
             }
         });
     }

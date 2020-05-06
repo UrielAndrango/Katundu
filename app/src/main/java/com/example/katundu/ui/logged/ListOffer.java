@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -81,6 +82,7 @@ public class ListOffer extends AppCompatActivity {
         }
     };
 
+    SwipeRefreshLayout refreshLayout;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class ListOffer extends AppCompatActivity {
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
         final FloatingActionButton addProduct = findViewById(R.id.FAB_addProduct_LO);
+        refreshLayout = findViewById(R.id.refreshLayout_LO);
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
 
@@ -114,6 +117,18 @@ public class ListOffer extends AppCompatActivity {
                 Intent intent = new Intent(ListOffer.this, Ajustes.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
             }
         });
 
