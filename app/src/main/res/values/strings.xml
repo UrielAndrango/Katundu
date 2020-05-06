@@ -167,6 +167,7 @@
     <string name="preview_fotoE_error">Error al borrar la foto</string>
 
     <!-- Strings related to ListTrophies-->
+    <string name="list_trophies_title">Trofeos</string>
     <string name="list_trophies_title0">¿Soy yo?</string>
     <string name="list_trophies_description0">Completa tu perfil</string>
     <string name="list_trophies_title1">Primeros pasos</string>

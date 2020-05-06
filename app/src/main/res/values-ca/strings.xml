@@ -167,6 +167,7 @@
     <string name="preview_fotoE_error">Error a l\'esborrar la foto</string>
 
     <!-- Strings related to ListTrophies-->
+    <string name="list_trophies_title">Trofeus</string>
     <string name="list_trophies_title0">Sóc jo?</string>
     <string name="list_trophies_description0">Completa el teu perfil</string>
     <string name="list_trophies_title1">Primeres pases</string>
