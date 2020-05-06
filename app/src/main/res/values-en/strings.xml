@@ -135,7 +135,7 @@
     <string name="preview_foto_cancelar">Cancel</string>
 
     <!-- Strings related to EditWish-->
-    <string name="edit_wish_title">Modify wish data</string>
+    <string name="edit_wish_title">Modify wish</string>
     <string name="edit_wish_ok">Modify wish</string>
     <string name="empty_values">There are empty values</string>
     <string name="wish_modified_successfully">Wish successfully modified</string>

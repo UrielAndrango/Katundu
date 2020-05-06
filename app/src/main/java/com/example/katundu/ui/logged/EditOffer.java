@@ -53,6 +53,8 @@ public class EditOffer extends AppCompatActivity {
     private static final int IMAGE_CAPTURE_CODE = 1001;
     Uri image_uri;
     Button Camara;
+    Button foto_gallery;
+    private static final int PICK_IMAGE = 100;
     ImageView PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4;
     ImageView PreviewFoto0_final, PreviewFoto1_final, PreviewFoto2_final, PreviewFoto3_final, PreviewFoto4_final;
     ImageView[] PreviewFotos;
@@ -80,6 +82,13 @@ public class EditOffer extends AppCompatActivity {
         final EditText valueEditText = findViewById(R.id.editTextValor_EditOffer);
         final EditText descriptionEditText = (TextInputEditText)findViewById(R.id.editDescripcio_EditOffer);
         final ImageView DeleteWish = findViewById(R.id.basura_delete_offer);
+        foto_gallery = findViewById(R.id.galleryButton_EditOffer);
+        foto_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
         // FOTOS
 
         Camara = findViewById(R.id.camaraButton_EditOffer);
@@ -518,6 +527,7 @@ public class EditOffer extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             //set the image captured to our ImageView
             //int longitud = fotos.length;
+            if (requestCode == PICK_IMAGE) image_uri = data.getData();
             if (ControladoraEditOffer.getCantidad_fotos() <=4) {
                 PreviewFotos[ControladoraEditOffer.getCantidad_fotos()].setImageURI(image_uri);
                 ControladoraEditOffer.setCantidad_fotos(ControladoraEditOffer.getCantidad_fotos() + 1);
@@ -525,4 +535,8 @@ public class EditOffer extends AppCompatActivity {
         }
     }
 
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
 }

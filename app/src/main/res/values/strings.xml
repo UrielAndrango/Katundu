@@ -136,7 +136,7 @@
     <string name="preview_foto_cancelar">Cancelar</string>
 
     <!-- Strings related to EditWish-->
-    <string name="edit_wish_title">Modificar datos del deseo</string>
+    <string name="edit_wish_title">Modificar deseo</string>
     <string name="edit_wish_ok">Modificar deseo</string>
     <string name="empty_values">Hay valores vacíos</string>
     <string name="wish_modified_successfully">Deseo modificado con éxito</string>
