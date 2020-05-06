@@ -165,4 +165,38 @@
     <string name="preview_fotoE_delete">Borrar foto</string>
     <string name="preview_fotoE_cancelar">Cancelar</string>
     <string name="preview_fotoE_error">Error al borrar la foto</string>
+
+    <!-- Strings related to ListTrophies-->
+    <string name="list_trophies_title0">¿Soy yo?</string>
+    <string name="list_trophies_description0">Completa tu perfil</string>
+    <string name="list_trophies_title1">Primeros pasos</string>
+    <string name="list_trophies_description1">Sube tu primer oferta</string>
+    <string name="list_trophies_title2">Aladdín</string>
+    <string name="list_trophies_description2">Sube tu primer deseo</string>
+    <string name="list_trophies_title3">Corregir es de sabíos</string>
+    <string name="list_trophies_description3">Modifica una oferta de tu lista de ofertas</string>
+    <string name="list_trophies_title4">Primera estrella</string>
+    <string name="list_trophies_description4">Añade una oferta de otra usuario a tu lista de favoritos</string>
+    <string name="list_trophies_title5">Los deseos se hacen realidad</string>
+    <string name="list_trophies_description5">Consigue, mediante un intercambio, aquello que tenias en tu lista de deseos</string>
+    <string name="list_trophies_title6">Ya es mío</string>
+    <string name="list_trophies_description6">Consigue, mediante un intercambio, un producto de tu lista de favoritos</string>
+    <string name="list_trophies_title7">La primera de muchas</string>
+    <string name="list_trophies_description7">Haz tu primer intercambio</string>
+    <string name="list_trophies_title8">¡Choca los cinco!</string>
+    <string name="list_trophies_description8">Haz 5 intercambios</string>
+    <string name="list_trophies_title9">Docena</string>
+    <string name="list_trophies_description9">Haz 12 intercambios</string>
+    <string name="list_trophies_title10">¡En racha!</string>
+    <string name="list_trophies_description10">Haz 25 intercambios</string>
+    <string name="list_trophies_title11">Medio centenario</string>
+    <string name="list_trophies_description11">Haz 50 intercambios</string>
+    <string name="list_trophies_title12">Franklin</string>
+    <string name="list_trophies_description12">Haz 100 intercambios</string>
+    <string name="list_trophies_title13">Cuarto de millar</string>
+    <string name="list_trophies_description13">Haz 250 intercambios</string>
+    <string name="list_trophies_title14">Medio millar</string>
+    <string name="list_trophies_description14">Haz 500 intercambios</string>
+    <string name="list_trophies_title15">1K</string>
+    <string name="list_trophies_description15">Haz 1000 intercambios</string>
 </resources>

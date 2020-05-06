@@ -165,4 +165,38 @@
     <string name="preview_fotoE_delete">Esborrar foto</string>
     <string name="preview_fotoE_cancelar">Cancel·lar</string>
     <string name="preview_fotoE_error">Error a l\'esborrar la foto</string>
+
+    <!-- Strings related to ListTrophies-->
+    <string name="list_trophies_title0">Sóc jo?</string>
+    <string name="list_trophies_description0">Completa el teu perfil</string>
+    <string name="list_trophies_title1">Primeres pases</string>
+    <string name="list_trophies_description1">Puja la teva primera oferta</string>
+    <string name="list_trophies_title2">Aladdin</string>
+    <string name="list_trophies_description2">Puja el teu primer desig</string>
+    <string name="list_trophies_title3">Corregir és de sabis</string>
+    <string name="list_trophies_description3">Modifica una oferta de la teva llista d\'ofertes</string>
+    <string name="list_trophies_title4">Primera estrella</string>
+    <string name="list_trophies_description4">Afegeix una oferta d\'una altre usuari a la teva llista de favorits</string>
+    <string name="list_trophies_title5">Els desitjos es fan realitat</string>
+    <string name="list_trophies_description5">Aconsegueix, mitjançant un intercanvi, allò tenies a la teva llista de desitjos</string>
+    <string name="list_trophies_title6">Ja es meu</string>
+    <string name="list_trophies_description6">Aconsegueix, mitjançant un intercanvi, una oferta de la teva llista de favorits</string>
+    <string name="list_trophies_title7">La primera de moltes</string>
+    <string name="list_trophies_description7">Realitza el teu primer intercanvi</string>
+    <string name="list_trophies_title8">¡Xoca els cinc!</string>
+    <string name="list_trophies_description8">Realitza 5 intercanvis</string>
+    <string name="list_trophies_title9">Dotzena</string>
+    <string name="list_trophies_description9">Realitza 12 intercanvis</string>
+    <string name="list_trophies_title10">En ratxa!</string>
+    <string name="list_trophies_description10">Realitza 25 intercanvis</string>
+    <string name="list_trophies_title11">Mig centenari</string>
+    <string name="list_trophies_description11">Realitza 50 intercanvis</string>
+    <string name="list_trophies_title12">Franklin</string>
+    <string name="list_trophies_description12">Realitza 100 intercanvis</string>
+    <string name="list_trophies_title13">Quart de miler</string>
+    <string name="list_trophies_description13">Realitza 250 intercanvis</string>
+    <string name="list_trophies_title14">Mig miler</string>
+    <string name="list_trophies_description14">Realitza 500 intercanvis</string>
+    <string name="list_trophies_title15">1K</string>
+    <string name="list_trophies_description15">Realitza 1000 intercanvis</string>
 </resources>

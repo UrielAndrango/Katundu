@@ -164,4 +164,38 @@
     <string name="preview_fotoE_delete">Delete foto</string>
     <string name="preview_fotoE_cancelar">Cancel</string>
     <string name="preview_fotoE_error">Could not delete the photo</string>
+
+    <!-- Strings related to ListTrophies-->
+    <string name="list_trophies_title0">It\'s me?</string>
+    <string name="list_trophies_description0">Complete your profile</string>
+    <string name="list_trophies_title1">First steps</string>
+    <string name="list_trophies_description1">Upload your first offer</string>
+    <string name="list_trophies_title2">Aladdin</string>
+    <string name="list_trophies_description2">Upload your first wish</string>
+    <string name="list_trophies_title3">To correct is wise</string>
+    <string name="list_trophies_description3">Modify an offer of your offers list</string>
+    <string name="list_trophies_title4">First star</string>
+    <string name="list_trophies_description4">Add another user\'s offer to your favorites list</string>
+    <string name="list_trophies_title5">The wishes come true</string>
+    <string name="list_trophies_description5">Get, through an exchange, what you had on your wishes list</string>
+    <string name="list_trophies_title6">It\'s already mine</string>
+    <string name="list_trophies_description6">Get, through an exchange, a product from your favorites list</string>
+    <string name="list_trophies_title7">The first of many</string>
+    <string name="list_trophies_description7">Do your first exchange</string>
+    <string name="list_trophies_title8">Give me five!</string>
+    <string name="list_trophies_description8">Do 5 exchanges</string>
+    <string name="list_trophies_title9">Dozen</string>
+    <string name="list_trophies_description9">Do 12 exchanges</string>
+    <string name="list_trophies_title10">In a streak!</string>
+    <string name="list_trophies_description10">Do 25 exchanges</string>
+    <string name="list_trophies_title11">Half centenary</string>
+    <string name="list_trophies_description11">Do 50 exchanges</string>
+    <string name="list_trophies_title12">Franklin</string>
+    <string name="list_trophies_description12">Do 100 exchanges</string>
+    <string name="list_trophies_title13">Quarter thousand</string>
+    <string name="list_trophies_description13">Do 250 exchanges</string>
+    <string name="list_trophies_title14">Half thousand</string>
+    <string name="list_trophies_description14">Do 500 exchanges</string>
+    <string name="list_trophies_title15">1K</string>
+    <string name="list_trophies_description15">Do 1000 exchanges</string>
 </resources>
