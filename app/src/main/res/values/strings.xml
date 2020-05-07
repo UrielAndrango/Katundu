@@ -202,4 +202,7 @@
     <string name="list_trophies_description14">Haz 500 intercambios</string>
     <string name="list_trophies_title15">1K</string>
     <string name="list_trophies_description15">Haz 1000 intercambios</string>
+
+    <!-- Strings related to VisualizeChat-->
+    <string name="contingut_message">Escribe un mensaje</string>
 </resources>

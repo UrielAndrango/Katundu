@@ -202,4 +202,7 @@
     <string name="list_trophies_description14">Realitza 500 intercanvis</string>
     <string name="list_trophies_title15">1K</string>
     <string name="list_trophies_description15">Realitza 1000 intercanvis</string>
+
+    <!-- Strings related to VisualizeChat-->
+    <string name="contingut_message">Escriu un missatge</string>
 </resources>
