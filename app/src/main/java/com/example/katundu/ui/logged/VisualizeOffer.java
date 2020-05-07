@@ -69,7 +69,7 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
-        afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
 
         //nombre_fotos();
 
@@ -199,10 +199,17 @@ public class VisualizeOffer extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.equals("0")) { //favorite added successfully
+                        if(response.equals("Favorite Added")) { //favorite added successfully
                             String favorite_added_successfully = getString(R.string.favorite_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
+                            afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                        }
+                        else if(response.equals("Favorite duplicated")) { //favorite duplicated
+                            String favorite_added_successfully = getString(R.string.favorite_added_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+                            afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                         }
                     }
                 }, new Response.ErrorListener() {
