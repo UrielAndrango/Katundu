@@ -123,7 +123,7 @@ public class AddWish extends AppCompatActivity {
                     if(!nueva_palabra.toString().equals("")) ++count;
                 }
             }
-            if(count == 2) okay = true;
+            if(count >= 2) okay = true;
             else {
                 String texterror = getString(R.string.add_product_minimo_dos_keywords);
                 Toast toast = Toast.makeText(AddWish.this, texterror, Toast.LENGTH_SHORT);
