@@ -48,6 +48,12 @@
     <string name="search_user_good_search">Users found</string>
     <string name="search_user_bad_search">No users found</string>
 
+    <!-- String related to SearchProducts -->
+    <string name="search_products">Search Products</string>
+    <string name="search_products_good_search">Products found</string>
+    <string name="search_products_bad_search">No products found</string>
+    <!-- utilitzar string filtres d'addProduct -->
+
     <!-- Strings related to Users-->
     <string name="nom_Usuari">Username</string>
     <string name="user_valoracio_text">"Assessment: "</string>
