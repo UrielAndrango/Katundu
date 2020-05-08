@@ -48,6 +48,12 @@
     <string name="search_user_good_search">Se han encontrado usuarios</string>
     <string name="search_user_bad_search">No se ha encontrado ningún usuario</string>
 
+    <!-- String related to SearchProducts -->
+    <string name="search_products">Buscar Productos</string>
+    <string name="search_products_good_search">Se han encontrado productos</string>
+    <string name="search_products_bad_search">No se ha encontrado ningún producto</string>
+    <!-- utilitzar string filtres d'addProduct -->
+
     <!-- Strings related to User-->
     <string name="nom_Usuari">Nombre de usuario</string>
     <string name="user_valoracio_text">"Valoración: "</string>
