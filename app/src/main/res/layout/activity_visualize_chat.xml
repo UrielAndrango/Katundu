@@ -119,14 +119,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <TextView
+                <EditText
                     android:id="@+id/contingut_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/contingut_message"
+                    android:autofillHints=""
+                    android:hint="@string/contingut_message"
+                    android:inputType="textLongMessage|textMultiLine|text"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textColorHint="?attr/colorPrimary"
+                    android:textSize="18sp" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -136,8 +138,8 @@
 
             <ImageView
                 android:id="@+id/enviar_message"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/descripcio"
                 android:src="@drawable/icono_enviar_message" />
 

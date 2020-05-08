@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
+import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +26,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraChat;
 import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.ControladoraSearchUsers;
 import com.example.katundu.ui.Message;
-import com.example.katundu.ui.Wish;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,8 +37,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class VisualizeChat extends AppCompatActivity {
-
-    LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,16 @@ public class VisualizeChat extends AppCompatActivity {
         final String username1 = ControladoraPresentacio.getUsername();
         final TextView username2 = findViewById(R.id.nomUsuari);
         final ImageView Atras = findViewById(R.id.ViewChat_Atras);
-        final String id_Chat = "id_chat"; //TODO: posar ControladorChat.getId()
+        final String id_Chat = "3rbsAn26ZwHgCsPtZzQM";
+        //final String id_Chat = ControladoraChat.getId_Chat(); //TODO: posar AIXO QUAN ACABI DE FER PROVES
         final ImageView Enviar_message = findViewById(R.id.enviar_message);
-        final TextView contingut_message = findViewById(R.id.contingut_message);
+        final EditText contingut_message = findViewById(R.id.contingut_message);
+        final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
+        final ScrollView scrollView = findViewById(R.id.scrollview);
 
-        username2.setText("nomUsuari"); //TODO: posar ControladorChat.getusername2() --> usuari amb qui parles
+        username2.setText(ControladoraChat.getUsername2());
 
-        RequestGetMessages(id_Chat);
+        RequestGetMessages(id_Chat, llBotonera);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,19 +72,22 @@ public class VisualizeChat extends AppCompatActivity {
         Enviar_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestAddMessage(id_Chat, username1, contingut_message);
+                RequestAddMessage(id_Chat, username1, contingut_message, llBotonera);
             }
         });
     }
 
-    private void RequestAddMessage(final String id_Chat, String username1, TextView contingut_message) {
+    private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeChat.this);
+
+        String contingut_message_transformat = contingut_message.getText().toString();
+        contingut_message_transformat = contingut_message_transformat.replaceAll(System.getProperty("line.separator"), "%0A");
 
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/chat-addMessage?" +
                 "id=" + id_Chat + "&" +
                 "un=" + username1 + "&" +
-                "message=" + contingut_message.getText();
+                "message=" + contingut_message_transformat;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -89,7 +95,9 @@ public class VisualizeChat extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("0")) { //wish added successfully
-                            RequestGetMessages(id_Chat);
+                            contingut_message.setText("");
+                            contingut_message.setHint(getString(R.string.contingut_message));
+                            RequestGetMessages(id_Chat, llBotonera);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -107,7 +115,7 @@ public class VisualizeChat extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void RequestGetMessages(String id_Chat) {
+    private void RequestGetMessages(String id_Chat, final LinearLayout llBotonera) {
         final ArrayList<Message> message_list = new ArrayList<>();
 
         // Instantiate the RequestQueue.
@@ -154,6 +162,7 @@ public class VisualizeChat extends AppCompatActivity {
         /* Creación de la lista mensajes */
         //Esto es temporal, hay que hacer tanto botones como usuarios hagan match en la busqueda
         int numBotones = message_list.size();
+
         //Creamos las propiedades de layout que tendrán los botones.
         //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -166,15 +175,14 @@ public class VisualizeChat extends AppCompatActivity {
             ll.setOrientation(LinearLayout.VERTICAL);
 
             TextView text_missatge = new TextView(VisualizeChat.this);
-            //TODO: caldrà posar temps, username al missatge
+            TextView time_missatge = new TextView(VisualizeChat.this);
 
             //Asignamos propiedades de layout al layout
             ll.setLayoutParams(lp);
 
             //Asignamos Texto a los textViews
-            text_missatge.setText("HOLA AIXO ÉS UN MISSATGE");
-            //TODO: posar text correcte:
-            //text_missatge.setText(message_list.get(i).getMessage());
+            text_missatge.setText(message_list.get(i).getMessage());
+            time_missatge.setText(message_list.get(i).getTime());
 
             //Le damos el estilo que queremos
             ll.setBackgroundResource(R.drawable.button_rounded);
@@ -182,27 +190,49 @@ public class VisualizeChat extends AppCompatActivity {
             text_missatge.setTextColor(VisualizeChat.this.getResources().getColor(R.color.colorLetraKatundu));
             text_missatge.setTextSize(18);
 
-            Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-            text_missatge.setTypeface(boldTypeface);
+            time_missatge.setTextColor(VisualizeChat.this.getResources().getColor(R.color.colorLetraKatundu));
+            time_missatge.setTextSize(10);
 
+            //Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+            //text_missatge.setTypeface(boldTypeface);
 
             //Margenes del layout
             TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //paramsll.setMargins(left, top, right, bottom);
-            if (i==0) paramsll.setMargins(0, 20, 0, 20);
-            else paramsll.setMargins(0, 0, 0, 20);
+            if(message_list.get(i).getUsername().equals(ControladoraPresentacio.getUsername())) {
+                if (i == 0) paramsll.setMargins(300, 20, 0, 20);
+                else paramsll.setMargins(300, 0, 0, 20);
+            }
+            else {
+                if (i == 0) paramsll.setMargins(0, 20, 300, 20);
+                else paramsll.setMargins(0, 0, 300, 20);
+            }
+
             ll.setLayoutParams(paramsll);
 
             //Margenes del textView
             TableRow.LayoutParams paramsU = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+
             paramsU.setMargins(25, 20, 25, 10);
+
             text_missatge.setLayoutParams(paramsU);
+            time_missatge.setLayoutParams(paramsU);
+
+            if(message_list.get(i).getUsername().equals(ControladoraPresentacio.getUsername())) {
+                text_missatge.setGravity(Gravity.END);
+                time_missatge.setGravity(Gravity.END);
+            }
+            else {
+                text_missatge.setGravity(Gravity.START);
+                time_missatge.setGravity(Gravity.START);
+            }
 
             //Asignamose el Listener al Layout dinamico
             //ll.setOnClickListener(new SearchUser.LayoutOnClickListener(SearchUser.this));
 
             //Añadimos el layout dinamico al layout
             ll.addView(text_missatge);
+            ll.addView(time_missatge);
 
             llBotonera.addView(ll);
         }
