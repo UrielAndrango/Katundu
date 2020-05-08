@@ -54,7 +54,7 @@ public class VisualizeChat extends AppCompatActivity {
         final TextView contingut_message = findViewById(R.id.contingut_message);
 
         username2.setText("nomUsuari"); //TODO: posar ControladorChat.getusername2() --> usuari amb qui parles
-
+ 
         RequestGetMessages(id_Chat);
 
         Atras.setOnClickListener(new View.OnClickListener() {
