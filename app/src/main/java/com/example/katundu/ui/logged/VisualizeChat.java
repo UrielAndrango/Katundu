@@ -47,8 +47,7 @@ public class VisualizeChat extends AppCompatActivity {
         final String username1 = ControladoraPresentacio.getUsername();
         final TextView username2 = findViewById(R.id.nomUsuari);
         final ImageView Atras = findViewById(R.id.ViewChat_Atras);
-        final String id_Chat = "3rbsAn26ZwHgCsPtZzQM";
-        //final String id_Chat = ControladoraChat.getId_Chat(); //TODO: posar AIXO QUAN ACABI DE FER PROVES
+        final String id_Chat = ControladoraChat.getId_Chat(); 
         final ImageView Enviar_message = findViewById(R.id.enviar_message);
         final EditText contingut_message = findViewById(R.id.contingut_message);
         final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
