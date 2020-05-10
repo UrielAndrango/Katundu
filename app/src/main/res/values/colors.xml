@@ -7,4 +7,5 @@
     <color name="colorLetraKatundu">#5C5B5B</color>
     <color name="colorBarraNotificaciones">#3D3D3D</color>
     <color name="colorRojoLogout">#BFFA0000</color>
+    <color name="colorMessage">#FAE7D3</color>
 </resources>
