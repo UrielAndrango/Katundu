@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
+import com.example.katundu.ui.logged.VisualizeChat;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -194,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
                     toast.show();
 
                     //Canviem de pantalla i anem al Menu Principal
-                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                    Intent intent = new Intent(getApplicationContext(), VisualizeChat.class);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

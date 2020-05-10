@@ -3,12 +3,10 @@ package com.example.katundu.ui.logged;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,7 +56,7 @@ public class VisualizeChat extends AppCompatActivity {
 
         username2.setText(ControladoraChat.getUsername2());
 
-        RequestGetMessages(id_Chat, llBotonera);
+        RequestGetMessages(id_Chat, llBotonera, scrollView);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,12 +70,12 @@ public class VisualizeChat extends AppCompatActivity {
         Enviar_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestAddMessage(id_Chat, username1, contingut_message, llBotonera);
+                RequestAddMessage(id_Chat, username1, contingut_message, llBotonera, scrollView);
             }
         });
     }
 
-    private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera) {
+    private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera, final ScrollView scrollView) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeChat.this);
 
@@ -94,10 +92,17 @@ public class VisualizeChat extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.equals("0")) { //wish added successfully
+                        if(response.equals("0")) { //message added successfully
                             contingut_message.setText("");
                             contingut_message.setHint(getString(R.string.contingut_message));
-                            RequestGetMessages(id_Chat, llBotonera);
+
+                            try {
+                                Thread.sleep(1*1000); //Ho faig per deixar algo de temps a Firebase per a que fagi el addMessage
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            RequestGetMessages(id_Chat, llBotonera, scrollView);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -115,7 +120,7 @@ public class VisualizeChat extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void RequestGetMessages(String id_Chat, final LinearLayout llBotonera) {
+    private void RequestGetMessages(String id_Chat, final LinearLayout llBotonera, final ScrollView scrollView) {
         final ArrayList<Message> message_list = new ArrayList<>();
 
         // Instantiate the RequestQueue.
@@ -140,7 +145,7 @@ public class VisualizeChat extends AppCompatActivity {
                         message_list.add(message);
                     }
 
-                    InicialitzarLayoutsMissatges(llBotonera, message_list);
+                    InicialitzarLayoutsMissatges(llBotonera, message_list, scrollView);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -155,7 +160,7 @@ public class VisualizeChat extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
-    private void InicialitzarLayoutsMissatges(LinearLayout llBotonera, ArrayList<Message> message_list) {
+    private void InicialitzarLayoutsMissatges(LinearLayout llBotonera, ArrayList<Message> message_list, final ScrollView scrollView) {
         //Borramos la busqueda anterior
         if (llBotonera.getChildCount() > 0) llBotonera.removeAllViews();
 
@@ -185,7 +190,9 @@ public class VisualizeChat extends AppCompatActivity {
             time_missatge.setText(message_list.get(i).getTime());
 
             //Le damos el estilo que queremos
-            ll.setBackgroundResource(R.drawable.button_rounded);
+            if(message_list.get(i).getUsername().equals(ControladoraPresentacio.getUsername()))
+                ll.setBackgroundResource(R.drawable.button_rounded_message);
+            else ll.setBackgroundResource(R.drawable.button_rounded);
 
             text_missatge.setTextColor(VisualizeChat.this.getResources().getColor(R.color.colorLetraKatundu));
             text_missatge.setTextSize(18);
@@ -235,6 +242,8 @@ public class VisualizeChat extends AppCompatActivity {
             ll.addView(time_missatge);
 
             llBotonera.addView(ll);
+
+            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }
 }
