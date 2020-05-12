@@ -173,7 +173,7 @@ public class ListChat extends AppCompatActivity {
         public ButtonOnClickListener(ListChat listchat) {
         }
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             System.out.println("1");
             //Provando que funciona el layout en modo boton
             Button b = (Button) view;
@@ -187,7 +187,13 @@ public class ListChat extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
+                            ControladoraChat.setUsername2(view.getContentDescription().toString());
                             ControladoraChat.setId_Chat(response);
+                            //Nos vamos a la ventana de EditOffer
+                            Intent intent = new Intent(ListChat.this, VisualizeChat.class);
+                            startActivity(intent);
+                            //finish();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -199,12 +205,6 @@ public class ListChat extends AppCompatActivity {
                 }
             });
             queue.add(stringRequest);
-            ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
-            ControladoraChat.setUsername2(view.getContentDescription().toString());
-            //Nos vamos a la ventana de EditOffer
-            Intent intent = new Intent(ListChat.this, VisualizeChat.class);
-            startActivity(intent);
-            //finish();
         }
     }
 }
