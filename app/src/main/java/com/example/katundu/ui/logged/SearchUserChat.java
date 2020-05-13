@@ -2,39 +2,36 @@
 package com.example.katundu.ui.logged;
 
         import android.content.Intent;
-        import android.graphics.Typeface;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.SearchView;
-        import android.widget.TableRow;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.JsonArrayRequest;
-        import com.android.volley.toolbox.JsonObjectRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.example.katundu.R;
-        import com.example.katundu.ui.ControladoraPresentacio;
-        import com.example.katundu.ui.ControladoraSearchUsers;
-        import com.example.katundu.ui.Message;
-        import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.ControladoraSearchUsers;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
-
-        import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SearchUserChat extends AppCompatActivity {
 
@@ -253,8 +250,10 @@ public class SearchUserChat extends AppCompatActivity {
             queue.add(jsonArrayRequest);
             //Nos vamos a la ventana de VisualizeListOUser
             Intent intent = new Intent(SearchUserChat.this, ListChat.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            //finish();
+            finish();
         }
     }
 }

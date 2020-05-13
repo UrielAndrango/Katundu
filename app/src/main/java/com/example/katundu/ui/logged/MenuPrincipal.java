@@ -119,8 +119,6 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
         RequestGetOffers();
-        System.out.println("He passat");
-
     }
     private void RequestGetMatches()
     {

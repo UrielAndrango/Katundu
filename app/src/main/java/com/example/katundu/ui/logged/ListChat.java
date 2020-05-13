@@ -1,44 +1,39 @@
 
 package com.example.katundu.ui.logged;
 
-        import android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
-        import android.util.Log;
-        import android.util.Pair;
-        import android.view.Gravity;
-        import android.view.MenuItem;
+import android.util.Log;
+import android.util.Pair;
+import android.view.MenuItem;
 import android.view.View;
-        import android.widget.Button;
-        import android.widget.LinearLayout;
-        import android.widget.TableRow;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.JsonArrayRequest;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.example.katundu.R;
-        import com.example.katundu.ui.ControladoraChat;
-        import com.example.katundu.ui.ControladoraPresentacio;
-        import com.example.katundu.ui.Message;
-        import com.example.katundu.ui.Offer;
-        import com.example.katundu.ui.login.LoginActivity;
-        import com.example.katundu.ui.login.RegisterActivity;
-        import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraChat;
+import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class ListChat extends AppCompatActivity {
 
@@ -74,6 +69,7 @@ public class ListChat extends AppCompatActivity {
         }
     };
 
+    SwipeRefreshLayout refreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +77,9 @@ public class ListChat extends AppCompatActivity {
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
 
-        final FloatingActionButton search = findViewById(R.id.new_chat);
+        final ImageView search = findViewById(R.id.imageView_newChat_LC);
         final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Chats);
+        refreshLayout = findViewById(R.id.refreshLayout_LC);
         BottomNavigationView navView = findViewById(R.id.nav_view_chat);
         navView.setSelectedItemId(R.id.navigation_xat);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -95,8 +92,17 @@ public class ListChat extends AppCompatActivity {
                 //finish();
             }
         });
-
-
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void RequestGetChats(final LinearLayout llBotonera) {
@@ -174,7 +180,7 @@ public class ListChat extends AppCompatActivity {
         }
         @Override
         public void onClick(final View view) {
-            System.out.println("1");
+            //System.out.println("1");
             //Provando que funciona el layout en modo boton
             Button b = (Button) view;
             Toast.makeText(getApplicationContext(),view.getContentDescription().toString(),Toast.LENGTH_SHORT).show();
