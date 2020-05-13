@@ -90,7 +90,6 @@ public class VisualizeChat extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             public void run() {
-                System.out.println("REQUEST");
                 RequestGetMessages(id_Chat, llBotonera, scrollView);
                 handler.postDelayed(this, TIEMPO);
             }
