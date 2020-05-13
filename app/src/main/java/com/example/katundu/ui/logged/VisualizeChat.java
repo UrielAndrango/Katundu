@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -81,6 +82,19 @@ public class VisualizeChat extends AppCompatActivity {
                 }
             }
         });
+
+        //Fa la request de getMessages cada 10 segons per mantenir actualitzats els missatges del chat
+        final Handler handler = new Handler();
+
+        final int TIEMPO = 10000;
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                System.out.println("REQUEST");
+                RequestGetMessages(id_Chat, llBotonera, scrollView);
+                handler.postDelayed(this, TIEMPO);
+            }
+        }, TIEMPO);
     }
 
     private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera, final ScrollView scrollView, final ImageView Enviar_message) {
