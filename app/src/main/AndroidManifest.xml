@@ -18,11 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.logged.ListTrophies"></activity>
         <activity android:name=".ui.logged.ListChat" />
         <activity android:name=".ui.logged.SearchUserChat" />
-
         <activity android:name=".ui.logged.VisualizeChat" />
-
         <activity
             android:name=".ui.logged.VisualizeFavorite"
             android:screenOrientation="portrait"
