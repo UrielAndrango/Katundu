@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -25,8 +26,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.logged.MenuPrincipal;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,6 +108,19 @@ public class LoginActivity extends AppCompatActivity {
                         if(response.equals("0")) { //Successful login
                             //Inicialitzem amb les dades de l'usuari
                             RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
+                            FirebaseMessaging.getInstance().subscribeToTopic(usernameEditText.getText().toString())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                        }
+                                    });
+                            RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic("pau")
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                        }
+                                    });
 
                             /*
                             //Idioma
