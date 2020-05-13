@@ -30,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.Offer;
 import com.google.android.gms.tasks.OnSuccessListener;
