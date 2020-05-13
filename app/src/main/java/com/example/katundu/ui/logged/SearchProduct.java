@@ -177,7 +177,8 @@ public class SearchProduct extends AppCompatActivity {
 
     private void RequestSearchProducts(String nom, int cat, String valor, String tipus, String keywords) {
         RequestQueue queue = Volley.newRequestQueue(SearchProduct.this);
-        String req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "name=" + nom;
+        String req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "username="
+                + ControladoraPresentacio.getUsername() + "&name=" + nom;
         if (cat != 0) req += "&category=" + (cat-1);
         if (!valor.equals("")) req += "&value=" + valor;
         req += "&type=" + tipus;
