@@ -52,6 +52,8 @@
     <string name="search_products">Search Products</string>
     <string name="search_products_good_search">Products found</string>
     <string name="search_products_bad_search">No products found</string>
+    <string name="search_products_value">Value</string>
+    <string name="category_all_SP">All</string>
     <!-- utilitzar string filtres d'addProduct -->
 
     <!-- Strings related to Users-->
