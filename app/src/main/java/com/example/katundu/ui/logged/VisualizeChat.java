@@ -1,8 +1,10 @@
 package com.example.katundu.ui.logged;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,7 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class VisualizeChat extends AppCompatActivity {
 
@@ -69,12 +75,15 @@ public class VisualizeChat extends AppCompatActivity {
         Enviar_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestAddMessage(id_Chat, username1, contingut_message, llBotonera, scrollView);
+                if(contingut_message.getText().toString().trim().length() != 0) {
+                    Enviar_message.setEnabled(false);
+                    RequestAddMessage(id_Chat, username1, contingut_message, llBotonera, scrollView, Enviar_message);
+                }
             }
         });
     }
 
-    private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera, final ScrollView scrollView) {
+    private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera, final ScrollView scrollView, final ImageView Enviar_message) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeChat.this);
 
@@ -94,9 +103,10 @@ public class VisualizeChat extends AppCompatActivity {
                         if(response.equals("0")) { //message added successfully
                             contingut_message.setText("");
                             contingut_message.setHint(getString(R.string.contingut_message));
+                            Enviar_message.setEnabled(true);
 
                             try {
-                                Thread.sleep(1*1000); //Ho faig per deixar algo de temps a Firebase per a que fagi el addMessage
+                                Thread.sleep(5*1000); //Ho faig per deixar algo de temps a Firebase per a que fagi el addMessage
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -110,6 +120,8 @@ public class VisualizeChat extends AppCompatActivity {
                 String texterror = getString(R.string.error);
                 Toast toast = Toast.makeText(VisualizeChat.this, texterror, Toast.LENGTH_SHORT);
                 toast.show();
+
+                Enviar_message.setEnabled(true);
             }
         });
 
@@ -129,6 +141,7 @@ public class VisualizeChat extends AppCompatActivity {
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -159,6 +172,7 @@ public class VisualizeChat extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void InicialitzarLayoutsMissatges(LinearLayout llBotonera, ArrayList<Message> message_list, final ScrollView scrollView) {
         //Borramos la busqueda anterior
         if (llBotonera.getChildCount() > 0) llBotonera.removeAllViews();
@@ -186,7 +200,18 @@ public class VisualizeChat extends AppCompatActivity {
 
             //Asignamos Texto a los textViews
             text_missatge.setText(message_list.get(i).getMessage());
-            time_missatge.setText(message_list.get(i).getTime());
+
+            String string = message_list.get(i).getTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+
+            String date = LocalDate.parse(string, formatter).format(DateTimeFormatter.ISO_DATE);
+            String temps = LocalTime.parse(string, formatter).format(DateTimeFormatter.ISO_TIME);
+
+            temps = temps.substring(0,5);
+
+            String contingut_temps = date + " " + temps;
+
+            time_missatge.setText(contingut_temps);
 
             //Le damos el estilo que queremos
             if(message_list.get(i).getUsername().equals(ControladoraPresentacio.getUsername()))
@@ -225,7 +250,7 @@ public class VisualizeChat extends AppCompatActivity {
             time_missatge.setLayoutParams(paramsU);
 
             if(message_list.get(i).getUsername().equals(ControladoraPresentacio.getUsername())) {
-                text_missatge.setGravity(Gravity.END);
+                text_missatge.setGravity(Gravity.START);
                 time_missatge.setGravity(Gravity.END);
             }
             else {
