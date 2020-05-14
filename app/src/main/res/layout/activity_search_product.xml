@@ -247,6 +247,19 @@
                                 android:maxLength="10"
                                 android:textAlignment="viewEnd" />
 
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/euro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/euro"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
                         </LinearLayout>
 
                         <Space
@@ -297,7 +310,8 @@
                                 android:maxLength="40"
                                 android:textAlignment="viewEnd"
                                 app:counterEnabled="true"
-                                app:counterMaxLength="40" />
+                                app:counterMaxLength="40"
+                                android:hint="@string/keyword" />
 
                         </LinearLayout>
 
