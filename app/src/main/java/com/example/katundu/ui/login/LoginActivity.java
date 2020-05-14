@@ -48,51 +48,58 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        //Modo Vertical
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        //Detectar idioma
-        loadLocale();
-        //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
-        getSupportActionBar().hide();
+        if ( ControladoraPresentacio.getUsername() != "null")
+        {
+            Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
+            startActivity(intent);
+        }
+        else {
+            setContentView(R.layout.activity_login);
+            //Modo Vertical
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            //Detectar idioma
+            loadLocale();
+            //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
+            getSupportActionBar().hide();
 
-        //TODO:Esto se puede quitar??
-        //Firebase Anlytics de prueba
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        mAuth = FirebaseAuth.getInstance();
+            //TODO:Esto se puede quitar??
+            //Firebase Anlytics de prueba
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mAuth = FirebaseAuth.getInstance();
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.passwordEdit);
-        final Button login_button = findViewById(R.id.login);
-        final TextView no_registrado = findViewById(R.id.no_registrado);
+            final EditText usernameEditText = findViewById(R.id.username);
+            final EditText passwordEditText = findViewById(R.id.passwordEdit);
+            final Button login_button = findViewById(R.id.login);
+            final TextView no_registrado = findViewById(R.id.no_registrado);
 
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            login_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                //desactivar login momentaneamente
-                login_button.setEnabled(false);
-                no_registrado.setEnabled(false);
+                    //desactivar login momentaneamente
+                    login_button.setEnabled(false);
+                    no_registrado.setEnabled(false);
 
-                RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
-            }
-        });
+                    RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
+                }
+            });
 
-        no_registrado.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
+            no_registrado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+                    //finish();
+                }
+            });
 
-        //TODO: Esto se puede quitar??
-        Bundle bundle = new Bundle();
-        //bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
-        //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+            //TODO: Esto se puede quitar??
+            Bundle bundle = new Bundle();
+            //bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+            //bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        }
     }
 
     private void RequestLogin(final EditText usernameEditText, EditText passwordEditText, final Button login_button, final TextView no_registrado) {

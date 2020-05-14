@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ControladoraPresentacio {
     //ATRIBUTS USER
-    private static String username = "testusername";
+    private static String username = "null";
     private static String nom_real = "testname";
     private static String password = "password";
     private static String latitud = "0.0";
