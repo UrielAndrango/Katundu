@@ -61,7 +61,7 @@ public class VisualizeChat extends AppCompatActivity {
         final EditText contingut_message = findViewById(R.id.contingut_message);
         final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
         final ScrollView scrollView = findViewById(R.id.scrollview);
-        final SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout_VC);
+        final ImageView refresh = findViewById(R.id.icono_refresh);
 
         username2.setText(ControladoraChat.getUsername2());
 
@@ -76,6 +76,16 @@ public class VisualizeChat extends AppCompatActivity {
             }
         });
 
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+            }
+        });
+
         Enviar_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,19 +96,7 @@ public class VisualizeChat extends AppCompatActivity {
             }
         });
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //recreate();
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
-                finish();
-                overridePendingTransition(0, 0);
-                refreshLayout.setRefreshing(false);
-            }
-        });
-
-        /*
+        /* PER SI VOLEM FER UNA REQUEST DE GETMESSAGES CADA X TEMPS
         //Fa la request de getMessages cada 10 segons per mantenir actualitzats els missatges del chat
         final Handler handler = new Handler();
 

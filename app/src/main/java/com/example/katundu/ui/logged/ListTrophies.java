@@ -17,9 +17,9 @@ import com.example.katundu.R;
 public class ListTrophies extends AppCompatActivity {
 
     //TODO: Sumar 4h (de 14:30 a 18:30) TROPHIES
-    //TODO: Sumar 2h (de 20:30 a 22:30) Swipe Refresh
+    //TODO: Sumar 2h (de 20:30 a 22:30) Swipe Refresh (OK)
     //TODO: SUmar 0,5h (de 22:30 a 23:00) Trophies en MP, LW, LO, LF
-    //TODO: Sumar 1,5h (de 23:00 a 24:00) Fotos desde la Galeria en AddP y Modify
+    //TODO: Sumar 1,5h (de 23:00 a 24:00) Fotos desde la Galeria en AddP y Modify (OK)
     int numero_trofeos = 16;
     ImageView[] lista_trofeos = new ImageView[numero_trofeos];
     Drawable[] vector_icons = new Drawable[numero_trofeos];
