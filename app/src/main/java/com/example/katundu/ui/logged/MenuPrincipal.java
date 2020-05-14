@@ -138,7 +138,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
-
+                        String user = info_offer.getString("user");
                         String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
                         String name = info_offer.getString("name");
                         String category = info_offer.getString("category");
@@ -152,7 +152,7 @@ public class MenuPrincipal extends AppCompatActivity {
                         }
                         String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,user);
                         offer_list.add(offer);
 
                     }
@@ -185,22 +185,26 @@ public class MenuPrincipal extends AppCompatActivity {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
-
-                        String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
-                        String name = info_offer.getString("name");
-                        String category = info_offer.getString("category");
-                        String type = info_offer.getString("type");
-                        JSONArray keywords_array = info_offer.getJSONArray("keywords");
-                        String keywords = "";
-                        for(int j = 0; j < keywords_array.length(); ++j) {
-                            String keyword = keywords_array.getString(j);
-                            keywords += "#";
-                            keywords += keyword;
+                        String user = info_offer.getString("user");
+                        System.out.println(user);
+                        System.out.println(ControladoraPresentacio.getUsername());
+                        if(!user.equals(ControladoraPresentacio.getUsername())) {
+                            String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
+                            String name = info_offer.getString("name");
+                            String category = info_offer.getString("category");
+                            String type = info_offer.getString("type");
+                            JSONArray keywords_array = info_offer.getJSONArray("keywords");
+                            String keywords = "";
+                            for (int j = 0; j < keywords_array.length(); ++j) {
+                                String keyword = keywords_array.getString(j);
+                                keywords += "#";
+                                keywords += keyword;
+                            }
+                            String value = info_offer.getString("value");
+                            String description = info_offer.getString("description");
+                            Offer offer = new Offer(id, name, Integer.parseInt(category), type, keywords, Integer.parseInt(value), description,user);
+                            offer_list.add(offer);
                         }
-                        String value = info_offer.getString("value");
-                        String description = info_offer.getString("description");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
-                        offer_list.add(offer);
 
                     }
                     InicialitzaBotonsOffers(offer_list);
@@ -438,6 +442,7 @@ public class MenuPrincipal extends AppCompatActivity {
             ControladoraPresentacio.setOffer_id(info_offer.getId());
             ControladoraPresentacio.setOffer_name(info_offer.getName());
             ControladoraPresentacio.setOffer_Categoria(info_offer.getCategory());
+            ControladoraPresentacio.setOffer_user(info_offer.getUser());
             boolean type = true;
             String tipus = info_offer.getType();
             if(tipus.equals("Product")) type = false;

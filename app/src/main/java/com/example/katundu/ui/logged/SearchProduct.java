@@ -228,7 +228,7 @@ public class SearchProduct extends AppCompatActivity {
                     ArrayList<Offer> products_list = new ArrayList<>();
                     for (int i = 0; i < response.length(); ++i) {
                         JSONObject product = response.getJSONObject(i);
-
+                        String user = product.getString("user");
                         String id = product.getString("id");
                         String name = product.getString("name");
                         String category = product.getString("category");
@@ -242,7 +242,7 @@ public class SearchProduct extends AppCompatActivity {
                             keywords += "#" + keyword;
                         }
 
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,user);
                         if (!products_list.contains(offer)) products_list.add(offer);
                     }
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.login.LoginActivity;
 
 public class Ajustes extends AppCompatActivity {
@@ -60,6 +61,7 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //FALTA HACER LOGOUT DE VERDAD
+                ControladoraPresentacio.setUsername("null");
                 Intent intent = new Intent(Ajustes.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
