@@ -212,8 +212,8 @@ public class AddProduct extends AppCompatActivity {
                     SubirProducto.setEnabled(false);
                     final String[] productid = {""};
                     String type;
-                    if (switch_type.isChecked()) type = "Service";
-                    else type = "Product";
+                    if (switch_type.isChecked()) type = "Servei";
+                    else type = "Producte";
 
                     String url = "https://us-central1-test-8ea8f.cloudfunctions.net/add-offer?" +
                             "user=" + ControladoraPresentacio.getUsername() + "&" +

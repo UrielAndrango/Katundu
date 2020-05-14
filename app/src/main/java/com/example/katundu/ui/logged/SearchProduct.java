@@ -161,8 +161,8 @@ public class SearchProduct extends AppCompatActivity {
                 String value = v.getText().toString();
                 //Tipus
                 final String type;
-                if (switch_type.isChecked()) type = "Service";
-                else type = "Product";
+                if (switch_type.isChecked()) type = "Servei";
+                else type = "Producte";
                 //Paraules clau
                 String keywords = kw.getText().toString();
 
@@ -181,44 +181,24 @@ public class SearchProduct extends AppCompatActivity {
 
     private void RequestSearchProducts(CharSequence nom, int cat, String valor, String tipus, String keywords) {
         RequestQueue queue = Volley.newRequestQueue(SearchProduct.this);
-        String req;
-        if (cat == 0) {
-            req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "username="
-                    + ControladoraPresentacio.getUsername() + "&name=" + nom;
+        String req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "username="
+                + ControladoraPresentacio.getUsername() + "&name=" + nom;
 
-            if (cat != 0) req += "&category=" + (cat-1);
-            if (!valor.equals("")) req += "&value=" + valor;
-            req += "&type=" + tipus;
-            for (int i = 0; i < keywords.length(); ++i) {
-                if (keywords.charAt(i) == '#') {
+        if (cat != 0) req += "&category=" + (cat-1);
+        if (!valor.equals("")) req += "&value=" + valor;
+        req += "&type=" + tipus;
+        for (int i = 0; i < keywords.length(); ++i) {
+            if (keywords.charAt(i) == '#') {
+                ++i;
+                String new_keyword = "";
+                while (i < keywords.length() && keywords.charAt(i) != '#') {
+                    new_keyword += keywords.charAt(i);
                     ++i;
-                    String new_keyword = "";
-                    while (i < keywords.length() && keywords.charAt(i) != '#') {
-                        new_keyword += keywords.charAt(i);
-                        ++i;
-                    }
-                    --i; //tornem al # de la seguent paraula per a la seguent iteracio
-                    req += "&keyword=" + new_keyword;
                 }
-            }
-            if (cat != 0) req += "&category=" + (cat-1);
-            if (!valor.equals("")) req += "&value=" + valor;
-            req += "&type=" + tipus;
-            for (int i = 0; i < keywords.length(); ++i) {
-                if (keywords.charAt(i) == '#') {
-                    ++i;
-                    String new_keyword = "";
-                    while (i < keywords.length() && keywords.charAt(i) != '#') {
-                        new_keyword += keywords.charAt(i);
-                        ++i;
-                    }
-                    --i; //tornem al # de la seguent paraula per a la seguent iteracio
-                    req += "&keyword=" + new_keyword;
-                }
+                --i; //tornem al # de la seguent paraula per a la seguent iteracio
+                req += "&keyword=" + new_keyword;
             }
         }
-
-        else req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-alloffers";
 
         // Request a JSON Array response from the provided URL.
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(Request.Method.GET, req, null, new Response.Listener<JSONArray>() {
