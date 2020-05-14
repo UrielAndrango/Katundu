@@ -95,6 +95,9 @@ public class SearchProduct extends AppCompatActivity {
         }
     };
 
+    TextView m;
+    LinearLayout ll_products_found;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +112,6 @@ public class SearchProduct extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         final ImageView Atras = findViewById(R.id.Search_Atras);
         final SearchView search = findViewById(R.id.search_SP);
 
@@ -123,7 +125,6 @@ public class SearchProduct extends AppCompatActivity {
         });
 
         final Spinner categorySpinner = findViewById(R.id.spinner_Category_SP);
-
         String[] categorias = new String[9];
         categorias[0] = getString(R.string.category_all_SP);
         categorias[1] = getString(R.string.add_product_category_technology);
@@ -134,7 +135,6 @@ public class SearchProduct extends AppCompatActivity {
         categorias[6] = getString(R.string.add_product_category_leisure);
         categorias[7] = getString(R.string.add_product_category_transport);
         categorias[8] = getString(R.string.add_product_category_education);
-
         ArrayAdapter adapter = new ArrayAdapter<String>(SearchProduct.this, android.R.layout.simple_spinner_dropdown_item, categorias);
         categorySpinner.setAdapter(adapter);
 
@@ -144,17 +144,21 @@ public class SearchProduct extends AppCompatActivity {
 
         final Switch switch_type = findViewById(R.id.switch_SP);
 
+        ll_products_found = findViewById(R.id.products_found_SP);
+
+        m = findViewById(R.id.no_products_found_SP);
+        m.setVisibility(View.GONE);
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Obtenir paràmetres finals per a la request
                 //Nom
-                final String nom = search.getQuery().toString();
+                final CharSequence nom = search.getQuery();
                 //Categoria
                 final int cat = categorySpinner.getSelectedItemPosition();
                 //Valor
                 String value = v.getText().toString();
-                if (value.length() == 0) System.out.println("valor es null");
                 //Tipus
                 final String type;
                 if (switch_type.isChecked()) type = "Service";
@@ -162,8 +166,8 @@ public class SearchProduct extends AppCompatActivity {
                 //Paraules clau
                 String keywords = kw.getText().toString();
 
-                System.out.println("nom = " + nom + " categoria = " + cat + " valor = " + value + " tipus = " + type + " paraules clau = " + keywords);
-
+                m.setVisibility(View.GONE);
+                ll_products_found.setVisibility(View.GONE);
                 RequestSearchProducts(nom, cat, value, type, keywords);
                 return false;
             }
@@ -175,28 +179,46 @@ public class SearchProduct extends AppCompatActivity {
         });
     }
 
-    private void RequestSearchProducts(String nom, int cat, String valor, String tipus, String keywords) {
+    private void RequestSearchProducts(CharSequence nom, int cat, String valor, String tipus, String keywords) {
         RequestQueue queue = Volley.newRequestQueue(SearchProduct.this);
-        String req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "username="
-                + ControladoraPresentacio.getUsername() + "&name=" + nom;
-        if (cat != 0) req += "&category=" + (cat-1);
-        if (!valor.equals("")) req += "&value=" + valor;
-        req += "&type=" + tipus;
-        for (int i = 0; i < keywords.length(); ++i) {
-            if (keywords.charAt(i) == '#') {
-                ++i;
-                String new_keyword = "";
-                while (i < keywords.length() && keywords.charAt(i) != '#') {
-                    new_keyword += keywords.charAt(i);
+        String req;
+        if (cat == 0) {
+            req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-products?" + "username="
+                    + ControladoraPresentacio.getUsername() + "&name=" + nom;
+
+            if (cat != 0) req += "&category=" + (cat-1);
+            if (!valor.equals("")) req += "&value=" + valor;
+            req += "&type=" + tipus;
+            for (int i = 0; i < keywords.length(); ++i) {
+                if (keywords.charAt(i) == '#') {
                     ++i;
+                    String new_keyword = "";
+                    while (i < keywords.length() && keywords.charAt(i) != '#') {
+                        new_keyword += keywords.charAt(i);
+                        ++i;
+                    }
+                    --i; //tornem al # de la seguent paraula per a la seguent iteracio
+                    req += "&keyword=" + new_keyword;
                 }
-                --i; //tornem al # de la seguent paraula per a la seguent iteracio
-                req += "&keyword=" + new_keyword;
+            }
+            if (cat != 0) req += "&category=" + (cat-1);
+            if (!valor.equals("")) req += "&value=" + valor;
+            req += "&type=" + tipus;
+            for (int i = 0; i < keywords.length(); ++i) {
+                if (keywords.charAt(i) == '#') {
+                    ++i;
+                    String new_keyword = "";
+                    while (i < keywords.length() && keywords.charAt(i) != '#') {
+                        new_keyword += keywords.charAt(i);
+                        ++i;
+                    }
+                    --i; //tornem al # de la seguent paraula per a la seguent iteracio
+                    req += "&keyword=" + new_keyword;
+                }
             }
         }
 
-
-        System.out.println("la request es: " + req);
+        else req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-alloffers";
 
         // Request a JSON Array response from the provided URL.
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(Request.Method.GET, req, null, new Response.Listener<JSONArray>() {
@@ -221,10 +243,17 @@ public class SearchProduct extends AppCompatActivity {
                         }
 
                         Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
-                        products_list.add(offer);
+                        if (!products_list.contains(offer)) products_list.add(offer);
                     }
 
-                    InitializeProductsButton(products_list);
+                    ll_products_found.setVisibility(View.VISIBLE);
+
+                    if (products_list.size() == 0) {
+                        m.setVisibility(View.VISIBLE);
+                        ll_products_found.setVisibility(View.GONE);
+                    }
+
+                    else InitializeProductsButton(products_list);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -250,7 +279,8 @@ public class SearchProduct extends AppCompatActivity {
         ControladoraPresentacio.setOffer_List(products_list);
         int nProducts = products_list.size();
 
-        LinearLayout ll_products_found = findViewById(R.id.listaProducts_SP);
+        ll_products_found = findViewById(R.id.products_found_SP);
+        ll_products_found.removeAllViews();
 
         LinearLayout pareja = new LinearLayout(SearchProduct.this);
         boolean show_product = true;

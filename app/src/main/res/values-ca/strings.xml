@@ -54,6 +54,7 @@
     <string name="search_products_bad_search">No s\'ha trobar cap producte</string>
     <string name="search_products_value">Valor</string>
     <string name="category_all_SP">Totes</string>
+    <string name="no_products_found_SP">No s\'ha trobat cap producte.\n\nProva modificant els filtres o ampliant el teu rang de cerca. </string>
     <!-- utilitzar string filtres d'addProduct -->
 
     <!-- Strings related to Users-->

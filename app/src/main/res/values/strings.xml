@@ -54,6 +54,7 @@
     <string name="search_products_bad_search">No se ha encontrado ningún producto</string>
     <string name="search_products_value">Valor</string>
     <string name="category_all_SP">Todas</string>
+    <string name="no_products_found_SP">No se ha encontrado ningún producto.\n\nPrueba modificando los filtros o ampliando tu rango de búsqueda. </string>
     <!-- utilitzar string filtres d'addProduct -->
 
     <!-- Strings related to User-->
