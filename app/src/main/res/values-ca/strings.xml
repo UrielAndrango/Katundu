@@ -125,6 +125,7 @@
     <string name="add_product_no_hay_hashtag">Les paraules clau han de començar amb # i sense espais</string>
     <string name="add_product_minimo_dos_keywords">Escriu com a mínim 2 paraules clau</string>
     <string name="euro">€</string>
+    <string name="keyword">#paraulaclau</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Afegir Nou Desig</string>

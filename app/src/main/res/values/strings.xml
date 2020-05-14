@@ -125,6 +125,7 @@
     <string name="add_product_no_hay_hashtag">Las palabras clave deben empezar con # e ir sin espacios</string>
     <string name="add_product_minimo_dos_keywords">Escribe como mínimo 2 palabras clave</string>
     <string name="euro">€</string>
+    <string name="keyword">#palabraclave</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Añadir Nuevo Deseo</string>
@@ -215,4 +216,5 @@
 
     <!-- Strings related to VisualizeChat-->
     <string name="contingut_message">Escribe un mensaje</string>
+
 </resources>

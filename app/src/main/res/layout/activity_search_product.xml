@@ -310,7 +310,8 @@
                                 android:maxLength="40"
                                 android:textAlignment="viewEnd"
                                 app:counterEnabled="true"
-                                app:counterMaxLength="40" />
+                                app:counterMaxLength="40"
+                                android:hint="@string/keyword" />
 
                         </LinearLayout>
 

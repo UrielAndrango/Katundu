@@ -125,6 +125,7 @@
     <string name="add_product_no_hay_hashtag">Keywords must start with # and write them without spaces</string>
     <string name="add_product_minimo_dos_keywords">Enter at least two keywords</string>
     <string name="euro">€</string>
+    <string name="keyword">#keyword</string>
 
     <!-- Strings related to Add Wish-->
     <string name="title_add_wish">Add New Wish</string>
