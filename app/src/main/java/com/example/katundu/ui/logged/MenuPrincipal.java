@@ -43,6 +43,8 @@ public class MenuPrincipal extends AppCompatActivity {
     private TextView mTextMessage;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
+    final ArrayList<Offer> ofertes_totals = new ArrayList<Offer>();
+    final ArrayList<Offer> ofertes_matches = new ArrayList<Offer>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -83,6 +85,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         final ImageView Perfil_img = findViewById(R.id.img_perfil);
         final LinearLayout search = findViewById(R.id.search_MP);
+
         refreshLayout = findViewById(R.id.refreshLayout_MP);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -119,17 +122,17 @@ public class MenuPrincipal extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
-        //RequestGetMatches();
-        RequestGetOffers();
+        RequestGetMatches();
     }
 
     private void RequestGetMatches() {
         final String username = ControladoraPresentacio.getUsername();
-        final ArrayList<Offer> offer_list = new ArrayList<>();
+        final ArrayList<Offer> offer_list_user = new ArrayList<>();
+        final ArrayList<Offer> offer_list_match = new ArrayList<>();
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(MenuPrincipal.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-alloffers";
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-matches?un=" + ControladoraPresentacio.getUsername();
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -137,26 +140,39 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
-                        JSONObject info_offer = response.getJSONObject(i);
-                        String user = info_offer.getString("user");
-                        String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
-                        String name = info_offer.getString("name");
-                        String category = info_offer.getString("category");
-                        String type = info_offer.getString("type");
-                        JSONArray keywords_array = info_offer.getJSONArray("keywords");
-                        String keywords = "";
-                        for(int j = 0; j < keywords_array.length(); ++j) {
-                            String keyword = keywords_array.getString(j);
-                            keywords += "#";
-                            keywords += keyword;
+                        System.out.println(response);
+                        JSONObject arrays_offer = response.getJSONObject(i);
+                        for(int j = 0; j < arrays_offer.length();++j)
+                        {
+                            JSONObject info_offer = arrays_offer.getJSONObject("offer"+ Integer.toString(j+1));
+                            String user =info_offer.getString("user");
+                            String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
+                            String name = info_offer.getString("name");
+                            String category = info_offer.getString("category");
+                            String type = info_offer.getString("type");
+                            JSONArray keywords_array = info_offer.getJSONArray("keywords");
+                            String keywords = "";
+                            for(int k = 0; k < keywords_array.length(); ++k) {
+                                String keyword = keywords_array.getString(k);
+                                keywords += "#";
+                                keywords += keyword;
+                            }
+                            String value = info_offer.getString("value");
+                            String description = info_offer.getString("description");
+                            Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,user);
+                            if(j==0)
+                            {
+                                offer_list_user.add(offer);
+                                ofertes_totals.add(offer);
+                            }
+                            else
+                            {
+                                offer_list_match.add(offer);
+                                ofertes_matches.add(offer);
+                            }
                         }
-                        String value = info_offer.getString("value");
-                        String description = info_offer.getString("description");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,user);
-                        offer_list.add(offer);
-
                     }
-                    InicialitzaBotonsOffersv2(offer_list,offer_list);
+                    InicialitzaBotonsOffersv2(offer_list_user,offer_list_match);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -223,7 +239,15 @@ public class MenuPrincipal extends AppCompatActivity {
 
     private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
         System.out.println(offer_list);
-        ControladoraPresentacio.setOffer_List(offer_list);
+        for (int i = 0; i < offer_list.size();++i)
+        {
+            ofertes_totals.add(offer_list.get(i));
+            if (ofertes_matches.contains(offer_list.get(i)))
+            {
+                offer_list.remove(i);
+            }
+        }
+        ControladoraPresentacio.setOffer_List(ofertes_totals);
         int numBotones = offer_list.size();
 
         //Obtenemos el linear layout donde colocar los botones
@@ -355,77 +379,145 @@ public class MenuPrincipal extends AppCompatActivity {
             }
             for(int j = 0; j<2;++j) {
                 //Definimos el layout y lo que contiene (foto+precio+nombre)
-                LinearLayout ll = new LinearLayout(MenuPrincipal.this);
+                if (j == 0) {
+                    LinearLayout ll = new LinearLayout(MenuPrincipal.this);
 
-                ll.setOrientation(LinearLayout.VERTICAL);
-                final ImageView foto = new ImageView(MenuPrincipal.this);
-                TextView preu_producte = new TextView(MenuPrincipal.this);
-                TextView nom_producte = new TextView(MenuPrincipal.this);
-                //Asignamos Texto a los textViews
-                preu_producte.setText(offer_user.get(i).getValue() + "€");
-                nom_producte.setText(offer_user.get(i).getName() + "");
-                //Le damos el estilo que queremos
-                //pareja.setBackgroundResource(R.drawable.button_rounded);
-                ll.setBackgroundResource(R.drawable.button_rounded);
-                //ll.setBackgroundColor(Color.WHITE);
-                //ll.setBackgroundResource(R.drawable.custom_border_black);
-                //foto.setImageURI();
-                StorageReference Reference = storageRef.child("/products/" + offer_user.get(i).getId()).child("product_0");
-                Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        //Redondeamos las esquinas de las fotos
-                        bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp, 64 * 2);
-                        foto.setImageBitmap(bmp);
-                        foto.setVisibility(View.VISIBLE);
-                    }
-                });
-                preu_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
-                nom_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
-                Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-                preu_producte.setTypeface(boldTypeface);
-                nom_producte.setTypeface(boldTypeface);
-                preu_producte.setTextSize(18);
-                nom_producte.setTextSize(18);
-                //Margenes del layout
-                TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsll.weight = 1;
-                paramsll.height = 800;
-                //paramsll.setMargins(left, top, right, bottom);
-                paramsll.setMargins(0, 0, 10, 0);
-                ll.setLayoutParams(paramsll);
-                //Margenes de los textViews
-                TableRow.LayoutParams paramsFoto = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsFoto.weight = 1;
-                paramsFoto.setMargins(25, 25, 25, 10);
-                foto.setLayoutParams(paramsFoto);
-                TableRow.LayoutParams paramsPrecio = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                paramsPrecio.setMargins(25, 10, 25, 10);
-                preu_producte.setLayoutParams(paramsPrecio);
-                TableRow.LayoutParams paramsN = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                //paramsN.weight = 1;
-                paramsN.setMargins(25, 10, 25, 20);
-                nom_producte.setLayoutParams(paramsN);
-                //Le escondemos el nombre del producto en la descripcion
-                ll.setContentDescription(offer_user.get(i).getName());
-                //Asignamose el Listener al Layout dinamico
-                ll.setOnClickListener(new MenuPrincipal.LayoutOnClickListener(MenuPrincipal.this));
-                //Añadimos el layout dinamico al layout
-                ll.addView(foto);
-                ll.addView(preu_producte);
-                ll.addView(nom_producte);
-                if (!mostrar_producto) ll.setVisibility(View.INVISIBLE);
-                pareja.addView(ll);
-                if (mostrar_producto && j == 0) llBotonera.addView(pareja);
+                    ll.setOrientation(LinearLayout.VERTICAL);
+                    final ImageView foto = new ImageView(MenuPrincipal.this);
+                    TextView preu_producte = new TextView(MenuPrincipal.this);
+                    TextView nom_producte = new TextView(MenuPrincipal.this);
+                    //Asignamos Texto a los textViews
+                    preu_producte.setText(offer_user.get(i).getValue() + "€");
+                    nom_producte.setText(offer_user.get(i).getName() + "");
+                    //Le damos el estilo que queremos
+                    //pareja.setBackgroundResource(R.drawable.button_rounded);
+                    ll.setBackgroundResource(R.drawable.button_rounded);
+                    //ll.setBackgroundColor(Color.WHITE);
+                    //ll.setBackgroundResource(R.drawable.custom_border_black);
+                    //foto.setImageURI();
+                    StorageReference Reference = storageRef.child("/products/" + offer_user.get(i).getId()).child("product_0");
+                    Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            //Redondeamos las esquinas de las fotos
+                            bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp, 64 * 2);
+                            foto.setImageBitmap(bmp);
+                            foto.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    preu_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                    nom_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                    Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                    preu_producte.setTypeface(boldTypeface);
+                    nom_producte.setTypeface(boldTypeface);
+                    preu_producte.setTextSize(18);
+                    nom_producte.setTextSize(18);
+                    //Margenes del layout
+                    TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsll.weight = 1;
+                    paramsll.height = 800;
+                    //paramsll.setMargins(left, top, right, bottom);
+                    paramsll.setMargins(0, 0, 10, 0);
+                    ll.setLayoutParams(paramsll);
+                    //Margenes de los textViews
+                    TableRow.LayoutParams paramsFoto = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsFoto.weight = 1;
+                    paramsFoto.setMargins(25, 25, 25, 10);
+                    foto.setLayoutParams(paramsFoto);
+                    TableRow.LayoutParams paramsPrecio = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsPrecio.setMargins(25, 10, 25, 10);
+                    preu_producte.setLayoutParams(paramsPrecio);
+                    TableRow.LayoutParams paramsN = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    //paramsN.weight = 1;
+                    paramsN.setMargins(25, 10, 25, 20);
+                    nom_producte.setLayoutParams(paramsN);
+                    //Le escondemos el nombre del producto en la descripcion
+                    ll.setContentDescription(offer_user.get(i).getName());
+                    //Asignamose el Listener al Layout dinamico
+                    ll.setOnClickListener(new MenuPrincipal.LayoutOnClickListener(MenuPrincipal.this));
+                    //Añadimos el layout dinamico al layout
+                    ll.addView(foto);
+                    ll.addView(preu_producte);
+                    ll.addView(nom_producte);
+                    if (!mostrar_producto) ll.setVisibility(View.INVISIBLE);
+                    pareja.addView(ll);
+                    if (mostrar_producto && j == 0) llBotonera.addView(pareja);
 
-                if (modo_impar == true && i == numBotones - 1) {
-                    --i;
-                    mostrar_producto = false;
-                    modo_impar = false;
+
                 }
+                else
+                {
+                    LinearLayout ll = new LinearLayout(MenuPrincipal.this);
+
+                    ll.setOrientation(LinearLayout.VERTICAL);
+                    final ImageView foto = new ImageView(MenuPrincipal.this);
+                    TextView preu_producte = new TextView(MenuPrincipal.this);
+                    TextView nom_producte = new TextView(MenuPrincipal.this);
+                    //Asignamos Texto a los textViews
+                    preu_producte.setText(offer_match.get(i).getValue() + "€");
+                    nom_producte.setText(offer_match.get(i).getName() + "");
+                    //Le damos el estilo que queremos
+                    //pareja.setBackgroundResource(R.drawable.button_rounded);
+                    ll.setBackgroundResource(R.drawable.button_rounded);
+                    //ll.setBackgroundColor(Color.WHITE);
+                    //ll.setBackgroundResource(R.drawable.custom_border_black);
+                    //foto.setImageURI();
+                    StorageReference Reference = storageRef.child("/products/" + offer_match.get(i).getId()).child("product_0");
+                    Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            //Redondeamos las esquinas de las fotos
+                            bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp, 64 * 2);
+                            foto.setImageBitmap(bmp);
+                            foto.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    preu_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                    nom_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                    Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                    preu_producte.setTypeface(boldTypeface);
+                    nom_producte.setTypeface(boldTypeface);
+                    preu_producte.setTextSize(18);
+                    nom_producte.setTextSize(18);
+                    //Margenes del layout
+                    TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsll.weight = 1;
+                    paramsll.height = 800;
+                    //paramsll.setMargins(left, top, right, bottom);
+                    paramsll.setMargins(0, 0, 10, 0);
+                    ll.setLayoutParams(paramsll);
+                    //Margenes de los textViews
+                    TableRow.LayoutParams paramsFoto = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsFoto.weight = 1;
+                    paramsFoto.setMargins(25, 25, 25, 10);
+                    foto.setLayoutParams(paramsFoto);
+                    TableRow.LayoutParams paramsPrecio = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    paramsPrecio.setMargins(25, 10, 25, 10);
+                    preu_producte.setLayoutParams(paramsPrecio);
+                    TableRow.LayoutParams paramsN = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    //paramsN.weight = 1;
+                    paramsN.setMargins(25, 10, 25, 20);
+                    nom_producte.setLayoutParams(paramsN);
+                    //Le escondemos el nombre del producto en la descripcion
+                    ll.setContentDescription(offer_match.get(i).getName());
+                    //Asignamose el Listener al Layout dinamico
+                    ll.setOnClickListener(new MenuPrincipal.LayoutOnClickListener(MenuPrincipal.this));
+                    //Añadimos el layout dinamico al layout
+                    ll.addView(foto);
+                    ll.addView(preu_producte);
+                    ll.addView(nom_producte);
+                    if (!mostrar_producto) ll.setVisibility(View.INVISIBLE);
+                    pareja.addView(ll);
+                    if (mostrar_producto && j == 0) llBotonera.addView(pareja);
+
+
+                }
+
             }
         }
+        RequestGetOffers();
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {
@@ -445,7 +537,7 @@ public class MenuPrincipal extends AppCompatActivity {
             ControladoraPresentacio.setOffer_user(info_offer.getUser());
             boolean type = true;
             String tipus = info_offer.getType();
-            if(tipus.equals("Product")) type = false;
+            if(tipus.equals("Producte")) type = false;
             ControladoraPresentacio.setOffer_Service(type);
             ControladoraPresentacio.setOffer_PC(info_offer.getKeywords());
             ControladoraPresentacio.setOffer_Value(info_offer.getValue());
