@@ -220,8 +220,6 @@ public class SearchProduct extends AppCompatActivity {
 
         else req = "https://us-central1-test-8ea8f.cloudfunctions.net/get-alloffers";
 
-        System.out.println("la request es:" + req);
-
         // Request a JSON Array response from the provided URL.
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(Request.Method.GET, req, null, new Response.Listener<JSONArray>() {
             @Override
