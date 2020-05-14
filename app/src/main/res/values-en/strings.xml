@@ -215,4 +215,5 @@
 
     <!-- Strings related to VisualizeChat-->
     <string name="contingut_message">Write a message</string>
+    <string name="chats">Chats</string>
 </resources>

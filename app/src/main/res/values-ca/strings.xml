@@ -216,4 +216,5 @@
 
     <!-- Strings related to VisualizeChat-->
     <string name="contingut_message">Escriu un missatge</string>
+    <string name="chats">Xats</string>
 </resources>
