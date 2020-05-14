@@ -44,7 +44,7 @@ public class MenuPrincipal extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     final ArrayList<Offer> ofertes_totals = new ArrayList<Offer>();
-    final ArrayList<Offer> ofertes_matches = new ArrayList<Offer>();
+    final ArrayList<String> ofertes_matches = new ArrayList<String>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -140,7 +140,6 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
-                        System.out.println(response);
                         JSONObject arrays_offer = response.getJSONObject(i);
                         for(int j = 0; j < arrays_offer.length();++j)
                         {
@@ -163,12 +162,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             if(j==0)
                             {
                                 offer_list_user.add(offer);
-                                ofertes_totals.add(offer);
+                                ofertes_matches.add(offer.getId());
                             }
                             else
                             {
                                 offer_list_match.add(offer);
-                                ofertes_matches.add(offer);
+                                ofertes_matches.add(offer.getId());
+                                ofertes_totals.add(offer);
                             }
                         }
                     }
@@ -202,8 +202,6 @@ public class MenuPrincipal extends AppCompatActivity {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
                         String user = info_offer.getString("user");
-                        System.out.println(user);
-                        System.out.println(ControladoraPresentacio.getUsername());
                         if(!user.equals(ControladoraPresentacio.getUsername())) {
                             String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
                             String name = info_offer.getString("name");
@@ -239,14 +237,21 @@ public class MenuPrincipal extends AppCompatActivity {
 
     private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
         System.out.println(offer_list);
+        System.out.println(ofertes_totals);
+        System.out.println(ofertes_matches);
         for (int i = 0; i < offer_list.size();++i)
         {
             ofertes_totals.add(offer_list.get(i));
-            if (ofertes_matches.contains(offer_list.get(i)))
+            System.out.println(offer_list.get(i).getId());
+            if (ofertes_matches.contains(offer_list.get(i).getId()))
             {
-                offer_list.remove(i);
+                offer_list.remove(offer_list.get(i));
             }
         }
+        System.out.println("----------------");
+        System.out.println(offer_list);
+        System.out.println(ofertes_totals);
+        System.out.println(ofertes_matches);
         ControladoraPresentacio.setOffer_List(ofertes_totals);
         int numBotones = offer_list.size();
 
@@ -530,6 +535,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
             //Pasamos los datos del deseo a la controladora
             Offer info_offer = ControladoraPresentacio.getOffer_perName(view.getContentDescription().toString());
+            System.out.println(info_offer);
             //Pasamos los datos del deseo a la controladora
             ControladoraPresentacio.setOffer_id(info_offer.getId());
             ControladoraPresentacio.setOffer_name(info_offer.getName());
