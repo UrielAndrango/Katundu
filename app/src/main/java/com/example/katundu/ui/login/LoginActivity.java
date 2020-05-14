@@ -20,11 +20,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.Offer;
 import com.example.katundu.ui.logged.MenuPrincipal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +34,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -108,19 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                         if(response.equals("0")) { //Successful login
                             //Inicialitzem amb les dades de l'usuari
                             RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
-                            FirebaseMessaging.getInstance().subscribeToTopic(usernameEditText.getText().toString())
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                        }
-                                    });
+                            manage_notifications(usernameEditText.getText().toString());
                             RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
-                            FirebaseMessaging.getInstance().unsubscribeFromTopic("pau")
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                        }
-                                    });
 
                             /*
                             //Idioma
@@ -245,5 +237,46 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String idioma = prefs.getString("My_Lang", "");
         setLocale(idioma);
+    }
+    private void manage_notifications(final String username){
+
+        final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-users";
+
+        // Request a JSONObject response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i = 0; i < response.length(); ++i) {
+                        JSONObject info = response.getJSONObject(i);
+                        String user = info.getString("username");
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(user)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                    }
+                                });
+
+                    }
+                    FirebaseMessaging.getInstance().subscribeToTopic(username)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                }
+                            });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
+
     }
 }

@@ -3,6 +3,7 @@ package com.example.katundu.ui.logged;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -118,6 +119,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
+        //RequestGetMatches();
         RequestGetOffers();
     }
     private void RequestGetMatches()
@@ -127,7 +129,7 @@ public class MenuPrincipal extends AppCompatActivity {
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(MenuPrincipal.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/calculate-offerMatch?" + "un=" + username;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-alloffers";
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -136,22 +138,25 @@ public class MenuPrincipal extends AppCompatActivity {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
-                        JSONArray matches = info_offer.getJSONArray(ControladoraPresentacio.getUsername()); //TODO: ACTUALITZA AMB CAMP ID
-                        for(int j = 0; j <matches.length(); ++j) {
-                            Object offer_id = matches.get(j);
+
+                        String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
+                        String name = info_offer.getString("name");
+                        String category = info_offer.getString("category");
+                        String type = info_offer.getString("type");
+                        JSONArray keywords_array = info_offer.getJSONArray("keywords");
+                        String keywords = "";
+                        for(int j = 0; j < keywords_array.length(); ++j) {
+                            String keyword = keywords_array.getString(j);
+                            keywords += "#";
+                            keywords += keyword;
                         }
-                        String id = "1" ;//TODO: ACTUALITZA AMB CAMP ID
-                        String name = "match";
-                        String category = "category";
-                        String type ="type";
-                        String keywords= "#test1#test2";
-                        String value ="999";
+                        String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
                         Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
                         offer_list.add(offer);
 
                     }
-                    InicialitzaBotonsOffers(offer_list);
+                    InicialitzaBotonsOffersv2(offer_list,offer_list);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -253,6 +258,8 @@ public class MenuPrincipal extends AppCompatActivity {
             //Le damos el estilo que queremos
             //pareja.setBackgroundResource(R.drawable.button_rounded);
             ll.setBackgroundResource(R.drawable.button_rounded);
+            ll.setBackgroundColor(Color.WHITE);
+            ll.setBackgroundResource(R.drawable.custom_border_black);
             //foto.setImageURI();
             StorageReference Reference = storageRef.child("/products/" + offer_list.get(i).getId()).child("product_0");
             Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -308,6 +315,171 @@ public class MenuPrincipal extends AppCompatActivity {
                 --i;
                 mostrar_producto = false;
                 modo_impar = false;
+            }
+            /*
+            //TODO: Se puede borrar pero hasta que no me asegure de que el modo_impar va 100% bien lo dejo por aqui
+            if (modo_impar == true && i==numBotones-1) {
+                //Definimos el layout y lo que contiene (foto+precio+nombre)
+                LinearLayout ll_aux = new LinearLayout(ListOffer.this);
+                ll_aux.setOrientation(LinearLayout.VERTICAL);
+                final ImageView foto_aux = new ImageView(ListOffer.this);
+                TextView preu_producte_aux = new TextView(ListOffer.this);
+                TextView nom_producte_aux = new TextView(ListOffer.this);
+                //Asignamos Texto a los textViews
+                preu_producte_aux.setText(offer_list.get(i).getValue() + "€");
+                nom_producte_aux.setText(offer_list.get(i).getName() + "");
+                //Le damos el estilo que queremos
+                //pareja.setBackgroundResource(R.drawable.button_rounded);
+                ll_aux.setBackgroundResource(R.drawable.button_rounded);
+                //foto.setImageURI();
+                StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
+                Reference2.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        foto_aux.setImageBitmap(bmp);
+                        foto_aux.setVisibility(View.VISIBLE);
+                    }
+                });
+                preu_producte_aux.setTextColor(ListOffer.this.getResources().getColor(R.color.colorLetraKatundu));
+                nom_producte_aux.setTextColor(ListOffer.this.getResources().getColor(R.color.colorLetraKatundu));
+                Typeface boldTypeface_aux = Typeface.defaultFromStyle(Typeface.BOLD);
+                preu_producte_aux.setTypeface(boldTypeface_aux);
+                nom_producte_aux.setTypeface(boldTypeface_aux);
+                preu_producte_aux.setTextSize(18);
+                nom_producte_aux.setTextSize(18);
+                //Margenes del layout
+                TableRow.LayoutParams paramsll_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsll_aux.weight = 1;
+                paramsll_aux.height = 800;
+                //paramsll.setMargins(left, top, right, bottom);
+                if (i%2==0) paramsll_aux.setMargins(0, 0, 10, 0);
+                else paramsll_aux.setMargins(10, 0, 0, 0);
+                ll_aux.setLayoutParams(paramsll_aux);
+                //Margenes de los textViews
+                TableRow.LayoutParams paramsFoto_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsFoto_aux.weight = 1;
+                paramsFoto_aux.setMargins(25, 25, 25, 10);
+                foto_aux.setLayoutParams(paramsFoto_aux);
+                TableRow.LayoutParams paramsPrecio_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsPrecio_aux.setMargins(25, 10, 25, 10);
+                preu_producte_aux.setLayoutParams(paramsPrecio_aux);
+                TableRow.LayoutParams paramsN_aux = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                //paramsN.weight = 1;
+                paramsN_aux.setMargins(25, 10, 25, 20);
+                nom_producte_aux.setLayoutParams(paramsN_aux);
+                //Asignamose el Listener al Layout dinamico
+                ll_aux.setOnClickListener(new LayoutOnClickListener(ListOffer.this));
+                //Añadimos el layout dinamico al layout
+                ll_aux.addView(foto_aux);
+                ll_aux.addView(preu_producte_aux);
+                ll_aux.addView(nom_producte_aux);
+                ll_aux.setVisibility(View.INVISIBLE);
+                pareja.addView(ll_aux);
+                //if (i%2 == 0) llBotonera.addView(pareja);
+            }*/
+        }
+    }
+    private void InicialitzaBotonsOffersv2(ArrayList<Offer> offer_user,ArrayList<Offer> offer_match) {
+        //ControladoraPresentacio.setOffer_List(offer_list);
+        int numBotones = offer_user.size();
+
+        //Obtenemos el linear layout donde colocar los botones
+        LinearLayout llBotonera = findViewById(R.id.listaOffers_gen);
+        //Creamos las propiedades de layout que tendrán los botones.
+        //Son LinearLayout.LayoutParams porque los botones van a estar en un LinearLayout.
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+        LinearLayout pareja = new LinearLayout(MenuPrincipal.this);
+        //Creamos los botones en bucle
+        //Antes debemos saber si hay un numero par o impar
+        boolean mostrar_producto = true;
+        boolean modo_impar = false;
+        if (numBotones % 2 == 1) modo_impar = true;
+
+        for (int i=0; i<numBotones; ++i){
+            //Modo Layout con pareja, layout de layout con foto+precio+nombre
+            //LinearLayout pareja;
+            if (mostrar_producto) {
+                pareja = new LinearLayout(MenuPrincipal.this);
+                pareja.setOrientation(LinearLayout.HORIZONTAL);
+                TableRow.LayoutParams paramsP = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                if (i==0) paramsP.setMargins(0, 20, 0, 20);
+                else paramsP.setMargins(0, 0, 0, 20);
+                pareja.setLayoutParams(paramsP);
+                pareja.setBackgroundColor(Color.WHITE);
+                pareja.setBackgroundResource(R.drawable.customborder);
+            }
+            for(int j = 0; j<2;++j) {
+                //Definimos el layout y lo que contiene (foto+precio+nombre)
+                LinearLayout ll = new LinearLayout(MenuPrincipal.this);
+
+                ll.setOrientation(LinearLayout.VERTICAL);
+                final ImageView foto = new ImageView(MenuPrincipal.this);
+                TextView preu_producte = new TextView(MenuPrincipal.this);
+                TextView nom_producte = new TextView(MenuPrincipal.this);
+                //Asignamos Texto a los textViews
+                preu_producte.setText(offer_user.get(i).getValue() + "€");
+                nom_producte.setText(offer_user.get(i).getName() + "");
+                //Le damos el estilo que queremos
+                //pareja.setBackgroundResource(R.drawable.button_rounded);
+                ll.setBackgroundResource(R.drawable.button_rounded);
+                ll.setBackgroundColor(Color.WHITE);
+                ll.setBackgroundResource(R.drawable.custom_border_black);
+                //foto.setImageURI();
+                StorageReference Reference = storageRef.child("/products/" + offer_user.get(i).getId()).child("product_0");
+                Reference.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        //Redondeamos las esquinas de las fotos
+                        bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp, 64 * 2);
+                        foto.setImageBitmap(bmp);
+                        foto.setVisibility(View.VISIBLE);
+                    }
+                });
+                preu_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                nom_producte.setTextColor(MenuPrincipal.this.getResources().getColor(R.color.colorLetraKatundu));
+                Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                preu_producte.setTypeface(boldTypeface);
+                nom_producte.setTypeface(boldTypeface);
+                preu_producte.setTextSize(18);
+                nom_producte.setTextSize(18);
+                //Margenes del layout
+                TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsll.weight = 1;
+                paramsll.height = 800;
+                //paramsll.setMargins(left, top, right, bottom);
+                paramsll.setMargins(0, 0, 10, 0);
+                ll.setLayoutParams(paramsll);
+                //Margenes de los textViews
+                TableRow.LayoutParams paramsFoto = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsFoto.weight = 1;
+                paramsFoto.setMargins(25, 25, 25, 10);
+                foto.setLayoutParams(paramsFoto);
+                TableRow.LayoutParams paramsPrecio = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                paramsPrecio.setMargins(25, 10, 25, 10);
+                preu_producte.setLayoutParams(paramsPrecio);
+                TableRow.LayoutParams paramsN = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                //paramsN.weight = 1;
+                paramsN.setMargins(25, 10, 25, 20);
+                nom_producte.setLayoutParams(paramsN);
+                //Le escondemos el nombre del producto en la descripcion
+                ll.setContentDescription(offer_user.get(i).getName());
+                //Asignamose el Listener al Layout dinamico
+                ll.setOnClickListener(new MenuPrincipal.LayoutOnClickListener(MenuPrincipal.this));
+                //Añadimos el layout dinamico al layout
+                ll.addView(foto);
+                ll.addView(preu_producte);
+                ll.addView(nom_producte);
+                if (!mostrar_producto) ll.setVisibility(View.INVISIBLE);
+                pareja.addView(ll);
+                if (mostrar_producto && j == 0) llBotonera.addView(pareja);
+
+                if (modo_impar == true && i == numBotones - 1) {
+                    --i;
+                    mostrar_producto = false;
+                    modo_impar = false;
+                }
             }
             /*
             //TODO: Se puede borrar pero hasta que no me asegure de que el modo_impar va 100% bien lo dejo por aqui
