@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -21,14 +23,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraChat;
 import com.example.katundu.ui.ControladoraEditOffer;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class VisualizeOffer extends AppCompatActivity {
 
@@ -62,6 +70,7 @@ public class VisualizeOffer extends AppCompatActivity {
         final ImageView afegirFavorite = findViewById(R.id.imageView_Favorite);
 
         // FOTOS
+        final ImageView new_chat = findViewById(R.id.icona_new_missatge);
         PreviewFoto0 = findViewById(R.id.previewFoto_EditOffer);
         PreviewFoto1 = findViewById(R.id.previewFoto2_EditOffer);
         PreviewFoto2 = findViewById(R.id.previewFoto3_EditOffer);
@@ -142,6 +151,84 @@ public class VisualizeOffer extends AppCompatActivity {
                 Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+        new_chat.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                if (ControladoraPresentacio.getOffer_user().equals(ControladoraPresentacio.getUsername()))
+                {
+                    String favorite_added_successfully = getString(R.string.error);
+                    Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else
+                {
+                    final RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
+
+                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-chats?" + "un=" + ControladoraPresentacio.getUsername();
+                    // Request a JSONObject response from the provided URL.
+                    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try {
+                                boolean found = false;
+                                for(int i = 0; i < response.length(); ++i) {
+                                    JSONObject info_message = response.getJSONObject(i);
+                                    String user = info_message.getString("user");
+                                    String id_chat = info_message.getString("id");
+                                    if (user.equals(ControladoraPresentacio.getOffer_user())) {
+                                        found = true;
+                                        ControladoraChat.setId_Chat(id_chat);
+                                        ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
+                                        ControladoraChat.setUsername2(user);
+                                        Intent intent = new Intent(VisualizeOffer.this, VisualizeChat.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                                if (!found) {
+                                    String url = "https://us-central1-test-8ea8f.cloudfunctions.net/chat-create?" + "un1=" + ControladoraPresentacio.getUsername() + "&un2=" + ControladoraPresentacio.getOffer_user();
+                                    final RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
+
+                                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                                            new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    if (!response.equals("-1")) { //message added successfully
+                                                        ControladoraChat.setId_Chat(response);
+                                                        ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
+                                                        ControladoraChat.setUsername2(ControladoraPresentacio.getOffer_user());
+                                                        Intent intent = new Intent(VisualizeOffer.this, VisualizeChat.class);
+                                                        startActivity(intent);
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+
+                                        }
+                                    });
+
+                                    stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                    // Add the request to the RequestQueue.
+                                    queue.add(stringRequest);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+                        }
+                    });
+                    queue.add(jsonArrayRequest);
+                }
             }
         });
 

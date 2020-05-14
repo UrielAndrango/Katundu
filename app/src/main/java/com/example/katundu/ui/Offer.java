@@ -8,10 +8,11 @@ public class Offer {
     private String keywords;
     private Integer value;
     private String description;
+    private String user;
     public Offer(){
     }
 
-    public Offer(String id, String name, Integer category, String type, String keywords, Integer value, String description) {
+    public Offer(String id, String name, Integer category, String type, String keywords, Integer value, String description, String user) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -19,6 +20,7 @@ public class Offer {
         this.keywords = keywords;
         this.value = value;
         this.description = description;
+        this.user = user;
     }
 
     public String getName() {
@@ -43,6 +45,14 @@ public class Offer {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getKeywords() {
@@ -76,4 +86,5 @@ public class Offer {
     public void setId(String id) {
         this.id = id;
     }
+
 }

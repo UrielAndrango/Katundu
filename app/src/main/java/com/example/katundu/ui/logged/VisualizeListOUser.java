@@ -168,7 +168,7 @@ public class VisualizeListOUser extends AppCompatActivity {
                         }
                         String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,ControladoraPresentacio.getUsername());
                         String tipus = offer.getType();
                         System.out.println("El tipus es : "+ tipus);
                         offer_list.add(offer);

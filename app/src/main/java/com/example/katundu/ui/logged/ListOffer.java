@@ -192,7 +192,6 @@ public class ListOffer extends AppCompatActivity {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
                         JSONObject info_offer = response.getJSONObject(i);
-
                         String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
                         String name = info_offer.getString("name");
                         String category = info_offer.getString("category");
@@ -206,7 +205,7 @@ public class ListOffer extends AppCompatActivity {
                         }
                         String value = info_offer.getString("value");
                         String description = info_offer.getString("description");
-                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description);
+                        Offer offer = new Offer(id,name,Integer.parseInt(category),type,keywords,Integer.parseInt(value),description,ControladoraPresentacio.getUsername());
                         String tipus = offer.getType();
                         offer_list.add(offer);
                     }

@@ -48,8 +48,9 @@ public class ControladoraPresentacio {
     private static String offer_PC = "Coche";
     private static Integer offer_value = 0;
     private static String offer_description= "Es una descripcio";
+    private static String offer_user="User";
 
-    //ATRIBUTS OFFER
+    //ATRIBUTS Favorite
     private static ArrayList<Favorite> favorite_list = new ArrayList<>();
     private static String favorite_id = "wish_id";
     private static String favorite_name = "Audi";
@@ -211,6 +212,13 @@ public class ControladoraPresentacio {
 
     public static void setOffer_name(String offer_name) {
         ControladoraPresentacio.offer_name = offer_name;
+    }
+    public static String getOffer_user() {
+        return offer_user;
+    }
+
+    public static void setOffer_user(String offer_user) {
+        ControladoraPresentacio.offer_user = offer_user;
     }
 
     public static int getOffer_Categoria() {
