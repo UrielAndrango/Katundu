@@ -336,7 +336,7 @@ public class VisualizeListOUser extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Categoria(info_offer.getCategory());
             boolean type = true;
             String tipus = info_offer.getType();
-            if(tipus.equals("Product")) type = false;
+            if(tipus.equals("Producte")) type = false;
             ControladoraPresentacio.setOffer_Service(type);
             ControladoraPresentacio.setOffer_PC(info_offer.getKeywords());
             ControladoraPresentacio.setOffer_Value(info_offer.getValue());
