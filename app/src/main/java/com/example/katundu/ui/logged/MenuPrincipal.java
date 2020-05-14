@@ -122,8 +122,8 @@ public class MenuPrincipal extends AppCompatActivity {
         //RequestGetMatches();
         RequestGetOffers();
     }
-    private void RequestGetMatches()
-    {
+
+    private void RequestGetMatches() {
         final String username = ControladoraPresentacio.getUsername();
         final ArrayList<Offer> offer_list = new ArrayList<>();
         // Instantiate the RequestQueue.
@@ -169,8 +169,8 @@ public class MenuPrincipal extends AppCompatActivity {
         });
         queue.add(jsonArrayRequest);
     }
-    private void RequestGetOffers()
-    {
+
+    private void RequestGetOffers() {
         final String username = ControladoraPresentacio.getUsername();
         final ArrayList<Offer> offer_list = new ArrayList<>();
         // Instantiate the RequestQueue.
@@ -216,6 +216,7 @@ public class MenuPrincipal extends AppCompatActivity {
         });
         queue.add(jsonArrayRequest);
     }
+
     private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
         System.out.println(offer_list);
         ControladoraPresentacio.setOffer_List(offer_list);
@@ -380,6 +381,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }*/
         }
     }
+
     private void InicialitzaBotonsOffersv2(ArrayList<Offer> offer_user,ArrayList<Offer> offer_match) {
         //ControladoraPresentacio.setOffer_List(offer_list);
         int numBotones = offer_user.size();
@@ -545,6 +547,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }*/
         }
     }
+
     private class LayoutOnClickListener implements View.OnClickListener {
         public LayoutOnClickListener(MenuPrincipal MenuPrincipal) {
         }

@@ -2,11 +2,13 @@ package com.example.katundu.ui.logged;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.LayoutDirection;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -59,6 +61,7 @@ public class VisualizeChat extends AppCompatActivity {
         final EditText contingut_message = findViewById(R.id.contingut_message);
         final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
         final ScrollView scrollView = findViewById(R.id.scrollview);
+        final SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout_VC);
 
         username2.setText(ControladoraChat.getUsername2());
 
@@ -83,6 +86,19 @@ public class VisualizeChat extends AppCompatActivity {
             }
         });
 
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+        /*
         //Fa la request de getMessages cada 10 segons per mantenir actualitzats els missatges del chat
         final Handler handler = new Handler();
 
@@ -94,6 +110,7 @@ public class VisualizeChat extends AppCompatActivity {
                 handler.postDelayed(this, TIEMPO);
             }
         }, TIEMPO);
+         */
     }
 
     private void RequestAddMessage(final String id_Chat, String username1, final TextView contingut_message, final LinearLayout llBotonera, final ScrollView scrollView, final ImageView Enviar_message) {

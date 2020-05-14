@@ -1,6 +1,7 @@
 package com.example.katundu.ui.login;
 
 import android.app.Activity;
+import android.app.AutomaticZenRule;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -26,7 +27,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.Offer;
 import com.example.katundu.ui.logged.MenuPrincipal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -110,9 +110,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if(response.equals("0")) { //Successful login
                             //Inicialitzem amb les dades de l'usuari
-                            RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
+                            RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue, login_button, no_registrado);
                             manage_notifications(usernameEditText.getText().toString());
-                            RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue);
 
                             /*
                             //Idioma
@@ -182,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void RequestInicialitzaDadesUsuari(final String username, RequestQueue queue) {
+    private void RequestInicialitzaDadesUsuari(final String username, RequestQueue queue, final Button login_button, final TextView no_registrado) {
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-infoUser?" + "un=" + username;
 
         // Request a JSONObject response from the provided URL.
@@ -217,6 +216,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+                login_button.setEnabled(true);
+                no_registrado.setEnabled(true);
             }
         });
         queue.add(jsObjectRequest);
@@ -238,6 +239,7 @@ public class LoginActivity extends AppCompatActivity {
         String idioma = prefs.getString("My_Lang", "");
         setLocale(idioma);
     }
+
     private void manage_notifications(final String username){
 
         final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -277,6 +279,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonArrayRequest);
-
     }
 }

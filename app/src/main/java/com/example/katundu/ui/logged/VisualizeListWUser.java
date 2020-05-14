@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -69,6 +70,7 @@ public class VisualizeListWUser extends AppCompatActivity {
 
         final TextView NomUsuari = findViewById(R.id.VLO_nomUsuari);
         final ImageView Atras = findViewById(R.id.VLO_User_Atras);
+        final SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout_LWU);
 
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraSearchUsers.getUsername());
@@ -82,6 +84,18 @@ public class VisualizeListWUser extends AppCompatActivity {
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //recreate();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+                finish();
+                overridePendingTransition(0, 0);
+                refreshLayout.setRefreshing(false);
             }
         });
 
