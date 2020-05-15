@@ -3,7 +3,6 @@ package com.example.katundu.ui.logged;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -379,7 +378,6 @@ public class MenuPrincipal extends AppCompatActivity {
                 if (i==0) paramsP.setMargins(0, 20, 0, 20);
                 else paramsP.setMargins(0, 0, 0, 20);
                 pareja.setLayoutParams(paramsP);
-                pareja.setBackgroundColor(Color.WHITE);
                 pareja.setBackgroundResource(R.drawable.customborder);
             }
             for(int j = 0; j<2;++j) {
@@ -491,7 +489,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     paramsll.weight = 1;
                     paramsll.height = 800;
                     //paramsll.setMargins(left, top, right, bottom);
-                    paramsll.setMargins(0, 0, 10, 0);
+                    paramsll.setMargins(10, 0, 0, 0);
                     ll.setLayoutParams(paramsll);
                     //Margenes de los textViews
                     TableRow.LayoutParams paramsFoto = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
