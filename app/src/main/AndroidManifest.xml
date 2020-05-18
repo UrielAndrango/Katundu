@@ -18,7 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.logged.Sorprenme"></activity>
+        <activity
+            android:name=".ui.logged.Sorprenme"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.logged.ListTrophies"
             android:screenOrientation="portrait"
