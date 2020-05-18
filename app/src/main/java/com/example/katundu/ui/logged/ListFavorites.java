@@ -91,6 +91,7 @@ public class ListFavorites extends AppCompatActivity {
         final TextView NomUsuari = findViewById(R.id.nomUsuari);
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
+        final LinearLayout trophies = findViewById(R.id.layout_trophies_LF);
         refreshLayout = findViewById(R.id.refreshLayout_LF);
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
@@ -111,6 +112,15 @@ public class ListFavorites extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListFavorites.this, Ajustes.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        trophies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListFavorites.this, ListTrophies.class);
                 startActivity(intent);
                 //finish();
             }

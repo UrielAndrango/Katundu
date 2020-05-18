@@ -81,6 +81,7 @@ public class ListWish extends AppCompatActivity {
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
         final FloatingActionButton addWish = findViewById(R.id.FAB_addWish_LW);
+        final LinearLayout trophies = findViewById(R.id.layout_trophies_LW);
         refreshLayout = findViewById(R.id.refreshLayout_LW);
 
         //USERNAME DEL USUARIO
@@ -102,6 +103,15 @@ public class ListWish extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListWish.this, Ajustes.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        trophies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListWish.this, ListTrophies.class);
                 startActivity(intent);
                 //finish();
             }

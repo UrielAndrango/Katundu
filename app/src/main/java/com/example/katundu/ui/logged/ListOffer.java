@@ -95,6 +95,7 @@ public class ListOffer extends AppCompatActivity {
         final ImageView ImgSettings = findViewById(R.id.img_settings);
         final ImageView Atras = findViewById(R.id.User_Atras);
         final FloatingActionButton addProduct = findViewById(R.id.FAB_addProduct_LO);
+        final LinearLayout trophies = findViewById(R.id.layout_trophies_LO);
         refreshLayout = findViewById(R.id.refreshLayout_LO);
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraPresentacio.getUsername());
@@ -115,6 +116,15 @@ public class ListOffer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListOffer.this, Ajustes.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        trophies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListOffer.this, ListTrophies.class);
                 startActivity(intent);
                 //finish();
             }

@@ -81,7 +81,7 @@ public class VisualizeListOUser extends AppCompatActivity {
         final TextView NomUsuari = findViewById(R.id.VLO_nomUsuari);
         final ImageView Atras = findViewById(R.id.VLO_User_Atras);
         final SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout_LOU);
-
+        final LinearLayout trophies = findViewById(R.id.layout_trophies_LO_User);
         //USERNAME DEL USUARIO
         NomUsuari.setText(ControladoraSearchUsers.getUsername());
 
@@ -94,6 +94,15 @@ public class VisualizeListOUser extends AppCompatActivity {
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
+            }
+        });
+
+        trophies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(VisualizeListOUser.this, ListTrophies.class);
+                startActivity(intent);
+                //finish();
             }
         });
 
