@@ -217,4 +217,7 @@
     <!-- Strings related to VisualizeChat-->
     <string name="contingut_message">Escriu un missatge</string>
     <string name="chats">Xats</string>
+
+    <!-- Strings related to Sorprenme-->
+    <string name="sorpren_me">Sorprèn-me!</string>
 </resources>

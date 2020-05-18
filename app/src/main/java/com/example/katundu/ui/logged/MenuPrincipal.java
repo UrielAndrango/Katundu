@@ -53,7 +53,13 @@ public class MenuPrincipal extends AppCompatActivity {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_surprise:
-                    return true;
+                    Intent intent3 = new Intent(MenuPrincipal.this,Sorprenme.class);
+                    intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent3.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent3);
+                    overridePendingTransition(0,0);
+                    //finish();
+                    break;
                 case R.id.navigation_add:
                     Intent intent = new Intent(MenuPrincipal.this, Add.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

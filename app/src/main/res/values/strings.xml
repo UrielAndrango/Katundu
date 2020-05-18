@@ -218,4 +218,7 @@
     <string name="contingut_message">Escribe un mensaje</string>
     <string name="chats">Chats</string>
 
+    <!-- Strings related to Sorprenme-->
+    <string name="sorpren_me">Sorpréndeme!</string>
+
 </resources>

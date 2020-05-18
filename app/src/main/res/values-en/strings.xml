@@ -216,4 +216,6 @@
     <!-- Strings related to VisualizeChat-->
     <string name="contingut_message">Write a message</string>
     <string name="chats">Chats</string>
+    <!-- Strings related to Sorprenme-->
+    <string name="sorpren_me">Surprise me!</string>
 </resources>
