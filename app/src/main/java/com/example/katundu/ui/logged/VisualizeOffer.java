@@ -1,6 +1,7 @@
 package com.example.katundu.ui.logged;
 
 import android.annotation.SuppressLint;
+import android.app.AutomaticZenRule;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -9,7 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -78,7 +78,10 @@ public class VisualizeOffer extends AppCompatActivity {
         PreviewFoto4 = findViewById(R.id.previewFoto5_EditOffer);
         PreviewFotos = new ImageView[]{PreviewFoto0, PreviewFoto1, PreviewFoto2, PreviewFoto3, PreviewFoto4};
 
-        afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+        //Posem l'estrella de color blanc si l'usuari ja te aquesta oferta com a favorite. En cas contrari la pintem de color negre
+        if(ControladoraPresentacio.isFavorite_withID(id))
+            afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        else afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
 
         //nombre_fotos();
 
@@ -268,7 +271,12 @@ public class VisualizeOffer extends AppCompatActivity {
         afegirFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestAddFavorite(Atras, afegirFavorite);
+                Atras.setEnabled(false);
+                afegirFavorite.setEnabled(false);
+                if(afegirFavorite.getImageTintList() == ColorStateList.valueOf(Color.parseColor("#000000")))
+                    RequestAddFavorite(Atras, afegirFavorite);
+                else
+                    RequestDeleteFavorite(id, afegirFavorite, Atras);
             }
         });
     }
@@ -291,12 +299,16 @@ public class VisualizeOffer extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
                             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                            Atras.setEnabled(true);
+                            afegirFavorite.setEnabled(true);
                         }
                         else if(response.equals("Favorite duplicated")) { //favorite duplicated
                             String favorite_added_successfully = getString(R.string.favorite_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
                             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                            Atras.setEnabled(true);
+                            afegirFavorite.setEnabled(true);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -316,6 +328,49 @@ public class VisualizeOffer extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
+    }
+
+    private void RequestDeleteFavorite(final String id, final ImageView afegirFavorite, final ImageView Atras) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/delete-favorite?" + "un=" + ControladoraPresentacio.getUsername() + "&id=" + id;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("0")) { //Account modified successfully
+                            String offer_deleted_successfully = getString(R.string.favorite_removed_successfully);
+                            Toast toast = Toast.makeText(getApplicationContext(), offer_deleted_successfully, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                            Atras.setEnabled(true);
+                            afegirFavorite.setEnabled(true);
+                        }
+                        else { //response == "1" No s'ha esborrat el desig
+                            String texterror = getString(R.string.error);
+                            Toast toast = Toast.makeText(VisualizeOffer.this, texterror, Toast.LENGTH_SHORT);
+                            toast.show();
+                            Atras.setEnabled(true);
+                            afegirFavorite.setEnabled(true);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String texterror = getString(R.string.error);
+                Toast toast = Toast.makeText(VisualizeOffer.this, texterror, Toast.LENGTH_SHORT);
+                toast.show();
+                Atras.setEnabled(true);
+                afegirFavorite.setEnabled(true);
+            }
+        });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     @SuppressLint("MissingSuperCall")

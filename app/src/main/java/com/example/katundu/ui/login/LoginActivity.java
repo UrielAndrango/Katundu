@@ -26,7 +26,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
+import com.example.katundu.ui.ControladoraChat;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.Favorite;
 import com.example.katundu.ui.logged.MenuPrincipal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +40,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
@@ -199,14 +203,21 @@ public class LoginActivity extends AppCompatActivity {
 
                     ControladoraPresentacio.setUsername(username);
                     ControladoraPresentacio.setNom_real(response.getString("name"));
-                    ControladoraPresentacio.setPassword(response.getString("password"));
+                    //ControladoraPresentacio.setPassword(response.getString("password")); //TODO: falta que retorni la password
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
                     ControladoraPresentacio.setDistanciaMaxima(response.getString("distanciamaxima"));
+                    //ControladoraPresentacio.setValoracion(Double.parseDouble(response.getString("valoracio"))); //TODO: si un usuari no te valoracio, peta
 
-                    String welcome = getString(R.string.welcome) + username;
-                    Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
-                    toast.show();
+                    JSONArray favorite_array = response.getJSONArray("favorite");
+                    ArrayList<Favorite> favorites_user = new ArrayList<>();
+                    for(int i = 0; i < favorite_array.length(); ++i) {
+                        Favorite favorite = new Favorite();
+                        favorite.setId(favorite_array.getString(i));
+                        favorites_user.add(favorite);
+                    }
+
+                    ControladoraPresentacio.setFavorite_List(favorites_user);
 
                     //Canviem de pantalla i anem al Menu Principal
                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
@@ -214,6 +225,10 @@ public class LoginActivity extends AppCompatActivity {
                     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
+
+                    String welcome = getString(R.string.welcome) + username;
+                    Toast toast = Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT);
+                    toast.show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

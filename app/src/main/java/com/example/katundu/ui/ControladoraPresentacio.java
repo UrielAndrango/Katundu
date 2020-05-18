@@ -19,12 +19,12 @@ public class ControladoraPresentacio {
     private static String latitud = "0.0";
     private static String longitud = "0.0";
     private static String distanciaMaxima = "10.0";
+    private static double valoracion = 4;
 
     //idioma usuario (temporal)
     private static String idioma = "";
 
     //ATRIBUTS add product
-    private static double valoracion = 4;
     private static int numero_imagen = -1;
     private static int cantidad_fotos = 0;
     private static int numero_maximo_fotos = 5;
@@ -367,6 +367,16 @@ public class ControladoraPresentacio {
             }
         }
         return info_favorite;
+    }
+
+    public static boolean isFavorite_withID(String id) {
+        boolean trobat = false;
+        for(int i = 0; i < favorite_list.size() & !trobat; ++i){
+            if(favorite_list.get(i).getId().equals(id)){
+                trobat = true;
+            }
+        }
+        return trobat;
     }
 
     public static void setFavorite_List(ArrayList<Favorite> favorite_list) {
