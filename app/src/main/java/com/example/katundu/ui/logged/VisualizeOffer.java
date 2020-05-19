@@ -1,7 +1,6 @@
 package com.example.katundu.ui.logged;
 
 import android.annotation.SuppressLint;
-import android.app.AutomaticZenRule;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -274,14 +273,14 @@ public class VisualizeOffer extends AppCompatActivity {
                 Atras.setEnabled(false);
                 afegirFavorite.setEnabled(false);
                 if(afegirFavorite.getImageTintList() == ColorStateList.valueOf(Color.parseColor("#000000")))
-                    RequestAddFavorite(Atras, afegirFavorite);
+                    RequestAddFavorite(Atras, afegirFavorite, id);
                 else
                     RequestDeleteFavorite(id, afegirFavorite, Atras);
             }
         });
     }
 
-    private void RequestAddFavorite(final ImageView Atras, final ImageView afegirFavorite) {
+    private void RequestAddFavorite(final ImageView Atras, final ImageView afegirFavorite, final String id) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(VisualizeOffer.this);
 
@@ -298,6 +297,7 @@ public class VisualizeOffer extends AppCompatActivity {
                             String favorite_added_successfully = getString(R.string.favorite_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
+                            ControladoraPresentacio.addavorite_byId(id);
                             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                             Atras.setEnabled(true);
                             afegirFavorite.setEnabled(true);
@@ -306,6 +306,7 @@ public class VisualizeOffer extends AppCompatActivity {
                             String favorite_added_successfully = getString(R.string.favorite_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), favorite_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
+                            ControladoraPresentacio.addavorite_byId(id);
                             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                             Atras.setEnabled(true);
                             afegirFavorite.setEnabled(true);
@@ -344,6 +345,8 @@ public class VisualizeOffer extends AppCompatActivity {
                             String offer_deleted_successfully = getString(R.string.favorite_removed_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), offer_deleted_successfully, Toast.LENGTH_SHORT);
                             toast.show();
+
+                            ControladoraPresentacio.deleteFavorite_byId(id);
 
                             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                             Atras.setEnabled(true);

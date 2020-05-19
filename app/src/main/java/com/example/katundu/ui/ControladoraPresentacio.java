@@ -379,6 +379,22 @@ public class ControladoraPresentacio {
         return trobat;
     }
 
+    public static void deleteFavorite_byId(String id) {
+        boolean trobat = false;
+        for(int i = 0; i < favorite_list.size() & !trobat; ++i){
+            if(favorite_list.get(i).getId().equals(id)){
+                ControladoraPresentacio.favorite_list.remove(i);
+                trobat = true;
+            }
+        }
+    }
+
+    public static void addavorite_byId(String id) {
+        Favorite favorite = new Favorite();
+        favorite.setId(id);
+        ControladoraPresentacio.favorite_list.add(favorite);
+    }
+
     public static void setFavorite_List(ArrayList<Favorite> favorite_list) {
         ControladoraPresentacio.favorite_list =favorite_list;
     }
