@@ -91,6 +91,8 @@ public class MenuPrincipal extends AppCompatActivity {
         final ImageView Perfil_img = findViewById(R.id.img_perfil);
         final LinearLayout search = findViewById(R.id.search_MP);
 
+        final ImageView Forum = findViewById(R.id.forum);
+
         refreshLayout = findViewById(R.id.refreshLayout_MP);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -111,6 +113,14 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuPrincipal.this, SearchProduct.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+        Forum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPrincipal.this, Forum.class);
                 startActivity(intent);
                 //finish();
             }
@@ -241,9 +251,6 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
-        System.out.println(offer_list);
-        System.out.println(ofertes_totals);
-        System.out.println(ofertes_matches);
         for (int i = 0; i < offer_list.size();++i)
         {
             ofertes_totals.add(offer_list.get(i));
@@ -253,10 +260,6 @@ public class MenuPrincipal extends AppCompatActivity {
                 offer_list.remove(offer_list.get(i));
             }
         }
-        System.out.println("----------------");
-        System.out.println(offer_list);
-        System.out.println(ofertes_totals);
-        System.out.println(ofertes_matches);
         ControladoraPresentacio.setOffer_List(ofertes_totals);
         int numBotones = offer_list.size();
 

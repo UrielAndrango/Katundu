@@ -220,4 +220,24 @@
 
     <!-- Strings related to Sorprenme-->
     <string name="sorpren_me">Sorprèn-me!</string>
+    <!-- Strings related to Forum-->
+    <string name="forum">Fòrum!</string>
+    <string name="title_add_post">Afegir publicació</string>
+    <string name="add_new_post_explication">La teva publicació ha de tenir títol i descripció. Publica qualsevol cosa que creguis interessant! </string>
+    <string name="add_post_title">Títol</string>
+    <string name="add_post_description">Descripció</string>
+    <string name="add_new_post">Afegir</string>
+    <string name="add_post_no_hay_titulo">Has d\'afegir un tìtol</string>
+    <string name="add_post_no_hay_descripcion">Has d\'afegir una descripció</string>
+    <string name="add_post_general_error">Hi ha hagut un error, torna-ho a intentar</string>
+    <string name="add_post_general_ok">Publicació afegida!</string>
+    <string name="personalposts">Les teves publicacions</string>
+    ç<string name="title_editar_post">Modificar publicació</string>
+    <string name="edit_post">Modificar</string>
+    <string name="eliminar_post">Eliminar publicació</string>
+    <string name="eliminar_post_confirmacion">Vols eliminar aquesta publicació?</string>
+    <string name="confirmar">Si</string>
+    <string name="cancelar">No</string>
+    <string name="post_deleted_successfully">Publicació eliminada</string>
+    <string name="post_modified_successfully">Modificació efectuada</string>
 </resources>

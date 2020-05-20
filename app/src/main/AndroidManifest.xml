@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.logged.VisualizePosts"></activity>
+        <activity android:name=".ui.logged.PersonalPosts" />
+        <activity android:name=".ui.logged.AddPost" />
+        <activity android:name=".ui.logged.Forum" />
         <activity
             android:name=".ui.logged.Sorprenme"
             android:screenOrientation="portrait"

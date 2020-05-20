@@ -221,4 +221,29 @@
     <!-- Strings related to Sorprenme-->
     <string name="sorpren_me">Sorpréndeme!</string>
 
+    <!-- Strings related to Forum-->
+    <string name="forum">Fórum!</string>
+    <string name="title_add_post">Añadir publicación</string>
+    <string name="add_new_post_explication">Tu publicación debe contener un título y una descripción. Publica cualquier cosa que creas interesante!</string>
+    <string name="add_post_title">Título</string>
+    <string name="add_post_description">Descripción</string>
+    <string name="add_new_post">Añadir</string>
+    <string name="add_post_no_hay_titulo">Debes añadir un título</string>
+    <string name="add_post_no_hay_descripcion">Debes añadir una descripción</string>
+    <string name="add_post_general_error">Ha habido un error, vuélvelo a intentar</string>
+    <string name="add_post_general_ok">Publicación añadida!</string>
+    <string name="personalposts">Tus publicaciones</string>
+    <string name="title_editar_post">Modificar publicación</string>
+    <string name="edit_post">Modificar</string>
+    <string name="eliminar_post">Eliminar publicación</string>
+    <string name="eliminar_post_confirmacion">Quieres eliminar esta publicación?</string>
+    <string name="confirmar">Si</string>
+    <string name="cancelar">No</string>
+    <string name="post_deleted_successfully">Publicación eliminada</string>
+    <string name="post_modified_successfully">Modificación efectuada</string>
+
+
+
+
+
 </resources>

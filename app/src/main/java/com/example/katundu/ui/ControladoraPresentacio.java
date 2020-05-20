@@ -60,6 +60,13 @@ public class ControladoraPresentacio {
     private static Integer favorite_value = 0;
     private static String favorite_description= "Es una descripcio";
 
+    //ATRIBUTS Post
+    private static ArrayList<Post> post_list = new ArrayList<>();
+    private static String title = "wish_id";
+    private static String description = "Audi";
+    private static String user = "wish_id";
+    private static String time = "Audi";
+
 
     //GET & SET DE USER
     public static String getUsername() {
@@ -474,5 +481,21 @@ public class ControladoraPresentacio {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
+    }
+
+    //POSTS
+    public static void setPost_List(ArrayList<Post> post_list) {
+        ControladoraPresentacio.post_list = post_list;
+    }
+    public static Post getpost_perName(String post_id) {
+        boolean trobat = false;
+        Post info_post = new Post();
+        for(int i = 0; i < post_list.size() & !trobat; ++i){
+            if(post_list.get(i).getId().equals(post_id)){
+                trobat = true;
+                info_post =post_list.get(i);
+            }
+        }
+        return info_post;
     }
 }
