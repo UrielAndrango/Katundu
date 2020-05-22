@@ -55,7 +55,6 @@ public class Forum extends AppCompatActivity {
         final FloatingActionButton addPost = findViewById(R.id.FAB_addPost);
         final FloatingActionButton deletePosts = findViewById(R.id.Post_Delete);
         final ImageView Atras = findViewById(R.id.Post_Atras);
-        final ImageView Perfil_img = findViewById(R.id.img_perfil);
 
         refreshLayout = findViewById(R.id.refreshLayout_SP);
 
@@ -65,14 +64,6 @@ public class Forum extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Forum.this, PersonalPosts.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
-        Perfil_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Forum.this, ListOffer.class);
                 startActivity(intent);
                 //finish();
             }
