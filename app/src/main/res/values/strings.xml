@@ -62,6 +62,9 @@
     <string name="user_valoracio_text">"Valoración: "</string>
     <string name="user_valoracio_numero">0</string>
     <string name="user_perfil_valoracio_max">"/5"</string>
+    <string name="user_birthdate">Fecha de nacimiento</string>
+    <string name="format_date">dd-mm-aaaa</string>
+    <string name="invalid_birthdate">La fecha de nacimiento no es correcta</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Configuración</string>

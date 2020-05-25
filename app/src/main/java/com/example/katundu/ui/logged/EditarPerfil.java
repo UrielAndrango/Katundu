@@ -1,7 +1,10 @@
 package com.example.katundu.ui.logged;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -20,8 +24,25 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class EditarPerfil extends AppCompatActivity {
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    ImageView PreviewFoto;
+    Button camaraButton, galleryButton;
+    Uri image_uri;
+    ImageView[] foto_perfil = ControladoraPresentacio.getProfile_picture();
+    private static final int PICK_IMAGE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +59,25 @@ public class EditarPerfil extends AppCompatActivity {
         final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
         final EditText longitudeEditText = findViewById(R.id.editTextLongitud);
         final EditText maximumDistanceEditText = findViewById(R.id.editTextMaximumDistance);
+        final EditText descriptionEditText = findViewById(R.id.editTextDescription);
+        final EditText birthdateEditText = findViewById(R.id.editTextBirthdate);
+
+        if (mAuth.getCurrentUser() == null) signInAnonymously();
+        //galleryButton = findViewById(R.id.galleryButton_EditProfile);
+        /*galleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });*/
+
+        //camaraButton = findViewById(R.id.camaraButton_EditProfile);
+        /*PreviewFoto = findViewById(R.id.foto_perfil);
+        if (foto_perfil.length == 0) PreviewFoto.setVisibility(View.INVISIBLE);
+        else {
+
+        }*/
+
 
         //DATOS DEL USUARIO
         usernameEditText.setText(ControladoraPresentacio.getUsername());
@@ -46,17 +86,14 @@ public class EditarPerfil extends AppCompatActivity {
         latitudeEditText.setText(ControladoraPresentacio.getLatitud());
         longitudeEditText.setText(ControladoraPresentacio.getLongitud());
         maximumDistanceEditText.setText(ControladoraPresentacio.getDistanciaMaxima());
-
+        descriptionEditText.setText(ControladoraPresentacio.getDescriptionUser());
+        birthdateEditText.setText(ControladoraPresentacio.getBirthdate());
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Comentar las dos lineas siguientes es equivalente aunque no se porque esto funciona
-                //Quizas busca el Intent de ajustes y al no encontrarlo hace un finish() y ya :D
                 Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
                 onNewIntent(intent);
-
-                //startActivity(intent);
                 finish();
             }
         });
@@ -64,12 +101,59 @@ public class EditarPerfil extends AppCompatActivity {
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText, maximumDistanceEditText);
+                boolean ok = true;
+                if (passwordEditText.getText().length() < 8) {
+                    ok = false;
+                    String texterror = getString(R.string.invalid_password);
+                    Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                if (birthdateEditText.getText().length() > 0 && !valid(birthdateEditText.toString())) {
+                    ok = false;
+                    String texterror = getString(R.string.invalid_birthdate);
+                    Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                if (ok) RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText, maximumDistanceEditText, descriptionEditText, birthdateEditText);
             }
         });
     }
 
-    private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText, final EditText latitudeEditText, final EditText longitudeEditText, final EditText maximumDistanceEditText) {
+    private boolean valid(String d) {
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println(date.toPattern());
+        date.setLenient(false);
+        try {
+            date.parse(d);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    private void signInAnonymously() {
+        mAuth.signInAnonymously().addOnSuccessListener(this, new  OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                // do your stuff
+            }
+        }).addOnFailureListener(this, new OnFailureListener() {
+                    private static final String TAG = "SignInStorage" ;
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.e(TAG, "signInAnonymously:FAILURE", exception);
+                    }
+                });
+    }
+
+    private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText,
+                                     final EditText latitudeEditText, final EditText longitudeEditText, final EditText maximumDistanceEditText,
+                                     final EditText descriptionEditText, final EditText birthdateEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(EditarPerfil.this);
 
@@ -80,6 +164,9 @@ public class EditarPerfil extends AppCompatActivity {
                 "lat=" + latitudeEditText.getText() + "&" +
                 "lon=" + longitudeEditText.getText() + "&" +
                 "distanciamaxima=" + maximumDistanceEditText.getText();
+
+        //url += "&descr=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText();
+        System.out.println(url + "&descr=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText());
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -99,6 +186,9 @@ public class EditarPerfil extends AppCompatActivity {
                             ControladoraPresentacio.setLatitud(latitudeEditText.getText().toString());
                             ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
                             ControladoraPresentacio.setDistanciaMaxima(maximumDistanceEditText.getText().toString());
+                            ControladoraPresentacio.setDescriptionUser(descriptionEditText.getText().toString());
+                            ControladoraPresentacio.setBirthdate(birthdateEditText.getText().toString());
+
                             //Volvemos a Ajustes
                             Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
                             onNewIntent(intent);

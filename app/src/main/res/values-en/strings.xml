@@ -62,6 +62,9 @@
     <string name="user_valoracio_text">"Assessment: "</string>
     <string name="user_valoracio_numero">0</string>
     <string name="user_perfil_valoracio_max">"/5"</string>
+    <string name="user_birthdate">Birth date</string>
+    <string name="format_date">dd-mm-yyyy</string>
+    <string name="invalid_birthdate">Birth date is not correct</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Settings</string>

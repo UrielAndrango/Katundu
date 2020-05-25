@@ -8,6 +8,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,9 @@ public class ControladoraPresentacio {
     private static String longitud = "0.0";
     private static String distanciaMaxima = "10.0";
     private static double valoracion = 4;
+    private static String descriptionUser = "";
+    private static String birthdate = "";
+    private static ImageView[] profile_picture = new ImageView[1];
 
     //idioma usuario (temporal)
     private static String idioma = "";
@@ -487,6 +491,7 @@ public class ControladoraPresentacio {
     public static void setPost_List(ArrayList<Post> post_list) {
         ControladoraPresentacio.post_list = post_list;
     }
+
     public static Post getpost_perName(String post_id) {
         boolean trobat = false;
         Post info_post = new Post();
@@ -497,5 +502,29 @@ public class ControladoraPresentacio {
             }
         }
         return info_post;
+    }
+
+    public static String getBirthdate() {
+        return birthdate;
+    }
+
+    public static void setBirthdate(String birthdate) {
+        ControladoraPresentacio.birthdate = birthdate;
+    }
+
+    public static ImageView[] getProfile_picture() {
+        return profile_picture;
+    }
+
+    public static void setProfile_picture(ImageView[] profile_picture) {
+        ControladoraPresentacio.profile_picture = profile_picture;
+    }
+
+    public static String getDescriptionUser() {
+        return descriptionUser;
+    }
+
+    public static void setDescriptionUser(String descriptionUser) {
+        ControladoraPresentacio.descriptionUser = descriptionUser;
     }
 }
