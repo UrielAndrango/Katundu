@@ -108,7 +108,7 @@ public class EditarPerfil extends AppCompatActivity {
                     Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                if (birthdateEditText.getText().length() > 0 && !valid(birthdateEditText.toString())) {
+                if (birthdateEditText.getText().length() > 0 && !valid(birthdateEditText.getText().toString())) {
                     ok = false;
                     String texterror = getString(R.string.invalid_birthdate);
                     Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
@@ -119,9 +119,15 @@ public class EditarPerfil extends AppCompatActivity {
         });
     }
 
-    private boolean valid(String d) {
+    static boolean valid(String d) {
+        if (d.length() != 10) return false;
+        String day2s = new StringBuilder().append(d.charAt(0)).append(d.charAt(1)).toString();
+        int day = Integer.parseInt(day2s);
+        String month2s = new StringBuilder().append(d.charAt(3)).append(d.charAt(4)).toString();
+        int month = Integer.parseInt(month2s);
+        String year2s = new StringBuilder().append(d.charAt(6)).append(d.charAt(7)).append(d.charAt(8)).append(d.charAt(9)).toString();
+        int year = Integer.parseInt(year2s);
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        System.out.println(date.toPattern());
         date.setLenient(false);
         try {
             date.parse(d);
@@ -173,7 +179,6 @@ public class EditarPerfil extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
                         if(response.equals("0")) { //Account modified successfully
                             String account_modified_successfully = getString(R.string.account_modified_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), account_modified_successfully, Toast.LENGTH_SHORT);

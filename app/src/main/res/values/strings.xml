@@ -28,6 +28,10 @@
     <string name="error">Se ha producido un error</string>
     <string name="mismatchedpasswords">No coinciden las contraseñas</string>
     <string name="existing_user">El nombre de usuario ya existe</string>
+    <string name="empty_username">El nombre de usuario no puede estar vacío</string>
+    <string name="empty_password">La contraseña no puede estar vacía</string>
+    <string name="empty_repeatpasword">Debes escribir la contraseña dos veces</string>
+    <string name="empty_location">Los campos de latitud y longitud no pueden estar vacíos</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
@@ -64,7 +68,10 @@
     <string name="user_perfil_valoracio_max">"/5"</string>
     <string name="user_birthdate">Fecha de nacimiento</string>
     <string name="format_date">dd-mm-aaaa</string>
+    <string name="format_date_register">Fecha de nacimiento (dd-mm-aaaa)</string>
+    <string name="format_description">Escribe algo sobre ti</string>
     <string name="invalid_birthdate">La fecha de nacimiento no es correcta</string>
+
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Configuración</string>

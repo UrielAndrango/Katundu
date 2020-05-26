@@ -28,6 +28,10 @@
     <string name="error">S\'ha produit un error</string>
     <string name="mismatchedpasswords">No coincideixen les contrasenyes</string>
     <string name="existing_user">El nom d\'usuari ja existeix</string>
+    <string name="empty_username">El nom d\'usuari no pot estar buit</string>
+    <string name="empty_password">La contrasenya no pot estar buida</string>
+    <string name="empty_repeatpasword">Has d\'escriure la contraasenya dues vegades</string>
+    <string name="empty_location">Els camps de latitud i longitud no poden estar buits</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
@@ -64,6 +68,8 @@
     <string name="user_perfil_valoracio_max">"/5"</string>
     <string name="user_birthdate">Data de naixement</string>
     <string name="format_date">dd-mm-aaaa</string>
+    <string name="format_date_register">Data de naixement (dd-mm-aaaa)</string>
+    <string name="format_description">Escriu alguna cosa sobre tu</string>
     <string name="invalid_birthdate">La data de naixement no és correcta</string>
 
     <!-- Strings related to Settings-->

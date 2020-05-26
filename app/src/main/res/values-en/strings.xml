@@ -28,6 +28,11 @@
     <string name="error">An error has occurred</string>
     <string name="mismatchedpasswords">Passwords don\'t match</string>
     <string name="existing_user">The username already exists</string>
+    <string name="empty_username">Username field can\'t be empty</string>
+    <string name="empty_password">Password field can\'t be empty</string>
+    <string name="empty_repeatpasword">You must write the password twice</string>
+    <string name="empty_location">Latitude and longitude fields can\'t be empty</string>
+
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
@@ -64,6 +69,8 @@
     <string name="user_perfil_valoracio_max">"/5"</string>
     <string name="user_birthdate">Birth date</string>
     <string name="format_date">dd-mm-yyyy</string>
+    <string name="format_date_register">Birth date (dd-mm-yyyy)</string>
+    <string name="format_description">Write something about you</string>
     <string name="invalid_birthdate">Birth date is not correct</string>
 
     <!-- Strings related to Settings-->
