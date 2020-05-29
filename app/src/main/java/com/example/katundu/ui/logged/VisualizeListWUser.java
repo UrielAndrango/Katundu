@@ -79,8 +79,6 @@ public class VisualizeListWUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizeListWUser.this, MenuPrincipal.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
@@ -91,6 +89,7 @@ public class VisualizeListWUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VisualizeListWUser.this, ListTrophies.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -254,6 +253,7 @@ public class VisualizeListWUser extends AppCompatActivity {
 
             //Nos vamos a la ventana de User
             Intent intent = new Intent(VisualizeListWUser.this, VisualizeWish.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
 

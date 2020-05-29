@@ -43,6 +43,7 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Ajustes.this, EditarPerfil.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -51,8 +52,9 @@ public class Ajustes extends AppCompatActivity {
         CambiarIdioma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent refresh = new Intent(Ajustes.this, EditarIdioma.class);
-                startActivity(refresh);
+                Intent intent = new Intent(Ajustes.this, EditarIdioma.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 //finish();
             }
         });
@@ -74,6 +76,7 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Ajustes.this, DeleteAccount.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }

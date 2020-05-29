@@ -104,8 +104,6 @@ public class ListOffer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListOffer.this, MenuPrincipal.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
@@ -116,6 +114,7 @@ public class ListOffer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListOffer.this, Ajustes.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -125,6 +124,7 @@ public class ListOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ListOffer.this, ListTrophies.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -355,6 +355,7 @@ public class ListOffer extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Description(info_offer.getDescription());
             //Nos vamos a la ventana de EditOffer
             Intent intent = new Intent(ListOffer.this, EditOffer.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
         }

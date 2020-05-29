@@ -52,15 +52,6 @@
                     android:layout_weight="1" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/img_perfil"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:clickable="true"
-                android:contentDescription="@string/descripcio"
-                android:focusable="true"
-                android:src="@drawable/logo_ajustes_blanco" />
-
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>

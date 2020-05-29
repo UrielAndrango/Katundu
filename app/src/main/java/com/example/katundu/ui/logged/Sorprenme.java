@@ -1,9 +1,5 @@
 package com.example.katundu.ui.logged;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -92,7 +92,8 @@ public class Sorprenme extends AppCompatActivity {
 
         refreshLayout = findViewById(R.id.refreshLayout_SP);
 
-        BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view_sorprenme);
+        navView.setSelectedItemId(R.id.navigation_surprise);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //RequestGetMatches();
@@ -290,7 +291,6 @@ public class Sorprenme extends AppCompatActivity {
 
             //Pasamos los datos del deseo a la controladora
             Offer info_offer = ControladoraPresentacio.getOffer_perName(view.getContentDescription().toString());
-            System.out.println(info_offer);
             //Pasamos los datos del deseo a la controladora
             ControladoraPresentacio.setOffer_id(info_offer.getId());
             ControladoraPresentacio.setOffer_name(info_offer.getName());

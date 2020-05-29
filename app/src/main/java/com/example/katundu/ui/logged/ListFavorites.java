@@ -100,8 +100,6 @@ public class ListFavorites extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListFavorites.this, MenuPrincipal.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
@@ -112,6 +110,7 @@ public class ListFavorites extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListFavorites.this, Ajustes.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -121,6 +120,7 @@ public class ListFavorites extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ListFavorites.this, ListTrophies.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -341,6 +341,7 @@ public class ListFavorites extends AppCompatActivity {
             ControladoraPresentacio.setfavorite_Value(info_favorite.getValue());
             ControladoraPresentacio.setfavorite_Description(info_favorite.getDescription());
             Intent intent = new Intent(ListFavorites.this, VisualizeFavorite.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
         }

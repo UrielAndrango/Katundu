@@ -47,7 +47,12 @@ public class SearchUser extends AppCompatActivity {
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     return true;
                 case R.id.navigation_search_users:
-                    return true;
+                    Intent intent_surprise = new Intent(SearchUser.this, Sorprenme.class);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent_surprise);
+                    overridePendingTransition(0,0);
+                    break;
                 case R.id.navigation_home:
                     Intent intentHome = new Intent(SearchUser.this, MenuPrincipal.class);
                     intentHome.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

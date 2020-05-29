@@ -104,6 +104,7 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, ListOffer.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -113,6 +114,7 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuPrincipal.this, SearchProduct.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -121,6 +123,7 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuPrincipal.this, Forum.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -542,7 +545,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
             //Pasamos los datos del deseo a la controladora
             Offer info_offer = ControladoraPresentacio.getOffer_perName(view.getContentDescription().toString());
-            System.out.println(info_offer);
             //Pasamos los datos del deseo a la controladora
             ControladoraPresentacio.setOffer_id(info_offer.getId());
             ControladoraPresentacio.setOffer_name(info_offer.getName());
@@ -557,6 +559,7 @@ public class MenuPrincipal extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Description(info_offer.getDescription());
             //Nos vamos a la ventana de EditOffer
             Intent intent = new Intent(MenuPrincipal.this, VisualizeOffer.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
         }

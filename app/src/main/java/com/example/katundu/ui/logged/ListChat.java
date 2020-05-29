@@ -53,7 +53,12 @@ public class ListChat extends AppCompatActivity {
                     //finish();
                     break;
                 case R.id.navigation_surprise:
-                    return true;
+                    Intent intent_surprise = new Intent(ListChat.this, Sorprenme.class);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent_surprise);
+                    overridePendingTransition(0,0);
+                    break;
                 case R.id.navigation_add:
                     Intent intent_2 = new Intent(ListChat.this, Add.class);
                     intent_2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -88,6 +93,7 @@ public class ListChat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ListChat.this, SearchUserChat.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -198,6 +204,7 @@ public class ListChat extends AppCompatActivity {
                             ControladoraChat.setId_Chat(response);
                             //Nos vamos a la ventana de EditOffer
                             Intent intent = new Intent(ListChat.this, VisualizeChat.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             //finish();
                         }

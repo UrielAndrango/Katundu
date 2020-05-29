@@ -89,8 +89,6 @@ public class VisualizeListOUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizeListOUser.this, MenuPrincipal.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 onNewIntent(intent);
                 //startActivity(intent);
                 finish();
@@ -101,6 +99,7 @@ public class VisualizeListOUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VisualizeListOUser.this, ListTrophies.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -352,6 +351,7 @@ public class VisualizeListOUser extends AppCompatActivity {
             ControladoraPresentacio.setOffer_Description(info_offer.getDescription());
             //Nos vamos a la ventana de EditOffer
             Intent intent = new Intent(VisualizeListOUser.this, VisualizeOffer.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
         }
