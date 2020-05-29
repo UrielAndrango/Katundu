@@ -137,6 +137,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setNumero_imagen(0);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -156,6 +157,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setNumero_imagen(1);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -175,6 +177,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setNumero_imagen(2);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -194,6 +197,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setNumero_imagen(3);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -213,6 +217,7 @@ public class EditOffer extends AppCompatActivity {
                 ControladoraEditOffer.setNumero_imagen(4);
                 //Nos vamos a la ventana de Preview
                 Intent intent = new Intent(EditOffer.this, PreviewFotoEdit.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }

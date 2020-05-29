@@ -82,9 +82,6 @@ public class VisualizeOffer extends AppCompatActivity {
             afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
         else afegirFavorite.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
 
-        //nombre_fotos();
-
-        System.out.println("Entrem al bucle per carregar imatges");
         for (int i = 0; i < 5; ++i) {
             final int finalI = i;
             StorageReference Reference2 = storageRef.child("/products/" + ControladoraPresentacio.getOffer_id()).child("product_" + i);
@@ -111,6 +108,7 @@ public class VisualizeOffer extends AppCompatActivity {
                 ControladoraEditOffer.add_foto(PreviewFotos[0],0);
                 ControladoraEditOffer.setNumero_imagen(0);
                 Intent intent = new Intent(VisualizeOffer.this, PreviewFotoShow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -121,6 +119,7 @@ public class VisualizeOffer extends AppCompatActivity {
                 ControladoraEditOffer.add_foto(PreviewFotos[1],1);
                 ControladoraEditOffer.setNumero_imagen(1);
                 Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -131,6 +130,7 @@ public class VisualizeOffer extends AppCompatActivity {
                 ControladoraEditOffer.add_foto(PreviewFotos[2],2);
                 ControladoraEditOffer.setNumero_imagen(2);
                 Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -141,6 +141,7 @@ public class VisualizeOffer extends AppCompatActivity {
                 ControladoraEditOffer.add_foto(PreviewFotos[3],3);
                 ControladoraEditOffer.setNumero_imagen(3);
                 Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -151,6 +152,7 @@ public class VisualizeOffer extends AppCompatActivity {
                 ControladoraEditOffer.add_foto(PreviewFotos[4],4);
                 ControladoraEditOffer.setNumero_imagen(4);
                 Intent intent = new Intent(VisualizeOffer.this,  PreviewFotoShow.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -186,6 +188,7 @@ public class VisualizeOffer extends AppCompatActivity {
                                         ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
                                         ControladoraChat.setUsername2(user);
                                         Intent intent = new Intent(VisualizeOffer.this, VisualizeChat.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         finish();
                                     }
@@ -203,6 +206,7 @@ public class VisualizeOffer extends AppCompatActivity {
                                                         ControladoraChat.setUsername1(ControladoraPresentacio.getUsername());
                                                         ControladoraChat.setUsername2(ControladoraPresentacio.getOffer_user());
                                                         Intent intent = new Intent(VisualizeOffer.this, VisualizeChat.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         startActivity(intent);
                                                     }
                                                 }

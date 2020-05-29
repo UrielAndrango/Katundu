@@ -1,8 +1,5 @@
 package com.example.katundu.ui.logged;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,11 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
-import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPosts;
 import com.example.katundu.ui.ControladoraPresentacio;
 import com.example.katundu.ui.Post;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,7 +33,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class PersonalPosts extends AppCompatActivity {
-    private TextView mTextMessage;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
 
@@ -47,21 +44,11 @@ public class PersonalPosts extends AppCompatActivity {
 
         getSupportActionBar().hide();
         final ImageView Atras = findViewById(R.id.Post_Atras);
-        final ImageView Perfil_img = findViewById(R.id.img_perfil);
 
         refreshLayout = findViewById(R.id.refreshLayout_SP);
 
 
         //RequestGetMatches();
-
-        Perfil_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PersonalPosts.this, ListOffer.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,6 +210,7 @@ public class PersonalPosts extends AppCompatActivity {
             ControladoraPosts.setdate(info_post.getTime());
             //Nos vamos a la ventana de VisualizeListOUser
             Intent intent = new Intent(PersonalPosts.this, VisualizePosts.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             //finish();
         }

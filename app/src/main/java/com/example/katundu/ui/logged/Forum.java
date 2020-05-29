@@ -1,20 +1,17 @@
 package com.example.katundu.ui.logged;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,12 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraAddProduct;
-import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.ControladoraSearchUsers;
-import com.example.katundu.ui.Offer;
 import com.example.katundu.ui.Post;
-import com.example.katundu.ui.Wish;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -64,6 +56,7 @@ public class Forum extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Forum.this, PersonalPosts.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -94,6 +87,7 @@ public class Forum extends AppCompatActivity {
             public void onClick(View v) {
                 ControladoraAddProduct.reset();
                 Intent intent = new Intent(Forum.this, AddPost.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }

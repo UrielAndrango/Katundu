@@ -69,13 +69,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
         <TextView
             android:id="@+id/no_sorprenme_found"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
             android:text="@string/no_sorprenme_found"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
         <ScrollView
             android:id="@+id/scrollView4"
             android:layout_width="match_parent"
@@ -96,7 +99,7 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/nav_view_sorprenme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorLetraKatundu"

@@ -52,7 +52,12 @@ public class SearchUserChat extends AppCompatActivity {
                     //Si lo hacemos con ventanas independientes, quitamos los TRUES
                     return true;
                 case R.id.navigation_surprise:
-                    return true;
+                    Intent intent_surprise = new Intent(SearchUserChat.this, Sorprenme.class);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent_surprise);
+                    overridePendingTransition(0,0);
+                    break;
                 case R.id.navigation_add:
                     Intent intentAdd = new Intent(SearchUserChat.this, Add.class);
                     intentAdd.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

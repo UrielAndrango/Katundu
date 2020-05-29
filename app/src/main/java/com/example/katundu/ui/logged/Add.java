@@ -33,7 +33,12 @@ public class Add extends AppCompatActivity {
                     //finish();
                     break;
                 case R.id.navigation_surprise:
-                    return true;
+                    Intent intent_surprise = new Intent(Add.this, Sorprenme.class);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent_surprise.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent_surprise);
+                    overridePendingTransition(0,0);
+                    break;
                 case R.id.navigation_add:
                     return true;
                 case R.id.navigation_xat:
@@ -69,6 +74,7 @@ public class Add extends AppCompatActivity {
             public void onClick(View v) {
                 ControladoraAddProduct.reset();
                 Intent intent = new Intent(Add.this, AddProduct.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
@@ -78,6 +84,7 @@ public class Add extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Add.this, AddWish.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //finish();
             }
