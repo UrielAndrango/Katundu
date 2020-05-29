@@ -228,6 +228,7 @@
     <string name="chats">Chats</string>
     <!-- Strings related to Sorprenme-->
     <string name="sorpren_me">Surprise me!</string>
+    <string name="no_sorprenme_found">We do not have any offer which can surprise you yet</string>
     <!-- Strings related to Forum-->
     <string name="forum">Forum!</string>
     <string name="title_add_post">Add post</string>

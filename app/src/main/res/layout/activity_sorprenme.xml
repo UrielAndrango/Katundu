@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.logged.Sorprenme">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -58,6 +59,8 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout_SP"
         android:layout_width="match_parent"
@@ -66,8 +69,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-
+        <TextView
+            android:id="@+id/no_sorprenme_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_sorprenme_found"
+            android:textSize="20sp"
+            />
         <ScrollView
             android:id="@+id/scrollView4"
             android:layout_width="match_parent"
@@ -84,11 +92,9 @@
                 android:splitMotionEvents="false"
                 />
 
-
-
         </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

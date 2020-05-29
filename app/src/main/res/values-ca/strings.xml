@@ -229,6 +229,7 @@
 
     <!-- Strings related to Sorprenme-->
     <string name="sorpren_me">Sorprèn-me!</string>
+    <string name="no_sorprenme_found">Encara no tenim cap oferta que et pugui sorprendre</string>
     <!-- Strings related to Forum-->
     <string name="forum">Fòrum!</string>
     <string name="title_add_post">Afegir publicació</string>
