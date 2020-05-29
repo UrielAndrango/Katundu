@@ -22,7 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.ControladoraTrophies;
 
 public class AddWish extends AppCompatActivity {
 
@@ -171,11 +170,6 @@ public class AddWish extends AppCompatActivity {
                             String wish_added_successfully = getString(R.string.wish_added_successfully);
                             Toast toast = Toast.makeText(getApplicationContext(), wish_added_successfully, Toast.LENGTH_SHORT);
                             toast.show();
-                            //Trofeo numero 1 (subir primera oferta)
-                            if (!ControladoraTrophies.TrofeoConseguido(2)) {
-                                ControladoraTrophies.DesbloquearTrofeo(2);
-                                //TODO: añadir conexión con el Firebase
-                            }
                             //Volvemos a ListWish
                             Intent intent = new Intent(AddWish.this, ListWish.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

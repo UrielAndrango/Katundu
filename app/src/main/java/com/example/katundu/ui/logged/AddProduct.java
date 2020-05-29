@@ -34,7 +34,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraAddProduct;
 import com.example.katundu.ui.ControladoraPresentacio;
-import com.example.katundu.ui.ControladoraTrophies;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -272,11 +271,6 @@ public class AddProduct extends AppCompatActivity {
                                                         }
                                                     });
                                                 }
-                                            }
-                                            //Trofeo numero 1 (subir primera oferta)
-                                            if (!ControladoraTrophies.TrofeoConseguido(1)) {
-                                                ControladoraTrophies.DesbloquearTrofeo(1);
-                                                //TODO: añadir conexión con el Firebase
                                             }
                                             //Nos vamos a ListOffer
                                             Intent intent = new Intent(AddProduct.this, ListOffer.class);
