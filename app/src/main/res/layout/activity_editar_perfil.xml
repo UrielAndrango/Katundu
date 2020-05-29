@@ -81,6 +81,7 @@
         android:id="@+id/scrollView5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -352,6 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -373,27 +375,30 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/format_date"
                     android:maxLength="10"
-                    android:inputType="textEmailAddress"
+                    android:inputType="date"
                     android:textAlignment="viewEnd"
                     app:counterEnabled="true"
                     app:counterMaxLength="20"/>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/save_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/button_rounded"
-                android:text="@string/Save"
-                android:textColor="@color/colorLetraKatundu"
-                android:textSize="18sp" />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/Save"
+        android:textColor="@color/colorLetraKatundu"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

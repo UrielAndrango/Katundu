@@ -22,199 +22,195 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameLayout_R"
+    <ScrollView
+        android:id="@+id/scrollView6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle">
+        app:layout_constraintTop_toBottomOf="@id/subtitle">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_R"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/prompt_username"
-            android:lines="1"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:singleLine="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="20" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameLayout_R">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameLayout_R"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name"
-            android:maxLines="1"
-            android:lines="1"
-            android:singleLine="true"
-            android:maxLength="30"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_R"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_password"
-            android:inputType="textPassword"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="20"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/prompt_password_2"
-            android:inputType="textPassword"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="20"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/latitud"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/coordinate_latitude"
-            android:inputType="numberDecimal"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="10"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password_2"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/longitud"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/coordinate_longitude"
-            android:inputType="numberDecimal"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="10"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/latitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/coordinate_latitude"
+                    android:inputType="numberDecimal"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        android:maxLength="260"
-        app:counterEnabled="true"
-        app:counterMaxLength="260"
-        app:errorEnabled="true">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="260"
-            android:textSize="18sp"
-            android:hint="@string/format_description"
-            app:counterEnabled="true"
-            app:counterMaxLength="260" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/longitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/coordinate_longitude"
+                    android:inputType="numberDecimal"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:maxLength="260"
+                app:counterEnabled="true"
+                app:counterMaxLength="260"
+                app:errorEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextBirthdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/format_date_register"
-            android:maxLength="10"
-            android:textSize="18sp"
-            app:counterEnabled="true"
-            app:counterMaxLength="10" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/format_description"
+                    android:maxLength="260"
+                    android:textSize="18sp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="260" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextBirthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/format_date_register"
+                    android:inputType="date"
+                    android:maxLength="10"
+                    android:textSize="18sp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/SaveButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -225,6 +221,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
