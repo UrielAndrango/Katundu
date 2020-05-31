@@ -41,7 +41,7 @@ public class EditarPerfil extends AppCompatActivity {
     ImageView PreviewFoto;
     Button camaraButton, galleryButton;
     Uri image_uri;
-    ImageView[] foto_perfil = ControladoraPresentacio.getProfile_picture();
+    ImageView foto_perfil = ControladoraPresentacio.getProfile_picture();
     private static final int PICK_IMAGE = 100;
 
     @Override
