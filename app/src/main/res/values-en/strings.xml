@@ -72,6 +72,7 @@
     <string name="format_date_register">Birth date (dd-mm-yyyy)</string>
     <string name="format_description">Write something about you</string>
     <string name="invalid_birthdate">Birth date is not correct</string>
+    <string name="add_pic">Add photo</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Settings</string>

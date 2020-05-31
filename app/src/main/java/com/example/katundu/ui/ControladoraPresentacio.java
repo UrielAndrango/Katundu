@@ -25,7 +25,7 @@ public class ControladoraPresentacio {
     private static double valoracion = 4;
     private static String descriptionUser = "";
     private static String birthdate = "";
-    private static ImageView[] profile_picture = new ImageView[1];
+    private static ImageView profile_picture;
 
     //idioma usuario (temporal)
     private static String idioma = "";
@@ -522,6 +522,14 @@ public class ControladoraPresentacio {
         return info_post;
     }
 
+    public static String getDescriptionUser() {
+        return descriptionUser;
+    }
+
+    public static void setDescriptionUser(String descriptionUser) {
+        ControladoraPresentacio.descriptionUser = descriptionUser;
+    }
+
     public static String getBirthdate() {
         return birthdate;
     }
@@ -530,19 +538,11 @@ public class ControladoraPresentacio {
         ControladoraPresentacio.birthdate = birthdate;
     }
 
-    public static ImageView[] getProfile_picture() {
+    public static ImageView getProfile_picture() {
         return profile_picture;
     }
 
-    public static void setProfile_picture(ImageView[] profile_picture) {
+    public static void setProfile_picture(ImageView profile_picture) {
         ControladoraPresentacio.profile_picture = profile_picture;
-    }
-
-    public static String getDescriptionUser() {
-        return descriptionUser;
-    }
-
-    public static void setDescriptionUser(String descriptionUser) {
-        ControladoraPresentacio.descriptionUser = descriptionUser;
     }
 }

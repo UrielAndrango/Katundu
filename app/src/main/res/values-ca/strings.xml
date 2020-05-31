@@ -71,6 +71,7 @@
     <string name="format_date_register">Data de naixement (dd-mm-aaaa)</string>
     <string name="format_description">Escriu alguna cosa sobre tu</string>
     <string name="invalid_birthdate">La data de naixement no és correcta</string>
+    <string name="add_pic">Afegir foto</string>
 
     <!-- Strings related to Settings-->
     <string name="title_settings">Configuració</string>
