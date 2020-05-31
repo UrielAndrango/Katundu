@@ -32,6 +32,10 @@
     <string name="empty_password">La contrasenya no pot estar buida</string>
     <string name="empty_repeatpasword">Has d\'escriure la contraasenya dues vegades</string>
     <string name="empty_location">Els camps de latitud i longitud no poden estar buits</string>
+    <string name="security_question">Escriu una pregunta de seguretat</string>
+    <string name="security_answer">Respon la pregunta</string>
+    <string name="empty_security_question">Has d\'escriure una pregunta de seguretat</string>
+    <string name="empty_security_answer">Has de respondre la pregunta de seguretat</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>

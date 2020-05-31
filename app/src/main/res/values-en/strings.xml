@@ -32,6 +32,10 @@
     <string name="empty_password">Password field can\'t be empty</string>
     <string name="empty_repeatpasword">You must write the password twice</string>
     <string name="empty_location">Latitude and longitude fields can\'t be empty</string>
+    <string name="security_question">Write a security question</string>
+    <string name="security_answer">Answer the question</string>
+    <string name="empty_security_question">You must write a security question</string>
+    <string name="empty_security_answer">You must write a security answer</string>
 
 
     <!-- Strings related to Menu Principal-->

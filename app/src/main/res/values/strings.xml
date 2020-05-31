@@ -32,6 +32,10 @@
     <string name="empty_password">La contraseña no puede estar vacía</string>
     <string name="empty_repeatpasword">Debes escribir la contraseña dos veces</string>
     <string name="empty_location">Los campos de latitud y longitud no pueden estar vacíos</string>
+    <string name="security_question">Escribe una pregunta de seguridad</string>
+    <string name="security_answer">Responde la pregunta</string>
+    <string name="empty_security_question">Debes escribir una pregunta de seguridad</string>
+    <string name="empty_security_answer">Debes responder la pregunta de seguridad</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>
