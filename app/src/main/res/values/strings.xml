@@ -36,6 +36,7 @@
     <string name="security_answer">Responde la pregunta</string>
     <string name="empty_security_question">Debes escribir una pregunta de seguridad</string>
     <string name="empty_security_answer">Debes responder la pregunta de seguridad</string>
+    <string name="more_info_about_you">Completa tu perfil</string>
 
     <!-- Strings related to Menu Principal-->
     <string name="title_activity_menu_principal">MenuPrincipal</string>

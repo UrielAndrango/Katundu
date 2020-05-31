@@ -50,6 +50,8 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText birthdateEditText = findViewById(R.id.editTextBirthdate);
         registratButton = findViewById(R.id.SaveButton);
 
+        final EditText questionEditText = findViewById(R.id.editTextQuestion);
+        final EditText answerEditText = findViewById(R.id.editTextAnswer);
 
         registratButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,9 +91,20 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                else if(questionEditText.getText().length() == 0) {
+                    String texterror = getString(R.string.empty_security_question);
+                    Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if(answerEditText.getText().length() == 0) {
+                    String texterror = getString(R.string.empty_security_answer);
+                    Toast toast = Toast.makeText(RegisterActivity.this, texterror, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 else {
                     registratButton.setEnabled(false);
-                    RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText, descriptionEditText, birthdateEditText);
+                    RequestRegister(usernameEditText, passwordEditText, nameEditText, latitudeEditText,
+                            longitudeEditText, descriptionEditText, birthdateEditText, questionEditText, answerEditText);
                 }
             }
         });
@@ -138,7 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void RequestRegister(final EditText usernameEditText, final EditText passwordEditText,
                                  final EditText nameEditText, final EditText latitudeEditText,
-                                 final EditText longitudeEditText, final EditText descriptionEditText, final EditText birthdateEditText) {
+                                 final EditText longitudeEditText, final EditText descriptionEditText, final EditText birthdateEditText,
+                                final EditText questionEditText, final EditText answerEditText) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
 
@@ -149,7 +163,13 @@ public class RegisterActivity extends AppCompatActivity {
                 "lat=" + latitudeEditText.getText() + "&" +
                 "lon=" + longitudeEditText.getText();
 
-        //url += "&descr=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText();
+        /*
+        if (descriptionEditText.getText().length() > 0)
+            url += "&descr=" + descriptionEditText.getText();
+        if (birthdateEditText.getText().length() > 0)
+            url += "&bdate=" + birthdateEditText.getText();
+
+        url += "&q=" + questionEditText.getText() + "&a=" + answerEditText.getText();*/
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -169,6 +189,8 @@ public class RegisterActivity extends AppCompatActivity {
                             ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
                             ControladoraPresentacio.setDescriptionUser(descriptionEditText.getText().toString());
                             ControladoraPresentacio.setBirthdate(birthdateEditText.getText().toString());
+                            ControladoraPresentacio.setBirthdate(questionEditText.getText().toString());
+                            ControladoraPresentacio.setBirthdate(answerEditText.getText().toString());
 
                             Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
