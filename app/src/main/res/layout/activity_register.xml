@@ -164,6 +164,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/Ubicacio"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:contentDescription="@string/descripcio"
+                    android:src="@drawable/icono_ubicacion_blanco" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

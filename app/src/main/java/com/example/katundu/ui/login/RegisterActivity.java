@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.logged.Mapa;
 import com.example.katundu.ui.logged.MenuPrincipal;
 
 import java.text.ParseException;
@@ -27,6 +29,8 @@ import java.text.SimpleDateFormat;
 public class RegisterActivity extends AppCompatActivity {
 
     Button registratButton;
+    EditText latitudeEditText;
+    EditText longitudeEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText nameEditText = findViewById(R.id.nom);
         final EditText passwordEditText = findViewById(R.id.password1);
         final EditText repeatpasswordEditText = findViewById(R.id.password2);
-        final EditText latitudeEditText = findViewById(R.id.latitud);
-        final EditText longitudeEditText = findViewById(R.id.longitud);
+        latitudeEditText = findViewById(R.id.latitud);
+        longitudeEditText = findViewById(R.id.longitud);
+        final ImageView ubicacio = findViewById(R.id.Ubicacio);
+
         final EditText descriptionEditText = findViewById(R.id.editTextDescription);
         final EditText birthdateEditText = findViewById(R.id.editTextBirthdate);
         registratButton = findViewById(R.id.SaveButton);
@@ -89,6 +95,27 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ubicacio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, Mapa.class);
+                //startActivity(intent);
+                //finish();
+                startActivityForResult(intent,2);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {
+            latitudeEditText.setText(ControladoraPresentacio.getLatitudMapa());
+            longitudeEditText.setText(ControladoraPresentacio.getLongitudMapa());
+        }
     }
 
     static boolean valid(String d) {

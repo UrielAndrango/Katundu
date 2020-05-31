@@ -19,6 +19,8 @@ public class ControladoraPresentacio {
     private static String password = "password";
     private static String latitud = "0.0";
     private static String longitud = "0.0";
+    private static String latitudMapa = "";
+    private static String longitudMapa = "";
     private static String distanciaMaxima = "10.0";
     private static double valoracion = 4;
     private static String descriptionUser = "";
@@ -111,6 +113,22 @@ public class ControladoraPresentacio {
 
     public static void setLongitud(String longitud) {
         ControladoraPresentacio.longitud = longitud;
+    }
+
+    public static String getLatitudMapa() {
+        return latitudMapa;
+    }
+
+    public static void setLatitudMapa(String latitudMapa) {
+        ControladoraPresentacio.latitudMapa = latitudMapa;
+    }
+
+    public static String getLongitudMapa() {
+        return longitudMapa;
+    }
+
+    public static void setLongitudMapa(String longitudMapa) {
+        ControladoraPresentacio.longitudMapa = longitudMapa;
     }
 
     public static String getDistanciaMaxima() {
