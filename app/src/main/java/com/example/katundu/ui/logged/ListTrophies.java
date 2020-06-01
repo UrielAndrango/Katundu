@@ -24,17 +24,14 @@ import com.example.katundu.ui.ControladoraTrophies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class ListTrophies extends AppCompatActivity {
 
     int numero_trofeos = 16;
     ImageView[] lista_trofeos = new ImageView[numero_trofeos];
     Drawable[] vector_icons = new Drawable[numero_trofeos];
-    //Boolean[] trofeos_usuario = new Boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
-    Boolean[] trofeos_usuario = ControladoraTrophies.getTrofeos_usuario();
+    int[] trophies_list = new int[numero_trofeos];
+    Boolean[] trofeos_usuario = new Boolean[]{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +50,21 @@ public class ListTrophies extends AppCompatActivity {
             }
         });
 
+        //Inicializamos con -1 para que al menos salgan los interrogantes
+        for (int i = 0; i<numero_trofeos; ++i) {
+            trophies_list[i] = -1;
+        }
+
         RequestTrophies();
     }
 
     private void RequestTrophies() {
-        final ArrayList<String> trophies_list = new ArrayList<>();
         final String username = ControladoraTrophies.getUsername();
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(ListTrophies.this);
 
-        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-trofeos?" + "un=" + username;
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-trofeos?" + "user=" + username;
 
         // Request a JSONObject response from the provided URL.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -71,12 +72,11 @@ public class ListTrophies extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
-                        JSONObject info_wish = response.getJSONObject(i);
-                        String id = info_wish.getString("id");
-                        trophies_list.add(id);
+                        int info_wish = response.getInt(i);
+                        trophies_list[i] = info_wish-1;
                     }
 
-                    Unlock_trophies(trophies_list);
+                    Unlock_trophies();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -91,7 +91,7 @@ public class ListTrophies extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
-    private void Unlock_trophies(ArrayList<String> trophies_list) {
+    private void Unlock_trophies() {
         //Inicializar lista
         lista_trofeos[0] = (ImageView) findViewById(R.id.image_lt0);
         lista_trofeos[1] = (ImageView) findViewById(R.id.image_lt1);
@@ -128,10 +128,11 @@ public class ListTrophies extends AppCompatActivity {
         vector_icons[15] = getResources().getDrawable(R.drawable.icon_trophy_1000);
 
         //Comprobar trofeos del usuario
-        int cantidad_trofeos_usuario = trophies_list.size();
-        for (int i=0; i<cantidad_trofeos_usuario; ++i) {
-            int id_trophy = Integer.valueOf(trophies_list.get(i));
-            trofeos_usuario[id_trophy] = true;
+        for (int i=0; i<numero_trofeos; ++i) {
+            int id_trophy = trophies_list[i];
+            if (id_trophy > -1) {
+                trofeos_usuario[id_trophy] = true;
+            }
         }
 
         //Enseñar imagenes
