@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraPresentacio;
+import com.example.katundu.ui.ControladoraTrophies;
 import com.example.katundu.ui.Offer;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -103,6 +104,9 @@ public class MenuPrincipal extends AppCompatActivity {
         Perfil_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Para todas las listas y en cualquier momento, hasta que se diga lo contrario
+                ControladoraTrophies.setUsername(ControladoraPresentacio.getUsername());
+                //Nos vamos a ListOffer
                 Intent intent = new Intent(MenuPrincipal.this, ListOffer.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

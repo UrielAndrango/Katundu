@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,8 +13,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraTrophies;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class ListTrophies extends AppCompatActivity {
 
@@ -40,6 +53,46 @@ public class ListTrophies extends AppCompatActivity {
             }
         });
 
+        RequestTrophies();
+    }
+
+    private void RequestTrophies() {
+        final ArrayList<String> trophies_list = new ArrayList<>();
+        final String username = ControladoraTrophies.getUsername();
+
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = Volley.newRequestQueue(ListTrophies.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-trofeos?" + "un=" + username;
+
+        // Request a JSONObject response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i = 0; i < response.length(); ++i) {
+                        JSONObject info_wish = response.getJSONObject(i);
+                        String id = info_wish.getString("id");
+                        trophies_list.add(id);
+                    }
+
+                    Unlock_trophies(trophies_list);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void Unlock_trophies(ArrayList<String> trophies_list) {
+        //Inicializar lista
         lista_trofeos[0] = (ImageView) findViewById(R.id.image_lt0);
         lista_trofeos[1] = (ImageView) findViewById(R.id.image_lt1);
         lista_trofeos[2] = (ImageView) findViewById(R.id.image_lt2);
@@ -56,7 +109,7 @@ public class ListTrophies extends AppCompatActivity {
         lista_trofeos[13] = (ImageView) findViewById(R.id.image_lt13);
         lista_trofeos[14] = (ImageView) findViewById(R.id.image_lt14);
         lista_trofeos[15] = (ImageView) findViewById(R.id.image_lt15);
-        //lista_trofeos = new ImageView[]{trofeo1, trofeo2, trofeo3, trofeo4, trofeo5, trofeo6, trofeo7, trofeo8, trofeo9, trofeo10, trofeo11, trofeo12};
+        //Inicializar fotos
         vector_icons[0] = getResources().getDrawable(R.drawable.icon_trophy_person_mirror);
         vector_icons[1] = getResources().getDrawable(R.drawable.icon_trophy_steps);
         vector_icons[2] = getResources().getDrawable(R.drawable.icon_trophy_lamp);
@@ -74,6 +127,14 @@ public class ListTrophies extends AppCompatActivity {
         vector_icons[14] = getResources().getDrawable(R.drawable.icon_trophy_500);
         vector_icons[15] = getResources().getDrawable(R.drawable.icon_trophy_1000);
 
+        //Comprobar trofeos del usuario
+        int cantidad_trofeos_usuario = trophies_list.size();
+        for (int i=0; i<cantidad_trofeos_usuario; ++i) {
+            int id_trophy = Integer.valueOf(trophies_list.get(i));
+            trofeos_usuario[id_trophy] = true;
+        }
+
+        //Enseñar imagenes
         for (int i=0; i<numero_trofeos; ++i) {
             if (trofeos_usuario[i]) {
                 //extraemos el drawable en un bitmap

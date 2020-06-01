@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraSearchUsers;
+import com.example.katundu.ui.ControladoraTrophies;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
@@ -240,10 +241,8 @@ public class SearchUser extends AppCompatActivity {
         }
         @Override
         public void onClick(View view) {
-            //Pasamos los datos del deseo a la controladora
-            //TODO: Se debe pedir las listas del usuario que se ha clicado
-            //ControladoraSearchUsers.setUsername("?");
-
+            //Para todas las listas y en cualquier momento, hasta que se diga lo contrario
+            ControladoraTrophies.setUsername(ControladoraSearchUsers.getUsername());
             //Nos vamos a la ventana de VisualizeListOUser
             Intent intent = new Intent(SearchUser.this, VisualizeListOUser.class);
             startActivity(intent);
