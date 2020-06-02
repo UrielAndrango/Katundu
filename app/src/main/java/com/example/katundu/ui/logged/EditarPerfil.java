@@ -50,6 +50,8 @@ public class EditarPerfil extends AppCompatActivity {
     ImageView profile_pic = ControladoraPresentacio.getProfile_picture();
     ImageView preview_profile_pic;
     private static final int PICK_IMAGE = 100;
+    EditText latitudeEditText;
+    EditText longitudeEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +66,12 @@ public class EditarPerfil extends AppCompatActivity {
         final TextView usernameEditText = findViewById(R.id.TextNomUsuari);
         final EditText nameEditText = findViewById(R.id.editTextNom);
         final EditText passwordEditText = findViewById(R.id.editTextContrasenya);
-        final EditText latitudeEditText = findViewById(R.id.editTextLatitud);
-        final EditText longitudeEditText = findViewById(R.id.editTextLongitud);
+        latitudeEditText = findViewById(R.id.editTextLatitud);
+        longitudeEditText = findViewById(R.id.editTextLongitud);
         final EditText maximumDistanceEditText = findViewById(R.id.editTextMaximumDistance);
         final EditText descriptionEditText = findViewById(R.id.editTextDescription);
         final EditText birthdateEditText = findViewById(R.id.editTextBirthdate);
+        final ImageView ubicacio = findViewById(R.id.UbicacioEP);
 
         //boto afegir foto
         add_picButton = findViewById(R.id.add_pic);
@@ -195,6 +198,16 @@ public class EditarPerfil extends AppCompatActivity {
                     toast.show();
                 }
                 if (ok) RequestEditarPerfil(usernameEditText, passwordEditText, nameEditText, latitudeEditText, longitudeEditText, maximumDistanceEditText, descriptionEditText, birthdateEditText);
+            }
+        });
+
+        ubicacio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditarPerfil.this, Mapa.class);
+                //startActivity(intent);
+                //finish();
+                startActivityForResult(intent,2);
             }
         });
     }
@@ -343,6 +356,14 @@ public class EditarPerfil extends AppCompatActivity {
             //Actualizamos la controladora
             ControladoraPresentacio.setProfile_picture(imageView);
             profile_pic = ControladoraPresentacio.getProfile_picture();
+        }
+
+        // check if the request code is same as what is passed  here it is 2
+        else if(requestCode == 2)
+        {
+            super.onActivityResult(requestCode, resultCode, data);
+            latitudeEditText.setText(ControladoraPresentacio.getLatitudMapa());
+            longitudeEditText.setText(ControladoraPresentacio.getLongitudMapa());
         }
     }
 }

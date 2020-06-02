@@ -203,7 +203,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     ControladoraPresentacio.setUsername(username);
                     ControladoraPresentacio.setNom_real(response.getString("name"));
-                    //ControladoraPresentacio.setPassword(response.getString("password")); //TODO: falta que retorni la password
+                    ControladoraPresentacio.setPassword(response.getString("password")); //TODO: falta que retorni la password
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
                     ControladoraPresentacio.setDistanciaMaxima(response.getString("distanciamaxima"));

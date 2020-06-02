@@ -236,70 +236,100 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout5"
+                android:id="@+id/textInputLayoutVertical1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/Adress"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/textInputLayoutVertical2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/coordinate_latitude"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_marginEnd="70dp"
+                    android:orientation="vertical">
 
-                <Space
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/Adress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/coordinate_latitude"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/editTextLatitud"
+                            android:layout_width="143dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="number|numberDecimal"
+                            android:maxLength="20"
+                            android:textAlignment="viewEnd"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="20" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/coordinate_longitude"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <EditText
+                            android:id="@+id/editTextLongitud"
+                            android:layout_width="143dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="number|numberDecimal"
+                            android:maxLength="20"
+                            android:textAlignment="viewEnd"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="20" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/textInputLayoutVertical3"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_marginStart="-70dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <EditText
-                    android:id="@+id/editTextLatitud"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number|numberDecimal"
-                    android:maxLength="20"
-                    android:textAlignment="viewEnd"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/coordinate_longitude"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <EditText
-                    android:id="@+id/editTextLongitud"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number|numberDecimal"
-                    android:maxLength="20"
-                    android:textAlignment="viewEnd"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20" />
+                    <ImageView
+                        android:id="@+id/UbicacioEP"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/descripcio"
+                        android:src="@drawable/icono_ubicacion_blanco" />
+                </LinearLayout>
 
             </LinearLayout>
 
