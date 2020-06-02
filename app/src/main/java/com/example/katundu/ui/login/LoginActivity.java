@@ -203,11 +203,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     ControladoraPresentacio.setUsername(username);
                     ControladoraPresentacio.setNom_real(response.getString("name"));
-                    ControladoraPresentacio.setPassword(response.getString("password")); //TODO: falta que retorni la password
+                    ControladoraPresentacio.setPassword(response.getString("password"));
                     ControladoraPresentacio.setLatitud(response.getString("latitud"));
                     ControladoraPresentacio.setLongitud(response.getString("longitud"));
                     ControladoraPresentacio.setDistanciaMaxima(response.getString("distanciamaxima"));
-                    //ControladoraPresentacio.setValoracion(Double.parseDouble(response.getString("valoracio"))); //TODO: si un usuari no te valoracio, peta
+                    ControladoraPresentacio.setValoracion(Double.parseDouble(response.getString("valoracio")));
 
                     JSONArray favorite_array = response.getJSONArray("favorite");
                     ArrayList<Favorite> favorites_user = new ArrayList<>();
