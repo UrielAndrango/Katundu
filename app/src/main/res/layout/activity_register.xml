@@ -121,64 +121,77 @@
                     app:counterMaxLength="20" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+            <LinearLayout
+                android:id="@+id/textInputLayoutVertical1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/latitud"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/coordinate_latitude"
-                    android:inputType="numberDecimal"
-                    android:lines="1"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/longitud"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/coordinate_longitude"
-                    android:inputType="numberDecimal"
-                    android:lines="1"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="115dp"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
-                android:gravity="center">
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/Ubicacio"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="@string/descripcio"
-                    android:src="@drawable/icono_ubicacion_blanco" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/textInputLayoutVertical2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="70dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/latitud"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/coordinate_latitude"
+                            android:inputType="numberDecimal"
+                            android:lines="1"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="20" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/longitud"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/coordinate_longitude"
+                            android:inputType="numberDecimal"
+                            android:lines="1"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="20" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/textInputLayoutVertical3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="-70dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/Ubicacio"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/descripcio"
+                        android:src="@drawable/icono_ubicacion_blanco" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout9"
