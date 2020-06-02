@@ -1,6 +1,10 @@
 package com.example.katundu.ui.logged;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,7 +34,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -39,9 +45,10 @@ public class EditarPerfil extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     ImageView PreviewFoto;
-    Button camaraButton, galleryButton;
+    Button add_picButton, delete_picButton;
     Uri image_uri;
-    ImageView foto_perfil = ControladoraPresentacio.getProfile_picture();
+    ImageView profile_pic = ControladoraPresentacio.getProfile_picture();
+    ImageView preview_profile_pic;
     private static final int PICK_IMAGE = 100;
 
     @Override
@@ -50,6 +57,7 @@ public class EditarPerfil extends AppCompatActivity {
         setContentView(R.layout.activity_editar_perfil);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
+        if (mAuth.getCurrentUser() == null) signInAnonymously();
 
         final ImageView Atras = findViewById(R.id.DeleteAccount_Atras);
         final Button SaveButton = findViewById(R.id.save_button);
@@ -62,21 +70,93 @@ public class EditarPerfil extends AppCompatActivity {
         final EditText descriptionEditText = findViewById(R.id.editTextDescription);
         final EditText birthdateEditText = findViewById(R.id.editTextBirthdate);
 
-        if (mAuth.getCurrentUser() == null) signInAnonymously();
-        //galleryButton = findViewById(R.id.galleryButton_EditProfile);
-        /*galleryButton.setOnClickListener(new View.OnClickListener() {
+        //boto afegir foto
+        add_picButton = findViewById(R.id.add_pic);
+        add_picButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGallery();
+                add_picButton.setVisibility(View.GONE);
+                delete_picButton.setVisibility(View.VISIBLE);
             }
-        });*/
+        });
 
-        //camaraButton = findViewById(R.id.camaraButton_EditProfile);
-        /*PreviewFoto = findViewById(R.id.foto_perfil);
-        if (foto_perfil.length == 0) PreviewFoto.setVisibility(View.INVISIBLE);
+        final StorageReference imageRef  = storageRef.child("/users/" + ControladoraPresentacio.getUsername());
+        System.out.println("IMAGEREF: " + imageRef.toString());
+
+        //boto esborrar foto
+        delete_picButton = findViewById(R.id.delete_pic);
+        delete_picButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO eliminar fotiko
+                ControladoraPresentacio.setProfile_picture(null);
+                imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(EditarPerfil.this, EditarPerfil.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        String texterror = getString(R.string.preview_fotoE_error);
+                        Toast toast = Toast.makeText(EditarPerfil.this, texterror, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+                add_picButton.setVisibility(View.VISIBLE);
+                delete_picButton.setVisibility(View.GONE);
+            }
+        });
+
+        preview_profile_pic = findViewById(R.id.foto_perfil);
+        System.out.println("en teoria ha de sortir true " + (preview_profile_pic == null));
+
+        //agafem la foto i mirem si existeix o no
+        imageRef.getBytes(1000000000).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                System.out.println("ON CREATE SUCCESS: " + imageRef.toString());
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                //Redondeamos las esquinas de las fotos
+                bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,64*2);
+                preview_profile_pic.setImageBitmap(bmp);
+                System.out.println("en teoria ha de sortir false " + (preview_profile_pic == null));
+                preview_profile_pic.setVisibility(View.VISIBLE);
+                add_picButton.setVisibility(View.GONE);
+                delete_picButton.setVisibility(View.VISIBLE);
+                System.out.println("TENIM FOTIKO");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                add_picButton.setVisibility(View.VISIBLE);
+                delete_picButton.setVisibility(View.GONE);
+                System.out.println("NO TENIM FOTIKO");
+            }
+        });
+
+        if (profile_pic != null) {
+            add_picButton.setVisibility(View.GONE);
+            delete_picButton.setVisibility(View.VISIBLE);
+            profile_pic.setVisibility(View.VISIBLE);
+            ImageView imageView = profile_pic;
+            imageView.setDrawingCacheEnabled(true);
+            imageView.buildDrawingCache();
+            Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,1024);
+            preview_profile_pic.setImageBitmap(bmp);
+            preview_profile_pic.setVisibility(View.VISIBLE);
+        }
         else {
+            delete_picButton.setVisibility(View.GONE);
+            add_picButton.setVisibility(View.VISIBLE);
+            //TODO mirar si cal posar algo x a tenir la foto x defecte
+        }
 
-        }*/
 
 
         //DATOS DEL USUARIO
@@ -121,12 +201,12 @@ public class EditarPerfil extends AppCompatActivity {
 
     static boolean valid(String d) {
         if (d.length() != 10) return false;
-        String day2s = new StringBuilder().append(d.charAt(0)).append(d.charAt(1)).toString();
+        /*String day2s = new StringBuilder().append(d.charAt(0)).append(d.charAt(1)).toString();
         int day = Integer.parseInt(day2s);
         String month2s = new StringBuilder().append(d.charAt(3)).append(d.charAt(4)).toString();
         int month = Integer.parseInt(month2s);
         String year2s = new StringBuilder().append(d.charAt(6)).append(d.charAt(7)).append(d.charAt(8)).append(d.charAt(9)).toString();
-        int year = Integer.parseInt(year2s);
+        int year = Integer.parseInt(year2s);*/
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         date.setLenient(false);
         try {
@@ -149,12 +229,12 @@ public class EditarPerfil extends AppCompatActivity {
                 // do your stuff
             }
         }).addOnFailureListener(this, new OnFailureListener() {
-                    private static final String TAG = "SignInStorage" ;
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.e(TAG, "signInAnonymously:FAILURE", exception);
-                    }
-                });
+            private static final String TAG = "SignInStorage" ;
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.e(TAG, "signInAnonymously:FAILURE", exception);
+            }
+        });
     }
 
     private void RequestEditarPerfil(final TextView usernameEditText, final EditText passwordEditText, final EditText nameEditText,
@@ -194,6 +274,27 @@ public class EditarPerfil extends AppCompatActivity {
                             ControladoraPresentacio.setDescriptionUser(descriptionEditText.getText().toString());
                             ControladoraPresentacio.setBirthdate(birthdateEditText.getText().toString());
 
+                            if (preview_profile_pic != null) {
+                                StorageReference imageRef = storageRef.child("/users/" + ControladoraPresentacio.getUsername());
+                                System.out.println("UBICACIOOOO: " + imageRef.toString());
+                                ImageView imageView = preview_profile_pic;
+                                imageView.buildDrawingCache();
+                                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                byte[] data = baos.toByteArray();
+                                UploadTask uploadTask = imageRef.putBytes(data);
+                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception exception) {
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    }
+                                });
+                            }
+
                             //Volvemos a Ajustes
                             Intent intent = new Intent(EditarPerfil.this, Ajustes.class);
                             onNewIntent(intent);
@@ -218,6 +319,31 @@ public class EditarPerfil extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //called when image was captured from camera
+        if (resultCode == RESULT_OK) {
+            //set the image captured to our ImageView
+            //caso de si quiero seleccionar una foto que ya tengo en la galeria
+            if (requestCode == PICK_IMAGE) image_uri = data.getData();
+
+            preview_profile_pic.setImageURI(image_uri);
+            ImageView imageView = preview_profile_pic;
+            imageView.setImageURI(image_uri);
+            imageView.setDrawingCacheEnabled(true);
+            imageView.buildDrawingCache();
+            Bitmap bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            bmp = ControladoraPresentacio.getRoundedCornerBitmap(bmp,1024);
+            preview_profile_pic.setImageBitmap(bmp);
+            preview_profile_pic.setVisibility(View.VISIBLE);
+            //Actualizamos la controladora
+            ControladoraPresentacio.setProfile_picture(imageView);
+            profile_pic = ControladoraPresentacio.getProfile_picture();
+        }
     }
 }
 
