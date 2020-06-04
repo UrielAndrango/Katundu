@@ -73,7 +73,7 @@ public class ListTrophies extends AppCompatActivity {
                 try {
                     for(int i = 0; i < response.length(); ++i) {
                         int info_wish = response.getInt(i);
-                        trophies_list[i] = info_wish-1;
+                        trophies_list[i] = info_wish;
                     }
 
                     Unlock_trophies();
