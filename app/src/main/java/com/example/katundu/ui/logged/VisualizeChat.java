@@ -62,6 +62,7 @@ public class VisualizeChat extends AppCompatActivity {
         final LinearLayout llBotonera = findViewById(R.id.LinearLayout_Messages);
         final ScrollView scrollView = findViewById(R.id.scrollview);
         final ImageView refresh = findViewById(R.id.icono_refresh);
+        final ImageView end_exchange = findViewById(R.id.icono_end_exchange);
 
         username2.setText(ControladoraChat.getUsername2());
 
@@ -93,6 +94,15 @@ public class VisualizeChat extends AppCompatActivity {
                     Enviar_message.setEnabled(false);
                     RequestAddMessage(id_Chat, username1, contingut_message, llBotonera, scrollView, Enviar_message);
                 }
+            }
+        });
+
+        end_exchange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VisualizeChat.this, EndExchange.class);
+                startActivity(intent);
+                //finish();
             }
         });
 

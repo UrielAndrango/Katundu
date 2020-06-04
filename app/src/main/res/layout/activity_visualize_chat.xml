@@ -62,6 +62,13 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/icono_end_exchange"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/descripcio"
+                android:src="@drawable/icono_basura" />
+
+            <ImageView
                 android:id="@+id/icono_refresh"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
