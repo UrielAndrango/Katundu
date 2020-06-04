@@ -118,8 +118,8 @@ public class Sorprenme extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
-        m = findViewById(R.id.no_sorprenme_found);
-        m.setVisibility(View.GONE);
+        //m = findViewById(R.id.no_sorprenme_found);
+       // m.setVisibility(View.GONE);
         RequestGetOffers();
     }
 
@@ -138,27 +138,26 @@ public class Sorprenme extends AppCompatActivity {
                 try {
                     for (int i = 0; i < response.length(); ++i) {
                         JSONObject arrays_offer = response.getJSONObject(i);
-                        for (int j = 0; j < arrays_offer.length(); ++j) {
-                            JSONObject info_offer = arrays_offer.getJSONObject("offer" + Integer.toString(j + 1));
-                            String user = info_offer.getString("user");
-                            String id = info_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
-                            String name = info_offer.getString("name");
-                            String category = info_offer.getString("category");
-                            String type = info_offer.getString("type");
-                            JSONArray keywords_array = info_offer.getJSONArray("keywords");
+
+                            String user =arrays_offer.getString("user");
+                            String id = arrays_offer.getString("id"); //TODO: ACTUALITZA AMB CAMP ID
+                            String name = arrays_offer.getString("name");
+                            String category = arrays_offer.getString("category");
+                            String type = arrays_offer.getString("type");
+                            JSONArray keywords_array =arrays_offer.getJSONArray("keywords");
                             String keywords = "";
                             for (int k = 0; k < keywords_array.length(); ++k) {
                                 String keyword = keywords_array.getString(k);
                                 keywords += "#";
                                 keywords += keyword;
                             }
-                            String value = info_offer.getString("value");
-                            String description = info_offer.getString("description");
+                            String value = arrays_offer.getString("value");
+                            String description = arrays_offer.getString("description");
+
                             Offer offer = new Offer(id, name, Integer.parseInt(category), type, keywords, Integer.parseInt(value), description, user);
                             offer_list.add(offer);
-
-                        }
                     }
+                    System.out.println("Inicialitzobotons");
                     InicialitzaBotonsOffers(offer_list);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -174,13 +173,13 @@ public class Sorprenme extends AppCompatActivity {
     }
 
     private void InicialitzaBotonsOffers(ArrayList<Offer> offer_list) {
-        ControladoraPresentacio.setOffer_List(ofertes_totals);
+        ControladoraPresentacio.setOffer_List(offer_list);
         int numBotones = offer_list.size();
         if (numBotones == 0) {
-            m.setVisibility(View.VISIBLE);
+           // m.setVisibility(View.VISIBLE);
         } else {
 
-
+            System.out.println("Inicialitzant botons");
             //Obtenemos el linear layout donde colocar los botones
             LinearLayout llBotonera = findViewById(R.id.listaOffers_sp);
 
@@ -215,6 +214,8 @@ public class Sorprenme extends AppCompatActivity {
                 //Asignamos Texto a los textViews
                 preu_producte.setText(offer_list.get(i).getValue() + "€");
                 nom_producte.setText(offer_list.get(i).getName() + "");
+                System.out.println(offer_list.get(i).getName());
+                System.out.println(offer_list.get(i).getValue());
                 //Le damos el estilo que queremos
                 //pareja.setBackgroundResource(R.drawable.button_rounded);
                 ll.setBackgroundResource(R.drawable.button_rounded);
@@ -271,7 +272,7 @@ public class Sorprenme extends AppCompatActivity {
                 pareja.addView(ll);
                 if (mostrar_producto && i % 2 == 0) llBotonera.addView(pareja);
 
-                if (modo_impar == true && i == numBotones - 1) {
+                if (modo_impar && i == numBotones - 1) {
                     --i;
                     mostrar_producto = false;
                     modo_impar = false;
