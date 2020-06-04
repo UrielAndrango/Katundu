@@ -267,6 +267,13 @@
     <!-- Strings related to EndExchange-->
     <string name="End_Exchange">Finalizar intercambio</string>
     <string name="offers_exchanged1">Indica tu oferta intercambiada:</string>
-    <string name="offers_exchanged2">Indica la otra oferta intercambiad:</string>
+    <string name="offers_exchanged2">Indica la otra oferta intercambiada:</string>
+
+    <!-- Strings related to RateExchange-->
+    <string name="rate_exchange">Valorar intercambio</string>
+    <string name="rate_explanation">Valora el usuario que has indicado. Recuerda que la puntuación es un valor entre 1 y 5.</string>
+    <string name="save_rating">Enviar valoración</string>
+    <string name="wrong_rating">Valoración inválida</string>
+
 
 </resources>

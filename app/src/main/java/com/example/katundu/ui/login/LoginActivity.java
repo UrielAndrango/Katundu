@@ -81,14 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                     //desactivar login momentaneamente
                     login_button.setEnabled(false);
                     no_registrado.setEnabled(false);
-                    if (ControladoraPresentacio.getIntentosLogin() < 2)
+                    if (ControladoraPresentacio.getIntentosLogin() < 4)
                         RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
                     else {
                         ControladoraPresentacio.setIntentosLogin(0);
                         ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
-                        Intent intent = new Intent(LoginActivity.this, SecurityLogin.class);
-                        startActivity(intent);
-                        finish();
+                        RequestQuestion();
                     }
                 }
             });
@@ -109,6 +107,40 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
             mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         }
+    }
+
+    private void RequestQuestion() {
+        final RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-SecurityQuestion?un=" + ControladoraPresentacio.getUsername();
+
+        JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //question = response.getString("question");
+                    ControladoraPresentacio.setQuestion(response.getString("question"));
+                    //answer = response.getString("answer");
+                    ControladoraPresentacio.setAnswer(response.getString("answer"));
+                    System.out.println("Q " + response.getString("question"));
+                    System.out.println("A " + response.getString("answer"));
+                    Intent intent = new Intent(LoginActivity.this, SecurityLogin.class);
+                    startActivity(intent);
+                    finish();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        jsObjectRequest.setRetryPolicy(new DefaultRetryPolicy(10000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Add the request to the RequestQueue.
+        queue.add(jsObjectRequest);
     }
 
     private void RequestLogin(final EditText usernameEditText, EditText passwordEditText, final Button login_button, final TextView no_registrado) {

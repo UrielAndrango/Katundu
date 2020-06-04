@@ -98,8 +98,8 @@ public class ListTrophies extends AppCompatActivity {
         lista_trofeos[2] = (ImageView) findViewById(R.id.image_lt2);
         lista_trofeos[3] = (ImageView) findViewById(R.id.image_lt3);
         lista_trofeos[4] = (ImageView) findViewById(R.id.image_lt4);
-        lista_trofeos[5] = (ImageView) findViewById(R.id.image_lt5);
-        lista_trofeos[6] = (ImageView) findViewById(R.id.image_lt6);
+        //lista_trofeos[5] = (ImageView) findViewById(R.id.image_lt5);
+        //lista_trofeos[6] = (ImageView) findViewById(R.id.image_lt6);
         lista_trofeos[7] = (ImageView) findViewById(R.id.image_lt7);
         lista_trofeos[8] = (ImageView) findViewById(R.id.image_lt8);
         lista_trofeos[9] = (ImageView) findViewById(R.id.image_lt9);

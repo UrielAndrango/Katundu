@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,14 +50,14 @@ public class SecurityLogin extends AppCompatActivity {
         final EditText answerEditText = findViewById(R.id.answerEditText);
         final TextView envirButton = findViewById(R.id.enviarButton);
 
-        questionEditText.setText("hola que tal");
+        questionEditText.setText(ControladoraPresentacio.getQuestion());
 
         envirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ControladoraPresentacio.getIntentosSecurityLogin() < 4) { //queden intents
 
-                    if (!answerEditText.getText().toString().equals("bien")) { //resposta incorrecta
+                    if (!answerEditText.getText().toString().equals(ControladoraPresentacio.getAnswer())) { //resposta incorrecta
                         ControladoraPresentacio.setIntentosSecurityLogin(ControladoraPresentacio.getIntentosSecurityLogin() + 1);
                         String wrong_answer = getString(R.string.wrong_answer);
                         Toast toast = Toast.makeText(getApplicationContext(), wrong_answer, Toast.LENGTH_SHORT);
@@ -170,7 +169,6 @@ public class SecurityLogin extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-
 
     public void loadLocale() {
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);

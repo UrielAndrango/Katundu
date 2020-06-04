@@ -77,7 +77,7 @@ public class EndExchange extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("0")) { //message added successfully
-                            Intent intent = new Intent(getApplicationContext(), ListOffer.class); //TODO: redirigir a la pantalla per VALORAR
+                            Intent intent = new Intent(getApplicationContext(), RateExchange.class);
                             startActivity(intent);
                             finish();
                         }
