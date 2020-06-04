@@ -137,17 +137,18 @@ public class ListTrophies extends AppCompatActivity {
 
         //Enseñar imagenes
         for (int i=0; i<numero_trofeos; ++i) {
-            if (trofeos_usuario[i]) {
-                //extraemos el drawable en un bitmap
-                Bitmap originalBitmap = ((BitmapDrawable) vector_icons[i]).getBitmap();
-                //creamos el drawable redondeado
-                RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), originalBitmap);
-                //asignamos el CornerRadius
-                roundedDrawable.setCornerRadius(originalBitmap.getHeight());
-                lista_trofeos[i].setImageDrawable(roundedDrawable);
-            }
-            else {
-                lista_trofeos[i].setImageDrawable(getResources().getDrawable(R.drawable.icon_interrogante));
+            if (i!=5 && i!=6) {
+                if (trofeos_usuario[i]) {
+                    //extraemos el drawable en un bitmap
+                    Bitmap originalBitmap = ((BitmapDrawable) vector_icons[i]).getBitmap();
+                    //creamos el drawable redondeado
+                    RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), originalBitmap);
+                    //asignamos el CornerRadius
+                    roundedDrawable.setCornerRadius(originalBitmap.getHeight());
+                    lista_trofeos[i].setImageDrawable(roundedDrawable);
+                } else {
+                    lista_trofeos[i].setImageDrawable(getResources().getDrawable(R.drawable.icon_interrogante));
+                }
             }
         }
     }
