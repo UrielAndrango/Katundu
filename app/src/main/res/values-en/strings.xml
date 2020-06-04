@@ -14,6 +14,7 @@
     <string name="texto_registro"><u>Not registered?</u></string>
     <string name="unregistered">You are not registered</string>
     <string name="incorrect_password">Incorrect password</string>
+    <string name="security_login_text">You have introduced an incorrect password 3 times. Please, answer your security question correctly or your account will be blocked.</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Create your account</string>
