@@ -259,4 +259,10 @@
     <string name="cancelar">No</string>
     <string name="post_deleted_successfully">Publicació eliminada</string>
     <string name="post_modified_successfully">Modificació efectuada</string>
+
+    <!-- Strings related to EndExchange-->
+    <string name="End_Exchange">Finalitzar intercanvi</string>
+    <string name="offers_exchanged1">Indica la teva oferta intercanviada:</string>
+    <string name="offers_exchanged2">Indica l\'altre oferta intercanviada:</string>
+
 </resources>

@@ -261,7 +261,12 @@
     <string name="post_deleted_successfully">Publicación eliminada</string>
     <string name="post_modified_successfully">Modificación efectuada</string>
 
+    <!-- Strings related to Mapa-->
     <string name="title_activity_mapa" translatable="false">Map</string>
 
+    <!-- Strings related to EndExchange-->
+    <string name="End_Exchange">Finalizar intercambio</string>
+    <string name="offers_exchanged1">Indica tu oferta intercambiada:</string>
+    <string name="offers_exchanged2">Indica la otra oferta intercambiad:</string>
 
 </resources>

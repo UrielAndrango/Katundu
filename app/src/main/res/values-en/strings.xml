@@ -259,4 +259,9 @@
     <string name="cancelar">No</string>
     <string name="post_deleted_successfully">Post deleted</string>
     <string name="post_modified_successfully">Post successfully modified</string>
+
+    <!-- Strings related to EndExchange-->
+    <string name="End_Exchange">End exchange</string>
+    <string name="offers_exchanged1">Select your exchanged offer:</string>
+    <string name="offers_exchanged2">Select the other offer exchanged:</string>
 </resources>
