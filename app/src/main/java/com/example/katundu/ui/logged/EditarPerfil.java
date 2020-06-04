@@ -264,8 +264,8 @@ public class EditarPerfil extends AppCompatActivity {
                 "lon=" + longitudeEditText.getText() + "&" +
                 "distanciamaxima=" + maximumDistanceEditText.getText();
 
-        //url += "&descr=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText();
-        System.out.println(url + "&descr=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText());
+        url += "&description=" + descriptionEditText.getText() + "&bdate=" + birthdateEditText.getText();
+        System.out.println(url);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
