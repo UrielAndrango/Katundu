@@ -14,7 +14,7 @@
     <string name="texto_registro"><u>¿No estás registrado?</u></string>
     <string name="unregistered">No está registrado</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
-    <string name="security_login_text">Has introducido una contraseña incorrecta 3 veces. Por favor, responde a tu pregunta de seguridad correctamente o se te bloqueará la cuenta. Recuerda que debe ser igual a la respuesta que introdujiste al registrarte.</string>
+    <string name="security_login_text">Has introducido una contraseña incorrecta 5 veces. Por favor, responde a tu pregunta de seguridad correctamente o se te bloqueará la cuenta. Recuerda que debe ser igual a la respuesta que introdujiste al registrarte.</string>
     <string name="account_blocked_successfully">Cuenta bloqueada</string>
     <string name="wrong_answer">Respuesta incorrecta</string>
 
