@@ -265,4 +265,10 @@
     <string name="offers_exchanged1">Indica la teva oferta intercanviada:</string>
     <string name="offers_exchanged2">Indica l\'altre oferta intercanviada:</string>
 
+    <!-- Strings related to RateExchange-->
+    <string name="rate_exchange">Valorar intercanvi</string>
+    <string name="rate_explanation">Valora l\'usuari que has indicat. Recorda que la puntuació és un valor entre 1 i 5.</string>
+    <string name="save_rating">Enviar valoració</string>
+    <string name="wrong_rating">Valoració invàlida</string>
+
 </resources>
