@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,7 +34,7 @@
         <activity
             android:name=".ui.logged.Mapa"
             android:label="@string/title_activity_mapa" />
-
+        <activity android:name=".ui.logged.EndExchange" />
         <activity android:name=".ui.logged.VisualizePosts" />
         <activity android:name=".ui.logged.PersonalPosts" />
         <activity android:name=".ui.logged.AddPost" />
