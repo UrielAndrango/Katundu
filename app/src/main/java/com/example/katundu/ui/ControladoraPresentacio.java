@@ -26,6 +26,8 @@ public class ControladoraPresentacio {
     private static String descriptionUser = "";
     private static String birthdate = "";
     private static ImageView profile_picture;
+    private static int intentosLogin = 0;
+    private static int intentosSecurityLogin = 0;
 
     //idioma usuario (temporal)
     private static String idioma = "";
@@ -544,5 +546,21 @@ public class ControladoraPresentacio {
 
     public static void setProfile_picture(ImageView profile_picture) {
         ControladoraPresentacio.profile_picture = profile_picture;
+    }
+
+    public static int getIntentosLogin() {
+        return intentosLogin;
+    }
+
+    public static void setIntentosLogin(int intentosLogin) {
+        ControladoraPresentacio.intentosLogin = intentosLogin;
+    }
+
+    public static int getIntentosSecurityLogin() {
+        return intentosSecurityLogin;
+    }
+
+    public static void setIntentosSecurityLogin(int intentosSecurityLogin) {
+        ControladoraPresentacio.intentosSecurityLogin = intentosSecurityLogin;
     }
 }
