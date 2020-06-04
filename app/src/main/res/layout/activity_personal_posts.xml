@@ -60,7 +60,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout_SP"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="675dp"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         <ScrollView
             android:id="@+id/scrollView4"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/listaPosts"
