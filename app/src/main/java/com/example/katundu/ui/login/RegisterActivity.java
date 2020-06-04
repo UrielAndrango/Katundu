@@ -169,7 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (birthdateEditText.getText().length() > 0)
             url += "&bdate=" + birthdateEditText.getText();
 
-        //url += "&q=" + questionEditText.getText() + "&a=" + answerEditText.getText();
+        url += "&q=" + questionEditText.getText() + "&a=" + answerEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
