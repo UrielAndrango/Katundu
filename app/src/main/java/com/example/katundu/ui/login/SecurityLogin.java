@@ -1,12 +1,14 @@
 package com.example.katundu.ui.login;
 
 import android.app.Activity;
+import android.app.AutomaticZenRule;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +27,6 @@ import com.example.katundu.ui.Favorite;
 import com.example.katundu.ui.logged.MenuPrincipal;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.katundu.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +64,7 @@ public class SecurityLogin extends AppCompatActivity {
                         toast.show();
                     } else { //resposta correcta
                         envirButton.setEnabled(false);
-                        RequestIniciarSessioIDades();
+                        RequestIniciarSessioIDades(envirButton);
                     }
                 }
                 else { //bloquejar compte
@@ -76,7 +76,7 @@ public class SecurityLogin extends AppCompatActivity {
 
     }
 
-    private void RequestIniciarSessioIDades() {
+    private void RequestIniciarSessioIDades(final TextView envirButton) {
         final RequestQueue queue = Volley.newRequestQueue(SecurityLogin.this);
 
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-infoUser?" + "un=" + ControladoraPresentacio.getUsername();
@@ -120,6 +120,7 @@ public class SecurityLogin extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+                envirButton.setEnabled(true);
             }
         });
         queue.add(jsObjectRequest);
