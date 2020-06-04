@@ -15,6 +15,8 @@
     <string name="unregistered">No està registrat</string>
     <string name="incorrect_password">Contrasenya incorrecta</string>
     <string name="security_login_text">Has introduit una contrasenya incorrecta 3 vegades. Si us plau, respon a la teva pregunta de seguretat correctament o se\'t bloquejarà el compte. Recorda que ha de ser igual a la resposta que vas introduir al registrar-te.</string>
+    <string name="account_blocked_successfully">Compte bloquejat</string>
+    <string name="wrong_answer">Resposta incorrecta</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Crea el teu compte</string>

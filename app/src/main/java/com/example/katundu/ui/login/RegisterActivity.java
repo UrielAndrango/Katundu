@@ -163,13 +163,13 @@ public class RegisterActivity extends AppCompatActivity {
                 "lat=" + latitudeEditText.getText() + "&" +
                 "lon=" + longitudeEditText.getText();
 
-        /*
+
         if (descriptionEditText.getText().length() > 0)
-            url += "&descr=" + descriptionEditText.getText();
+            url += "&description=" + descriptionEditText.getText();
         if (birthdateEditText.getText().length() > 0)
             url += "&bdate=" + birthdateEditText.getText();
 
-        url += "&q=" + questionEditText.getText() + "&a=" + answerEditText.getText();*/
+        //url += "&q=" + questionEditText.getText() + "&a=" + answerEditText.getText();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -189,8 +189,8 @@ public class RegisterActivity extends AppCompatActivity {
                             ControladoraPresentacio.setLongitud(longitudeEditText.getText().toString());
                             ControladoraPresentacio.setDescriptionUser(descriptionEditText.getText().toString());
                             ControladoraPresentacio.setBirthdate(birthdateEditText.getText().toString());
-                            ControladoraPresentacio.setBirthdate(questionEditText.getText().toString());
-                            ControladoraPresentacio.setBirthdate(answerEditText.getText().toString());
+                            ControladoraPresentacio.setQuestion(questionEditText.getText().toString());
+                            ControladoraPresentacio.setAnswer(answerEditText.getText().toString());
 
                             Intent intent = new Intent(RegisterActivity.this, MenuPrincipal.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

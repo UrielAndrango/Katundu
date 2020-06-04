@@ -26,6 +26,8 @@ public class ControladoraPresentacio {
     private static String descriptionUser = "";
     private static String birthdate = "";
     private static ImageView profile_picture;
+    private static String question = "";
+    private static String answer = "";
     private static int intentosLogin = 0;
     private static int intentosSecurityLogin = 0;
 
@@ -562,5 +564,21 @@ public class ControladoraPresentacio {
 
     public static void setIntentosSecurityLogin(int intentosSecurityLogin) {
         ControladoraPresentacio.intentosSecurityLogin = intentosSecurityLogin;
+    }
+
+    public static String getQuestion() {
+        return question;
+    }
+
+    public static void setQuestion(String question) {
+        ControladoraPresentacio.question = question;
+    }
+
+    public static String getAnswer() {
+        return answer;
+    }
+
+    public static void setAnswer(String answer) {
+        ControladoraPresentacio.answer = answer;
     }
 }

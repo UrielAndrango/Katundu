@@ -59,8 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_login);
-            //Modo Vertical
-            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             //Detectar idioma
             loadLocale();
             //Oculta la barra que dice el nombre de la apliacion en la Action Bar (asi de momento)
@@ -83,8 +81,15 @@ public class LoginActivity extends AppCompatActivity {
                     //desactivar login momentaneamente
                     login_button.setEnabled(false);
                     no_registrado.setEnabled(false);
-
-                    RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
+                    if (ControladoraPresentacio.getIntentosLogin() < 2)
+                        RequestLogin(usernameEditText, passwordEditText, login_button, no_registrado);
+                    else {
+                        ControladoraPresentacio.setIntentosLogin(0);
+                        ControladoraPresentacio.setUsername(usernameEditText.getText().toString());
+                        Intent intent = new Intent(LoginActivity.this, SecurityLogin.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             });
 
@@ -123,34 +128,9 @@ public class LoginActivity extends AppCompatActivity {
                             //Inicialitzem amb les dades de l'usuari
                             RequestInicialitzaDadesUsuari(usernameEditText.getText().toString(), queue, login_button, no_registrado);
                             manage_notifications(usernameEditText.getText().toString());
-
-                            /*
-                            //Idioma
-                            //temporal lo de la controladora, porque debe ser con el idioma del usuario desde el servidor
-                            String idioma_usuario = ControladoraPresentacio.getIdioma();
-                            Locale localizacion;
-                            switch (idioma_usuario) {
-                                case "es":
-                                    localizacion = new Locale("es");
-                                    break;
-                                case "ca":
-                                    localizacion = new Locale("ca");
-                                    break;
-                                case "en":
-                                    localizacion = new Locale("en");
-                                    break;
-                                default:
-                                    idioma_usuario = "es";
-                                    localizacion = new Locale("es");
-                            }
-                            ControladoraPresentacio.setIdioma(idioma_usuario);
-                            Locale.setDefault(localizacion);
-                            Configuration config = new Configuration();
-                            config.locale = localizacion;
-                            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                            */
                         }
                         else if(response.equals("2")){ //Incorrect password
+                            ControladoraPresentacio.setIntentosLogin(ControladoraPresentacio.getIntentosLogin() + 1); //incrementem els intents que hem fet
                             String texterror = getString(R.string.incorrect_password);
                             Toast toast = Toast.makeText(LoginActivity.this, texterror, Toast.LENGTH_SHORT);
                             toast.show();
