@@ -134,16 +134,22 @@ public class VisualizeListOUser extends AppCompatActivity {
     private void InicialitzarValoracioUsuari() {
         //Valoracion Usuario
         final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_VLO_User);
+        System.out.println("ABAA" + valoracion_usuario.getText().toString());
         valoracion_usuario.setText(Double.toString(ControladoraSearchUsers.getValoracion()));
-        final ImageView star1 = findViewById(R.id.imageViewStar1_VLO_User);
-        final ImageView star2 = findViewById(R.id.imageViewStar2_VLO_User);
-        final ImageView star3 = findViewById(R.id.imageViewStar3_VLO_User);
-        final ImageView star4 = findViewById(R.id.imageViewStar4_VLO_User);
-        final ImageView star5 = findViewById(R.id.imageViewStar5_VLO_User);
-        ImageView[] stars = {star1, star2, star3, star4, star5};
-        int valoracion = (int) ControladoraPresentacio.getValoracion();
-        for (int i=0; i<valoracion; ++i) {
-            stars[i].setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        if (ControladoraSearchUsers.getValoracion() != -1) {
+            final ImageView star1 = findViewById(R.id.imageViewStar1_VLO_User);
+            final ImageView star2 = findViewById(R.id.imageViewStar2_VLO_User);
+            final ImageView star3 = findViewById(R.id.imageViewStar3_VLO_User);
+            final ImageView star4 = findViewById(R.id.imageViewStar4_VLO_User);
+            final ImageView star5 = findViewById(R.id.imageViewStar5_VLO_User);
+            ImageView[] stars = {star1, star2, star3, star4, star5};
+            int valoracion = (int) ControladoraSearchUsers.getValoracion();
+            for (int i=0; i<valoracion; ++i) {
+                stars[i].setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+            }
+        }
+        else { //no ha realitzat cap intercanvi
+            valoracion_usuario.setText("-");
         }
     }
 

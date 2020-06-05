@@ -182,25 +182,20 @@ public class SearchUserChat extends AppCompatActivity {
             ll.setOrientation(LinearLayout.VERTICAL);
             TextView text_username = new TextView(SearchUserChat.this);
             TextView text_realName = new TextView(SearchUserChat.this);
-            TextView text_valoracio = new TextView(SearchUserChat.this);
             //Asignamos propiedades de layout al layout
             ll.setLayoutParams(lp);
             //Asignamos Texto a los textViews
             text_username.setText(getString(R.string.search_user_username) + ": " + username);
             text_realName.setText(getString(R.string.search_user_real_name) + ": " + ControladoraSearchUsers.getNombre_real());
-            text_valoracio.setText(getString(R.string.search_user_valoracio) + ": " + ControladoraSearchUsers.getValoracion() + "/5");
             //Le damos el estilo que queremos
             ll.setBackgroundResource(R.drawable.button_rounded);
             text_username.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
             text_realName.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
-            text_valoracio.setTextColor(SearchUserChat.this.getResources().getColor(R.color.colorLetraKatundu));
             Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
             text_username.setTypeface(boldTypeface);
             text_realName.setTypeface(boldTypeface);
-            text_valoracio.setTypeface(boldTypeface);
             text_username.setTextSize(18);
             text_realName.setTextSize(18);
-            text_valoracio.setTextSize(18);
             //Margenes del layout
             TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //paramsll.setMargins(left, top, right, bottom);
@@ -216,13 +211,11 @@ public class SearchUserChat extends AppCompatActivity {
             text_realName.setLayoutParams(paramsRN);
             TableRow.LayoutParams paramsV = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             paramsV.setMargins(25, 10, 25, 20);
-            text_valoracio.setLayoutParams(paramsV);
             //Asignamose el Listener al Layout dinamico
             ll.setOnClickListener(new LayoutOnClickListener(SearchUserChat.this));
             //Añadimos el layout dinamico al layout
             ll.addView(text_username);
             ll.addView(text_realName);
-            ll.addView(text_valoracio);
             ll.setContentDescription(username);
             llBotonera.addView(ll);
         }
