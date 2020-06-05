@@ -25,10 +25,14 @@ import com.android.volley.toolbox.Volley;
 import com.example.katundu.R;
 import com.example.katundu.ui.ControladoraSearchUsers;
 import com.example.katundu.ui.ControladoraTrophies;
+import com.example.katundu.ui.Favorite;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class SearchUser extends AppCompatActivity {
 
@@ -98,6 +102,7 @@ public class SearchUser extends AppCompatActivity {
         setContentView(R.layout.activity_search_user);
         //Escondemos la Action Bar porque usamos la ToolBar
         getSupportActionBar().hide();
+
         //Barra Navegacio Tipus de Cerca
         BottomNavigationView typeSearch = findViewById(R.id.type_search);
         typeSearch.setSelectedItemId(R.id.navigation_search_users);
@@ -138,13 +143,13 @@ public class SearchUser extends AppCompatActivity {
     private void RequestSearchUser(final String username) {
         final RequestQueue queue = Volley.newRequestQueue(SearchUser.this);
         String url = "https://us-central1-test-8ea8f.cloudfunctions.net/user-search?" + "un=" + username;
+        System.out.println("BUSCA " + url);
 
         // Request a JSONObject response from the provided URL.
         JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
                     ControladoraSearchUsers.setUsername(username);
                     ControladoraSearchUsers.setNombre_real(response.getString("name"));
                     //ControladoraSearchUsers.setValoracion();
@@ -191,25 +196,25 @@ public class SearchUser extends AppCompatActivity {
             ll.setOrientation(LinearLayout.VERTICAL);
             TextView text_username = new TextView(SearchUser.this);
             TextView text_realName = new TextView(SearchUser.this);
-            TextView text_valoracio = new TextView(SearchUser.this);
+
             //Asignamos propiedades de layout al layout
             ll.setLayoutParams(lp);
             //Asignamos Texto a los textViews
             text_username.setText(getString(R.string.search_user_username) + ": " + username);
             text_realName.setText(getString(R.string.search_user_real_name) + ": " + ControladoraSearchUsers.getNombre_real());
-            text_valoracio.setText(getString(R.string.search_user_valoracio) + ": " + ControladoraSearchUsers.getValoracion() + "/5");
+
             //Le damos el estilo que queremos
             ll.setBackgroundResource(R.drawable.button_rounded);
             text_username.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
             text_realName.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
-            text_valoracio.setTextColor(SearchUser.this.getResources().getColor(R.color.colorLetraKatundu));
+
             Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
             text_username.setTypeface(boldTypeface);
             text_realName.setTypeface(boldTypeface);
-            text_valoracio.setTypeface(boldTypeface);
+
             text_username.setTextSize(18);
             text_realName.setTextSize(18);
-            text_valoracio.setTextSize(18);
+
             //Margenes del layout
             TableRow.LayoutParams paramsll = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             //paramsll.setMargins(left, top, right, bottom);
@@ -225,13 +230,13 @@ public class SearchUser extends AppCompatActivity {
             text_realName.setLayoutParams(paramsRN);
             TableRow.LayoutParams paramsV = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
             paramsV.setMargins(25, 10, 25, 20);
-            text_valoracio.setLayoutParams(paramsV);
+
             //Asignamose el Listener al Layout dinamico
             ll.setOnClickListener(new LayoutOnClickListener(SearchUser.this));
             //Añadimos el layout dinamico al layout
             ll.addView(text_username);
             ll.addView(text_realName);
-            ll.addView(text_valoracio);
+
             llBotonera.addView(ll);
         }
     }
@@ -244,9 +249,47 @@ public class SearchUser extends AppCompatActivity {
             //Para todas las listas y en cualquier momento, hasta que se diga lo contrario
             ControladoraTrophies.setUsername(ControladoraSearchUsers.getUsername());
             //Nos vamos a la ventana de VisualizeListOUser
-            Intent intent = new Intent(SearchUser.this, VisualizeListOUser.class);
-            startActivity(intent);
+            RequestInicialitzaDadesUsuari();
             //finish();
         }
     }
+
+    private void RequestInicialitzaDadesUsuari() {
+        final RequestQueue queue = Volley.newRequestQueue(SearchUser.this);
+
+        String url = "https://us-central1-test-8ea8f.cloudfunctions.net/get-infoUser?" + "un=" + ControladoraSearchUsers.getUsername();
+        System.out.println("DADES " + url);
+
+        // Request a JSONObject response from the provided URL.
+        JsonObjectRequest jsObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    ControladoraSearchUsers.setUsername(ControladoraSearchUsers.getUsername());
+                    ControladoraSearchUsers.setValoracion(Double.parseDouble(response.getString("valoracio")));
+
+                    JSONArray favorite_array = response.getJSONArray("favorite");
+                    ArrayList<Favorite> favorites_user = new ArrayList<>();
+                    for(int i = 0; i < favorite_array.length(); ++i) {
+                        Favorite favorite = new Favorite();
+                        favorite.setId(favorite_array.getString(i));
+                        favorites_user.add(favorite);
+                    }
+                    Intent intent = new Intent(SearchUser.this, VisualizeListOUser.class);
+                    startActivity(intent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+            }
+        });
+        queue.add(jsObjectRequest);
+    }
+
+
 }
