@@ -40,6 +40,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class VisualizeListOUser extends AppCompatActivity {
@@ -134,8 +136,7 @@ public class VisualizeListOUser extends AppCompatActivity {
     private void InicialitzarValoracioUsuari() {
         //Valoracion Usuario
         final TextView valoracion_usuario = findViewById(R.id.textView_valoracio_numero_VLO_User);
-        System.out.println("ABAA" + valoracion_usuario.getText().toString());
-        valoracion_usuario.setText(Double.toString(ControladoraSearchUsers.getValoracion()));
+        valoracion_usuario.setText(Double.toString(round(ControladoraSearchUsers.getValoracion(), 2)));
         if (ControladoraSearchUsers.getValoracion() != -1) {
             final ImageView star1 = findViewById(R.id.imageViewStar1_VLO_User);
             final ImageView star2 = findViewById(R.id.imageViewStar2_VLO_User);
@@ -151,6 +152,14 @@ public class VisualizeListOUser extends AppCompatActivity {
         else { //no ha realitzat cap intercanvi
             valoracion_usuario.setText("-");
         }
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     private void RequestGetOffers() {
